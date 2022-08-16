@@ -149,7 +149,7 @@ interface SmartCardConnection {
 
   Promise<ArrayBuffer> transmit(BufferSource sendBuffer);
 
-  // Transaction is ended when the promise returned by the callback resolves.
+  // Transaction is ended when the promise returned by the callback settles.
   Promise<any> startTransaction(TransactionStartedCallback transaction);
 
   // Queries the host's PC/SC stack about the current connection status.
@@ -369,7 +369,7 @@ Smart card readers are traditionally used in corporate or institutional machines
 
 #### Persistence
 
-It persists as long as the same set of readers and inserted cards remains unchanged. 
+It persists as long as the same set of readers and inserted cards remains unchanged.
 
 #### Availability
 
