@@ -353,14 +353,14 @@ Some smart cards have the ability to store arbitrary data without requiring PIN 
 
 #### Changing the state of a reader device
 
-The `SmartCardConnetion.control` and `SmartCardConnetion.setAttribute` methods are able to change the state and configuration of a card reader.
+The `SmartCardConnection.control` and `SmartCardConnection.setAttribute` methods are able to change the state and configuration of a card reader.
 Some readers have the ability of having their firmware updated via some vendor-specific control codes. An attacker could theoretically exploit this feature to upload a malicious firmware that intercepts or stores PINs contained in APDUs sent by legitimate PC/SC applications in order to later gain access to that card using those PINs.
 Alternatively, an attacker could aim to simply render the card reader unusable, either temporarily by setting an invalid mode that requires a reboot, or permanently by uploading a nonfunctional firmware.
 The user would have to explicitly grant permission for the malicious website to establish connections with card readers to make this possible.
 
 ### Fingerprinting
 
-The names of the available smart card readers provide an [active fingerprinting](https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting) surface. This is made available via the `navigator.smartCard.getReaders()` API call and does not require user consent. Furthermore, the `SmartCardReader.getAtr()` method extends that surface by allowing one to also know the model and, in some cases,  issuer of the smart card inserted in that reader. Eg: the SIM card of a particular phone carrier is inserted in a particular card reader model. Some devices such as YubiKeys may provide smart card functionality, in which case it will represent a card reader that has always the same card inserted, in which case the ATR doesn't provide additional entropy as that is effectively as unique as the reader name itself.
+The names of the available smart card readers provide an [active fingerprinting](https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting) surface. This is made available via the `navigator.smartCard.getReaders()` API call and does not require user consent. Furthermore, the `SmartCardReader.getATR()` method extends that surface by allowing one to also know the model and, in some cases,  issuer of the smart card inserted in that reader. Eg: the SIM card of a particular phone carrier is inserted in a particular card reader model. Some devices such as YubiKeys may provide smart card functionality, in which case it will represent a card reader that has always the same card inserted, in which case the ATR doesn't provide additional entropy as that is effectively as unique as the reader name itself.
 The name of a reader is also dependent on its driver, which is platform-specific. Ie, the same device when plugged on a Windows machine may show a different name than when plugged on a macOS, as the corresponding PC/SC stacks also come with their own different reader drivers and the reader name comes from its driver.
 
 #### Entropy
