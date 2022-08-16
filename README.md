@@ -239,7 +239,7 @@ enum SmartCardResponseCode {
   // as its DOMException.name
   "unsupported-card",
 
-  // The card or reader does not support the requested feature.
+  // SCARD_E_UNSUPPORTED_FEATURE in the PC/SC spec.
   // A SmartCardException with this responseCode with have "NotSupportedError"
   // as its DOMException.name
   "unsupported-feature"
