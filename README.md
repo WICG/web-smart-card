@@ -6,7 +6,17 @@ The objective of this API is to enable [smart card](https://en.wikipedia.org/wik
 
 ## Motivating Use Cases
 
-Smart cards are popular in the enterprise and governmental sectors. A governmental website could identify a citizen by communicating with a government-issued smart ID card inserted in a card reader without the need of external applications. Take German ID cards for example:  The [AusweisApp2](https://www.ausweisapp.bund.de/en/home) needs [native code](https://github.com/Governikus/AusweisApp2/tree/community/src/card/pcsc) to talk to the platform's PC/SC stack to access a USB smart card reader. Websites from the German government then have to interact with the user's ID card via that native companion application. Similarly, an enterprise that issues smart cards to their employees could authenticate them in its corporate website using the employee's card inserted in a smart card reader needing only the browser itself.
+### Identification and Authentication
+
+While there are other APIs that provide the right level of abstraction and security properties for identity on the Web, such as WebAuthn, there are domain-specific functions which can't be captured by such higher-level APIs. Take German ID cards for example:  The [AusweisApp2](https://www.ausweisapp.bund.de/en/home) needs [native code](https://github.com/Governikus/AusweisApp2/tree/community/src/card/pcsc) to talk to the platform's PC/SC stack to access a USB smart card reader. It can issue control commands to the reader to establish and destroy [PACE](https://de.wikipedia.org/wiki/Password_Authenticated_Connection_Establishment) channels between the reader and the card (if the reader supports this feature). Websites from the German government then have to interact with the user's ID card via that native companion application.
+
+### Remote Access Applications
+
+A remote access (aka "remote desktop") web app letting the remote machine access the host's card reader as if it were directly connected to it. Enabling PC/SC applications on that remote machine to work without modification, unaware that the card reader is not local.
+
+### Badge reading kiosks
+
+A web-based kiosk could read even simple RFID badges via PC/SC and then display relevant information on a display. It's also not uncommon for such readers to need control commands to put them into the proper state for reading the particular type of card the application supports.
 
 ## Non-goals
 
