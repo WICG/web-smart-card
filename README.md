@@ -338,9 +338,11 @@ enum SmartCardDisposition {
 
 Smart cards offer tamper-resistant storage for private keys and other personal information as well as isolation for security-critical computations. Such devices can be used in identification and authentication applications.
 
-The security-sensitive nature of smart card applications and the fact that PC/SC is a rather low level API, which makes it powerful while at the same time hard (or impossible) to differentiate legitimate from malicious use, it is recommended that it is made available only to [Isolated Web Apps](https://github.com/reillyeon/isolated-web-apps/blob/main/README.md). See the Risks section below for details.
+The security-sensitive nature of smart card applications and the fact that PC/SC is a rather low level API, which makes it powerful while at the same time hard (or impossible) to differentiate legitimate from malicious use, it is recommended that it is made available only to [Isolated Web Apps](https://github.com/reillyeon/isolated-web-apps/blob/main/README.md). Note that despite this recommendation, this API is described independently from it. 
 
 ### Risks
+
+The scenarios described here refer to API access by websites in general and can be read as a justification for the recommendation of having it available only to Isolated Web Apps.
 
 #### Accessing sensitive information
 
