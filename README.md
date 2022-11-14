@@ -379,7 +379,7 @@ The name of a reader is also dependent on its driver, which is platform-specific
 
 The `SmartCardReader.getATR()` method extends that fingerprinting surface by allowing one to also know the model and, in some cases,  issuer of the smart card inserted in that reader. Eg: the SIM card of a particular phone carrier is inserted in a particular card reader model. Because of that, this method is protected by the `"smartcard"` permission check, thus requiring user consent before this information is made available.
 
-Some devices such as YubiKeys show up as both a smart card its own card reader (ie, a card reader that has always the same card inserted). In this situation the ATR doesn't provide additional entropy as there is a one-to-one mapping between the reader name its constant ATR.
+Some devices such as YubiKeys show up as both a smart card and its own card reader (ie, a card reader that has always the same card inserted). In this situation the ATR doesn't provide additional entropy as there is a one-to-one mapping between the reader name its constant ATR.
 
 #### Entropy
 
