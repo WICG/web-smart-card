@@ -146,10 +146,12 @@ interface SmartCardReader : EventTarget {
   // A plain Event. Check Event.target.state for the new state value.
   attribute EventHandler onstatechange;
 
-  // Returns the ATR (Answer To Reset) of the inserted and powered card.
-  // Will be null if there's no card inserted or if the card is inserted but
-  // not powered.
-  ArrayBuffer? getATR();
+  // On success, the returned promise resolves to the ATR (Answer To Reset) of
+  // the inserted and powered card. It will be null if there's no card inserted
+  // or if the card is inserted but not powered.
+  // It may display a permission prompt. When denied, it rejects with a
+  // "NotAllowedError" DOMException.
+  Promise<ArrayBuffer?> getATR();
   // A plain Event. Check Event.target.getATR() for the new ATR value.
   attribute EventHandler onatrchange;
 };
@@ -338,7 +340,7 @@ enum SmartCardDisposition {
 
 Smart cards offer tamper-resistant storage for private keys and other personal information as well as isolation for security-critical computations. Such devices can be used in identification and authentication applications.
 
-The security-sensitive nature of smart card applications and the fact that PC/SC is a rather low level API, which makes it powerful while at the same time hard (or impossible) to differentiate legitimate from malicious use, it is recommended that it is made available only to [Isolated Web Apps](https://github.com/reillyeon/isolated-web-apps/blob/main/README.md). Note that despite this recommendation, this API is described independently from it. 
+The security-sensitive nature of smart card applications and the fact that PC/SC is a rather low level API, which makes it powerful while at the same time hard (or impossible) to differentiate legitimate from malicious use, it is recommended that it is made available only to [Isolated Web Apps](https://github.com/reillyeon/isolated-web-apps/blob/main/README.md). Note that despite this recommendation, this API is described independently from it.
 
 ### Risks
 
@@ -372,8 +374,12 @@ The user would have to explicitly grant permission for the malicious website to 
 
 ### Fingerprinting
 
-The names of the available smart card readers provide an [active fingerprinting](https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting) surface. This is made available via the `navigator.smartCard.getReaders()` API call and does not require user consent. Furthermore, the `SmartCardReader.getATR()` method extends that surface by allowing one to also know the model and, in some cases,  issuer of the smart card inserted in that reader. Eg: the SIM card of a particular phone carrier is inserted in a particular card reader model. Some devices such as YubiKeys may provide smart card functionality, in which case it will represent a card reader that has always the same card inserted, in which case the ATR doesn't provide additional entropy as that is effectively as unique as the reader name itself.
+The names of the available smart card readers provide an [active fingerprinting](https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting) surface. This is made available via the `navigator.smartCard.getReaders()` API call and does not require user consent.
 The name of a reader is also dependent on its driver, which is platform-specific. Ie, the same device when plugged on a Windows machine may show a different name than when plugged on a macOS, as the corresponding PC/SC stacks also come with their own different reader drivers and the reader name comes from its driver.
+
+The `SmartCardReader.getATR()` method extends that fingerprinting surface by allowing one to also know the model and, in some cases,  issuer of the smart card inserted in that reader. Eg: the SIM card of a particular phone carrier is inserted in a particular card reader model. Because of that, this method is protected by the `"smartcard"` permission check, thus requiring user consent before this information is made available.
+
+Some devices such as YubiKeys show up as both a smart card its own card reader (ie, a card reader that has always the same card inserted). In this situation the ATR doesn't provide additional entropy as there is a one-to-one mapping between the reader name its constant ATR.
 
 #### Entropy
 
