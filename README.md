@@ -4,6 +4,8 @@
 
 The objective of this API is to enable [smart card](https://en.wikipedia.org/wiki/Smart_card) ([PC/SC](https://en.wikipedia.org/wiki/PC%2FSC)) applications to move to the Web platform. It gives them access to the PC/SC implementation (and card reader drivers) available in the host OS.
 
+See [background.md](background.md) for background information.
+
 ## Motivating Use Cases
 
 ### Identification and Authentication
