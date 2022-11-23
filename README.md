@@ -128,8 +128,8 @@ interface SmartCardResourceManager {
 
 interface SmartCardReaderPresenceObserver : EventTarget {
   // Emits SmartCardReaderPresenceEvent.
-  attribute EventHandler onreaderadd;
-  attribute EventHandler onreaderremove;
+  attribute EventHandler onconnect;
+  attribute EventHandler ondisconnect;
 };
 
 interface SmartCardReader : EventTarget {
