@@ -193,6 +193,11 @@ interface SmartCardException : DOMException {
 };
 
 enum SmartCardResponseCode {
+  // SCARD_E_NO_SERVICE in the PC/SC spec.
+  // A SmartCardException with this responseCode with have "UnknownError"
+  // as its DOMException.name
+  "no-service",
+
   // SCARD_E_NO_SMARTCARD in the PC/SC spec.
   // A SmartCardException with this responseCode with have "NotFoundError"
   // as its DOMException.name
