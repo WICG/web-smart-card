@@ -306,22 +306,29 @@ enum SmartCardReaderState {
   // longer connected to the host).
   "unavailable",
 
-  // There is not a card in the reader.
+  // There is no card in the reader.
   "empty",
 
-  // There is a card in the reader. It's powered, responsive and not currently in use.
+  // There is a card in the reader. It's powered, responsive and no other
+  // applications are using it.
   "present",
 
-  // The card in the reader is allocated for exclusive use by another application
+  // The card in the reader is allocated for exclusive use by another
+  // application.
+  // It could be powered or not.
   "exclusive",
 
-  // The card in the reader is in use by one or more other applications
+  // The card in the reader is in use by one or more other applications in
+  // shared mode.
+  // It could be powered or not.
   "inuse",
 
   // There is a powered but unresponsive card in the reader.
+  // No other applications are using it.
   "mute",
 
   // The card in the reader has not been powered up.
+  // No other applications are using it.
   "unpowered"
 };
 
