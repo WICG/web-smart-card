@@ -185,82 +185,57 @@ interface SmartCardReaderPresenceEvent : Event {
   [SameObject] readonly attribute SmartCardReader reader;
 };
 
-interface SmartCardException : DOMException {
-  // The DOMException.name attribute will be set depending on the given responseCode
-  // See SmartCardResponseCode documentation for details.
-  constructor(SmartCardResponseCode responseCode, optional DOMString message = "");
+[Serializable]
+interface SmartCardError : DOMException {
+  constructor(optional DOMString message = "", SmartCardErrorOptions options);
   readonly attribute SmartCardResponseCode responseCode;
 };
 
+dictionary SmartCardErrorOptions {
+  required SmartCardResponseCode responseCode;
+}
+
 enum SmartCardResponseCode {
   // SCARD_E_NO_SERVICE in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "UnknownError"
-  // as its DOMException.name
   "no-service",
 
   // SCARD_E_NO_SMARTCARD in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotFoundError"
-  // as its DOMException.name
   "no-smartcard",
 
   // SCARD_E_NOT_READY in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "OperationError"
-  // as its DOMException.name
   "not-ready",
 
   // SCARD_E_NOT_TRANSACTED in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "OperationError"
-  // as its DOMException.name
   "not-transacted",
 
   // SCARD_E_PROTO_MISMATCH in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "ConstraintError"
-  // as its DOMException.name
   "proto-mismatch",
 
   // SCARD_E_READER_UNAVAILABLE in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotFoundError"
-  // as its DOMException.name
   "reader-unavailable",
 
   // SCARD_W_REMOVED_CARD in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotFoundError"
-  // as its DOMException.name
   "removed-card",
 
   // SCARD_W_RESET_CARD in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "OperationError"
-  // as its DOMException.name
   "reset-card",
 
   // SCARD_E_SHARING_VIOLATION in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotAllowedError"
-  // as its DOMException.name
   "sharing-violation",
 
   // SCARD_E_SYSTEM_CANCELLED in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "OperationError"
-  // as its DOMException.name
   "system-cancelled",
 
   // SCARD_W_UNPOWERED_CARD in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotReadableError"
-  // as its DOMException.name
   "unpowered-card",
 
   // SCARD_W_UNRESPONSIVE_CARD in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotReadableError"
-  // as its DOMException.name
   "unresponsive-card",
 
   // SCARD_W_UNSUPPORTED_CARD in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotSupportedError"
-  // as its DOMException.name
   "unsupported-card",
 
   // SCARD_E_UNSUPPORTED_FEATURE in the PC/SC spec.
-  // A SmartCardException with this responseCode with have "NotSupportedError"
-  // as its DOMException.name
   "unsupported-feature"
 };
 
