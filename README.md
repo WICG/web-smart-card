@@ -130,6 +130,14 @@ interface SmartCardReaderPresenceObserver : EventTarget {
   // Emits SmartCardReaderPresenceEvent.
   attribute EventHandler onreaderadd;
   attribute EventHandler onreaderremove;
+
+  // Emits SmartCardErrorEvent.
+  // Occurs when an error prevents the monitoring of readers being added or
+  // removed. Once an observer receives an error event it will no longer
+  // receive any other events.
+  // If an application wants to retry, it can call smartCard.watchForReaders()
+  // again to acquire a new observer.
+  attribute EventHandler onerror;
 };
 
 interface SmartCardReader : EventTarget {
@@ -184,6 +192,10 @@ interface SmartCardConnection {
 interface SmartCardReaderPresenceEvent : Event {
   [SameObject] readonly attribute SmartCardReader reader;
 };
+
+interface SmartCardErrorEvent : Event {
+  [SameObject] readonly attribute DOMException error;
+}
 
 [Serializable]
 interface SmartCardError : DOMException {
