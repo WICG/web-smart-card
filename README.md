@@ -232,6 +232,9 @@ enum SmartCardResponseCode {
   // SCARD_W_RESET_CARD in the PC/SC spec.
   "reset-card",
 
+  // The smart card resource manager is too busy to complete this operation.
+  "server-too-busy",
+
   // SCARD_E_SHARING_VIOLATION in the PC/SC spec.
   "sharing-violation",
 
