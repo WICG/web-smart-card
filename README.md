@@ -148,10 +148,6 @@ interface SmartCardReader : EventTarget {
   Promise<SmartCardConnection> connect(SmartCardAccessMode accessMode,
       optional sequence<SmartCardProtocol> preferredProtocols);
 
-  readonly attribute boolean cardPresent;
-  // A plain Event. Check Event.target.cardPresent for the new cardPresent value.
-  attribute EventHandler oncardpresentchange;
-
   readonly attribute SmartCardReaderState state;
   // A plain Event. Check Event.target.state for the new state value.
   attribute EventHandler onstatechange;
