@@ -105,6 +105,7 @@ try {
 
 ## Web IDL
 
+### Navigator
 ```WebIDL
 [Exposed=Window, SecureContext]
 partial interface Navigator {
@@ -115,7 +116,9 @@ partial interface Navigator {
 partial interface WorkerNavigator {
   [SameObject] readonly attribute SmartCardResourceManager smartCard;
 };
-
+```
+### SmartCardResourceManager
+```WebIDL
 [Exposed=(DedicatedWorker,SharedWorker,Window), SecureContext]
 interface SmartCardResourceManager {
   // Returns all currently available readers.
@@ -125,7 +128,9 @@ interface SmartCardResourceManager {
   // by the Operating System's PC/SC stack.
   Promise<SmartCardReaderPresenceObserver> watchForReaders();
 };
-
+```
+### SmartCardReaderPresenceObserver
+```WebIDL
 interface SmartCardReaderPresenceObserver : EventTarget {
   // Emits SmartCardReaderPresenceEvent.
   attribute EventHandler onreaderadd;
@@ -139,7 +144,9 @@ interface SmartCardReaderPresenceObserver : EventTarget {
   // again to acquire a new observer.
   attribute EventHandler onerror;
 };
-
+```
+### SmartCardReader
+```WebIDL
 interface SmartCardReader : EventTarget {
   readonly attribute DOMString name;
 
@@ -161,7 +168,9 @@ interface SmartCardReader : EventTarget {
   // A plain Event. Check Event.target.getATR() for the new ATR value.
   attribute EventHandler onatrchange;
 };
-
+```
+### SmartCardConnection
+```WebIDL
 interface SmartCardConnection {
   Promise<undefined> disconnect(optional SmartCardDisposition disposition = "leave");
 
@@ -184,7 +193,9 @@ interface SmartCardConnection {
   // Sets a card reader's attribute or capability.
   Promise<undefined> setAttribute([EnforceRange] unsigned long tag, BufferSource value);
 };
-
+```
+### Events and other auxiliary types
+```WebIDL
 interface SmartCardReaderPresenceEvent : Event {
   [SameObject] readonly attribute SmartCardReader reader;
 };
