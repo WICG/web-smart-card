@@ -31,14 +31,15 @@ This shows all the steps necessary to transmit a command to a smart card. This i
 
 ```js
 try {
-  let readers = await navigator.smartCard.getReaders();
+  let context = await navigator.smartCard.establishContext();
+  let readers = await context.listReaders();
 
   // Assume there's at least one reader present.
   let reader = readers[0];
 
-  console.log("Connecting to the smart card inside " + reader.name);
+  console.log("Connecting to the smart card inside " + reader);
   // A permission prompt might be displayed before the connection is established.
-  let connection = await reader.connect("shared", ["t0", "t1"]);
+  let connection = await context.connect(reader, "shared", ["t0", "t1"]);
 
   // Send an APDU (application protocol data unit) and get the card's response
   let command = new Uint8Array([0x00, 0xA4, 0x04, 0x00, 0x0A, 0xA0, 0x00, 0x00,
@@ -79,30 +80,6 @@ try {
 
 Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles.
 
-## Reacting to reader availability
-
-A common use case is reacting when a new card reader becomes available or is removed from the host:
-
-```js
-try {
-  // The returned promise rejects with "NotSupportedError" if the feature is
-  // not supported by the Operating System's PC/SC stack.
-  let readerObserver = navigator.smartCard.watchForReaders();
-
-  readerObserver.onreaderadd = event => {
-    console.log("Smart card reader " + event.reader.name + " is now available.");
-    // eg: update a reader picker GUI to include |event.reader|.
-  };
-
-  readerObserver.onreaderremove = event => {
-    console.log("Smart card reader " + event.reader.name + " was removed.");
-    // eg: Remove |event.reader| from a reader picker GUI.
-  };
-} catch(ex) {
-  console.warn("A Smart Card operation failed: " + ex);
-}
-```
-
 ## Web IDL
 
 ### Navigator
@@ -121,54 +98,64 @@ partial interface WorkerNavigator {
 ```WebIDL
 [Exposed=(DedicatedWorker,SharedWorker,Window), SecureContext]
 interface SmartCardResourceManager {
-  // Returns all currently available readers.
-  Promise<sequence<SmartCardReader>> getReaders();
-
-  // Rejects with "NotSupportedError" if the feature is not supported
-  // by the Operating System's PC/SC stack.
-  Promise<SmartCardReaderPresenceObserver> watchForReaders();
+  // Requests a PC/SC context from the platform's PC/SC stack.
+  Promise<SmartCardContext> establishContext();
 };
 ```
-### SmartCardReaderPresenceObserver
-```WebIDL
-interface SmartCardReaderPresenceObserver : EventTarget {
-  // Emits SmartCardReaderPresenceEvent.
-  attribute EventHandler onreaderadd;
-  attribute EventHandler onreaderremove;
+### SmartCardContext
 
-  // Emits SmartCardErrorEvent.
-  // Occurs when an error prevents the monitoring of readers being added or
-  // removed. Once an observer receives an error event it will no longer
-  // receive any other events.
-  // If an application wants to retry, it can call smartCard.watchForReaders()
-  // again to acquire a new observer.
-  attribute EventHandler onerror;
-};
-```
-### SmartCardReader
 ```WebIDL
-interface SmartCardReader : EventTarget {
-  readonly attribute DOMString name;
+// A context for communicating with the PC/SC resource manager.
+interface SmartCardContext {
+  Promise<sequence<DOMString>> listReaders();
 
-  // Connects to the card in the reader.
-  // The user agent may display a permission prompt.
-  Promise<SmartCardConnection> connect(SmartCardAccessMode accessMode,
+  Promise<sequence<SmartCardReaderStateOut>> getStatusChange(
+      sequence<SmartCardReaderStateIn> readerStates,
+      AbortSignal signal);
+
+  Promise<SmartCardConnectResult> connect(
+      DOMString readerName,
+      SmartCardAccessMode accessMode,
       optional sequence<SmartCardProtocol> preferredProtocols);
+};
 
-  readonly attribute SmartCardReaderState state;
-  // A plain Event. Check Event.target.state for the new state value.
-  attribute EventHandler onstatechange;
+dictionary SmartCardReaderStateIn {
+  required DOMString readerName;
+  required SmartCardReaderStateFlags currentState;
+};
 
-  // On success, the returned promise resolves to the ATR (Answer To Reset) of
-  // the inserted and powered card. It will be null if there's no card inserted
-  // or if the card is inserted but not powered.
-  // It may display a permission prompt. When denied, it rejects with a
-  // "NotAllowedError" DOMException.
-  Promise<ArrayBuffer?> getATR();
-  // A plain Event. Check Event.target.getATR() for the new ATR value.
-  attribute EventHandler onatrchange;
+dictionary SmartCardReaderStateOut {
+  required DOMString readerName;
+  required SmartCardReaderStateFlags eventState;
+  required ArrayBuffer answerToReset;
+};
+
+dictionary SmartCardReaderStateFlags {
+  boolean unaware;
+  boolean ignore;
+  boolean changed;
+  boolean unknown;
+  boolean unavailable;
+  boolean empty;
+  boolean present;
+  boolean exclusive;
+  boolean inuse;
+  boolean mute;
+  boolean unpowered;
+};
+
+dictionary SmartCardConnectResult {
+  required SmartCardConnection connection;
+  required SmartCardProtocol activeProtocol;
+};
+
+enum SmartCardAccessMode {
+  "shared",
+  "exclusive",
+  "direct"
 };
 ```
+
 ### SmartCardConnection
 ```WebIDL
 interface SmartCardConnection {
@@ -193,17 +180,39 @@ interface SmartCardConnection {
   // Sets a card reader's attribute or capability.
   Promise<undefined> setAttribute([EnforceRange] unsigned long tag, BufferSource value);
 };
-```
-### Events and other auxiliary types
-```WebIDL
-interface SmartCardReaderPresenceEvent : Event {
-  [SameObject] readonly attribute SmartCardReader reader;
+
+callback TransactionStartedCallback = Promise<any> ();
+
+dictionary SmartCardConnectionStatus {
+  required SmartCardConnectionState state;
+  SmartCardProtocol activeProtocol;
 };
 
-interface SmartCardErrorEvent : Event {
-  [SameObject] readonly attribute DOMException error;
-}
+enum SmartCardConnectionState {
+  // There is no card in the reader.
+  "absent",
 
+  // There is a card in the reader, but it has not been moved into position for use
+  "present",
+
+  // There is a card in the reader in position for use. The card is not powered.
+  "swallowed",
+
+  // Power is being provided to the card, but the reader driver is unaware of
+  // the mode of the card.
+  "powered",
+
+  // The card has been reset and is awaiting PTS (protocol type selection)
+  // negotiation.
+  "negotiable",
+
+  // The card is in a specific protocol mode and a new protocol may not be
+  // negotiated.
+  "specific"
+};
+```
+### Definitions common to several interfaces
+```WebIDL
 [Serializable]
 interface SmartCardError : DOMException {
   constructor(optional DOMString message = "", SmartCardErrorOptions options);
@@ -261,36 +270,6 @@ enum SmartCardResponseCode {
   "unsupported-feature"
 };
 
-callback TransactionStartedCallback = Promise<any> ();
-
-dictionary SmartCardConnectionStatus {
-  required SmartCardConnectionState state;
-  SmartCardProtocol activeProtocol;
-};
-
-enum SmartCardConnectionState {
-  // There is no card in the reader.
-  "absent",
-
-  // There is a card in the reader, but it has not been moved into position for use
-  "present",
-
-  // There is a card in the reader in position for use. The card is not powered.
-  "swallowed",
-
-  // Power is being provided to the card, but the reader driver is unaware of
-  // the mode of the card.
-  "powered",
-
-  // The card has been reset and is awaiting PTS (protocol type selection)
-  // negotiation.
-  "negotiable",
-
-  // The card is in a specific protocol mode and a new protocol may not be
-  // negotiated.
-  "specific"
-};
-
 enum SmartCardProtocol {
   // "Raw" mode. May be used to support arbitrary data exchange protocols
   // for special-purpose requirements.
@@ -301,43 +280,6 @@ enum SmartCardProtocol {
 
   // ISO/IEC 7186 T=1. Asynchronous half duplex block transmission protocol.
   "t1",
-};
-
-enum SmartCardReaderState {
-  // The reader device it represents cannot be accessed (eg: it might be no
-  // longer connected to the host).
-  "unavailable",
-
-  // There is no card in the reader.
-  "empty",
-
-  // There is a card in the reader. It's powered, responsive and no other
-  // applications are using it.
-  "present",
-
-  // The card in the reader is allocated for exclusive use by another
-  // application.
-  // It could be powered or not.
-  "exclusive",
-
-  // The card in the reader is in use by one or more other applications in
-  // shared mode.
-  // It could be powered or not.
-  "inuse",
-
-  // There is a powered but unresponsive card in the reader.
-  // No other applications are using it.
-  "mute",
-
-  // The card in the reader has not been powered up.
-  // No other applications are using it.
-  "unpowered"
-};
-
-enum SmartCardAccessMode {
-  "shared",
-  "exclusive",
-  "direct"
 };
 
 enum SmartCardDisposition {
