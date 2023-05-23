@@ -184,8 +184,8 @@ interface SmartCardConnection {
 
   // Direct communication with the reader device. Sends vendor-specific commands.
   // The returned Promise might contain output data, if applicable for the given
-  // control code.
-  Promise<ArrayBuffer?> control([EnforceRange] unsigned long controlCode,
+  // control code. Otherwise the returned buffer will be empty.
+  Promise<ArrayBuffer> control([EnforceRange] unsigned long controlCode,
       BufferSource data);
 
   // Queries a card reader's attribute or capability value, given its tag.
