@@ -80,6 +80,33 @@ try {
 
 Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles.
 
+## Reacting to reader availability
+
+A common use case is reacting when a new card reader becomes available. On most platforms one can be notified of that using the special reader name `\\?PnP?\Notification`:
+
+```js
+try {
+  let context = await navigator.smartCard.establishContext();
+
+  let oldReaders = await context.listReaders();
+
+  let allReaders = await context.getStatusChange(
+      [{readerName: "\\\\?PnP?\\Notification", currentState: {}}],
+      AbortSignal.timeout(10000))
+        .then(
+          (statesOut) => {
+            // A new reader was added.
+            return context.listReaders();
+          }
+        );
+
+  let newReaders = allReaders.filter(x => !oldReaders.includes(x));
+  console.log("Readers added: " + newReaders);
+} catch(ex) {
+  console.warn("A Smart Card operation failed (or timed out): " + ex);
+}
+```
+
 ## Web IDL
 
 ### Navigator
