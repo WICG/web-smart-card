@@ -158,17 +158,17 @@ dictionary SmartCardReaderStateOut {
 };
 
 dictionary SmartCardReaderStateFlags {
-  boolean unaware;
-  boolean ignore;
-  boolean changed;
-  boolean unknown;
-  boolean unavailable;
-  boolean empty;
-  boolean present;
-  boolean exclusive;
-  boolean inuse;
-  boolean mute;
-  boolean unpowered;
+  boolean unaware = false;
+  boolean ignore = false;
+  boolean changed = false;
+  boolean unknown = false;
+  boolean unavailable = false;
+  boolean empty = false;
+  boolean present = false;
+  boolean exclusive = false;
+  boolean inuse = false;
+  boolean mute = false;
+  boolean unpowered = false;
 };
 
 dictionary SmartCardConnectResult {
