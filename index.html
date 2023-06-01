@@ -73,7 +73,7 @@
     <section data-dfn-for="WorkerNavigator">
       <h2>Extensions to the {{WorkerNavigator}} interface</h2>
       <pre class="idl">
-        [Exposed=DedicatedWorker, SharedWorker, SecureContext]
+        [Exposed=(DedicatedWorker, SharedWorker), SecureContext]
         partial interface WorkerNavigator {
           [SameObject] readonly attribute SmartCardResourceManager smartCard;
         };
@@ -243,8 +243,7 @@
                 application, and the actual state.</dd>
 
               <dt><dfn>unavailable</dfn> member</dt>
-              <dd>The application believes that this reader is not available for
-                use.</dd>
+              <dd>This reader is not available for use.</dd>
 
               <dt><dfn>unknown</dfn> member</dt>
               <dd>The reader name given by the application is not known.</dd>
@@ -386,7 +385,7 @@
       </section>
       <section>
         <h3><dfn>startTransaction()</dfn> method</h3>
-        <p>Starts a transaction. The Transaction is ended when the promise
+        <p>Starts a transaction. The Transaction is ended when the {{Promise}}
         returned by the given callback settles.</p>
       </section>
       <section>
@@ -455,7 +454,7 @@
       <section>
         <h3><dfn>control()</dfn> method</h3>
         <p>Direct communication with the reader device. Sends vendor-specific
-        commands. The returned Promise might contain output data, if applicable
+        commands. The returned {{Promise}} might contain output data, if applicable
         for the given control code. Otherwise the returned buffer will be
         empty.</p>
       </section>
