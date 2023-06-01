@@ -95,6 +95,7 @@
       <section>
         <h3><dfn>establishContext()</dfn> method</h3>
         <p>Requests a PC/SC context from the platform's PC/SC stack.</p>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
     </section>
 
@@ -118,10 +119,12 @@
       </pre>
       <section>
         <h3><dfn>listReaders()</dfn> method</h3>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
         <h3><dfn>getStatusChange()</dfn> method</h3>
         <p>Equivalent to the GetStatusChange method of the SCARDTRACK class from [[PCSC5]].</p>
+        <div class="issue">Write an algorithm for this method.</div>
         <section data-dfn-for="SmartCardReaderStateIn">
           <h4><dfn>SmartCardReaderStateIn</dfn> dictionary</h4>
           <p>Describes the state that the application expectes a smart card
@@ -270,6 +273,7 @@
       </section>
       <section>
         <h3><dfn>connect()</dfn> method</h3>
+        <div class="issue">Write an algorithm for this method.</div>
         <section data-dfn-for="SmartCardProtocol">
           <h4><dfn>SmartCardProtocol</dfn> enum</h4>
           <pre class="idl">
@@ -357,6 +361,7 @@
       <section>
         <h3><dfn>disconnect()</dfn> method</h3>
         <section data-dfn-for="SmartCardDisposition">
+          <div class="issue">Write an algorithm for this method.</div>
           <h4><dfn>SmartCardDisposition</dfn> enum</h3>
           <pre class="idl">
             enum SmartCardDisposition {
@@ -382,15 +387,18 @@
       </section>
       <section>
         <h3><dfn>transmit()</dfn> method</h3>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
         <h3><dfn>startTransaction()</dfn> method</h3>
         <p>Starts a transaction. The Transaction is ended when the {{Promise}}
         returned by the given callback settles.</p>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
         <h3><dfn>status()</dfn> method</h3>
         <p>Queries the host's PC/SC stack about the current connection status.</p>
+        <div class="issue">Write an algorithm for this method.</div>
         <section data-dfn-for="SmartCardConnectionStatus">
           <h4><dfn>SmartCardConnectionStatus</dfn> dictionary</h3>
           <pre class="idl">
@@ -457,14 +465,17 @@
         commands. The returned {{Promise}} might contain output data, if applicable
         for the given control code. Otherwise the returned buffer will be
         empty.</p>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
         <h3><dfn>getAttribute()</dfn> method</h3>
         <p>Queries a card reader's attribute or capability value, given its tag.</p>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
         <h3><dfn>setAttribute()</dfn> method</h3>
         <p>Sets a card reader's attribute or capability.</p>
+        <div class="issue">Write an algorithm for this method.</div>
       </section>
     </section>
 
