@@ -205,7 +205,7 @@
             dictionary SmartCardReaderStateOut {
               required DOMString readerName;
               required SmartCardReaderStateFlagsOut state;
-              required ArrayBuffer answerToReset;
+              ArrayBuffer answerToReset;
             };
           </pre>
 
@@ -217,7 +217,8 @@
             <dd>The actual state of that smart card reader.</dd>
 
             <dt><dfn>answerToReset</dfn> member</dt>
-            <dd>The inserted card's [[ISO7186-3]] Answer To Reset (ATR), if any.</dd>
+            <dd>The inserted card's [[ISO7186-3]] Answer To Reset (ATR), if
+              applicable.</dd>
           </dl>
 
           <section data-dfn-for="SmartCardReaderStateFlagsOut">
@@ -405,7 +406,7 @@
             dictionary SmartCardConnectionStatus {
               required DOMString readerName;
               required SmartCardConnectionState state;
-              required ArrayBuffer answerToReset;
+              ArrayBuffer answerToReset;
             };
           </pre>
           <dl>
@@ -414,8 +415,7 @@
             <dt><dfn>state</dfn> member</dt>
             <dd>Current state of the connection.</dd>
             <dt><dfn>answerToReset</dfn> member</dt>
-            <dd>The answer to reset (ATR) string from the card, if applicable.
-            Empty otherwise.</dd>
+            <dd>The answer to reset (ATR) string from the card, if applicable.</dd>
           </dl>
           <section data-dfn-for="SmartCardConnectionState">
             <h5><dfn>SmartCardConnectionState</dfn> enum</h3>
