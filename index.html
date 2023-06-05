@@ -17,7 +17,7 @@
           branch: "main",
           repoURL: "WICG/web-smart-card",
         },
-        xref: "web-platform",
+        xref: ["dom", "html", "permissions-policy", "webidl"],
         localBiblio: {
           // Remove this one once https://github.com/tobie/specref/pull/747 is merged:
           "PCSC5": {
@@ -553,6 +553,22 @@
           <dt><dfn>unsupported-feature</dfn></dt>
           <dd>SCARD_E_UNSUPPORTED_FEATURE in the [[PCSC5]] spec.</dd>
         </dl>
+      </section>
+    </section>
+    <section id="integrations">
+      <h2>Integrations</h2>
+
+      <section id="permissions-policy">
+        <h3>Permissions Policy</h3>
+
+        <p>This specification defines a feature that controls whether the
+        methods exposed by the {{Navigator/smartCard}} attribute on the
+        {{Navigator}} object may be used.</p>
+
+        <p>The feature name for this feature is `"smart-card"`.</p>
+
+        <p>The [=policy-controlled feature/default allowlist=] for this feature
+        is `'self'`.</p>
       </section>
     </section>
     <section id='conformance'>
