@@ -1,0 +1,16 @@
+name: deploy-spec
+on:
+  pull_request: {}
+  push:
+    branches: [main]
+jobs:
+  main:
+    name: Build, Validate and Deploy Spec
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: w3c/spec-prod@v2
+        with:
+          SOURCE: index.html
+          TOOLCHAIN: respec
+          GH_PAGES_BRANCH: gh-pages
