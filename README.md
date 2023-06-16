@@ -6,6 +6,8 @@ The objective of this API is to enable [smart card](https://en.wikipedia.org/wik
 
 See [background.md](background.md) for background information.
 
+There's also the [Unofficial draft of the Specification](https://wicg.github.io/web-smart-card/).
+
 ## Motivating Use Cases
 
 ### Identification and Authentication
