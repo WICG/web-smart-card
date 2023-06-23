@@ -346,7 +346,7 @@
 
           Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer);
 
-          Promise&lt;any&gt; startTransaction(TransactionStartedCallback transaction);
+          Promise&lt;undefined&gt; startTransaction(SmartCardTransactionCallback transaction);
 
           Promise&lt;SmartCardConnectionStatus&gt; status();
 
@@ -357,7 +357,7 @@
           Promise&lt;undefined&gt; setAttribute([EnforceRange] unsigned long tag, BufferSource value);
         };
 
-        callback TransactionStartedCallback = Promise&lt;any&gt; ();
+        callback SmartCardTransactionCallback = Promise&lt;SmartCardDisposition&gt; ();
       </pre>
       <section>
         <h3><dfn>disconnect()</dfn> method</h3>
