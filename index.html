@@ -346,7 +346,7 @@
 
           Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer);
 
-          Promise&lt;any&gt; startTransaction(TransactionStartedCallback transaction);
+          Promise&lt;SmartCardTransaction&gt; beginTransaction();
 
           Promise&lt;SmartCardConnectionStatus&gt; status();
 
@@ -356,8 +356,6 @@
           Promise&lt;ArrayBuffer&gt; getAttribute([EnforceRange] unsigned long tag);
           Promise&lt;undefined&gt; setAttribute([EnforceRange] unsigned long tag, BufferSource value);
         };
-
-        callback TransactionStartedCallback = Promise&lt;any&gt; ();
       </pre>
       <section>
         <h3><dfn>disconnect()</dfn> method</h3>
@@ -391,9 +389,7 @@
         <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
-        <h3><dfn>startTransaction()</dfn> method</h3>
-        <p>Starts a transaction. The Transaction is ended when the {{Promise}}
-        returned by the given callback settles.</p>
+        <h3><dfn>beginTransaction()</dfn> method</h3>
         <div class="issue">Write an algorithm for this method.</div>
       </section>
       <section>
@@ -475,6 +471,20 @@
       <section>
         <h3><dfn>setAttribute()</dfn> method</h3>
         <p>Sets a card reader's attribute or capability.</p>
+        <div class="issue">Write an algorithm for this method.</div>
+      </section>
+    </section>
+
+    <section data-dfn-for="SmartCardTransaction">
+      <h2><dfn>SmartCardTransaction</dfn> interface</h2>
+      <pre class="idl">
+        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext]
+        interface SmartCardTransaction {
+          Promise&lt;undefined&gt; end(optional SmartCardDisposition disposition = "leave");
+        };
+      </pre>
+      <section>
+        <h3><dfn>end()</dfn> method</h3>
         <div class="issue">Write an algorithm for this method.</div>
       </section>
     </section>

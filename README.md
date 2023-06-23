@@ -62,26 +62,22 @@ If a connection is established in `"shared"` access mode, to ensure consecutive 
 
 ```js
 try {
-  const result = await connection.startTransaction(async connection => {
-    // A transaction has successfully started.
-    let firstCommand = new UInt8Array([0x00, 0xA4, 0x04, 0x00, 0x0A, 0xA0, 0x00,
-        0x00, 0x00, 0x62, 0x03, 0x01, 0x0C, 0x06, 0x01]);
-    let firstResponse = await connection.transmit(firstCommand);
-    …
-    await connection.transmit(someOtherCommand);
-    …
-    await connection.transmit(finalCommand);
-    // The transaction with the card ends when the Promise settles.
-  });
-  // |result| has the value the Promise returned by callback above settled with.
+  let transaction = await connection.beginTransaction();
+
+  let firstCommand = new UInt8Array([0x00, 0xA4, 0x04, 0x00, 0x0A, 0xA0, 0x00,
+      0x00, 0x00, 0x62, 0x03, 0x01, 0x0C, 0x06, 0x01]);
+  let firstResponse = await connection.transmit(firstCommand);
+  …
+  await connection.transmit(someOtherCommand);
+  …
+  await connection.transmit(finalCommand);
+
+  // Reset the card after ending the transaction.
+  await transaction.end("reset");
 } catch (ex) {
-  // Either the transaction failed to start, the callback
-  // has thrown or the transaction failed to end.
+  console.warn("A Smart Card operation failed: " + ex);
 }
 ```
-
-Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles.
-
 ## Reacting to reader availability
 
 A common use case is reacting when a new card reader becomes available. On most platforms one can be notified of that using the special reader name `\\?PnP?\Notification`:
