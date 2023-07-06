@@ -81,7 +81,7 @@ try {
 }
 ```
 
-Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles. If the settled `Promise` is fulfilled, the transaction is ended with the card disposition it was fulfilled with. Otherwise the transaction is ended without any further action.
+Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles. If the settled `Promise` is fulfilled, the transaction is ended with the card disposition it was fulfilled with. If that value is `undefined` or invalid, a `"leave"` card disposition is assumed. A rejected `Promise` also causes the transaction to be ended with a `"leave"` card disposition.
 
 ## Reacting to reader availability
 
