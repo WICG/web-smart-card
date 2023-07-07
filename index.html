@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 34.1.3">
+<meta name="generator" content="ReSpec 34.1.4">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 .issue-label{text-transform:initial}
@@ -179,14 +179,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-06-16T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 16 June 2023"
+  "publishISODate": "2023-07-07T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 07 July 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom html permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-06-16">16 June 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-07">07 July 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -509,13 +509,13 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
 
     <section data-dfn-for="SmartCardConnection" id="smartcardconnection-interface"><div class="header-wrapper"><h2 id="x5-smartcardconnection-interface"><bdi class="secno">5. </bdi><dfn data-export="" data-dfn-type="interface" id="dom-smartcardconnection" data-idl="interface" data-title="SmartCardConnection" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardConnection</code></dfn> interface</h2><a class="self-link" href="#smartcardconnection-interface" aria-label="Permalink for Section 5."></a></div>
       
-      <pre class="idl def" id="webidl-1084460895"><span class="idlHeader"><a class="self-link" href="#webidl-1084460895">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcardconnection" data-title="SmartCardConnection">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>]
+      <pre class="idl def" id="webidl-982869160"><span class="idlHeader"><a class="self-link" href="#webidl-982869160">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcardconnection" data-title="SmartCardConnection">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcardconnection" id="ref-for-dom-smartcardconnection-2"><code>SmartCardConnection</code></a> {<span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-disconnect-disposition" data-title="disconnect" data-dfn-for="SmartCardConnection"><span class="idlType">
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined">undefined</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-disconnect" id="ref-for-dom-smartcardconnection-disconnect-1"><code>disconnect</code></a>(optional<span class="idlType"> <a data-link-type="idl" href="#dom-smartcarddisposition" class="internalDFN" id="ref-for-dom-smartcarddisposition-1"><code>SmartCardDisposition</code></a></span> <span class="idlParamName">disposition</span> = "leave");</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-transmit-sendbuffer" data-title="transmit" data-dfn-for="SmartCardConnection"><span class="idlType">
 
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer">ArrayBuffer</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-transmit" id="ref-for-dom-smartcardconnection-transmit-1"><code>transmit</code></a>(<span class="idlType"><a data-link-type="idl" data-type="typedef" href="https://webidl.spec.whatwg.org/#BufferSource">BufferSource</a></span> <span class="idlParamName">sendBuffer</span>);</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-starttransaction-transaction" data-title="startTransaction" data-dfn-for="SmartCardConnection"><span class="idlType">
 
-  <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-any">any</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-starttransaction" id="ref-for-dom-smartcardconnection-starttransaction-1"><code>startTransaction</code></a>(<span class="idlType"><a data-link-type="idl" href="#dom-transactionstartedcallback" class="internalDFN" id="ref-for-dom-transactionstartedcallback-1"><code>TransactionStartedCallback</code></a></span> <span class="idlParamName">transaction</span>);</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-status" data-title="status" data-dfn-for="SmartCardConnection"><span class="idlType">
+  <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined">undefined</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-starttransaction" id="ref-for-dom-smartcardconnection-starttransaction-1"><code>startTransaction</code></a>(<span class="idlType"><a data-link-type="idl" href="#dom-smartcardtransactioncallback" class="internalDFN" id="ref-for-dom-smartcardtransactioncallback-1"><code>SmartCardTransactionCallback</code></a></span> <span class="idlParamName">transaction</span>);</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-status" data-title="status" data-dfn-for="SmartCardConnection"><span class="idlType">
 
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" href="#dom-smartcardconnectionstatus" class="internalDFN" id="ref-for-dom-smartcardconnectionstatus-1"><code>SmartCardConnectionStatus</code></a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-status" id="ref-for-dom-smartcardconnection-status-1"><code>status</code></a>();</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-control-controlcode-data" data-title="control" data-dfn-for="SmartCardConnection"><span class="idlType">
 
@@ -524,15 +524,15 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
 
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer">ArrayBuffer</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-getattribute" id="ref-for-dom-smartcardconnection-getattribute-1"><code>getAttribute</code></a>([<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#EnforceRange">EnforceRange</a></span>]<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long">unsigned long</a></span> <span class="idlParamName">tag</span>);</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-setattribute-tag-value" data-title="setAttribute" data-dfn-for="SmartCardConnection"><span class="idlType">
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined">undefined</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-setattribute" id="ref-for-dom-smartcardconnection-setattribute-1"><code>setAttribute</code></a>([<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#EnforceRange">EnforceRange</a></span>]<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long">unsigned long</a></span> <span class="idlParamName">tag</span>,<span class="idlType"> <a data-link-type="idl" data-type="typedef" href="https://webidl.spec.whatwg.org/#BufferSource">BufferSource</a></span> <span class="idlParamName">value</span>);</span>
-};</span><span data-idl="" class="idlCallback" id="idl-def-transactionstartedcallback" data-title="TransactionStartedCallback">
+};</span><span data-idl="" class="idlCallback" id="idl-def-smartcardtransactioncallback" data-title="SmartCardTransactionCallback">
 
-callback <dfn data-export="" data-dfn-type="callback" id="dom-transactionstartedcallback" data-idl="callback" data-title="TransactionStartedCallback" data-dfn-for="" class="idlID" tabindex="0" aria-haspopup="dialog"><code>TransactionStartedCallback</code></dfn> =<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-any">any</a>&gt;</span> ();</span></code></pre>
+callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransactioncallback" data-idl="callback" data-title="SmartCardTransactionCallback" data-dfn-for="" class="idlID" tabindex="0" aria-haspopup="dialog"><code>SmartCardTransactionCallback</code></dfn> =<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" href="#dom-smartcarddisposition" class="internalDFN" id="ref-for-dom-smartcarddisposition-2"><code>SmartCardDisposition</code></a>?&gt;</span> ();</span></code></pre>
       <section id="disconnect-method"><div class="header-wrapper"><h3 id="x5-1-disconnect-method"><bdi class="secno">5.1 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-disconnect" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect" tabindex="0" aria-haspopup="dialog"><code>disconnect()</code></dfn> method</h3><a class="self-link" href="#disconnect-method" aria-label="Permalink for Section 5.1"></a></div>
         
         <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue 5</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardDisposition" id="smartcarddisposition-enum"><div class="header-wrapper"><h4 id="x5-1-1-smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><dfn data-export="" data-dfn-type="enum" id="dom-smartcarddisposition" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardDisposition</code></dfn> enum</h4><a class="self-link" href="#smartcarddisposition-enum" aria-label="Permalink for Section 5.1.1"></a></div>
           
-          <pre class="idl def" id="webidl-633517433"><span class="idlHeader"><a class="self-link" href="#webidl-633517433">WebIDL</a></span><code><span data-idl="" class="idlEnum" id="idl-def-smartcarddisposition" data-title="SmartCardDisposition">enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-smartcarddisposition" id="ref-for-dom-smartcarddisposition-2"><code>SmartCardDisposition</code></a> {
+          <pre class="idl def" id="webidl-633517433"><span class="idlHeader"><a class="self-link" href="#webidl-633517433">WebIDL</a></span><code><span data-idl="" class="idlEnum" id="idl-def-smartcarddisposition" data-title="SmartCardDisposition">enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-smartcarddisposition" id="ref-for-dom-smartcarddisposition-3"><code>SmartCardDisposition</code></a> {
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcarddisposition-leave" id="ref-for-dom-smartcarddisposition-leave-1"><code>leave</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcarddisposition-reset" id="ref-for-dom-smartcarddisposition-reset-1"><code>reset</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcarddisposition-unpower" id="ref-for-dom-smartcarddisposition-unpower-1"><code>unpower</code></a>"</span>,
@@ -743,7 +743,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     </dd><dt id="bib-pcsc5">[PCSC5]</dt><dd>
       <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf"><cite>Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition</cite></a>.  PC/SC Workgroup. Published. URL: <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf">https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 7 June 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 5 July 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-webidl">[WEBIDL]</dt><dd>
       <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
     </dd></dl>
@@ -1325,7 +1325,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection" aria-label="Permalink for definition: SmartCardConnection. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1335,23 +1335,23 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <a href="#ref-for-dom-smartcardconnection-2" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-transactionstartedcallback" aria-label="Links in this document to definition: TransactionStartedCallback">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardtransactioncallback" aria-label="Links in this document to definition: SmartCardTransactionCallback">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="#dom-transactionstartedcallback" aria-label="Permalink for definition: TransactionStartedCallback. Activate to close this dialog.">Permalink</a>
+        <a class="self-link" href="#dom-smartcardtransactioncallback" aria-label="Permalink for definition: SmartCardTransactionCallback. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-dom-transactionstartedcallback-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+    <a href="#ref-for-dom-smartcardtransactioncallback-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardconnection-disconnect" aria-label="Links in this document to definition: disconnect()">
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-disconnect" aria-label="Permalink for definition: disconnect(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1368,9 +1368,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-dom-smartcarddisposition-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+    <a href="#ref-for-dom-smartcarddisposition-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> <a href="#ref-for-dom-smartcarddisposition-2" title="Reference 2">(2)</a> 
   </li><li>
-    <a href="#ref-for-dom-smartcarddisposition-2" title="§ 5.1.1 SmartCardDisposition enum">§ 5.1.1 SmartCardDisposition enum</a> 
+    <a href="#ref-for-dom-smartcarddisposition-3" title="§ 5.1.1 SmartCardDisposition enum">§ 5.1.1 SmartCardDisposition enum</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarddisposition-leave" aria-label="Links in this document to definition: leave">
@@ -1425,7 +1425,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-transmit" aria-label="Permalink for definition: transmit(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1437,7 +1437,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-starttransaction" aria-label="Permalink for definition: startTransaction(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1449,7 +1449,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-status" aria-label="Permalink for definition: status(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1621,7 +1621,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-control" aria-label="Permalink for definition: control(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1633,7 +1633,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-getattribute" aria-label="Permalink for definition: getAttribute(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1645,7 +1645,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-setattribute" aria-label="Permalink for definition: setAttribute(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1084460895">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-982869160">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
