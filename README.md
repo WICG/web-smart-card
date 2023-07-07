@@ -62,7 +62,7 @@ If a connection is established in `"shared"` access mode, to ensure consecutive 
 
 ```js
 try {
-  const result = await connection.startTransaction(async connection => {
+  await connection.startTransaction(async connection => {
     // A transaction has successfully started.
     let firstCommand = new UInt8Array([0x00, 0xA4, 0x04, 0x00, 0x0A, 0xA0, 0x00,
         0x00, 0x00, 0x62, 0x03, 0x01, 0x0C, 0x06, 0x01]);
@@ -71,16 +71,17 @@ try {
     await connection.transmit(someOtherCommand);
     …
     await connection.transmit(finalCommand);
-    // The transaction with the card ends when the Promise settles.
+
+    // Reset the card when ending the transaction.
+    return "reset";
   });
-  // |result| has the value the Promise returned by callback above settled with.
 } catch (ex) {
   // Either the transaction failed to start, the callback
   // has thrown or the transaction failed to end.
 }
 ```
 
-Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles.
+Upon calling `startTransaction()`, a transaction will be started with the card related to this connection. When successful, the given callback will be called. All interactions with the card done inside this callback will then be part of this transaction. The transaction is ended once the `Promise` returned by the callback settles. If the settled `Promise` is fulfilled, the transaction is ended with the card disposition it was fulfilled with. If that value is `undefined` or invalid, a `"leave"` card disposition is assumed. A rejected `Promise` also causes the transaction to be ended with a `"leave"` card disposition.
 
 ## Reacting to reader availability
 
