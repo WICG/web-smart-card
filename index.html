@@ -179,14 +179,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-07-07T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 07 July 2023"
+  "publishISODate": "2023-07-10T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 10 July 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom html permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-07">07 July 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-10">10 July 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -314,18 +314,23 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
           <p>Describes the state that the application expectes a smart card
           reader to be in.</p>
 
-          <pre class="idl def" id="webidl-2144227067"><span class="idlHeader"><a class="self-link" href="#webidl-2144227067">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstatein" data-title="SmartCardReaderStateIn">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstatein" id="ref-for-dom-smartcardreaderstatein-2"><code>SmartCardReaderStateIn</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateIn">
-  required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-readername" id="ref-for-dom-smartcardreaderstatein-readername-1"><code>readerName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-knownstate" data-title="knownState" data-dfn-for="SmartCardReaderStateIn">
-  required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardreaderstateflagsin" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-1"><code>SmartCardReaderStateFlagsIn</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-knownstate" id="ref-for-dom-smartcardreaderstatein-knownstate-1"><code>knownState</code></a>;</span>
+          <pre class="idl def" id="webidl-1648599769"><span class="idlHeader"><a class="self-link" href="#webidl-1648599769">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstatein" data-title="SmartCardReaderStateIn">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstatein" id="ref-for-dom-smartcardreaderstatein-2"><code>SmartCardReaderStateIn</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateIn">
+  required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-readername" id="ref-for-dom-smartcardreaderstatein-readername-1"><code>readerName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-currentstate" data-title="currentState" data-dfn-for="SmartCardReaderStateIn">
+  required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardreaderstateflagsin" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-1"><code>SmartCardReaderStateFlagsIn</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-currentstate" id="ref-for-dom-smartcardreaderstatein-currentstate-1"><code>currentState</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-currentcount" data-title="currentCount" data-dfn-for="SmartCardReaderStateIn"><span class="idlType">
+  <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-currentcount" id="ref-for-dom-smartcardreaderstatein-currentcount-1"><code>currentCount</code></a>;</span>
 };</span></code></pre>
 
           <dl>
             <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstatein-readername" data-idl="field" data-title="readerName" data-dfn-for="SmartCardReaderStateIn" data-type="DOMString" tabindex="0" aria-haspopup="dialog"><code>readerName</code></dfn> member</dt>
             <dd>Name of the smart card reader.</dd>
 
-            <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstatein-knownstate" data-idl="field" data-title="knownState" data-dfn-for="SmartCardReaderStateIn" data-type="SmartCardReaderStateFlagsIn" tabindex="0" aria-haspopup="dialog"><code>knownState</code></dfn> member</dt>
+            <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstatein-currentstate" data-idl="field" data-title="currentState" data-dfn-for="SmartCardReaderStateIn" data-type="SmartCardReaderStateFlagsIn" tabindex="0" aria-haspopup="dialog"><code>currentState</code></dfn> member</dt>
             <dd>The current state of that smart card reader as known by the
               application.</dd>
+
+            <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstatein-currentcount" data-idl="field" data-title="currentCount" data-dfn-for="SmartCardReaderStateIn" data-type="unsigned long" tabindex="0" aria-haspopup="dialog"><code>currentCount</code></dfn> member</dt>
+            <dd>The current number of card insertion and removal events in this
+              reader, as known by the application.</dd>
           </dl>
           <section data-dfn-for="SmartCardReaderStateFlagsIn" id="smartcardreaderstateflagsin-dictionary"><div class="header-wrapper"><h5 id="x4-2-1-1-smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.1.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateflagsin" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateFlagsIn</code></dfn> dictionary</h5><a class="self-link" href="#smartcardreaderstateflagsin-dictionary" aria-label="Permalink for Section 4.2.1.1"></a></div>
             
@@ -381,9 +386,10 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
           
           <p>The actual state of a smart card reader.</p>
 
-          <pre class="idl def" id="webidl-305522378"><span class="idlHeader"><a class="self-link" href="#webidl-305522378">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateout" data-title="SmartCardReaderStateOut">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateout" id="ref-for-dom-smartcardreaderstateout-2"><code>SmartCardReaderStateOut</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateOut">
-  required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-readername" id="ref-for-dom-smartcardreaderstateout-readername-1"><code>readerName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-state" data-title="state" data-dfn-for="SmartCardReaderStateOut">
-  required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-1"><code>SmartCardReaderStateFlagsOut</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-state" id="ref-for-dom-smartcardreaderstateout-state-1"><code>state</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-answertoreset" data-title="answerToReset" data-dfn-for="SmartCardReaderStateOut"><span class="idlType">
+          <pre class="idl def" id="webidl-889475000"><span class="idlHeader"><a class="self-link" href="#webidl-889475000">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateout" data-title="SmartCardReaderStateOut">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateout" id="ref-for-dom-smartcardreaderstateout-2"><code>SmartCardReaderStateOut</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateOut">
+  required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-readername" id="ref-for-dom-smartcardreaderstateout-readername-1"><code>readerName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-eventstate" data-title="eventState" data-dfn-for="SmartCardReaderStateOut">
+  required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-1"><code>SmartCardReaderStateFlagsOut</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-eventstate" id="ref-for-dom-smartcardreaderstateout-eventstate-1"><code>eventState</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-eventcount" data-title="eventCount" data-dfn-for="SmartCardReaderStateOut">
+  required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-eventcount" id="ref-for-dom-smartcardreaderstateout-eventcount-1"><code>eventCount</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-answertoreset" data-title="answerToReset" data-dfn-for="SmartCardReaderStateOut"><span class="idlType">
   <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer">ArrayBuffer</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-answertoreset" id="ref-for-dom-smartcardreaderstateout-answertoreset-1"><code>answerToReset</code></a>;</span>
 };</span></code></pre>
 
@@ -391,8 +397,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
             <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateout-readername" data-idl="field" data-title="readerName" data-dfn-for="SmartCardReaderStateOut" data-type="DOMString" tabindex="0" aria-haspopup="dialog"><code>readerName</code></dfn> member</dt>
             <dd>Name of the smart card reader.</dd>
 
-            <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateout-state" data-idl="field" data-title="state" data-dfn-for="SmartCardReaderStateOut" data-type="SmartCardReaderStateFlagsOut" tabindex="0" aria-haspopup="dialog"><code>state</code></dfn> member</dt>
+            <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateout-eventstate" data-idl="field" data-title="eventState" data-dfn-for="SmartCardReaderStateOut" data-type="SmartCardReaderStateFlagsOut" tabindex="0" aria-haspopup="dialog"><code>eventState</code></dfn> member</dt>
             <dd>The actual state of that smart card reader.</dd>
+
+            <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateout-eventcount" data-idl="field" data-title="eventCount" data-dfn-for="SmartCardReaderStateOut" data-type="unsigned long" tabindex="0" aria-haspopup="dialog"><code>eventCount</code></dfn> member</dt>
+            <dd>The actual number of card insertion and removal events in this
+              reader.</dd>
 
             <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateout-answertoreset" data-idl="field" data-title="answerToReset" data-dfn-for="SmartCardReaderStateOut" data-type="ArrayBuffer" tabindex="0" aria-haspopup="dialog"><code>answerToReset</code></dfn> member</dt>
             <dd>The inserted card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] Answer To Reset (ATR), if
@@ -853,7 +863,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardreaderstatein" aria-label="Permalink for definition: SmartCardReaderStateIn. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-2144227067">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1648599769">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -867,7 +877,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardreaderstatein-readername" aria-label="Permalink for definition: readerName. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-2144227067">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1648599769">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -875,16 +885,28 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <a href="#ref-for-dom-smartcardreaderstatein-readername-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein-knownstate" aria-label="Links in this document to definition: knownState">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein-currentstate" aria-label="Links in this document to definition: currentState">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="#dom-smartcardreaderstatein-knownstate" aria-label="Permalink for definition: knownState. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-2144227067">IDL</a>
+        <a class="self-link" href="#dom-smartcardreaderstatein-currentstate" aria-label="Permalink for definition: currentState. Activate to close this dialog.">Permalink</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1648599769">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-dom-smartcardreaderstatein-knownstate-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+    <a href="#ref-for-dom-smartcardreaderstatein-currentstate-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein-currentcount" aria-label="Links in this document to definition: currentCount">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dom-smartcardreaderstatein-currentcount" aria-label="Permalink for definition: currentCount. Activate to close this dialog.">Permalink</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1648599769">IDL</a>
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-dom-smartcardreaderstatein-currentcount-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin" aria-label="Links in this document to definition: SmartCardReaderStateFlagsIn">
@@ -1001,7 +1023,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardreaderstateout" aria-label="Permalink for definition: SmartCardReaderStateOut. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-305522378">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-889475000">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1015,7 +1037,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardreaderstateout-readername" aria-label="Permalink for definition: readerName. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-305522378">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-889475000">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -1023,23 +1045,35 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <a href="#ref-for-dom-smartcardreaderstateout-readername-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-state" aria-label="Links in this document to definition: state">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-eventstate" aria-label="Links in this document to definition: eventState">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="#dom-smartcardreaderstateout-state" aria-label="Permalink for definition: state. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-305522378">IDL</a>
+        <a class="self-link" href="#dom-smartcardreaderstateout-eventstate" aria-label="Permalink for definition: eventState. Activate to close this dialog.">Permalink</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-889475000">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-dom-smartcardreaderstateout-state-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+    <a href="#ref-for-dom-smartcardreaderstateout-eventstate-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-eventcount" aria-label="Links in this document to definition: eventCount">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dom-smartcardreaderstateout-eventcount" aria-label="Permalink for definition: eventCount. Activate to close this dialog.">Permalink</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-889475000">IDL</a>
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-dom-smartcardreaderstateout-eventcount-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-answertoreset" aria-label="Links in this document to definition: answerToReset">
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardreaderstateout-answertoreset" aria-label="Permalink for definition: answerToReset. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-305522378">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-889475000">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
