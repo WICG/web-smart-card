@@ -133,7 +133,8 @@
           <pre class="idl">
             dictionary SmartCardReaderStateIn {
               required DOMString readerName;
-              required SmartCardReaderStateFlagsIn knownState;
+              required SmartCardReaderStateFlagsIn currentState;
+              unsigned long currentCount;
             };
           </pre>
 
@@ -141,9 +142,13 @@
             <dt><dfn>readerName</dfn> member</dt>
             <dd>Name of the smart card reader.</dd>
 
-            <dt><dfn>knownState</dfn> member</dt>
+            <dt><dfn>currentState</dfn> member</dt>
             <dd>The current state of that smart card reader as known by the
               application.</dd>
+
+            <dt><dfn>currentCount</dfn> member</dt>
+            <dd>The current number of card insertion and removal events in this
+              reader, as known by the application.</dd>
           </dl>
           <section data-dfn-for="SmartCardReaderStateFlagsIn">
             <h5><dfn>SmartCardReaderStateFlagsIn</dfn> dictionary</h4>
@@ -204,7 +209,8 @@
           <pre class="idl">
             dictionary SmartCardReaderStateOut {
               required DOMString readerName;
-              required SmartCardReaderStateFlagsOut state;
+              required SmartCardReaderStateFlagsOut eventState;
+              required unsigned long eventCount;
               ArrayBuffer answerToReset;
             };
           </pre>
@@ -213,8 +219,12 @@
             <dt><dfn>readerName</dfn> member</dt>
             <dd>Name of the smart card reader.</dd>
 
-            <dt><dfn>state</dfn> member</dt>
+            <dt><dfn>eventState</dfn> member</dt>
             <dd>The actual state of that smart card reader.</dd>
+
+            <dt><dfn>eventCount</dfn> member</dt>
+            <dd>The actual number of card insertion and removal events in this
+              reader.</dd>
 
             <dt><dfn>answerToReset</dfn> member</dt>
             <dd>The inserted card's [[ISO7186-3]] Answer To Reset (ATR), if
