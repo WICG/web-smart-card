@@ -109,7 +109,8 @@
 
           Promise&lt;sequence&lt;SmartCardReaderStateOut&gt;&gt; getStatusChange(
               sequence&lt;SmartCardReaderStateIn&gt; readerStates,
-              AbortSignal signal);
+              DOMHighResTimeStamp timeout,
+              optional AbortSignal signal);
 
           Promise&lt;SmartCardConnectResult&gt; connect(
               DOMString readerName,
@@ -124,6 +125,8 @@
       <section>
         <h3><dfn>getStatusChange()</dfn> method</h3>
         <p>Equivalent to the GetStatusChange method of the SCARDTRACK class from [[PCSC5]].</p>
+        <p>When the given {{AbortSignal}} is triggered, a [[PCSC5]] Cancel
+        request is made.</p>
         <div class="issue">Write an algorithm for this method.</div>
         <section data-dfn-for="SmartCardReaderStateIn">
           <h4><dfn>SmartCardReaderStateIn</dfn> dictionary</h4>
