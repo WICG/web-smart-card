@@ -109,7 +109,7 @@
 
           Promise&lt;sequence&lt;SmartCardReaderStateOut&gt;&gt; getStatusChange(
               sequence&lt;SmartCardReaderStateIn&gt; readerStates,
-              SmartCardGetStatusChangeOptions options);
+              optional SmartCardGetStatusChangeOptions options);
 
           Promise&lt;SmartCardConnectResult&gt; connect(
               DOMString readerName,
