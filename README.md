@@ -94,8 +94,7 @@ try {
   let oldReaders = await context.listReaders();
 
   let allReaders = await context.getStatusChange(
-      [{readerName: "\\\\?PnP?\\Notification", currentState: {}}],
-      {timeout: 10000})
+      [{readerName: "\\\\?PnP?\\Notification", currentState: {}}], 10000)
         .then(
           (statesOut) => {
             // A new reader was added.
