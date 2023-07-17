@@ -92,10 +92,47 @@
           Promise&lt;SmartCardContext&gt; establishContext();
         };
       </pre>
+      <p>Methods on this interface complete asynchronously, queuing
+      work on the <dfn>smart card task source</dfn>.</p>
       <section>
         <h3><dfn>establishContext()</dfn> method</h3>
         <p>Requests a PC/SC context from the platform's PC/SC stack.</p>
-        <div class="issue">Write an algorithm for this method.</div>
+        The {{SmartCardResourceManager/establishContext()}} method steps are:
+        <ol>
+          <li>
+            If [=this=]'s [=relevant global object=]'s [=associated Document=] is
+            not [=allowed to use=] the [=policy-controlled feature=] named
+            "[=policy-controlled feature/smart-card=]", [=exception/throw=] a
+            "{{SecurityError}}" {{DOMException}}.
+          </li>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>Run the following steps [=in parallel=]:
+          <ol>
+            <li>Let |resourceManager:RESOURCEMANAGER| be a new instance of the
+              platform's [[PCSC5]] `RESOURCEMANAGER` class.</li>
+            <li>Invoke the `EstablishContext` method of |resourceManager| with
+              a "system" `Scope` parameter.</li>
+            <li>If the returned `RESPONSECODE` is not `SCARD_S_SUCCESS`, perform
+              the following steps:
+              <ol>
+                <li>Destroy |resourceManager|.</li>
+                <li>[=Queue a global task=] on the [=relevant global object=] of
+              [=this=] using the [=smart card task source=] to
+              [=reject=] |promise| with a corresponding {{SmartCardError}}.</li>
+              </ol>
+            </li>
+            <li>Otherwise, perform the following steps:
+              <ol>
+                <li>Let |context:SmartCardContext| be a {{SmartCardContext}}
+                  containing |resourceManager|.</li>
+                <li>[=Queue a global task=] on the [=relevant global object=]
+                  of [=this=] using the [=smart card task source=] to
+                  [=resolve=] |promise| with |context|.</li>
+              </ol>
+            </li>
+          </ol>
+          </li>
+        </ol>
       </section>
     </section>
 
@@ -578,7 +615,8 @@
         methods exposed by the {{Navigator/smartCard}} attribute on the
         {{Navigator}} object may be used.</p>
 
-        <p>The feature name for this feature is `"smart-card"`.</p>
+        <p>The feature name for this feature is
+        "<dfn data-dfn-for="policy-controlled feature">smart-card</dfn>".</p>
 
         <p>The [=policy-controlled feature/default allowlist=] for this feature
         is `'self'`.</p>
