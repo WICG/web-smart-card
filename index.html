@@ -179,14 +179,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-07-13T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 13 July 2023"
+  "publishISODate": "2023-07-17T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 17 July 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom html permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-13">13 July 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-17">17 July 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -682,7 +682,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-server-too-busy" id="ref-for-dom-smartcardresponsecode-server-too-busy-1"><code>server-too-busy</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-sharing-violation" id="ref-for-dom-smartcardresponsecode-sharing-violation-1"><code>sharing-violation</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-system-cancelled" id="ref-for-dom-smartcardresponsecode-system-cancelled-1"><code>system-cancelled</code></a>"</span>,
-  <span class="idlEnumItem">"<dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardresponsecode-unknown-reader" data-idl="enum-value" data-title="unknown-reader" data-dfn-for="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>unknown-reader</code></dfn>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unknown-reader" id="ref-for-dom-smartcardresponsecode-unknown-reader-1"><code>unknown-reader</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unpowered-card" id="ref-for-dom-smartcardresponsecode-unpowered-card-1"><code>unpowered-card</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unresponsive-card" id="ref-for-dom-smartcardresponsecode-unresponsive-card-1"><code>unresponsive-card</code></a>"</span>,
   <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unsupported-card" id="ref-for-dom-smartcardresponsecode-unsupported-card-1"><code>unsupported-card</code></a>"</span>,
@@ -711,6 +711,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
           <dd>SCARD_E_SHARING_VIOLATION in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
           <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardresponsecode-system-cancelled" data-idl="enum-value" data-title="system-cancelled" data-dfn-for="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>system-cancelled</code></dfn></dt>
           <dd>SCARD_E_SYSTEM_CANCELLED in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+          <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardresponsecode-unknown-reader" data-idl="enum-value" data-title="unknown-reader" data-dfn-for="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>unknown-reader</code></dfn></dt>
+          <dd>SCARD_E_UNKNOWN_READER in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
           <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardresponsecode-unpowered-card" data-idl="enum-value" data-title="unpowered-card" data-dfn-for="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>unpowered-card</code></dfn></dt>
           <dd>SCARD_W_UNPOWERED_CARD in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
           <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardresponsecode-unresponsive-card" data-idl="enum-value" data-title="unresponsive-card" data-dfn-for="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>unresponsive-card</code></dfn></dt>
@@ -1768,16 +1770,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <a href="#ref-for-dom-smartcardresponsecode-3" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unknown-reader" aria-label="Links in this document to definition: unknown-reader">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="#dom-smartcardresponsecode-unknown-reader" aria-label="Permalink for definition: unknown-reader. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-      <li>Not referenced in this document.</li>
-    </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-no-service" aria-label="Links in this document to definition: no-service">
       <span class="caret"></span>
       <div>
@@ -1908,6 +1900,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
     <a href="#ref-for-dom-smartcardresponsecode-system-cancelled-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unknown-reader" aria-label="Links in this document to definition: unknown-reader">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dom-smartcardresponsecode-unknown-reader" aria-label="Permalink for definition: unknown-reader. Activate to close this dialog.">Permalink</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1071113654">IDL</a>
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-dom-smartcardresponsecode-unknown-reader-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unpowered-card" aria-label="Links in this document to definition: unpowered-card">
