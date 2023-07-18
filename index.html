@@ -117,8 +117,9 @@
               <ol>
                 <li>Destroy |resourceManager|.</li>
                 <li>[=Queue a global task=] on the [=relevant global object=] of
-              [=this=] using the [=smart card task source=] to
-              [=reject=] |promise| with a corresponding {{SmartCardError}}.</li>
+                  [=this=] using the [=smart card task source=] to [=reject=]
+                  |promise| with a {{SmartCardError/corresponding}}
+                {{DOMException}}.</li>
               </ol>
             </li>
             <li>Otherwise, perform the following steps:
@@ -537,6 +538,73 @@
       </pre>
       <p>The <dfn>responseCode</dfn> attribute is the error or warning response
       code returned by the related [[PCSC5]] method.</p>
+      <p>Given a [[PCSC5]] `RESPONSECODE` different from `SCARD_S_SUCCESS`, a
+      <dfn>corresponding</dfn> {{DOMException}} is created with the following
+      steps:</p>
+      <aside class="note" title="Unspecified response codes">
+        <p>The following `RESPONSECODE`s are not part of [[PCSC5]] but are still
+        considered in this specification as existing PC/SC
+        implementations do define them:</p>
+        <ul>
+          <li>`SCARD_E_SERVER_TOO_BUSY`</li>
+          <li>`SCARD_E_SERVICE_STOPPED`</li>
+          <li>`SCARD_P_SHUTDOWN`</li>
+        </ul>
+      </aside>
+      <ol>
+        <li>Let |pcscCode:RESPONSECODE| be that RESPONSECODE.</li>
+        <li>If |pcscCode| is `SCARD_E_NO_SERVICE`, return a [=new=]
+          {{SmartCardResponseCode/"no-service"}} {{SmartCardError}}.
+          <aside class="note" title="Creating SmartCardError instances">
+            <p>In statements such as:</p>
+            <blockquote>[=new=] {{SmartCardResponseCode/"no-service"}}
+              {{SmartCardError}}</blockquote>
+            <p>What is meant, more exactly, is:</p>
+            <blockquote>[=new=] {{SmartCardError}} with a
+              {{SmartCardError/responseCode}}
+              {{SmartCardResponseCode/"no-service"}} </blockquote>
+          </aside>
+        </li>
+        <li>If |pcscCode| is `SCARD_E_NO_SMARTCARD`, return a [=new=]
+          {{SmartCardResponseCode/"no-smartcard"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_NOT_READY`, return a [=new=]
+          {{SmartCardResponseCode/"not-ready"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_NOT_TRANSACTED`, return a [=new=]
+          {{SmartCardResponseCode/"not-transacted"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_PROTO_MISMATCH`, return a [=new=]
+          {{SmartCardResponseCode/"proto-mismatch"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_READER_UNAVAILABLE`, return a [=new=]
+          {{SmartCardResponseCode/"reader-unavailable"}}
+          {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_W_REMOVED_CARD`, return a [=new=]
+          {{SmartCardResponseCode/"removed-card"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_W_RESET_CARD`, return a [=new=]
+          {{SmartCardResponseCode/"reset-card"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_SERVER_TOO_BUSY`, return a [=new=]
+          {{SmartCardResponseCode/"server-too-busy"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_SHARING_VIOLATION`, return a [=new=]
+          {{SmartCardResponseCode/"sharing-violation"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_SYSTEM_CANCELLED`, return a [=new=]
+          {{SmartCardResponseCode/"system-cancelled"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_UNKNOWN_READER`, return a [=new=]
+          {{SmartCardResponseCode/"unknown-reader"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_W_UNPOWERED_CARD`, return a [=new=]
+          {{SmartCardResponseCode/"unpowered-card"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_W_UNRESPONSIVE_CARD`, return a [=new=]
+          {{SmartCardResponseCode/"unresponsive-card"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_W_UNSUPPORTED_CARD`, return a [=new=]
+          {{SmartCardResponseCode/"unsupported-card"}} {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_UNSUPPORTED_FEATURE`, return a [=new=]
+          {{SmartCardResponseCode/"unsupported-feature"}}
+          {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_INVALID_HANDLE`, return a [=new=]
+          `"InvalidStateError"` {{DOMException}}.</li>
+        <li>If |pcscCode| is `SCARD_E_SERVICE_STOPPED`, return a [=new=]
+          `"InvalidStateError"` {{DOMException}}.</li>
+        <li>If |pcscCode| is `SCARD_P_SHUTDOWN`, return a [=new=]
+          `"AbortError"` {{DOMException}}.</li>
+        <li>Otherwise return a [=new=] `"UnknownError"` {{DOMException}}.</li>
+      </ol>
       <section data-dfn-for="SmartCardErrorOptions">
         <h3><dfn>SmartCardErrorOptions</dfn> dictionary</h3>
         <pre class="idl">
