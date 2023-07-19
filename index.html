@@ -179,14 +179,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-07-18T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 18 July 2023"
+  "publishISODate": "2023-07-19T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 19 July 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom html permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-18">18 July 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-19">19 July 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -303,8 +303,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <ol>
                 <li>Destroy <var data-type="RESOURCEMANAGER">resourceManager</var>.</li>
                 <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
-              <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-1">smart card task source</a> to
-              <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a corresponding <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-1"><code>SmartCardError</code></a>.</li>
+                  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-1">smart card task source</a> to <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+                  <var data-type="Promise">promise</var> with a <a data-link-type="idl" href="#dfn-corresponding" class="internalDFN" id="ref-for-dfn-corresponding-1"><code>corresponding</code></a>
+                <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
               </ol>
             </li>
             <li>Otherwise, perform the following steps:
@@ -691,39 +692,106 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
     <section data-dfn-for="SmartCardError" id="smartcarderror-interface"><div class="header-wrapper"><h2 id="x6-smartcarderror-interface"><bdi class="secno">6. </bdi><dfn data-export="" data-dfn-type="interface" id="dom-smartcarderror" data-idl="interface" data-title="SmartCardError" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardError</code></dfn> interface</h2><a class="self-link" href="#smartcarderror-interface" aria-label="Permalink for Section 6."></a></div>
       
       <pre class="idl def" id="webidl-1271376181"><span class="idlHeader"><a class="self-link" href="#webidl-1271376181">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcarderror" data-title="SmartCardError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable">Serializable</a></span>]
-interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcarderror" id="ref-for-dom-smartcarderror-2"><code>SmartCardError</code></a> : <span class="idlSuperclass"><a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException">DOMException</a></span> {<span data-idl="" class="idlConstructor" id="idl-def-smartcarderror-constructor-message-options" data-title="constructor" data-dfn-for="SmartCardError">
+interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcarderror" id="ref-for-dom-smartcarderror-1"><code>SmartCardError</code></a> : <span class="idlSuperclass"><a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException">DOMException</a></span> {<span data-idl="" class="idlConstructor" id="idl-def-smartcarderror-constructor-message-options" data-title="constructor" data-dfn-for="SmartCardError">
   <dfn data-export="" data-dfn-type="constructor" id="dom-smartcarderror-constructor" data-idl="constructor" data-title="constructor" data-dfn-for="SmartCardError" data-lt="constructor()|constructor(options)|constructor(options, message)" data-local-lt="SmartCardError.constructor|SmartCardError.constructor()|constructor" tabindex="0" aria-haspopup="dialog"><code>constructor</code></dfn>(optional<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <span class="idlParamName">message</span> = "",<span class="idlType"> <a data-link-type="idl" href="#dom-smartcarderroroptions" class="internalDFN" id="ref-for-dom-smartcarderroroptions-1"><code>SmartCardErrorOptions</code></a></span> <span class="idlParamName">options</span>);</span><span data-idl="" class="idlAttribute" id="idl-def-smartcarderror-responsecode" data-title="responseCode" data-dfn-for="SmartCardError">
   readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardresponsecode" class="internalDFN" id="ref-for-dom-smartcardresponsecode-1"><code>SmartCardResponseCode</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-smartcarderror-responsecode" id="ref-for-dom-smartcarderror-responsecode-1"><code>responseCode</code></a>;</span>
 };</span></code></pre>
       <p>The <dfn data-export="" data-dfn-type="attribute" id="dom-smartcarderror-responsecode" data-idl="attribute" data-title="responseCode" data-dfn-for="SmartCardError" data-type="SmartCardResponseCode" data-lt="responseCode" data-local-lt="SmartCardError.responseCode" tabindex="0" aria-haspopup="dialog"><code>responseCode</code></dfn> attribute is the error or warning response
       code returned by the related [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] method.</p>
+      <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>RESPONSECODE</code> different from <code>SCARD_S_SUCCESS</code>, a
+      <dfn id="dfn-corresponding" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> is created with the following
+      steps:</p>
+      <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
+        <p>The following <code>RESPONSECODE</code>s are not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still
+        considered in this specification as existing PC/SC
+        implementations use them:</p>
+        <ul>
+          <li><code>SCARD_E_SERVER_TOO_BUSY</code></li>
+          <li><code>SCARD_E_SERVICE_STOPPED</code></li>
+          <li><code>SCARD_P_SHUTDOWN</code></li>
+        </ul>
+      </aside></div>
+      <ol>
+        <li>Let <var data-type="RESPONSECODE">pcscCode</var> be that <code>RESPONSECODE</code>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NO_SERVICE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-1"><code>no-service</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-2"><code>SmartCardError</code></a>.
+          <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
+            <p>In statements such as:</p>
+            <blockquote><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-2"><code>no-service</code></a>"
+              <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-3"><code>SmartCardError</code></a></blockquote>
+            <p>What is meant, more exactly, is:</p>
+            <blockquote><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-4"><code>SmartCardError</code></a> with a
+              where <a data-link-type="idl" href="#dom-smartcarderror-responsecode" class="internalDFN" id="ref-for-dom-smartcarderror-responsecode-2"><code>responseCode</code></a> is set to
+              "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-3"><code>no-service</code></a>"</blockquote>
+          </aside></div>
+        </li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NO_SMARTCARD</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-smartcard" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-smartcard-1"><code>no-smartcard</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-5"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NOT_READY</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-not-ready" class="internalDFN" id="ref-for-dom-smartcardresponsecode-not-ready-1"><code>not-ready</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-6"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NOT_TRANSACTED</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-not-transacted" class="internalDFN" id="ref-for-dom-smartcardresponsecode-not-transacted-1"><code>not-transacted</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-7"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_PROTO_MISMATCH</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-proto-mismatch" class="internalDFN" id="ref-for-dom-smartcardresponsecode-proto-mismatch-1"><code>proto-mismatch</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-8"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_READER_UNAVAILABLE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-reader-unavailable" class="internalDFN" id="ref-for-dom-smartcardresponsecode-reader-unavailable-1"><code>reader-unavailable</code></a>"
+          <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-9"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_W_REMOVED_CARD</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-removed-card" class="internalDFN" id="ref-for-dom-smartcardresponsecode-removed-card-1"><code>removed-card</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-10"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_W_RESET_CARD</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-reset-card" class="internalDFN" id="ref-for-dom-smartcardresponsecode-reset-card-1"><code>reset-card</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-11"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_SERVER_TOO_BUSY</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-server-too-busy" class="internalDFN" id="ref-for-dom-smartcardresponsecode-server-too-busy-1"><code>server-too-busy</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-12"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_SHARING_VIOLATION</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-sharing-violation" class="internalDFN" id="ref-for-dom-smartcardresponsecode-sharing-violation-1"><code>sharing-violation</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-13"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_SYSTEM_CANCELLED</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-system-cancelled" class="internalDFN" id="ref-for-dom-smartcardresponsecode-system-cancelled-1"><code>system-cancelled</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-14"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_UNKNOWN_READER</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-unknown-reader" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unknown-reader-1"><code>unknown-reader</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-15"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_W_UNPOWERED_CARD</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-unpowered-card" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unpowered-card-1"><code>unpowered-card</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-16"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_W_UNRESPONSIVE_CARD</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-unresponsive-card" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unresponsive-card-1"><code>unresponsive-card</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-17"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_W_UNSUPPORTED_CARD</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-unsupported-card" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unsupported-card-1"><code>unsupported-card</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-18"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_UNSUPPORTED_FEATURE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          "<a data-link-type="idl" href="#dom-smartcardresponsecode-unsupported-feature" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unsupported-feature-1"><code>unsupported-feature</code></a>"
+          <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-19"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_INVALID_HANDLE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          <code>"InvalidStateError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_SERVICE_STOPPED</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          <code>"InvalidStateError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_P_SHUTDOWN</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          <code>"AbortError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+        <li>Otherwise return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> <code>"UnknownError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+      </ol>
       <section data-dfn-for="SmartCardErrorOptions" id="smartcarderroroptions-dictionary"><div class="header-wrapper"><h3 id="x6-1-smartcarderroroptions-dictionary"><bdi class="secno">6.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcarderroroptions" data-idl="dictionary" data-title="SmartCardErrorOptions" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardErrorOptions</code></dfn> dictionary</h3><a class="self-link" href="#smartcarderroroptions-dictionary" aria-label="Permalink for Section 6.1"></a></div>
         
         <pre class="idl def" id="webidl-42336405"><span class="idlHeader"><a class="self-link" href="#webidl-42336405">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcarderroroptions" data-title="SmartCardErrorOptions">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcarderroroptions" id="ref-for-dom-smartcarderroroptions-2"><code>SmartCardErrorOptions</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcarderroroptions-responsecode" data-title="responseCode" data-dfn-for="SmartCardErrorOptions">
   required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardresponsecode" class="internalDFN" id="ref-for-dom-smartcardresponsecode-2"><code>SmartCardResponseCode</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcarderroroptions-responsecode" id="ref-for-dom-smartcarderroroptions-responsecode-1"><code>responseCode</code></a>;</span>
 };</span></code></pre>
-        <p>The <dfn data-export="" data-dfn-type="dict-member" id="dom-smartcarderroroptions-responsecode" data-idl="field" data-title="responseCode" data-dfn-for="SmartCardErrorOptions" data-type="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>responseCode</code></dfn> member is the value for <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-3"><code>SmartCardError</code></a>'s
-        <a data-link-type="idl" href="#dom-smartcarderror-responsecode" class="internalDFN" id="ref-for-dom-smartcarderror-responsecode-2"><code>responseCode</code></a> attribute.</p>
+        <p>The <dfn data-export="" data-dfn-type="dict-member" id="dom-smartcarderroroptions-responsecode" data-idl="field" data-title="responseCode" data-dfn-for="SmartCardErrorOptions" data-type="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>responseCode</code></dfn> member is the value for <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-20"><code>SmartCardError</code></a>'s
+        <a data-link-type="idl" href="#dom-smartcarderror-responsecode" class="internalDFN" id="ref-for-dom-smartcarderror-responsecode-3"><code>responseCode</code></a> attribute.</p>
       </section>
       <section data-dfn-for="SmartCardResponseCode" id="smartcardresponsecode-enum"><div class="header-wrapper"><h3 id="x6-2-smartcardresponsecode-enum"><bdi class="secno">6.2 </bdi><dfn data-export="" data-dfn-type="enum" id="dom-smartcardresponsecode" data-idl="enum" data-title="SmartCardResponseCode" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardResponseCode</code></dfn> enum</h3><a class="self-link" href="#smartcardresponsecode-enum" aria-label="Permalink for Section 6.2"></a></div>
         
         <pre class="idl def" id="webidl-1071113654"><span class="idlHeader"><a class="self-link" href="#webidl-1071113654">WebIDL</a></span><code><span data-idl="" class="idlEnum" id="idl-def-smartcardresponsecode" data-title="SmartCardResponseCode">enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-smartcardresponsecode" id="ref-for-dom-smartcardresponsecode-3"><code>SmartCardResponseCode</code></a> {
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-no-service" id="ref-for-dom-smartcardresponsecode-no-service-1"><code>no-service</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-no-smartcard" id="ref-for-dom-smartcardresponsecode-no-smartcard-1"><code>no-smartcard</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-not-ready" id="ref-for-dom-smartcardresponsecode-not-ready-1"><code>not-ready</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-not-transacted" id="ref-for-dom-smartcardresponsecode-not-transacted-1"><code>not-transacted</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-proto-mismatch" id="ref-for-dom-smartcardresponsecode-proto-mismatch-1"><code>proto-mismatch</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-reader-unavailable" id="ref-for-dom-smartcardresponsecode-reader-unavailable-1"><code>reader-unavailable</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-removed-card" id="ref-for-dom-smartcardresponsecode-removed-card-1"><code>removed-card</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-reset-card" id="ref-for-dom-smartcardresponsecode-reset-card-1"><code>reset-card</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-server-too-busy" id="ref-for-dom-smartcardresponsecode-server-too-busy-1"><code>server-too-busy</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-sharing-violation" id="ref-for-dom-smartcardresponsecode-sharing-violation-1"><code>sharing-violation</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-system-cancelled" id="ref-for-dom-smartcardresponsecode-system-cancelled-1"><code>system-cancelled</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unknown-reader" id="ref-for-dom-smartcardresponsecode-unknown-reader-1"><code>unknown-reader</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unpowered-card" id="ref-for-dom-smartcardresponsecode-unpowered-card-1"><code>unpowered-card</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unresponsive-card" id="ref-for-dom-smartcardresponsecode-unresponsive-card-1"><code>unresponsive-card</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unsupported-card" id="ref-for-dom-smartcardresponsecode-unsupported-card-1"><code>unsupported-card</code></a>"</span>,
-  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unsupported-feature" id="ref-for-dom-smartcardresponsecode-unsupported-feature-1"><code>unsupported-feature</code></a>"</span>
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-no-service" id="ref-for-dom-smartcardresponsecode-no-service-4"><code>no-service</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-no-smartcard" id="ref-for-dom-smartcardresponsecode-no-smartcard-2"><code>no-smartcard</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-not-ready" id="ref-for-dom-smartcardresponsecode-not-ready-2"><code>not-ready</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-not-transacted" id="ref-for-dom-smartcardresponsecode-not-transacted-2"><code>not-transacted</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-proto-mismatch" id="ref-for-dom-smartcardresponsecode-proto-mismatch-2"><code>proto-mismatch</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-reader-unavailable" id="ref-for-dom-smartcardresponsecode-reader-unavailable-2"><code>reader-unavailable</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-removed-card" id="ref-for-dom-smartcardresponsecode-removed-card-2"><code>removed-card</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-reset-card" id="ref-for-dom-smartcardresponsecode-reset-card-2"><code>reset-card</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-server-too-busy" id="ref-for-dom-smartcardresponsecode-server-too-busy-2"><code>server-too-busy</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-sharing-violation" id="ref-for-dom-smartcardresponsecode-sharing-violation-2"><code>sharing-violation</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-system-cancelled" id="ref-for-dom-smartcardresponsecode-system-cancelled-2"><code>system-cancelled</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unknown-reader" id="ref-for-dom-smartcardresponsecode-unknown-reader-2"><code>unknown-reader</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unpowered-card" id="ref-for-dom-smartcardresponsecode-unpowered-card-2"><code>unpowered-card</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unresponsive-card" id="ref-for-dom-smartcardresponsecode-unresponsive-card-2"><code>unresponsive-card</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unsupported-card" id="ref-for-dom-smartcardresponsecode-unsupported-card-2"><code>unsupported-card</code></a>"</span>,
+  <span class="idlEnumItem">"<a class="internalDFN" data-link-type="enum-value" href="#dom-smartcardresponsecode-unsupported-feature" id="ref-for-dom-smartcardresponsecode-unsupported-feature-2"><code>unsupported-feature</code></a>"</span>
 };</span></code></pre>
         <dl>
           <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardresponsecode-no-service" data-idl="enum-value" data-title="no-service" data-dfn-for="SmartCardResponseCode" tabindex="0" aria-haspopup="dialog"><code>no-service</code></dfn></dt>
@@ -1753,11 +1821,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcarderror-1" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> 
+      <a href="#ref-for-dom-smartcarderror-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> <a href="#ref-for-dom-smartcarderror-2" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcarderror-3" title="Reference 3">(3)</a> <a href="#ref-for-dom-smartcarderror-4" title="Reference 4">(4)</a> <a href="#ref-for-dom-smartcarderror-5" title="Reference 5">(5)</a> <a href="#ref-for-dom-smartcarderror-6" title="Reference 6">(6)</a> <a href="#ref-for-dom-smartcarderror-7" title="Reference 7">(7)</a> <a href="#ref-for-dom-smartcarderror-8" title="Reference 8">(8)</a> <a href="#ref-for-dom-smartcarderror-9" title="Reference 9">(9)</a> <a href="#ref-for-dom-smartcarderror-10" title="Reference 10">(10)</a> <a href="#ref-for-dom-smartcarderror-11" title="Reference 11">(11)</a> <a href="#ref-for-dom-smartcarderror-12" title="Reference 12">(12)</a> <a href="#ref-for-dom-smartcarderror-13" title="Reference 13">(13)</a> <a href="#ref-for-dom-smartcarderror-14" title="Reference 14">(14)</a> <a href="#ref-for-dom-smartcarderror-15" title="Reference 15">(15)</a> <a href="#ref-for-dom-smartcarderror-16" title="Reference 16">(16)</a> <a href="#ref-for-dom-smartcarderror-17" title="Reference 17">(17)</a> <a href="#ref-for-dom-smartcarderror-18" title="Reference 18">(18)</a> <a href="#ref-for-dom-smartcarderror-19" title="Reference 19">(19)</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcarderror-2" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
-    </li><li>
-      <a href="#ref-for-dom-smartcarderror-3" title="§ 6.1 SmartCardErrorOptions dictionary">§ 6.1 SmartCardErrorOptions dictionary</a> 
+      <a href="#ref-for-dom-smartcarderror-20" title="§ 6.1 SmartCardErrorOptions dictionary">§ 6.1 SmartCardErrorOptions dictionary</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderror-constructor" aria-label="Links in this document to definition: constructor">
@@ -1779,9 +1845,21 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcarderror-responsecode-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+      <a href="#ref-for-dom-smartcarderror-responsecode-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> <a href="#ref-for-dom-smartcarderror-responsecode-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcarderror-responsecode-2" title="§ 6.1 SmartCardErrorOptions dictionary">§ 6.1 SmartCardErrorOptions dictionary</a> 
+      <a href="#ref-for-dom-smartcarderror-responsecode-3" title="§ 6.1 SmartCardErrorOptions dictionary">§ 6.1 SmartCardErrorOptions dictionary</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding" aria-label="Links in this document to definition: corresponding">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-corresponding" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-corresponding-1" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderroroptions" aria-label="Links in this document to definition: SmartCardErrorOptions">
@@ -1835,7 +1913,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-no-service-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-no-service-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> <a href="#ref-for-dom-smartcardresponsecode-no-service-2" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardresponsecode-no-service-3" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-no-service-4" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-no-smartcard" aria-label="Links in this document to definition: no-smartcard">
@@ -1847,7 +1927,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-no-smartcard-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-no-smartcard-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-no-smartcard-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-not-ready" aria-label="Links in this document to definition: not-ready">
@@ -1859,7 +1941,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-not-ready-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-not-ready-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-not-ready-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-not-transacted" aria-label="Links in this document to definition: not-transacted">
@@ -1871,7 +1955,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-not-transacted-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-not-transacted-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-not-transacted-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-proto-mismatch" aria-label="Links in this document to definition: proto-mismatch">
@@ -1883,7 +1969,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-proto-mismatch-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-proto-mismatch-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-proto-mismatch-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-reader-unavailable" aria-label="Links in this document to definition: reader-unavailable">
@@ -1895,7 +1983,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-reader-unavailable-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-reader-unavailable-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-reader-unavailable-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-removed-card" aria-label="Links in this document to definition: removed-card">
@@ -1907,7 +1997,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-removed-card-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-removed-card-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-removed-card-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-reset-card" aria-label="Links in this document to definition: reset-card">
@@ -1919,7 +2011,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-reset-card-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-reset-card-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-reset-card-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-server-too-busy" aria-label="Links in this document to definition: server-too-busy">
@@ -1931,7 +2025,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-server-too-busy-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-server-too-busy-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-server-too-busy-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-sharing-violation" aria-label="Links in this document to definition: sharing-violation">
@@ -1943,7 +2039,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-sharing-violation-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-sharing-violation-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-sharing-violation-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-system-cancelled" aria-label="Links in this document to definition: system-cancelled">
@@ -1955,7 +2053,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-system-cancelled-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-system-cancelled-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-system-cancelled-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unknown-reader" aria-label="Links in this document to definition: unknown-reader">
@@ -1967,7 +2067,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-unknown-reader-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-unknown-reader-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-unknown-reader-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unpowered-card" aria-label="Links in this document to definition: unpowered-card">
@@ -1979,7 +2081,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-unpowered-card-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-unpowered-card-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-unpowered-card-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unresponsive-card" aria-label="Links in this document to definition: unresponsive-card">
@@ -1991,7 +2095,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-unresponsive-card-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-unresponsive-card-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-unresponsive-card-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unsupported-card" aria-label="Links in this document to definition: unsupported-card">
@@ -2003,7 +2109,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-unsupported-card-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-unsupported-card-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-unsupported-card-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresponsecode-unsupported-feature" aria-label="Links in this document to definition: unsupported-feature">
@@ -2015,7 +2123,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardresponsecode-unsupported-feature-1" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
+      <a href="#ref-for-dom-smartcardresponsecode-unsupported-feature-1" title="§ 6. SmartCardError interface">§ 6. SmartCardError interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardresponsecode-unsupported-feature-2" title="§ 6.2 SmartCardResponseCode enum">§ 6.2 SmartCardResponseCode enum</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-smart-card" aria-label="Links in this document to definition: smart-card">
