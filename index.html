@@ -17,7 +17,7 @@
           branch: "main",
           repoURL: "WICG/web-smart-card",
         },
-        xref: ["dom", "html", "permissions-policy", "webidl"],
+        xref: ["dom", "hr-time-3", "html", "permissions-policy", "webidl"],
         localBiblio: {
           // Remove this one once https://github.com/tobie/specref/pull/747 is merged:
           "PCSC5": {
@@ -147,7 +147,7 @@
 
           Promise&lt;sequence&lt;SmartCardReaderStateOut&gt;&gt; getStatusChange(
               sequence&lt;SmartCardReaderStateIn&gt; readerStates,
-              AbortSignal signal);
+              optional SmartCardGetStatusChangeOptions options = {});
 
           Promise&lt;SmartCardConnectResult&gt; connect(
               DOMString readerName,
@@ -162,6 +162,8 @@
       <section>
         <h3><dfn>getStatusChange()</dfn> method</h3>
         <p>Equivalent to the GetStatusChange method of the SCARDTRACK class from [[PCSC5]].</p>
+        <p>When the given {{AbortSignal}} is triggered, a [[PCSC5]] Cancel
+        request is made.</p>
         <div class="issue">Write an algorithm for this method.</div>
         <section data-dfn-for="SmartCardReaderStateIn">
           <h4><dfn>SmartCardReaderStateIn</dfn> dictionary</h4>
@@ -318,6 +320,26 @@
               <dd>There is an unresponsive card in the reader.</dd>
             </dl>
           </section>
+        </section>
+        <section data-dfn-for="SmartCardGetStatusChangeOptions">
+          <h4><dfn>SmartCardGetStatusChangeOptions</dfn> dictionary</h4>
+          <pre class="idl">
+            dictionary SmartCardGetStatusChangeOptions {
+              DOMHighResTimeStamp timeout;
+              AbortSignal signal;
+            };
+          </pre>
+
+          <dl>
+            <dt><dfn>timeout</dfn> member</dt>
+            <dd>Timeout parameter for the GetStatusChange() [[PCSC5]] method. If
+            not specified, a timeout value of INFINITE (which is defined system
+            dependent) will be used.</dd>
+
+            <dt><dfn>signal</dfn> member</dt>
+            <dd>When triggered, the platform's [[PCSC5]] Cancel() method is
+            called.</dd>
+          </dl>
         </section>
       </section>
       <section>

@@ -95,7 +95,7 @@ try {
 
   let allReaders = await context.getStatusChange(
       [{readerName: "\\\\?PnP?\\Notification", currentState: {}}],
-      AbortSignal.timeout(10000))
+      {timeout: 10000})
         .then(
           (statesOut) => {
             // A new reader was added.
