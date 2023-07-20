@@ -620,12 +620,12 @@
           {{SmartCardResponseCode/"unsupported-feature"}}
           {{SmartCardError}}.</li>
         <li>If |pcscCode| is `SCARD_E_INVALID_HANDLE`, return a [=new=]
-          `"InvalidStateError"` {{DOMException}}.</li>
+          "{{InvalidStateError}}" {{DOMException}}.</li>
         <li>If |pcscCode| is `SCARD_E_SERVICE_STOPPED`, return a [=new=]
-          `"InvalidStateError"` {{DOMException}}.</li>
+          "{{InvalidStateError}}" {{DOMException}}.</li>
         <li>If |pcscCode| is `SCARD_P_SHUTDOWN`, return a [=new=]
-          `"AbortError"` {{DOMException}}.</li>
-        <li>Otherwise return a [=new=] `"UnknownError"` {{DOMException}}.</li>
+          "{{AbortError}}" {{DOMException}}.</li>
+        <li>Otherwise return a [=new=] "{{UnknownError}}" {{DOMException}}.</li>
       </ol>
       <section data-dfn-for="SmartCardErrorOptions">
         <h3><dfn>SmartCardErrorOptions</dfn> dictionary</h3>
