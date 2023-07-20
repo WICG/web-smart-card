@@ -180,14 +180,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-07-19T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 19 July 2023"
+  "publishISODate": "2023-07-20T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 20 July 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-19">19 July 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-20">20 July 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -779,12 +779,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
           "<a data-link-type="idl" href="#dom-smartcardresponsecode-unsupported-feature" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unsupported-feature-1"><code>unsupported-feature</code></a>"
           <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-19"><code>SmartCardError</code></a>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_INVALID_HANDLE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
-          <code>"InvalidStateError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+          "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_SERVICE_STOPPED</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
-          <code>"InvalidStateError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+          "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_P_SHUTDOWN</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
-          <code>"AbortError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
-        <li>Otherwise return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> <code>"UnknownError"</code> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+          "<a data-link-type="idl" data-lt="AbortError" data-type="exception" href="https://webidl.spec.whatwg.org/#aborterror"><code>AbortError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+        <li>Otherwise return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> "<a data-link-type="idl" data-lt="UnknownError" data-type="exception" href="https://webidl.spec.whatwg.org/#unknownerror"><code>UnknownError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
       </ol>
       <section data-dfn-for="SmartCardErrorOptions" id="smartcarderroroptions-dictionary"><div class="header-wrapper"><h3 id="x6-1-smartcarderroroptions-dictionary"><bdi class="secno">6.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcarderroroptions" data-idl="dictionary" data-title="SmartCardErrorOptions" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardErrorOptions</code></dfn> dictionary</h3><a class="self-link" href="#smartcarderroroptions-dictionary" aria-label="Permalink for Section 6.1"></a></div>
         
@@ -877,7 +877,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <dl class="bibliography"><dt id="bib-dom">[dom]</dt><dd>
       <a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Anne van Kesteren.  WHATWG. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
     </dd><dt id="bib-hr-time-3">[hr-time-3]</dt><dd>
-      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 25 April 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
+      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 19 July 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
     </dd><dt id="bib-html">[html]</dt><dd>
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
     </dd><dt id="bib-iso7186-3">[ISO7186-3]</dt><dd>
