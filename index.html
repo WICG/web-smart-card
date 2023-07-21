@@ -182,12 +182,12 @@
         <p>The {{SmartCardContext/listReaders()}} method steps
         are:</p>
         <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
           <li>If [=this=].{{SmartCardContext/[[operationInProgress]]}} is
-            `true`, [=exception/throw=] a "{{InvalidStateError}}"
-            {{DOMException}}.</li>
+            `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+            {{DOMException}} and return |promise|.</li>
           <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
             `true`.</li>
-          <li>Let |promise:Promise| be [=a new promise=].</li>
           <li>Run the following steps [=in parallel=]:
             <ol>
               <li>Let |resourceQuery:RESOURCEQUERY| be a new instance of the
@@ -207,25 +207,17 @@
               <li>Let |responseCode:RESPONSECODE| be the returned
                 `RESPONSECODE`.</li>
               <li>Destroy |resourceQuery|.</li>
-              <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=queue a global
-                task=] on the [=relevant global object=] of [=this=] using the
-                [=smart card task source=] which performs the following
-                steps:
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
                 <ol>
                   <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
                     `false`.</li>
-                  <li>[=Reject=] |promise| with a {{DOMException}}
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with a {{DOMException}}
                     {{SmartCardError/corresponding}} to |responseCode|.</li>
-                </ol>
-              </li>
-              <li>Otherwise, [=queue a global task=] on the [=relevant global
-                object=] of [=this=] using the [=smart card task source=] which
-                performs the following steps:
-                <ol>
-                  <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
-                    `false`.</li>
-                  <li>[=Resolve=] |promise| with a `sequence` of {{DOMString}}
-                    equivalent to |pcscReaders|.</li>
+                  <li>Otherwise, [=resolve=] |promise| with a `sequence` of
+                    {{DOMString}} equivalent to |pcscReaders|.</li>
                 </ol>
               </li>
             </ol>
