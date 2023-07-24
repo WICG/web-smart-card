@@ -124,8 +124,10 @@
             </li>
             <li>Otherwise, perform the following steps:
               <ol>
-                <li>Let |context:SmartCardContext| be a {{SmartCardContext}}
-                  containing |resourceManager|.</li>
+                <li>Let |context:SmartCardContext| be a [=new=]
+                  {{SmartCardContext}} whose
+                  {{SmartCardContext/[[resourceManager]]}} internal slot is set
+                to |resourceManager|.</li>
                 <li>[=Queue a global task=] on the [=relevant global object=]
                   of [=this=] using the [=smart card task source=] to
                   [=resolve=] |promise| with |context|.</li>
@@ -156,9 +158,72 @@
               optional sequence&lt;SmartCardProtocol&gt; preferredProtocols);
         };
       </pre>
+      <p>Instances of {{SmartCardContext}} are created with the internal slots
+      described in the following table:</p>
+      <table class="simple" data-dfn-for="SmartCardContext">
+        <tr>
+          <th>Internal slot
+          <th>Initial value
+          <th>Description (non-normative)
+        </tr>
+        <tr>
+          <td><dfn>[[\resourceManager]]</dfn></td>
+          <td>`null`</td>
+          <td>The platform's [[PCSC5]] `RESOURCEMANAGER` to be used.</td>
+        </tr>
+        <tr>
+          <td><dfn>[[\operationInProgress]]</dfn></td>
+          <td>`false`</td>
+          <td>Whether there is an ongoing PC/SC operation in this context.</td>
+        </tr>
+      </table>
       <section>
         <h3><dfn>listReaders()</dfn> method</h3>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardContext/listReaders()}} method steps
+        are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If [=this=].{{SmartCardContext/[[operationInProgress]]}} is
+            `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+            {{DOMException}} and return |promise|.</li>
+          <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
+            `true`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Let |resourceQuery:RESOURCEQUERY| be a new instance of the
+                platform's [[PCSC5]] `RESOURCEQUERY` class, with
+                [=this=].{{SmartCardContext/[[resourceManager]]}} as its
+                contructor input parameter.</li>
+              <! –– NB: Can't have "[]" in the data type part of a variable declaration. ––>
+              <li>Let |groups:array of STR| be the platform's [[PCSC5]] `STR[]`
+                containing the list of group names that is equivalent to "all
+                readers in the system" in that platform.
+                <aside class="note">This could be an empty `STR[]` in some
+                  [[PCSC5]] implementations.</aside>
+              </li>
+              <li>Let |pcscReaders:array of STR| be an empty `STR[]`.
+              <li>Invoke the `ListReaders` method of |resourceQuery| with
+                |groups| as input and |pcscReaders| as output parameters.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>Destroy |resourceQuery|.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
+                    `false`.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with a {{DOMException}}
+                    {{SmartCardError/corresponding}} to |responseCode|.</li>
+                  <li>Otherwise, [=resolve=] |promise| with a `sequence` of
+                    {{DOMString}} equivalent to |pcscReaders|.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
       </section>
       <section>
         <h3><dfn>getStatusChange()</dfn> method</h3>
