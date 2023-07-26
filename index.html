@@ -334,8 +334,9 @@
           <p>To <dfn>set the high word</dfn> of a [[PCSC5]] `DWORD` named
           |dword:DWORD| to a given number |n|, perform the following steps.</p>
           <ol>
+            <li>Set |dword| to |dword| bitwise AND `0xFFFF`.</li>
             <li>Let |shiftedN| be the result of a left shift of 16 bits on |n|.</li>
-            <li>Set |dword| to the bitwise OR of |dword| and |shiftedN|.</li>
+            <li>Set |dword| to |dword| bitwise OR |shiftedN|.</li>
           </ol>
 
           <p>To <dfn>add a flag</dfn> |f:DWORD| to a [[PCSC5]] `DWORD`
