@@ -479,7 +479,7 @@
                 |pcscFlags|.
                 <aside class="note">
                   <p>`SCARD_STATE_MUTE` is not part of [[PCSC5]] but it is still
-                  considered in this speficiation as existing PC/SC
+                  considered in this specification as existing PC/SC
                   implementations use it.</p>
                 </aside>
               </li>
@@ -541,12 +541,12 @@
                     <p>Having the number of card insertion and removal events
                     stored in the upper 2 bytes of the `EventState` and
                     `CurrentState` `DWORD`s is not part of [[PCSC5]] but it is
-                    still considered in this speficiation as several existing
+                    still considered in this specification as several existing
                     PC/SC implementations use it.</p>
                     <p>In PC/SC implementations where this information is not
-                    avaialble, the upper two bytes of `EventState` will always
+                    available, the upper two bytes of `EventState` will always
                     be zero and so the resulting
-                    "{{SmartCardReaderStateOut/eventCount}}".</p>
+                    "{{SmartCardReaderStateOut/eventCount}}" will be zero.</p>
                     <p>The algorithms in this specification assume that PC/SC
                     implementations will define all [[PCSC5]] `SCARD_STATE_*`
                     flags to be `DWORD` values no higher than `0xFFFF`.</p>
