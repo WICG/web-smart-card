@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 34.1.5">
+<meta name="generator" content="ReSpec 34.1.6">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 .issue-label{text-transform:initial}
@@ -158,6 +158,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "dom",
     "hr-time-3",
     "html",
+    "infra",
     "permissions-policy",
     "webidl"
   ],
@@ -172,14 +173,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-07-25T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 25 July 2023"
+  "publishISODate": "2023-07-27T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 27 July 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
-  <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html permissions-policy webidl"><div class="head">
+  <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-25">25 July 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-07-27">27 July 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -239,7 +240,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       any standards organization.
     </p>
       
-    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-navigator-interface"><bdi class="secno">1. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="Navigator" data-cite="html" data-cite-path="/system-state.html" data-cite-frag="navigator" data-type="interface" class="formerLink"><code>Navigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute"><bdi class="secno">1.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="Navigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="Navigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-workernavigator-interface"><bdi class="secno">2. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="WorkerNavigator" data-cite="html" data-cite-path="/workers.html" data-cite-frag="workernavigator" data-type="interface" class="formerLink"><code>WorkerNavigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute-0"><bdi class="secno">2.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="WorkerNavigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="WorkerNavigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardresourcemanager-interface"><bdi class="secno">3. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardResourceManager" data-dfn-for=""><code>SmartCardResourceManager</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#establishcontext-method"><bdi class="secno">3.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="establishContext()" data-dfn-for="SmartCardResourceManager" data-type="Promise" data-lt="establishContext()" data-local-lt="SmartCardResourceManager.establishContext|SmartCardResourceManager.establishContext()|establishContext"><code>establishContext()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardcontext-interface"><bdi class="secno">4. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardContext" data-dfn-for=""><code>SmartCardContext</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#listreaders-method"><bdi class="secno">4.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="listReaders()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="listReaders()" data-local-lt="SmartCardContext.listReaders|SmartCardContext.listReaders()|listReaders"><code>listReaders()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getstatuschange-method"><bdi class="secno">4.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getStatusChange()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="getStatusChange()|getStatusChange(readerStates)|getStatusChange(readerStates, options)" data-local-lt="SmartCardContext.getStatusChange|SmartCardContext.getStatusChange()|getStatusChange"><code>getStatusChange()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstatein-dictionary"><bdi class="secno">4.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateIn" data-dfn-for=""><code>SmartCardReaderStateIn</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.1.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for=""><code>SmartCardReaderStateFlagsIn</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardreaderstateout-dictionary"><bdi class="secno">4.2.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateOut" data-dfn-for=""><code>SmartCardReaderStateOut</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsout-dictionary"><bdi class="secno">4.2.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsOut" data-dfn-for=""><code>SmartCardReaderStateFlagsOut</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardgetstatuschangeoptions-dictionary"><bdi class="secno">4.2.3 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardGetStatusChangeOptions" data-dfn-for=""><code>SmartCardGetStatusChangeOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#connect-method"><bdi class="secno">4.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="connect()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="connect()|connect(readerName, accessMode)|connect(readerName, accessMode, preferredProtocols)" data-local-lt="SmartCardContext.connect|SmartCardContext.connect()|connect"><code>connect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardprotocol-enum"><bdi class="secno">4.3.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardProtocol" data-dfn-for=""><code>SmartCardProtocol</code></span> enum</a></li><li class="tocline"><a class="tocxref" href="#smartcardconnectresult-dictionary"><bdi class="secno">4.3.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectResult" data-dfn-for=""><code>SmartCardConnectResult</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardaccessmode-enum"><bdi class="secno">4.3.3 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardAccessMode" data-dfn-for=""><code>SmartCardAccessMode</code></span> enum</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardconnection-interface"><bdi class="secno">5. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardConnection" data-dfn-for=""><code>SmartCardConnection</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#disconnect-method"><bdi class="secno">5.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect"><code>disconnect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for=""><code>SmartCardDisposition</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#transmit-method"><bdi class="secno">5.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="transmit()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="transmit()|transmit(sendBuffer)" data-local-lt="SmartCardConnection.transmit|SmartCardConnection.transmit()|transmit"><code>transmit()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#starttransaction-method"><bdi class="secno">5.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction"><code>startTransaction()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#status-method"><bdi class="secno">5.4 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status"><code>status()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for=""><code>SmartCardConnectionStatus</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstate-enum"><bdi class="secno">5.4.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardConnectionState" data-dfn-for=""><code>SmartCardConnectionState</code></span> enum</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#control-method"><bdi class="secno">5.5 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="control()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="control()|control(controlCode, data)" data-local-lt="SmartCardConnection.control|SmartCardConnection.control()|control"><code>control()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getattribute-method"><bdi class="secno">5.6 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute"><code>getAttribute()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#setattribute-method"><bdi class="secno">5.7 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute"><code>setAttribute()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcarderror-interface"><bdi class="secno">6. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardError" data-dfn-for=""><code>SmartCardError</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarderroroptions-dictionary"><bdi class="secno">6.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardErrorOptions" data-dfn-for=""><code>SmartCardErrorOptions</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardresponsecode-enum"><bdi class="secno">6.2 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardResponseCode" data-dfn-for=""><code>SmartCardResponseCode</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#integrations"><bdi class="secno">7. </bdi>Integrations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#permissions-policy"><bdi class="secno">7.1 </bdi>Permissions Policy</a></li></ol></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">8. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li></ol></li></ol></nav>
+    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-navigator-interface"><bdi class="secno">1. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="Navigator" data-cite="html" data-cite-path="/system-state.html" data-cite-frag="navigator" data-type="interface" class="formerLink"><code>Navigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute"><bdi class="secno">1.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="Navigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="Navigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-workernavigator-interface"><bdi class="secno">2. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="WorkerNavigator" data-cite="html" data-cite-path="/workers.html" data-cite-frag="workernavigator" data-type="interface" class="formerLink"><code>WorkerNavigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute-0"><bdi class="secno">2.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="WorkerNavigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="WorkerNavigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardresourcemanager-interface"><bdi class="secno">3. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardResourceManager" data-dfn-for=""><code>SmartCardResourceManager</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#establishcontext-method"><bdi class="secno">3.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="establishContext()" data-dfn-for="SmartCardResourceManager" data-type="Promise" data-lt="establishContext()" data-local-lt="SmartCardResourceManager.establishContext|SmartCardResourceManager.establishContext()|establishContext"><code>establishContext()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardcontext-interface"><bdi class="secno">4. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardContext" data-dfn-for=""><code>SmartCardContext</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#listreaders-method"><bdi class="secno">4.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="listReaders()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="listReaders()" data-local-lt="SmartCardContext.listReaders|SmartCardContext.listReaders()|listReaders"><code>listReaders()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getstatuschange-method"><bdi class="secno">4.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getStatusChange()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="getStatusChange()|getStatusChange(readerStates)|getStatusChange(readerStates, options)" data-local-lt="SmartCardContext.getStatusChange|SmartCardContext.getStatusChange()|getStatusChange"><code>getStatusChange()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#auxiliary-algorithms-and-definitions"><bdi class="secno">4.2.1 </bdi>Auxiliary algorithms and definitions</a></li><li class="tocline"><a class="tocxref" href="#smartcardreaderstatein-dictionary"><bdi class="secno">4.2.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateIn" data-dfn-for=""><code>SmartCardReaderStateIn</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for=""><code>SmartCardReaderStateFlagsIn</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardreaderstateout-dictionary"><bdi class="secno">4.2.3 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateOut" data-dfn-for=""><code>SmartCardReaderStateOut</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsout-dictionary"><bdi class="secno">4.2.3.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsOut" data-dfn-for=""><code>SmartCardReaderStateFlagsOut</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardgetstatuschangeoptions-dictionary"><bdi class="secno">4.2.4 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardGetStatusChangeOptions" data-dfn-for=""><code>SmartCardGetStatusChangeOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#connect-method"><bdi class="secno">4.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="connect()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="connect()|connect(readerName, accessMode)|connect(readerName, accessMode, preferredProtocols)" data-local-lt="SmartCardContext.connect|SmartCardContext.connect()|connect"><code>connect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardprotocol-enum"><bdi class="secno">4.3.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardProtocol" data-dfn-for=""><code>SmartCardProtocol</code></span> enum</a></li><li class="tocline"><a class="tocxref" href="#smartcardconnectresult-dictionary"><bdi class="secno">4.3.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectResult" data-dfn-for=""><code>SmartCardConnectResult</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardaccessmode-enum"><bdi class="secno">4.3.3 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardAccessMode" data-dfn-for=""><code>SmartCardAccessMode</code></span> enum</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardconnection-interface"><bdi class="secno">5. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardConnection" data-dfn-for=""><code>SmartCardConnection</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#disconnect-method"><bdi class="secno">5.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect"><code>disconnect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for=""><code>SmartCardDisposition</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#transmit-method"><bdi class="secno">5.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="transmit()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="transmit()|transmit(sendBuffer)" data-local-lt="SmartCardConnection.transmit|SmartCardConnection.transmit()|transmit"><code>transmit()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#starttransaction-method"><bdi class="secno">5.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction"><code>startTransaction()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#status-method"><bdi class="secno">5.4 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status"><code>status()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for=""><code>SmartCardConnectionStatus</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstate-enum"><bdi class="secno">5.4.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardConnectionState" data-dfn-for=""><code>SmartCardConnectionState</code></span> enum</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#control-method"><bdi class="secno">5.5 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="control()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="control()|control(controlCode, data)" data-local-lt="SmartCardConnection.control|SmartCardConnection.control()|control"><code>control()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getattribute-method"><bdi class="secno">5.6 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute"><code>getAttribute()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#setattribute-method"><bdi class="secno">5.7 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute"><code>setAttribute()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcarderror-interface"><bdi class="secno">6. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardError" data-dfn-for=""><code>SmartCardError</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarderroroptions-dictionary"><bdi class="secno">6.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardErrorOptions" data-dfn-for=""><code>SmartCardErrorOptions</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardresponsecode-enum"><bdi class="secno">6.2 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardResponseCode" data-dfn-for=""><code>SmartCardResponseCode</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#integrations"><bdi class="secno">7. </bdi>Integrations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#permissions-policy"><bdi class="secno">7.1 </bdi>Permissions Policy</a></li></ol></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">8. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li></ol></li></ol></nav>
 
     <section data-dfn-for="Navigator" id="extensions-to-the-navigator-interface"><div class="header-wrapper"><h2 id="x1-extensions-to-the-navigator-interface"><bdi class="secno">1. </bdi>Extensions to the <a data-link-type="idl" data-lt="Navigator" data-type="interface" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator"><code>Navigator</code></a> interface</h2><a class="self-link" href="#extensions-to-the-navigator-interface" aria-label="Permalink for Section 1."></a></div>
       
@@ -297,7 +298,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <li>Destroy <var data-type="RESOURCEMANAGER">resourceManager</var>.</li>
                 <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
                   <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-1">smart card task source</a> to <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
-                  <var data-type="Promise">promise</var> with a <a data-link-type="idl" href="#dfn-corresponding" class="internalDFN" id="ref-for-dfn-corresponding-1"><code>corresponding</code></a>
+                  <var data-type="Promise">promise</var> with a <a data-link-type="idl" href="#dfn-corresponding-3" class="internalDFN" id="ref-for-dfn-corresponding-3-1"><code>corresponding</code></a>
                 <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
               </ol>
             </li>
@@ -353,6 +354,17 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
           <td><code>false</code></td>
           <td>Whether there is an ongoing PC/SC operation in this context.</td>
         </tr>
+        <tr>
+          <td><dfn data-idl="" data-dfn-for="SmartCardContext" data-noexport="" data-dfn-type="attribute" id="dfn-tracker" tabindex="0" aria-haspopup="dialog">[[tracker]]</dfn></td>
+          <td><code>null</code></td>
+          <td>A [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARDTRACK</code> instance.</td>
+        </tr>
+        <tr>
+          <td><dfn data-idl="" data-dfn-for="SmartCardContext" data-noexport="" data-dfn-type="attribute" id="dfn-signal" tabindex="0" aria-haspopup="dialog">[[signal]]</dfn></td>
+          <td><code>null</code></td>
+          <td>The <a data-link-type="idl" data-lt="AbortSignal" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal"><code>AbortSignal</code></a> of the outstanding
+            <a data-link-type="idl" data-lt="getStatusChange()" href="#dom-smartcardcontext-getstatuschange" class="internalDFN" id="ref-for-dom-smartcardcontext-getstatuschange-2"><code>getStatusChange</code></a><code>()</code> call, if any.</td>
+        </tr>
       </tbody></table>
       <section id="listreaders-method"><div class="header-wrapper"><h3 id="x4-1-listreaders-method"><bdi class="secno">4.1 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardcontext-listreaders" data-idl="operation" data-title="listReaders()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="listReaders()" data-local-lt="SmartCardContext.listReaders|SmartCardContext.listReaders()|listReaders" tabindex="0" aria-haspopup="dialog"><code>listReaders()</code></dfn> method</h3><a class="self-link" href="#listreaders-method" aria-label="Permalink for Section 4.1"></a></div>
         
@@ -392,7 +404,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                     <code>false</code>.</li>
                   <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
                     <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
-                    <a data-link-type="idl" href="#dfn-corresponding" class="internalDFN" id="ref-for-dfn-corresponding-2"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var>.</li>
+                    <a data-link-type="idl" href="#dfn-corresponding-3" class="internalDFN" id="ref-for-dfn-corresponding-3-2"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var>.</li>
                   <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">resolve</a> <var data-type="Promise">promise</var> with a <code>sequence</code> of
                     <a data-link-type="idl" data-lt="DOMString" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><code>DOMString</code></a> equivalent to <var data-type="array of STR">pcscReaders</var>.</li>
                 </ol>
@@ -404,15 +416,123 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       </section>
       <section id="getstatuschange-method"><div class="header-wrapper"><h3 id="x4-2-getstatuschange-method"><bdi class="secno">4.2 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardcontext-getstatuschange" data-idl="operation" data-title="getStatusChange()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="getStatusChange()|getStatusChange(readerStates)|getStatusChange(readerStates, options)" data-local-lt="SmartCardContext.getStatusChange|SmartCardContext.getStatusChange()|getStatusChange" tabindex="0" aria-haspopup="dialog"><code>getStatusChange()</code></dfn> method</h3><a class="self-link" href="#getstatuschange-method" aria-label="Permalink for Section 4.2"></a></div>
         
-        <p>Equivalent to the GetStatusChange method of the SCARDTRACK class from [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>].</p>
-        <p>When the given <a data-link-type="idl" data-lt="AbortSignal" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal"><code>AbortSignal</code></a> is triggered, a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] Cancel
-        request is made.</p>
-        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
-        <section data-dfn-for="SmartCardReaderStateIn" id="smartcardreaderstatein-dictionary"><div class="header-wrapper"><h4 id="x4-2-1-smartcardreaderstatein-dictionary"><bdi class="secno">4.2.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstatein" data-idl="dictionary" data-title="SmartCardReaderStateIn" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateIn</code></dfn> dictionary</h4><a class="self-link" href="#smartcardreaderstatein-dictionary" aria-label="Permalink for Section 4.2.1"></a></div>
-          
-          <p>Describes the state that the application expectes a smart card
-          reader to be in.</p>
+        <p>The <a data-link-type="idl" data-lt="getStatusChange(readerStates, options)" href="#dom-smartcardcontext-getstatuschange" class="internalDFN" id="ref-for-dom-smartcardcontext-getstatuschange-3"><code>getStatusChange</code></a><code>(<var>readerStates</var>, <var>options</var>)</code> method steps
+        are:</p>
+        <ol>
+          <li>Let <var data-type="Promise">promise</var> be <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#a-new-promise">a new promise</a>.</li>
+          <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-4"><code>[[operationInProgress]]</code></a> is
+            <code>true</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+            <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return <var data-type="Promise">promise</var>.</li>
+          <li>If
+            <var data-type="SmartCardGetStatusChangeOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardgetstatuschangeoptions-signal" class="internalDFN" id="ref-for-dom-smartcardgetstatuschangeoptions-signal-1"><code>signal</code></a>"]
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#map-exists">exists</a>, run the following steps:
+            <ol>
+              <li>Let <var data-type="AbortSignal">signal</var> be
+                <var data-type="SmartCardGetStatusChangeOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardgetstatuschangeoptions-signal" class="internalDFN" id="ref-for-dom-smartcardgetstatuschangeoptions-signal-2"><code>signal</code></a>"].</li>
+              <li>If <var data-type="AbortSignal">signal</var> is <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-aborted">aborted</a>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var>
+                with <var data-type="AbortSignal">signal</var>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-abort-reason">abort reason</a> and return
+                <var data-type="Promise">promise</var>.</li>
+              <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[signal]]" href="#dfn-signal" class="internalDFN" id="ref-for-dfn-signal-1"><code>[[signal]]</code></a> to <var data-type="AbortSignal">signal</var></li>
+              <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-add">Add</a> the <a data-link-type="idl" href="#dfn-cancel-the-outstanding-getstatuschange" class="internalDFN" id="ref-for-dfn-cancel-the-outstanding-getstatuschange-1"><code>Cancel the outstanding GetStatusChange</code></a> algorithm to <var data-type="AbortSignal">signal</var>.</li>
+            </ol>
+          </li>
+          <li>Let <var data-type="DWORD">pcscTimeout</var> be a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> set to [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+            <code>INFINITE</code>.</li>
+          <li>If
+            <var data-type="SmartCardGetStatusChangeOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardgetstatuschangeoptions-timeout" class="internalDFN" id="ref-for-dom-smartcardgetstatuschangeoptions-timeout-1"><code>timeout</code></a>"]
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#map-exists">exists</a>, set <var data-type="DWORD">pcscTimeout</var> to
+            <var data-type="SmartCardGetStatusChangeOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardgetstatuschangeoptions-timeout" class="internalDFN" id="ref-for-dom-smartcardgetstatuschangeoptions-timeout-2"><code>timeout</code></a>"].</li>
+          <li>Let <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var> be a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+            <code>SCARD_READERSTATE[]</code> <a data-link-type="dfn|abstract-op" href="#dfn-corresponding" class="internalDFN" id="ref-for-dfn-corresponding-1">corresponding</a> to
+            <var data-type="sequence<SmartCardReaderStateIn>">readerStates</var>.</li>
+          <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-5"><code>[[operationInProgress]]</code></a> to
+            <code>true</code>.</li>
+          <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[tracker]]" href="#dfn-tracker" class="internalDFN" id="ref-for-dfn-tracker-1"><code>[[tracker]]</code></a> to a new instance of the
+            platform's [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARDTRACK</code> class, with
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[resourceManager]]" href="#dfn-resourcemanager" class="internalDFN" id="ref-for-dfn-resourcemanager-3"><code>[[resourceManager]]</code></a> as its
+            constructor input parameter.</li>
+          <li>Run the following steps <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+            <ol>
+              <li>Call
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[tracker]]" href="#dfn-tracker" class="internalDFN" id="ref-for-dfn-tracker-2"><code>[[tracker]]</code></a>.<code>GetStatusChange()</code>
+                with <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var> and <var data-type="DWORD">pcscTimeout</var> as input parameters.</li>
+              <li>Let <var data-type="RESPONSECODE">responseCode</var> be the returned
+                [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>RESPONSECODE</code>.</li>
+              <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-4">smart card task source</a> which performs the
+                following steps:
+                <ol>
+                  <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[tracker]]" href="#dfn-tracker" class="internalDFN" id="ref-for-dfn-tracker-3"><code>[[tracker]]</code></a> to <code>null</code>.</li>
+                  <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-6"><code>[[operationInProgress]]</code></a> to
+                    <code>false</code>.</li>
+                  <li>Let <var>abortReason</var> be <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a>.</li>
+                  <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[signal]]" href="#dfn-signal" class="internalDFN" id="ref-for-dfn-signal-2"><code>[[signal]]</code></a> is not <code>null</code>,
+                    run the following steps:
+                    <ol>
+                      <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[signal]]" href="#dfn-signal" class="internalDFN" id="ref-for-dfn-signal-3"><code>[[signal]]</code></a> is
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-aborted">aborted</a> then set <var>abortReason</var> to
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[signal]]" href="#dfn-signal" class="internalDFN" id="ref-for-dfn-signal-4"><code>[[signal]]</code></a>'s
+                      <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-abort-reason">abort reason</a>.</li>
+                      <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-remove">Remove</a> the <a data-link-type="idl" href="#dfn-cancel-the-outstanding-getstatuschange" class="internalDFN" id="ref-for-dfn-cancel-the-outstanding-getstatuschange-2"><code>cancel the outstanding GetStatusChange</code></a> algorithm from
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[signal]]" href="#dfn-signal" class="internalDFN" id="ref-for-dfn-signal-5"><code>[[signal]]</code></a>.</li>
+                      <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[signal]]" href="#dfn-signal" class="internalDFN" id="ref-for-dfn-signal-6"><code>[[signal]]</code></a> to
+                        <code>null</code>.</li>
+                    </ol>
+                  </li>
+                  <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, run the
+                    following steps:
+                    <ol>
+                      <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_E_CANCELLED</code> and
+                        <var>abortReason</var> is not <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a> then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+                        <var data-type="Promise">promise</var> with <var>abortReason</var>.</li>
+                      <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                        <a data-link-type="idl" href="#dfn-corresponding-3" class="internalDFN" id="ref-for-dfn-corresponding-3-3"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var>.</li>
+                      <li>Return.</li>
+                    </ol>
+                  </li>
+                  <li>Let
+                    <var data-type="sequence<SmartCardReaderStateOut>">readerStatesOut</var> be
+                    a sequence of <a data-link-type="idl" data-lt="SmartCardReaderStateOut" href="#dom-smartcardreaderstateout" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-2"><code>SmartCardReaderStateOut</code></a>
+                    <a data-link-type="dfn|abstract-op" href="#dfn-corresponding-1" class="internalDFN" id="ref-for-dfn-corresponding-1-1">corresponding</a> to
+                    <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var>.</li>
+                  <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">Resolve</a> <var data-type="Promise">promise</var> with <var data-type="sequence<SmartCardReaderStateOut>">readerStatesOut</var>.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return <var data-type="Promise">promise</var>.</li>
+        </ol>
 
+        <section id="auxiliary-algorithms-and-definitions"><div class="header-wrapper"><h4 id="x4-2-1-auxiliary-algorithms-and-definitions"><bdi class="secno">4.2.1 </bdi>Auxiliary algorithms and definitions</h4><a class="self-link" href="#auxiliary-algorithms-and-definitions" aria-label="Permalink for Section 4.2.1"></a></div>
+          
+
+          <p>The <dfn id="dfn-cancel-the-outstanding-getstatuschange" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">cancel the outstanding GetStatusChange</dfn>
+          algorithm steps are:</p>
+          <ol>
+            <li>Call <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[tracker]]" href="#dfn-tracker" class="internalDFN" id="ref-for-dfn-tracker-4"><code>[[tracker]]</code></a>.<code>Cancel()</code>.</li>
+          </ol>
+
+          <p>The <dfn id="dfn-high-word" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">high word</dfn> of a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> is the result of an
+          unsigned right shift of 16 bits on that <code>DWORD</code>.</p>
+
+          <p>To <dfn id="dfn-set-the-high-word" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">set the high word</dfn> of a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> named
+          <var data-type="DWORD">dword</var> to a given number <var>n</var>, perform the following steps.</p>
+          <ol>
+            <li>Set <var data-type="DWORD">dword</var> to <var data-type="DWORD">dword</var> bitwise AND <code>0xFFFF</code>.</li>
+            <li>Let <var>shiftedN</var> be the result of a left shift of 16 bits on <var>n</var>.</li>
+            <li>Set <var data-type="DWORD">dword</var> to <var data-type="DWORD">dword</var> bitwise OR <var>shiftedN</var>.</li>
+          </ol>
+
+          <p>To <dfn id="dfn-add-a-flag" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">add a flag</dfn> <var data-type="DWORD">f</var> to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code>
+          <var data-type="DWORD">flags</var>, set <var data-type="DWORD">flags</var> to <var data-type="DWORD">flags</var> bitwise OR <var data-type="DWORD">f</var>.</p>
+
+          <p>A [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> <var data-type="DWORD">flags</var> <dfn id="dfn-has-a-flag" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">has a flag</dfn> <var data-type="DWORD">f</var>
+          if <var data-type="DWORD">flags</var> bitwise AND <var data-type="DWORD">f</var> is <var data-type="DWORD">f</var>.</p>
+
+        </section>
+
+        <section data-dfn-for="SmartCardReaderStateIn" id="smartcardreaderstatein-dictionary"><div class="header-wrapper"><h4 id="x4-2-2-smartcardreaderstatein-dictionary"><bdi class="secno">4.2.2 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstatein" data-idl="dictionary" data-title="SmartCardReaderStateIn" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateIn</code></dfn> dictionary</h4><a class="self-link" href="#smartcardreaderstatein-dictionary" aria-label="Permalink for Section 4.2.2"></a></div>
+          
           <pre class="idl def" id="webidl-1648599769"><span class="idlHeader"><a class="self-link" href="#webidl-1648599769">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstatein" data-title="SmartCardReaderStateIn">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstatein" id="ref-for-dom-smartcardreaderstatein-2"><code>SmartCardReaderStateIn</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateIn">
   required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-readername" id="ref-for-dom-smartcardreaderstatein-readername-1"><code>readerName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-currentstate" data-title="currentState" data-dfn-for="SmartCardReaderStateIn">
   required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardreaderstateflagsin" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-1"><code>SmartCardReaderStateFlagsIn</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstatein-currentstate" id="ref-for-dom-smartcardreaderstatein-currentstate-1"><code>currentState</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstatein-currentcount" data-title="currentCount" data-dfn-for="SmartCardReaderStateIn"><span class="idlType">
@@ -431,7 +551,32 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
             <dd>The current number of card insertion and removal events in this
               reader, as known by the application.</dd>
           </dl>
-          <section data-dfn-for="SmartCardReaderStateFlagsIn" id="smartcardreaderstateflagsin-dictionary"><div class="header-wrapper"><h5 id="x4-2-1-1-smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.1.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateflagsin" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateFlagsIn</code></dfn> dictionary</h5><a class="self-link" href="#smartcardreaderstateflagsin-dictionary" aria-label="Permalink for Section 4.2.1.1"></a></div>
+          <p>Given a sequence of <a data-link-type="idl" data-lt="SmartCardReaderStateIn" href="#dom-smartcardreaderstatein" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-3"><code>SmartCardReaderStateIn</code></a> named
+          <var data-type="sequence<SmartCardReaderStateIn>">readerStates</var>, a
+          <dfn data-dfn-for="SmartCardReaderStateIn" id="dfn-corresponding" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn>
+          [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_READERSTATE[]</code> is created with the following
+          steps:</p>
+          <ol>
+            <li>Let <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var> be an empty
+              <code>SCARD_READERSTATE[]</code>.</li>
+            <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate">For each</a> <var data-type="SmartCardReaderStateIn">stateIn</var> in <var data-type="sequence<SmartCardReaderStateIn>">readerStates</var>:
+              <ol>
+                <li>Let <var data-type="SCARD_READERSTATE">pcscState</var> be a <code>SCARD_READERSTATE</code>.</li>
+                <li>Set <var data-type="SCARD_READERSTATE">pcscState</var>.<code>Reader</code> to
+                  <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-readername" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-readername-2"><code>readerName</code></a>"].</li>
+                <li>Set <var data-type="SCARD_READERSTATE">pcscState</var>.<code>CurrentState</code> to the <code>DWORD</code>
+                  <a data-link-type="dfn|abstract-op" href="#dfn-corresponding-0" class="internalDFN" id="ref-for-dfn-corresponding-0-1">corresponding</a>
+                to <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-currentstate" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-currentstate-2"><code>currentState</code></a>"].</li>
+                <li><a data-link-type="dfn|abstract-op" href="#dfn-set-the-high-word" class="internalDFN" id="ref-for-dfn-set-the-high-word-1">Set the high word</a> of <var data-type="SCARD_READERSTATE">pcscState</var>.<code>CurrentState</code> to
+                  <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-currentcount" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-currentcount-2"><code>currentCount</code></a>"].</li>
+                <li>Set <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code> to zero.</li>
+                <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-append">Append</a> <var data-type="SCARD_READERSTATE">pcscState</var> to <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var>.</li>
+              </ol>
+            </li>
+            <li>Return <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var>.</li>
+          </ol>
+
+          <section data-dfn-for="SmartCardReaderStateFlagsIn" id="smartcardreaderstateflagsin-dictionary"><div class="header-wrapper"><h5 id="x4-2-2-1-smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.2.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateflagsin" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateFlagsIn</code></dfn> dictionary</h5><a class="self-link" href="#smartcardreaderstateflagsin-dictionary" aria-label="Permalink for Section 4.2.2.1"></a></div>
             
 
             <pre class="idl def" id="webidl-1383660250"><span class="idlHeader"><a class="self-link" href="#webidl-1383660250">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateflagsin" data-title="SmartCardReaderStateFlagsIn">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateflagsin" id="ref-for-dom-smartcardreaderstateflagsin-2"><code>SmartCardReaderStateFlagsIn</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateflagsin-unaware" data-title="unaware" data-dfn-for="SmartCardReaderStateFlagsIn"><span class="idlType">
@@ -479,13 +624,54 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <dd>The application believes that there is an unresponsive card in
                 the reader.</dd>
             </dl>
+
+            <p>The [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code>
+              <dfn data-dfn-for="SmartCardReaderStateFlagsIn" id="dfn-corresponding-0" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn>
+              to a given <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsIn" href="#dom-smartcardreaderstateflagsin" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-3"><code>SmartCardReaderStateFlagsIn</code></a> is created with the
+              following steps:</p>
+            <ol>
+              <li>Let <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var> be the given
+                <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsIn" href="#dom-smartcardreaderstateflagsin" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-4"><code>SmartCardReaderStateFlagsIn</code></a>.</li>
+              <li>Let <var data-type="DWORD">pcscFlags</var> be a <code>DWORD</code> set to zero.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-unaware" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-unaware-2"><code>unaware</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-1">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_UNAWARE</code> to
+                <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-ignore" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-ignore-2"><code>ignore</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-2">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_IGNORE</code> to
+                <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-unavailable" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-unavailable-2"><code>unavailable</code></a>"]
+                is <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-3">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_UNAVAILABLE</code> to <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-empty" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-empty-2"><code>empty</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-4">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_EMPTY</code> to
+                <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-present" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-present-2"><code>present</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-5">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_PRESENT</code> to
+                <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-exclusive" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-exclusive-2"><code>exclusive</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-6">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_EXCLUSIVE</code> to
+                <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-inuse" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-inuse-2"><code>inuse</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-7">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_INUSE</code> to
+                <var data-type="DWORD">pcscFlags</var>.</li>
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-mute-2"><code>mute</code></a>"] is
+                <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-8">add</a> <code>SCARD_STATE_MUTE</code> to
+                <var data-type="DWORD">pcscFlags</var>.
+                <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="6"><span>Note</span></div><aside class="">
+                  <p><code>SCARD_STATE_MUTE</code> is not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still
+                  considered in this specification as existing PC/SC
+                  implementations use it.</p>
+                </aside></div>
+              </li>
+              <li>Return <var data-type="DWORD">pcscFlags</var>.</li>
+            </ol>
           </section>
         </section>
-        <section data-dfn-for="SmartCardReaderStateOut" id="smartcardreaderstateout-dictionary"><div class="header-wrapper"><h4 id="x4-2-2-smartcardreaderstateout-dictionary"><bdi class="secno">4.2.2 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateout" data-idl="dictionary" data-title="SmartCardReaderStateOut" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateOut</code></dfn> dictionary</h4><a class="self-link" href="#smartcardreaderstateout-dictionary" aria-label="Permalink for Section 4.2.2"></a></div>
+        <section data-dfn-for="SmartCardReaderStateOut" id="smartcardreaderstateout-dictionary"><div class="header-wrapper"><h4 id="x4-2-3-smartcardreaderstateout-dictionary"><bdi class="secno">4.2.3 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateout" data-idl="dictionary" data-title="SmartCardReaderStateOut" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateOut</code></dfn> dictionary</h4><a class="self-link" href="#smartcardreaderstateout-dictionary" aria-label="Permalink for Section 4.2.3"></a></div>
           
           <p>The actual state of a smart card reader.</p>
 
-          <pre class="idl def" id="webidl-889475000"><span class="idlHeader"><a class="self-link" href="#webidl-889475000">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateout" data-title="SmartCardReaderStateOut">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateout" id="ref-for-dom-smartcardreaderstateout-2"><code>SmartCardReaderStateOut</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateOut">
+          <pre class="idl def" id="webidl-889475000"><span class="idlHeader"><a class="self-link" href="#webidl-889475000">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateout" data-title="SmartCardReaderStateOut">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateout" id="ref-for-dom-smartcardreaderstateout-3"><code>SmartCardReaderStateOut</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-readername" data-title="readerName" data-dfn-for="SmartCardReaderStateOut">
   required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-readername" id="ref-for-dom-smartcardreaderstateout-readername-1"><code>readerName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-eventstate" data-title="eventState" data-dfn-for="SmartCardReaderStateOut">
   required<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-1"><code>SmartCardReaderStateFlagsOut</code></a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-eventstate" id="ref-for-dom-smartcardreaderstateout-eventstate-1"><code>eventState</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-eventcount" data-title="eventCount" data-dfn-for="SmartCardReaderStateOut">
   required<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateout-eventcount" id="ref-for-dom-smartcardreaderstateout-eventcount-1"><code>eventCount</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateout-answertoreset" data-title="answerToReset" data-dfn-for="SmartCardReaderStateOut"><span class="idlType">
@@ -508,10 +694,55 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               applicable.</dd>
           </dl>
 
-          <section data-dfn-for="SmartCardReaderStateFlagsOut" id="smartcardreaderstateflagsout-dictionary"><div class="header-wrapper"><h5 id="x4-2-2-1-smartcardreaderstateflagsout-dictionary"><bdi class="secno">4.2.2.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateflagsout" data-idl="dictionary" data-title="SmartCardReaderStateFlagsOut" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateFlagsOut</code></dfn> dictionary</h5><a class="self-link" href="#smartcardreaderstateflagsout-dictionary" aria-label="Permalink for Section 4.2.2.1"></a></div>
+          <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_READERSTATE[]</code> named
+          <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var>, a <dfn data-dfn-for="SmartCardReaderStateOut" id="dfn-corresponding-1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> sequence of
+          <a data-link-type="idl" data-lt="SmartCardReaderStateOut" href="#dom-smartcardreaderstateout" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-4"><code>SmartCardReaderStateOut</code></a> is created with the following steps:</p>
+          <ol>
+            <li>Let <var data-type="sequence<SmartCardReaderStateOut>">readerStatesOut</var> be
+              an empty sequence of <a data-link-type="idl" data-lt="SmartCardReaderStateOut" href="#dom-smartcardreaderstateout" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-5"><code>SmartCardReaderStateOut</code></a>.</li>
+            <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate">For each</a> <var data-type="SCARD_READERSTATE">pcscState</var> in
+              <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var>:
+              <ol>
+                <li>Let <var data-type="SmartCardReaderStateOut">stateOut</var> be a
+                  <a data-link-type="idl" data-lt="SmartCardReaderStateOut" href="#dom-smartcardreaderstateout" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-6"><code>SmartCardReaderStateOut</code></a>.</li>
+                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-readername" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-readername-2"><code>readerName</code></a>"] to
+                  <var data-type="SCARD_READERSTATE">pcscState</var>.<code>Reader</code>.</li>
+                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventstate" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventstate-2"><code>eventState</code></a>"] to
+                  the <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsOut" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-2"><code>SmartCardReaderStateFlagsOut</code></a> dictionary
+                  <a data-link-type="dfn|abstract-op" href="#dfn-corresponding-2" class="internalDFN" id="ref-for-dfn-corresponding-2-1">corresponding</a>
+                  to <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.</li>
+                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventcount" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventcount-2"><code>eventCount</code></a>"] to
+                  the <a data-link-type="dfn|abstract-op" href="#dfn-high-word" class="internalDFN" id="ref-for-dfn-high-word-1">high word</a> of <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.
+                  <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="5"><span>Note</span><span class="issue-label">: Number of card insertion and removal
+                    events</span></div><aside class="">
+                    <p>Having the number of card insertion and removal events
+                    stored in the upper 2 bytes of the <code>EventState</code> and
+                    <code>CurrentState</code> <code>DWORD</code>s is not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is
+                    still considered in this specification as several existing
+                    PC/SC implementations use it.</p>
+                    <p>In PC/SC implementations where this information is not
+                    available, the upper two bytes of <code>EventState</code> will always
+                    be zero and so the resulting
+                    "<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventcount" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventcount-3"><code>eventCount</code></a>" will be zero.</p>
+                    <p>The algorithms in this specification assume that PC/SC
+                    implementations will define all [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_*</code>
+                    flags to be <code>DWORD</code> values no higher than <code>0xFFFF</code>.</p>
+                  </aside></div>
+                </li>
+                <li>If the platform's <code>SCARD_READERSTATE</code> structure has a member
+                  containing the card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] Answer To Reset, set
+                  <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-answertoreset" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-answertoreset-2"><code>answerToReset</code></a>"] to
+                  that value.</li>
+                <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-append">Append</a> <var data-type="SmartCardReaderStateOut">stateOut</var> to <var data-type="sequence<SmartCardReaderStateOut>">readerStatesOut</var>.</li>
+              </ol>
+            </li>
+            <li>Return <var data-type="sequence<SmartCardReaderStateOut>">readerStatesOut</var>.</li>
+          </ol>
+
+          <section data-dfn-for="SmartCardReaderStateFlagsOut" id="smartcardreaderstateflagsout-dictionary"><div class="header-wrapper"><h5 id="x4-2-3-1-smartcardreaderstateflagsout-dictionary"><bdi class="secno">4.2.3.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardreaderstateflagsout" data-idl="dictionary" data-title="SmartCardReaderStateFlagsOut" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardReaderStateFlagsOut</code></dfn> dictionary</h5><a class="self-link" href="#smartcardreaderstateflagsout-dictionary" aria-label="Permalink for Section 4.2.3.1"></a></div>
             
 
-            <pre class="idl def" id="webidl-1736043475"><span class="idlHeader"><a class="self-link" href="#webidl-1736043475">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateflagsout" data-title="SmartCardReaderStateFlagsOut">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateflagsout" id="ref-for-dom-smartcardreaderstateflagsout-2"><code>SmartCardReaderStateFlagsOut</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateflagsout-ignore" data-title="ignore" data-dfn-for="SmartCardReaderStateFlagsOut"><span class="idlType">
+            <pre class="idl def" id="webidl-1736043475"><span class="idlHeader"><a class="self-link" href="#webidl-1736043475">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardreaderstateflagsout" data-title="SmartCardReaderStateFlagsOut">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardreaderstateflagsout" id="ref-for-dom-smartcardreaderstateflagsout-3"><code>SmartCardReaderStateFlagsOut</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateflagsout-ignore" data-title="ignore" data-dfn-for="SmartCardReaderStateFlagsOut"><span class="idlType">
   <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateflagsout-ignore" id="ref-for-dom-smartcardreaderstateflagsout-ignore-1"><code>ignore</code></a> = false;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateflagsout-changed" data-title="changed" data-dfn-for="SmartCardReaderStateFlagsOut"><span class="idlType">
   <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateflagsout-changed" id="ref-for-dom-smartcardreaderstateflagsout-changed-1"><code>changed</code></a> = false;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateflagsout-unavailable" data-title="unavailable" data-dfn-for="SmartCardReaderStateFlagsOut"><span class="idlType">
   <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardreaderstateflagsout-unavailable" id="ref-for-dom-smartcardreaderstateflagsout-unavailable-1"><code>unavailable</code></a> = false;</span><span data-idl="" class="idlMember" id="idl-def-smartcardreaderstateflagsout-unknown" data-title="unknown" data-dfn-for="SmartCardReaderStateFlagsOut"><span class="idlType">
@@ -554,13 +785,63 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateflagsout-mute" data-idl="field" data-title="mute" data-dfn-for="SmartCardReaderStateFlagsOut" data-type="boolean" tabindex="0" aria-haspopup="dialog"><code>mute</code></dfn> member</dt>
               <dd>There is an unresponsive card in the reader.</dd>
             </dl>
+
+            <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> named <var data-type="DWORD">pcscFlags</var>, a <dfn data-dfn-for="SmartCardReaderStateFlagsOut" id="dfn-corresponding-2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn>
+              <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsOut" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-4"><code>SmartCardReaderStateFlagsOut</code></a> dictionary is created with the
+              following steps:</p>
+            <ol>
+              <li>Let <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var> be a
+                <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsOut" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-5"><code>SmartCardReaderStateFlagsOut</code></a> dictionary with <a data-link-type="dfn|abstract-op" data-lt="default value" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member-default-value">default members</a>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-1">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_IGNORE</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-ignore" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-ignore-2"><code>ignore</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-2">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_CHANGED</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-changed" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-changed-2"><code>changed</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-3">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_UNAVAILABLE</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-unavailable" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-unavailable-2"><code>unavailable</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-4">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_UNKNOWN</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-unknown" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-unknown-2"><code>unknown</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-5">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_EMPTY</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-empty" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-empty-2"><code>empty</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-6">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_PRESENT</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-present" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-present-2"><code>present</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-7">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_EXCLUSIVE</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-exclusive" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-exclusive-2"><code>exclusive</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-8">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>SCARD_STATE_INUSE</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-inuse" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-inuse-2"><code>inuse</code></a>"] to
+                <code>true</code>.</li>
+              <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-9">has</a> <code>SCARD_STATE_MUTE</code>, set
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-mute-2"><code>mute</code></a>"] to
+                <code>true</code>.
+                <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="6"><span>Note</span></div><aside class="">
+                  <p><code>SCARD_STATE_MUTE</code> is not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still
+                  considered in this speficiation as existing PC/SC
+                  implementations use it.</p>
+                </aside></div>
+              </li>
+              <li>Return <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.</li>
+            </ol>
           </section>
         </section>
-        <section data-dfn-for="SmartCardGetStatusChangeOptions" id="smartcardgetstatuschangeoptions-dictionary"><div class="header-wrapper"><h4 id="x4-2-3-smartcardgetstatuschangeoptions-dictionary"><bdi class="secno">4.2.3 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardgetstatuschangeoptions" data-idl="dictionary" data-title="SmartCardGetStatusChangeOptions" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardGetStatusChangeOptions</code></dfn> dictionary</h4><a class="self-link" href="#smartcardgetstatuschangeoptions-dictionary" aria-label="Permalink for Section 4.2.3"></a></div>
+        <section data-dfn-for="SmartCardGetStatusChangeOptions" id="smartcardgetstatuschangeoptions-dictionary"><div class="header-wrapper"><h4 id="x4-2-4-smartcardgetstatuschangeoptions-dictionary"><bdi class="secno">4.2.4 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardgetstatuschangeoptions" data-idl="dictionary" data-title="SmartCardGetStatusChangeOptions" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardGetStatusChangeOptions</code></dfn> dictionary</h4><a class="self-link" href="#smartcardgetstatuschangeoptions-dictionary" aria-label="Permalink for Section 4.2.4"></a></div>
           
           <pre class="idl def" id="webidl-837952189"><span class="idlHeader"><a class="self-link" href="#webidl-837952189">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardgetstatuschangeoptions" data-title="SmartCardGetStatusChangeOptions">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardgetstatuschangeoptions" id="ref-for-dom-smartcardgetstatuschangeoptions-2"><code>SmartCardGetStatusChangeOptions</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardgetstatuschangeoptions-timeout" data-title="timeout" data-dfn-for="SmartCardGetStatusChangeOptions"><span class="idlType">
-  <a data-link-type="idl" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-domhighrestimestamp">DOMHighResTimeStamp</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardgetstatuschangeoptions-timeout" id="ref-for-dom-smartcardgetstatuschangeoptions-timeout-1"><code>timeout</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardgetstatuschangeoptions-signal" data-title="signal" data-dfn-for="SmartCardGetStatusChangeOptions"><span class="idlType">
-  <a data-link-type="idl" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal">AbortSignal</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardgetstatuschangeoptions-signal" id="ref-for-dom-smartcardgetstatuschangeoptions-signal-1"><code>signal</code></a>;</span>
+  <a data-link-type="idl" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-domhighrestimestamp">DOMHighResTimeStamp</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardgetstatuschangeoptions-timeout" id="ref-for-dom-smartcardgetstatuschangeoptions-timeout-3"><code>timeout</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-smartcardgetstatuschangeoptions-signal" data-title="signal" data-dfn-for="SmartCardGetStatusChangeOptions"><span class="idlType">
+  <a data-link-type="idl" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal">AbortSignal</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardgetstatuschangeoptions-signal" id="ref-for-dom-smartcardgetstatuschangeoptions-signal-3"><code>signal</code></a>;</span>
 };</span></code></pre>
 
           <dl>
@@ -577,7 +858,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       </section>
       <section id="connect-method"><div class="header-wrapper"><h3 id="x4-3-connect-method"><bdi class="secno">4.3 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardcontext-connect" data-idl="operation" data-title="connect()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="connect()|connect(readerName, accessMode)|connect(readerName, accessMode, preferredProtocols)" data-local-lt="SmartCardContext.connect|SmartCardContext.connect()|connect" tabindex="0" aria-haspopup="dialog"><code>connect()</code></dfn> method</h3><a class="self-link" href="#connect-method" aria-label="Permalink for Section 4.3"></a></div>
         
-        <div class="issue" id="issue-container-number-2"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="4"><span>Issue 2</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardProtocol" id="smartcardprotocol-enum"><div class="header-wrapper"><h4 id="x4-3-1-smartcardprotocol-enum"><bdi class="secno">4.3.1 </bdi><dfn data-export="" data-dfn-type="enum" id="dom-smartcardprotocol" data-idl="enum" data-title="SmartCardProtocol" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardProtocol</code></dfn> enum</h4><a class="self-link" href="#smartcardprotocol-enum" aria-label="Permalink for Section 4.3.1"></a></div>
           
           <pre class="idl def" id="webidl-117544486"><span class="idlHeader"><a class="self-link" href="#webidl-117544486">WebIDL</a></span><code><span data-idl="" class="idlEnum" id="idl-def-smartcardprotocol" data-title="SmartCardProtocol">enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-smartcardprotocol" id="ref-for-dom-smartcardprotocol-2"><code>SmartCardProtocol</code></a> {
@@ -656,7 +937,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
 callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransactioncallback" data-idl="callback" data-title="SmartCardTransactionCallback" data-dfn-for="" class="idlID" tabindex="0" aria-haspopup="dialog"><code>SmartCardTransactionCallback</code></dfn> =<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="idl" href="#dom-smartcarddisposition" class="internalDFN" id="ref-for-dom-smartcarddisposition-2"><code>SmartCardDisposition</code></a>?&gt;</span> ();</span></code></pre>
       <section id="disconnect-method"><div class="header-wrapper"><h3 id="x5-1-disconnect-method"><bdi class="secno">5.1 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-disconnect" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect" tabindex="0" aria-haspopup="dialog"><code>disconnect()</code></dfn> method</h3><a class="self-link" href="#disconnect-method" aria-label="Permalink for Section 5.1"></a></div>
         
-        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-2"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="4"><span>Issue 2</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardDisposition" id="smartcarddisposition-enum"><div class="header-wrapper"><h4 id="x5-1-1-smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><dfn data-export="" data-dfn-type="enum" id="dom-smartcarddisposition" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardDisposition</code></dfn> enum</h4><a class="self-link" href="#smartcarddisposition-enum" aria-label="Permalink for Section 5.1.1"></a></div>
           
           <pre class="idl def" id="webidl-633517433"><span class="idlHeader"><a class="self-link" href="#webidl-633517433">WebIDL</a></span><code><span data-idl="" class="idlEnum" id="idl-def-smartcarddisposition" data-title="SmartCardDisposition">enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-smartcarddisposition" id="ref-for-dom-smartcarddisposition-3"><code>SmartCardDisposition</code></a> {
@@ -681,18 +962,18 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
       </section>
       <section id="transmit-method"><div class="header-wrapper"><h3 id="x5-2-transmit-method"><bdi class="secno">5.2 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-transmit" data-idl="operation" data-title="transmit()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="transmit()|transmit(sendBuffer)" data-local-lt="SmartCardConnection.transmit|SmartCardConnection.transmit()|transmit" tabindex="0" aria-haspopup="dialog"><code>transmit()</code></dfn> method</h3><a class="self-link" href="#transmit-method" aria-label="Permalink for Section 5.2"></a></div>
         
-        <div class="issue" id="issue-container-number-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue 4</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="starttransaction-method"><div class="header-wrapper"><h3 id="x5-3-starttransaction-method"><bdi class="secno">5.3 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-starttransaction" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction" tabindex="0" aria-haspopup="dialog"><code>startTransaction()</code></dfn> method</h3><a class="self-link" href="#starttransaction-method" aria-label="Permalink for Section 5.3"></a></div>
         
         <p>Starts a transaction. The Transaction is ended when the <a data-link-type="idl" data-lt="Promise" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><code>Promise</code></a>
         returned by the given callback settles.</p>
-        <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue 5</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue 4</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="status-method"><div class="header-wrapper"><h3 id="x5-4-status-method"><bdi class="secno">5.4 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-status" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status" tabindex="0" aria-haspopup="dialog"><code>status()</code></dfn> method</h3><a class="self-link" href="#status-method" aria-label="Permalink for Section 5.4"></a></div>
         
         <p>Queries the host's PC/SC stack about the current connection status.</p>
-        <div class="issue" id="issue-container-number-6"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue 6</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue 5</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardConnectionStatus" id="smartcardconnectionstatus-dictionary"><div class="header-wrapper"><h4 id="x5-4-1-smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardconnectionstatus" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardConnectionStatus</code></dfn> dictionary</h4><a class="self-link" href="#smartcardconnectionstatus-dictionary" aria-label="Permalink for Section 5.4.1"></a></div>
           
           <pre class="idl def" id="webidl-686619780"><span class="idlHeader"><a class="self-link" href="#webidl-686619780">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardconnectionstatus" data-title="SmartCardConnectionStatus">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardconnectionstatus" id="ref-for-dom-smartcardconnectionstatus-2"><code>SmartCardConnectionStatus</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardconnectionstatus-readername" data-title="readerName" data-dfn-for="SmartCardConnectionStatus">
@@ -754,17 +1035,17 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
         commands. The returned <a data-link-type="idl" data-lt="Promise" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><code>Promise</code></a> might contain output data, if applicable
         for the given control code. Otherwise the returned buffer will be
         empty.</p>
-        <div class="issue" id="issue-container-number-7"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>Issue 7</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-6"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue 6</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="getattribute-method"><div class="header-wrapper"><h3 id="x5-6-getattribute-method"><bdi class="secno">5.6 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-getattribute" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute" tabindex="0" aria-haspopup="dialog"><code>getAttribute()</code></dfn> method</h3><a class="self-link" href="#getattribute-method" aria-label="Permalink for Section 5.6"></a></div>
         
         <p>Queries a card reader's attribute or capability value, given its tag.</p>
-        <div class="issue" id="issue-container-number-8"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="4"><span>Issue 8</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-7"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>Issue 7</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="setattribute-method"><div class="header-wrapper"><h3 id="x5-7-setattribute-method"><bdi class="secno">5.7 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-setattribute" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute" tabindex="0" aria-haspopup="dialog"><code>setAttribute()</code></dfn> method</h3><a class="self-link" href="#setattribute-method" aria-label="Permalink for Section 5.7"></a></div>
         
         <p>Sets a card reader's attribute or capability.</p>
-        <div class="issue" id="issue-container-number-9"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="4"><span>Issue 9</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-8"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="4"><span>Issue 8</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
     </section>
 
@@ -778,9 +1059,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p>The <dfn data-export="" data-dfn-type="attribute" id="dom-smartcarderror-responsecode" data-idl="attribute" data-title="responseCode" data-dfn-for="SmartCardError" data-type="SmartCardResponseCode" data-lt="responseCode" data-local-lt="SmartCardError.responseCode" tabindex="0" aria-haspopup="dialog"><code>responseCode</code></dfn> attribute is the error or warning response
       code returned by the related [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] method.</p>
       <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>RESPONSECODE</code> different from <code>SCARD_S_SUCCESS</code>, a
-      <dfn id="dfn-corresponding" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> is created with the following
-      steps:</p>
-      <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
+      <dfn data-dfn-for="SmartCardError" id="dfn-corresponding-3" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> is
+      created with the following steps:</p>
+      <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
         <p>The following <code>RESPONSECODE</code>s are not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still
         considered in this specification as existing PC/SC
         implementations use them:</p>
@@ -794,7 +1075,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
         <li>Let <var data-type="RESPONSECODE">pcscCode</var> be that <code>RESPONSECODE</code>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NO_SERVICE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
           "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-1"><code>no-service</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-2"><code>SmartCardError</code></a>.
-          <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
+          <div class="note" role="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-4" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
             <p>In statements such as:</p>
             <blockquote><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-2"><code>no-service</code></a>"
               <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-3"><code>SmartCardError</code></a></blockquote>
@@ -938,6 +1219,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 19 July 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
     </dd><dt id="bib-html">[html]</dt><dd>
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+    </dd><dt id="bib-infra">[infra]</dt><dd>
+      <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-iso7186-3">[ISO7186-3]</dt><dd>
       <a href="https://www.iso.org/standard/38770.html"><cite>Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols</cite></a>.  ISO/IEC. Published. URL: <a href="https://www.iso.org/standard/38770.html">https://www.iso.org/standard/38770.html</a>
     </dd><dt id="bib-pcsc5">[PCSC5]</dt><dd>
@@ -1011,6 +1294,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-smart-card-task-source-1" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> <a href="#ref-for-dfn-smart-card-task-source-2" title="Reference 2">(2)</a> 
     </li><li>
       <a href="#ref-for-dfn-smart-card-task-source-3" title="§ 4.1 listReaders() method">§ 4.1 listReaders() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-smart-card-task-source-4" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresourcemanager-establishcontext" aria-label="Links in this document to definition: establishContext()">
@@ -1055,6 +1340,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-resourcemanager-1" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> 
     </li><li>
       <a href="#ref-for-dfn-resourcemanager-2" title="§ 4.1 listReaders() method">§ 4.1 listReaders() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-resourcemanager-3" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-operationinprogress" aria-label="Links in this document to definition: [[operationInProgress]]">
@@ -1067,6 +1354,34 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dfn-operationinprogress-1" title="§ 4.1 listReaders() method">§ 4.1 listReaders() method</a> <a href="#ref-for-dfn-operationinprogress-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-3" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-operationinprogress-4" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dfn-operationinprogress-5" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-6" title="Reference 3">(3)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-tracker" aria-label="Links in this document to definition: [[tracker]]">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-tracker" aria-label="Permalink for definition: [[tracker]]. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-tracker-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dfn-tracker-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-tracker-3" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-tracker-4" title="§ 4.2.1 Auxiliary algorithms and definitions">§ 4.2.1 Auxiliary algorithms and definitions</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-signal" aria-label="Links in this document to definition: [[signal]]">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-signal" aria-label="Permalink for definition: [[signal]]. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-signal-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dfn-signal-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-signal-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-signal-4" title="Reference 4">(4)</a> <a href="#ref-for-dfn-signal-5" title="Reference 5">(5)</a> <a href="#ref-for-dfn-signal-6" title="Reference 6">(6)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardcontext-listreaders" aria-label="Links in this document to definition: listReaders()">
@@ -1092,7 +1407,69 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardcontext-getstatuschange-1" title="§ 4. SmartCardContext interface">§ 4. SmartCardContext interface</a> 
+      <a href="#ref-for-dom-smartcardcontext-getstatuschange-1" title="§ 4. SmartCardContext interface">§ 4. SmartCardContext interface</a> <a href="#ref-for-dom-smartcardcontext-getstatuschange-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardcontext-getstatuschange-3" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-cancel-the-outstanding-getstatuschange" aria-label="Links in this document to definition: cancel the outstanding GetStatusChange">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-cancel-the-outstanding-getstatuschange" aria-label="Permalink for definition: cancel the outstanding GetStatusChange. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-cancel-the-outstanding-getstatuschange-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dfn-cancel-the-outstanding-getstatuschange-2" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-high-word" aria-label="Links in this document to definition: high word">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-high-word" aria-label="Permalink for definition: high word. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-high-word-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-set-the-high-word" aria-label="Links in this document to definition: set the high word">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-set-the-high-word" aria-label="Permalink for definition: set the high word. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-set-the-high-word-1" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-add-a-flag" aria-label="Links in this document to definition: add a flag">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-add-a-flag" aria-label="Permalink for definition: add a flag. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-add-a-flag-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dfn-add-a-flag-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-add-a-flag-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-add-a-flag-4" title="Reference 4">(4)</a> <a href="#ref-for-dfn-add-a-flag-5" title="Reference 5">(5)</a> <a href="#ref-for-dfn-add-a-flag-6" title="Reference 6">(6)</a> <a href="#ref-for-dfn-add-a-flag-7" title="Reference 7">(7)</a> <a href="#ref-for-dfn-add-a-flag-8" title="Reference 8">(8)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-has-a-flag" aria-label="Links in this document to definition: has a flag">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-has-a-flag" aria-label="Permalink for definition: has a flag. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-has-a-flag-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dfn-has-a-flag-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-has-a-flag-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-has-a-flag-4" title="Reference 4">(4)</a> <a href="#ref-for-dfn-has-a-flag-5" title="Reference 5">(5)</a> <a href="#ref-for-dfn-has-a-flag-6" title="Reference 6">(6)</a> <a href="#ref-for-dfn-has-a-flag-7" title="Reference 7">(7)</a> <a href="#ref-for-dfn-has-a-flag-8" title="Reference 8">(8)</a> <a href="#ref-for-dfn-has-a-flag-9" title="Reference 9">(9)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein" aria-label="Links in this document to definition: SmartCardReaderStateIn">
@@ -1106,7 +1483,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <li>
       <a href="#ref-for-dom-smartcardreaderstatein-1" title="§ 4. SmartCardContext interface">§ 4. SmartCardContext interface</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcardreaderstatein-2" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstatein-2" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstatein-3" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein-readername" aria-label="Links in this document to definition: readerName">
@@ -1118,7 +1495,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstatein-readername-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstatein-readername-1" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstatein-readername-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein-currentstate" aria-label="Links in this document to definition: currentState">
@@ -1130,7 +1507,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstatein-currentstate-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstatein-currentstate-1" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstatein-currentstate-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstatein-currentcount" aria-label="Links in this document to definition: currentCount">
@@ -1142,7 +1519,19 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstatein-currentcount-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstatein-currentcount-1" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstatein-currentcount-2" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding" aria-label="Links in this document to definition: corresponding">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-corresponding" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-corresponding-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin" aria-label="Links in this document to definition: SmartCardReaderStateFlagsIn">
@@ -1154,9 +1543,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-1" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-2" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-2" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-unaware" aria-label="Links in this document to definition: unaware">
@@ -1168,7 +1557,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-unaware-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-unaware-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-unaware-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-ignore" aria-label="Links in this document to definition: ignore">
@@ -1180,7 +1569,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-ignore-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-ignore-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-ignore-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-unavailable" aria-label="Links in this document to definition: unavailable">
@@ -1192,7 +1581,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-unavailable-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-unavailable-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-unavailable-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-empty" aria-label="Links in this document to definition: empty">
@@ -1204,7 +1593,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-empty-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-empty-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-empty-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-present" aria-label="Links in this document to definition: present">
@@ -1216,7 +1605,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-present-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-present-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-present-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-exclusive" aria-label="Links in this document to definition: exclusive">
@@ -1228,7 +1617,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-exclusive-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-exclusive-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-exclusive-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-inuse" aria-label="Links in this document to definition: inuse">
@@ -1240,7 +1629,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-inuse-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-inuse-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-inuse-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsin-mute" aria-label="Links in this document to definition: mute">
@@ -1252,7 +1641,19 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsin-mute-1" title="§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.1.1 SmartCardReaderStateFlagsIn dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsin-mute-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsin-mute-2" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding-0" aria-label="Links in this document to definition: corresponding">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-corresponding-0" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-corresponding-0-1" title="§ 4.2.2 SmartCardReaderStateIn dictionary">§ 4.2.2 SmartCardReaderStateIn dictionary</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout" aria-label="Links in this document to definition: SmartCardReaderStateOut">
@@ -1266,7 +1667,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <li>
       <a href="#ref-for-dom-smartcardreaderstateout-1" title="§ 4. SmartCardContext interface">§ 4. SmartCardContext interface</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcardreaderstateout-2" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateout-2" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardreaderstateout-3" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateout-4" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardreaderstateout-5" title="Reference 3">(3)</a> <a href="#ref-for-dom-smartcardreaderstateout-6" title="Reference 4">(4)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-readername" aria-label="Links in this document to definition: readerName">
@@ -1278,7 +1681,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateout-readername-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateout-readername-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateout-readername-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-eventstate" aria-label="Links in this document to definition: eventState">
@@ -1290,7 +1693,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateout-eventstate-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateout-eventstate-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateout-eventstate-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-eventcount" aria-label="Links in this document to definition: eventCount">
@@ -1302,7 +1705,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateout-eventcount-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateout-eventcount-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateout-eventcount-2" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardreaderstateout-eventcount-3" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateout-answertoreset" aria-label="Links in this document to definition: answerToReset">
@@ -1314,7 +1717,19 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateout-answertoreset-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateout-answertoreset-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateout-answertoreset-2" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding-1" aria-label="Links in this document to definition: corresponding">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-corresponding-1" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-corresponding-1-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout" aria-label="Links in this document to definition: SmartCardReaderStateFlagsOut">
@@ -1326,9 +1741,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-1" title="§ 4.2.2 SmartCardReaderStateOut dictionary">§ 4.2.2 SmartCardReaderStateOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-2" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-3" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-4" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-5" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-ignore" aria-label="Links in this document to definition: ignore">
@@ -1340,7 +1755,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-ignore-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-ignore-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-ignore-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-changed" aria-label="Links in this document to definition: changed">
@@ -1352,7 +1767,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-changed-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-changed-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-changed-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-unavailable" aria-label="Links in this document to definition: unavailable">
@@ -1364,7 +1779,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-unavailable-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-unavailable-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-unavailable-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-unknown" aria-label="Links in this document to definition: unknown">
@@ -1376,7 +1791,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-unknown-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-unknown-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-unknown-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-empty" aria-label="Links in this document to definition: empty">
@@ -1388,7 +1803,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-empty-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-empty-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-empty-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-present" aria-label="Links in this document to definition: present">
@@ -1400,7 +1815,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-present-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-present-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-present-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-exclusive" aria-label="Links in this document to definition: exclusive">
@@ -1412,7 +1827,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-exclusive-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-exclusive-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-exclusive-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-inuse" aria-label="Links in this document to definition: inuse">
@@ -1424,7 +1839,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-inuse-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-inuse-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-inuse-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardreaderstateflagsout-mute" aria-label="Links in this document to definition: mute">
@@ -1436,7 +1851,19 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstateflagsout-mute-1" title="§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.2.1 SmartCardReaderStateFlagsOut dictionary</a> 
+      <a href="#ref-for-dom-smartcardreaderstateflagsout-mute-1" title="§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary">§ 4.2.3.1 SmartCardReaderStateFlagsOut dictionary</a> <a href="#ref-for-dom-smartcardreaderstateflagsout-mute-2" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding-2" aria-label="Links in this document to definition: corresponding">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-corresponding-2" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-corresponding-2-1" title="§ 4.2.3 SmartCardReaderStateOut dictionary">§ 4.2.3 SmartCardReaderStateOut dictionary</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardgetstatuschangeoptions" aria-label="Links in this document to definition: SmartCardGetStatusChangeOptions">
@@ -1450,7 +1877,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <li>
       <a href="#ref-for-dom-smartcardgetstatuschangeoptions-1" title="§ 4. SmartCardContext interface">§ 4. SmartCardContext interface</a> 
     </li><li>
-      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-2" title="§ 4.2.3 SmartCardGetStatusChangeOptions dictionary">§ 4.2.3 SmartCardGetStatusChangeOptions dictionary</a> 
+      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-2" title="§ 4.2.4 SmartCardGetStatusChangeOptions dictionary">§ 4.2.4 SmartCardGetStatusChangeOptions dictionary</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardgetstatuschangeoptions-timeout" aria-label="Links in this document to definition: timeout">
@@ -1462,7 +1889,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-timeout-1" title="§ 4.2.3 SmartCardGetStatusChangeOptions dictionary">§ 4.2.3 SmartCardGetStatusChangeOptions dictionary</a> 
+      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-timeout-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dom-smartcardgetstatuschangeoptions-timeout-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-timeout-3" title="§ 4.2.4 SmartCardGetStatusChangeOptions dictionary">§ 4.2.4 SmartCardGetStatusChangeOptions dictionary</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardgetstatuschangeoptions-signal" aria-label="Links in this document to definition: signal">
@@ -1474,7 +1903,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-signal-1" title="§ 4.2.3 SmartCardGetStatusChangeOptions dictionary">§ 4.2.3 SmartCardGetStatusChangeOptions dictionary</a> 
+      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-signal-1" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dom-smartcardgetstatuschangeoptions-signal-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardgetstatuschangeoptions-signal-3" title="§ 4.2.4 SmartCardGetStatusChangeOptions dictionary">§ 4.2.4 SmartCardGetStatusChangeOptions dictionary</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardcontext-connect" aria-label="Links in this document to definition: connect()">
@@ -1999,18 +2430,20 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dom-smartcarderror-responsecode-3" title="§ 6.1 SmartCardErrorOptions dictionary">§ 6.1 SmartCardErrorOptions dictionary</a> 
     </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding" aria-label="Links in this document to definition: corresponding">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding-3" aria-label="Links in this document to definition: corresponding">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="#dfn-corresponding" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
+        <a class="self-link" href="#dfn-corresponding-3" aria-label="Permalink for definition: corresponding. Activate to close this dialog.">Permalink</a>
          
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-corresponding-1" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> 
+      <a href="#ref-for-dfn-corresponding-3-1" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> 
     </li><li>
-      <a href="#ref-for-dfn-corresponding-2" title="§ 4.1 listReaders() method">§ 4.1 listReaders() method</a> 
+      <a href="#ref-for-dfn-corresponding-3-2" title="§ 4.1 listReaders() method">§ 4.1 listReaders() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-corresponding-3-3" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderroroptions" aria-label="Links in this document to definition: SmartCardErrorOptions">
