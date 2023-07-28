@@ -759,7 +759,8 @@
 
           Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer);
 
-          Promise&lt;undefined&gt; startTransaction(SmartCardTransactionCallback transaction);
+          Promise&lt;undefined&gt; startTransaction(SmartCardTransactionCallback transaction,
+              optional AbortSignal signal);
 
           Promise&lt;SmartCardConnectionStatus&gt; status();
 
