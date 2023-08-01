@@ -759,7 +759,8 @@
 
           Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer);
 
-          Promise&lt;undefined&gt; startTransaction(SmartCardTransactionCallback transaction);
+          Promise&lt;undefined&gt; startTransaction(SmartCardTransactionCallback transaction,
+              optional SmartCardTransactionOptions options = {});
 
           Promise&lt;SmartCardConnectionStatus&gt; status();
 
@@ -808,6 +809,20 @@
         <p>Starts a transaction. The Transaction is ended when the {{Promise}}
         returned by the given callback settles.</p>
         <div class="issue">Write an algorithm for this method.</div>
+        <section data-dfn-for="SmartCardTransactionOptions">
+          <h4><dfn>SmartCardTransactionOptions</dfn> dictionary</h4>
+          <pre class="idl">
+            dictionary SmartCardTransactionOptions {
+              AbortSignal signal;
+            };
+          </pre>
+
+          <dl>
+            <dt><dfn>signal</dfn> member</dt>
+            <dd>When triggered, the platform's [[PCSC5]] Cancel() method is
+            called.</dd>
+          </dl>
+        </section>
       </section>
       <section>
         <h3><dfn>status()</dfn> method</h3>
