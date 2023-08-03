@@ -453,28 +453,28 @@
               <li>Let |flagsIn:SmartCardReaderStateFlagsIn| be the given
                 {{SmartCardReaderStateFlagsIn}}.</li>
               <li>Let |pcscFlags:DWORD| be a `DWORD` set to zero.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/unaware}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/unaware}}"] is
                 `true`, [=add a flag|add=] [[PCSC5]] `SCARD_STATE_UNAWARE` to
                 |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/ignore}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/ignore}}"] is
                 `true`, [=add a flag|add=] [[PCSC5]] `SCARD_STATE_IGNORE` to
                 |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/unavailable}}"]
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/unavailable}}"]
                 is `true`, [=add a flag|add=] [[PCSC5]]
                 `SCARD_STATE_UNAVAILABLE` to |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/empty}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/empty}}"] is
                 `true`, [=add a flag|add=] [[PCSC5]] `SCARD_STATE_EMPTY` to
                 |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/present}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/present}}"] is
                 `true`, [=add a flag|add=] [[PCSC5]] `SCARD_STATE_PRESENT` to
                 |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/exclusive}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/exclusive}}"] is
                 `true`, [=add a flag|add=] [[PCSC5]] `SCARD_STATE_EXCLUSIVE` to
                 |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/inuse}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/inuse}}"] is
                 `true`, [=add a flag|add=] [[PCSC5]] `SCARD_STATE_INUSE` to
                 |pcscFlags|.</li>
-              <li>If |flagsIn|.["{{SmartCardReaderStateFlagsIn/mute}}"] is
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/mute}}"] is
                 `true`, [=add a flag|add=] `SCARD_STATE_MUTE` to
                 |pcscFlags|.
                 <aside class="note">
@@ -528,13 +528,13 @@
               <ol>
                 <li>Let |stateOut:SmartCardReaderStateOut| be a
                   {{SmartCardReaderStateOut}}.</li>
-                <li>Set |stateOut|.["{{SmartCardReaderStateOut/readerName}}"] to
+                <li>Set |stateOut|["{{SmartCardReaderStateOut/readerName}}"] to
                   |pcscState|.`Reader`.</li>
-                <li>Set |stateOut|.["{{SmartCardReaderStateOut/eventState}}"] to
+                <li>Set |stateOut|["{{SmartCardReaderStateOut/eventState}}"] to
                   the {{SmartCardReaderStateFlagsOut}} dictionary
                   [=SmartCardReaderStateFlagsOut/corresponding=]
                   to |pcscState|.`EventState`.</li>
-                <li>Set |stateOut|.["{{SmartCardReaderStateOut/eventCount}}"] to
+                <li>Set |stateOut|["{{SmartCardReaderStateOut/eventCount}}"] to
                   the [=SmartCardContext/high word=] of |pcscState|.`EventState`.
                   <aside class="note" title="Number of card insertion and removal
                     events">
@@ -554,7 +554,7 @@
                 </li>
                 <li>If the platform's `SCARD_READERSTATE` structure has a member
                   containing the card's [[ISO7186-3]] Answer To Reset, set
-                  |stateOut|.["{{SmartCardReaderStateOut/answerToReset}}"] to
+                  |stateOut|["{{SmartCardReaderStateOut/answerToReset}}"] to
                   that value.</li>
                 <li>[=list/Append=] |stateOut| to |readerStatesOut|.</li>
               </ol>
@@ -621,38 +621,38 @@
                 member/default value|default members=].</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_IGNORE`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/ignore}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/ignore}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_CHANGED`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/changed}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/changed}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_UNAVAILABLE`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/unavailable}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/unavailable}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_UNKNOWN`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/unknown}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/unknown}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_EMPTY`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/empty}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/empty}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_PRESENT`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/present}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/present}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_EXCLUSIVE`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/exclusive}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/exclusive}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] [[PCSC5]]
                 `SCARD_STATE_INUSE`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/inuse}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/inuse}}"] to
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] `SCARD_STATE_MUTE`, set
-                |flagsOut|.["{{SmartCardReaderStateFlagsOut/mute}}"] to
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/mute}}"] to
                 `true`.
                 <aside class="note">
                   <p>`SCARD_STATE_MUTE` is not part of [[PCSC5]] but it is still
