@@ -173,14 +173,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-08-01T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 01 August 2023"
+  "publishISODate": "2023-08-03T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 03 August 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-01">01 August 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-03">03 August 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -633,28 +633,28 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <li>Let <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var> be the given
                 <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsIn" href="#dom-smartcardreaderstateflagsin" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-4"><code>SmartCardReaderStateFlagsIn</code></a>.</li>
               <li>Let <var data-type="DWORD">pcscFlags</var> be a <code>DWORD</code> set to zero.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-unaware" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-unaware-2"><code>unaware</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-unaware" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-unaware-2"><code>unaware</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-1">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_UNAWARE</code> to
                 <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-ignore" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-ignore-2"><code>ignore</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-ignore" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-ignore-2"><code>ignore</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-2">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_IGNORE</code> to
                 <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-unavailable" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-unavailable-2"><code>unavailable</code></a>"]
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-unavailable" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-unavailable-2"><code>unavailable</code></a>"]
                 is <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-3">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_UNAVAILABLE</code> to <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-empty" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-empty-2"><code>empty</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-empty" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-empty-2"><code>empty</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-4">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_EMPTY</code> to
                 <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-present" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-present-2"><code>present</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-present" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-present-2"><code>present</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-5">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_PRESENT</code> to
                 <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-exclusive" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-exclusive-2"><code>exclusive</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-exclusive" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-exclusive-2"><code>exclusive</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-6">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_EXCLUSIVE</code> to
                 <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-inuse" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-inuse-2"><code>inuse</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-inuse" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-inuse-2"><code>inuse</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-7">add</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_STATE_INUSE</code> to
                 <var data-type="DWORD">pcscFlags</var>.</li>
-              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-mute-2"><code>mute</code></a>"] is
+              <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-mute-2"><code>mute</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-8">add</a> <code>SCARD_STATE_MUTE</code> to
                 <var data-type="DWORD">pcscFlags</var>.
                 <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="6"><span>Note</span></div><aside class="">
@@ -705,13 +705,13 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <ol>
                 <li>Let <var data-type="SmartCardReaderStateOut">stateOut</var> be a
                   <a data-link-type="idl" data-lt="SmartCardReaderStateOut" href="#dom-smartcardreaderstateout" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-6"><code>SmartCardReaderStateOut</code></a>.</li>
-                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-readername" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-readername-2"><code>readerName</code></a>"] to
+                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-readername" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-readername-2"><code>readerName</code></a>"] to
                   <var data-type="SCARD_READERSTATE">pcscState</var>.<code>Reader</code>.</li>
-                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventstate" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventstate-2"><code>eventState</code></a>"] to
+                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventstate" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventstate-2"><code>eventState</code></a>"] to
                   the <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsOut" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-2"><code>SmartCardReaderStateFlagsOut</code></a> dictionary
                   <a data-link-type="dfn|abstract-op" href="#dfn-corresponding-2" class="internalDFN" id="ref-for-dfn-corresponding-2-1">corresponding</a>
                   to <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.</li>
-                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventcount" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventcount-2"><code>eventCount</code></a>"] to
+                <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventcount" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventcount-2"><code>eventCount</code></a>"] to
                   the <a data-link-type="dfn|abstract-op" href="#dfn-high-word" class="internalDFN" id="ref-for-dfn-high-word-1">high word</a> of <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.
                   <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="5"><span>Note</span><span class="issue-label">: Number of card insertion and removal
                     events</span></div><aside class="">
@@ -731,7 +731,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 </li>
                 <li>If the platform's <code>SCARD_READERSTATE</code> structure has a member
                   containing the card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] Answer To Reset, set
-                  <var data-type="SmartCardReaderStateOut">stateOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateout-answertoreset" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-answertoreset-2"><code>answerToReset</code></a>"] to
+                  <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-answertoreset" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-answertoreset-2"><code>answerToReset</code></a>"] to
                   that value.</li>
                 <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-append">Append</a> <var data-type="SmartCardReaderStateOut">stateOut</var> to <var data-type="sequence<SmartCardReaderStateOut>">readerStatesOut</var>.</li>
               </ol>
@@ -794,38 +794,38 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <a data-link-type="idl" data-lt="SmartCardReaderStateFlagsOut" href="#dom-smartcardreaderstateflagsout" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-5"><code>SmartCardReaderStateFlagsOut</code></a> dictionary with <a data-link-type="dfn|abstract-op" data-lt="default value" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-dictionary-member-default-value">default members</a>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-1">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_IGNORE</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-ignore" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-ignore-2"><code>ignore</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-ignore" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-ignore-2"><code>ignore</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-2">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_CHANGED</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-changed" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-changed-2"><code>changed</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-changed" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-changed-2"><code>changed</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-3">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_UNAVAILABLE</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-unavailable" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-unavailable-2"><code>unavailable</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-unavailable" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-unavailable-2"><code>unavailable</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-4">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_UNKNOWN</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-unknown" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-unknown-2"><code>unknown</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-unknown" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-unknown-2"><code>unknown</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-5">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_EMPTY</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-empty" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-empty-2"><code>empty</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-empty" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-empty-2"><code>empty</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-6">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_PRESENT</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-present" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-present-2"><code>present</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-present" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-present-2"><code>present</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-7">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_EXCLUSIVE</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-exclusive" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-exclusive-2"><code>exclusive</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-exclusive" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-exclusive-2"><code>exclusive</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-8">has</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
                 <code>SCARD_STATE_INUSE</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-inuse" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-inuse-2"><code>inuse</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-inuse" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-inuse-2"><code>inuse</code></a>"] to
                 <code>true</code>.</li>
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-9">has</a> <code>SCARD_STATE_MUTE</code>, set
-                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-mute-2"><code>mute</code></a>"] to
+                <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-mute-2"><code>mute</code></a>"] to
                 <code>true</code>.
                 <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="6"><span>Note</span></div><aside class="">
                   <p><code>SCARD_STATE_MUTE</code> is not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still
