@@ -659,8 +659,8 @@
       </section>
       <section>
         <h3><dfn>connect()</dfn> method</h3>
-        <p>The {{SmartCardContext/connect(readerName, accessMode,
-        preferredProtocols)}} method steps are:</p>
+        <p>The {{SmartCardContext/connect(readerName, accessMode, options)}}
+        method steps are:</p>
         <ol>
           <li>Let |promise:Promise| be [=a new promise=].</li>
           <li>If [=this=].{{SmartCardContext/[[operationInProgress]]}} is
@@ -674,8 +674,10 @@
               [=SmartCardAccessMode/corresponding=] to
               |accessMode:SmartCardAccessMode|.</li>
               <li>Let |protocolFlags:DWORD| be a `DWORD` set to `0`.</li>
-              <li>If |preferredProtocols:sequence&lt;SmartCardProtocol&gt;| was
-              specified, set |protocolFlags| to its [=SmartCardProtocol/corresponding flags=].
+              <li>If
+              |options:SmartCardConnectOptions|["{{SmartCardConnectOptions/preferredProtocols}}"]
+              [=map/exists=], set |protocolFlags| to its
+              [=SmartCardProtocol/corresponding flags=].</li>
               <li>Let |activeProtocol:DWORD| be a `DWORD` set to `0`.</li>
               <li>Let |comm:SCARDCOMM| be a new instance of the platform's
               [[PCSC5]] `SCARDCOMM` class, with
