@@ -147,7 +147,7 @@
           Promise&lt;SmartCardConnectResult&gt; connect(
               DOMString readerName,
               SmartCardAccessMode accessMode,
-              optional sequence&lt;SmartCardProtocol&gt; preferredProtocols);
+              optional SmartCardConnectOptions options = {});
         };
       </pre>
       <p>Instances of {{SmartCardContext}} are created with the internal slots
@@ -805,6 +805,18 @@
             `SCARD_SHARE_DIRECT`.</li>
             <li>Return |dword|.</li>
           </ol>
+        </section>
+        <section data-dfn-for="SmartCardConnectOptions">
+          <h4><dfn>SmartCardConnectOptions</dfn> enum</h5>
+          <pre class="idl">
+            dictionary SmartCardConnectOptions {
+              sequence&lt;SmartCardProtocol&gt; preferredProtocols;
+            };
+          </pre>
+          <dl>
+            <dt><dfn>preferredProtocols</dfn></dt>
+            <dd>Card communication protocols that may be used.</dd>
+          </dl>
         </section>
       </section>
       <section>

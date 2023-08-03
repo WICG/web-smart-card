@@ -41,7 +41,12 @@ try {
 
   console.log("Connecting to the smart card inside " + reader);
   // A permission prompt might be displayed before the connection is established.
-  let connection = await context.connect(reader, "shared", ["t0", "t1"]);
+  let connectResult = await context.connect(reader, "shared",
+      {preferredProtocols: ["t0", "t1"]});
+
+  console.log(`Connected with protocol ${connectResult.activeProtocol}`);
+
+  let connection = connectResult.connection;
 
   // Send an APDU (application protocol data unit) and get the card's response
   let command = new Uint8Array([0x00, 0xA4, 0x04, 0x00, 0x0A, 0xA0, 0x00, 0x00,
