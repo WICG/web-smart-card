@@ -796,12 +796,12 @@
           data-dfn-for="SmartCardAccessMode">corresponding</dfn> [[PCSC5]]
           `DWORD` is created with the following steps:</p>
           <ol>
-            <li>Let |dword| be a `DWORD` set to `0`.
-            <li>If |accessMode| is `"shared"`, set |dword| to [[PCSC5]]
+            <li>Let |dword:DWORD| be a `DWORD` set to `0`.
+            <li>If |accessMode| is "{{SmartCardAccessMode/shared}}", set |dword| to [[PCSC5]]
             `SCARD_SHARE_SHARED`.</li>
-            <li>If |accessMode| is `"exclusive"`, set |dword| to [[PCSC5]]
+            <li>If |accessMode| is "{{SmartCardAccessMode/exclusive}}", set |dword| to [[PCSC5]]
             `SCARD_SHARE_EXCLUSIVE`.</li>
-            <li>If |accessMode| is `"direct"`, set |dword| to [[PCSC5]]
+            <li>If |accessMode| is "{{SmartCardAccessMode/direct}}", set |dword| to [[PCSC5]]
             `SCARD_SHARE_DIRECT`.</li>
             <li>Return |dword|.</li>
           </ol>
