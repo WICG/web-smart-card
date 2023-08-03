@@ -695,8 +695,7 @@
                     <ol>
                       <li>Destroy |comm|.</li>
                       <li>[=Reject=] |promise| with a {{DOMException}}
-                      {{SmartCardError/corresponding}} to |responseCode|.</li>
-                      <li>Return.</li>
+                      {{SmartCardError/corresponding}} to |responseCode| and abort these steps.</li>
                     </ol>
                   </li>
                   <li>Let |result:SmartCardConnectResult| be an empty
@@ -704,12 +703,12 @@
                   <li>Let |connection:SmartCardConnection| be a new
                   {{SmartCardConnection}}.</li>
                   <li>Set |connection|.{{SmartCardConnection/[[comm]]}} to |comm|.
-                  <li>Set |result|.["{{SmartCardConnectResult/connection}}"] to
+                  <li>Set |result|["{{SmartCardConnectResult/connection}}"] to
                   |connection|.</li>
                   <li>If |activeProtocol| is a [=SmartCardProtocol/valid
                   protocol value=], set
                   |result|.["{{SmartCardConnectResult/activeProtocol}}"] to the
-                  corresponding SmartCardProtocol.</li>
+                  corresponding {{SmartCardProtocol}}.</li>
                   <li>[=Resolve=] |promise| with |result|.</li>
                 </ol>
               </li>
