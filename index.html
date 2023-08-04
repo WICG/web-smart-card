@@ -173,14 +173,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "iso7186-3"
     }
   },
-  "publishISODate": "2023-08-03T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 03 August 2023"
+  "publishISODate": "2023-08-04T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 04 August 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-03">03 August 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-04">04 August 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -402,9 +402,23 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <ol>
                   <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-3"><code>[[operationInProgress]]</code></a> to
                     <code>false</code>.</li>
-                  <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
-                    <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
-                    <a data-link-type="idl" href="#dfn-corresponding-3" class="internalDFN" id="ref-for-dfn-corresponding-3-2"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var>.</li>
+                  <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>:
+                    <ol>
+                      <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_E_NO_READERS_AVAILABLE</code>,
+                      <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">resolve</a> <var data-type="Promise">promise</var> with an empty <code>sequence</code> of
+                      <a data-link-type="idl" data-lt="DOMString" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><code>DOMString</code></a>.
+                        <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span></div><aside class="">
+                          <p><code>SCARD_E_NO_READERS_AVAILABLE</code> is not part of
+                          [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still considered in this
+                          specification as existing PC/SC implementations use
+                          it.</p>
+                        </aside></div>
+                      </li>
+                      <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a
+                      <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> <a data-link-type="idl" href="#dfn-corresponding-3" class="internalDFN" id="ref-for-dfn-corresponding-3-2"><code>corresponding</code></a> to
+                      <var data-type="RESPONSECODE">responseCode</var>.</li>
+                    </ol>
+                  </li>
                   <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">resolve</a> <var data-type="Promise">promise</var> with a <code>sequence</code> of
                     <a data-link-type="idl" data-lt="DOMString" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><code>DOMString</code></a> equivalent to <var data-type="array of STR">pcscReaders</var>.</li>
                 </ol>
@@ -657,7 +671,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <li>If <var data-type="SmartCardReaderStateFlagsIn">flagsIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsin-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsin-mute-2"><code>mute</code></a>"] is
                 <code>true</code>, <a data-link-type="dfn|abstract-op" data-lt="add a flag" href="#dfn-add-a-flag" class="internalDFN" id="ref-for-dfn-add-a-flag-8">add</a> <code>SCARD_STATE_MUTE</code> to
                 <var data-type="DWORD">pcscFlags</var>.
-                <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="6"><span>Note</span></div><aside class="">
+                <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="6"><span>Note</span></div><aside class="">
                   <p><code>SCARD_STATE_MUTE</code> is not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still
                   considered in this specification as existing PC/SC
                   implementations use it.</p>
@@ -713,7 +727,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                   to <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.</li>
                 <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventcount" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventcount-2"><code>eventCount</code></a>"] to
                   the <a data-link-type="dfn|abstract-op" href="#dfn-high-word" class="internalDFN" id="ref-for-dfn-high-word-1">high word</a> of <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.
-                  <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="5"><span>Note</span><span class="issue-label">: Number of card insertion and removal
+                  <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="5"><span>Note</span><span class="issue-label">: Number of card insertion and removal
                     events</span></div><aside class="">
                     <p>Having the number of card insertion and removal events
                     stored in the upper 2 bytes of the <code>EventState</code> and
@@ -827,7 +841,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <li>If <var data-type="DWORD">pcscFlags</var> <a data-link-type="dfn|abstract-op" data-lt="has a flag" href="#dfn-has-a-flag" class="internalDFN" id="ref-for-dfn-has-a-flag-9">has</a> <code>SCARD_STATE_MUTE</code>, set
                 <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateflagsout-mute" class="internalDFN" id="ref-for-dom-smartcardreaderstateflagsout-mute-2"><code>mute</code></a>"] to
                 <code>true</code>.
-                <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="6"><span>Note</span></div><aside class="">
+                <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="6"><span>Note</span></div><aside class="">
                   <p><code>SCARD_STATE_MUTE</code> is not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still
                   considered in this speficiation as existing PC/SC
                   implementations use it.</p>
@@ -1074,7 +1088,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>RESPONSECODE</code> different from <code>SCARD_S_SUCCESS</code>, a
       <dfn data-dfn-for="SmartCardError" id="dfn-corresponding-3" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> is
       created with the following steps:</p>
-      <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
+      <div class="note" role="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-4" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
         <p>The following <code>RESPONSECODE</code>s are not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still
         considered in this specification as existing PC/SC
         implementations use them:</p>
@@ -1088,7 +1102,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
         <li>Let <var data-type="RESPONSECODE">pcscCode</var> be that <code>RESPONSECODE</code>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NO_SERVICE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
           "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-1"><code>no-service</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-2"><code>SmartCardError</code></a>.
-          <div class="note" role="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-4" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
+          <div class="note" role="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-5" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
             <p>In statements such as:</p>
             <blockquote><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-2"><code>no-service</code></a>"
               <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-3"><code>SmartCardError</code></a></blockquote>
