@@ -147,7 +147,7 @@
           Promise&lt;SmartCardConnectResult&gt; connect(
               DOMString readerName,
               SmartCardAccessMode accessMode,
-              optional sequence&lt;SmartCardProtocol&gt; preferredProtocols);
+              optional SmartCardConnectOptions options = {});
         };
       </pre>
       <p>Instances of {{SmartCardContext}} are created with the internal slots
@@ -332,34 +332,6 @@
           </li>
           <li>Return |promise|.</li>
         </ol>
-
-        <section>
-          <h4>Auxiliary algorithms and definitions</h4>
-
-          <p>The <dfn>cancel the outstanding GetStatusChange</dfn>
-          algorithm steps are:</p>
-          <ol>
-            <li>Call [=this=].{{SmartCardContext/[[tracker]]}}.`Cancel()`.</li>
-          </ol>
-
-          <p>The <dfn>high word</dfn> of a [[PCSC5]] `DWORD` is the result of an
-          unsigned right shift of 16 bits on that `DWORD`.</p>
-
-          <p>To <dfn>set the high word</dfn> of a [[PCSC5]] `DWORD` named
-          |dword:DWORD| to a given number |n|, perform the following steps.</p>
-          <ol>
-            <li>Set |dword| to |dword| bitwise AND `0xFFFF`.</li>
-            <li>Let |shiftedN| be the result of a left shift of 16 bits on |n|.</li>
-            <li>Set |dword| to |dword| bitwise OR |shiftedN|.</li>
-          </ol>
-
-          <p>To <dfn>add a flag</dfn> |f:DWORD| to a [[PCSC5]] `DWORD`
-          |flags:DWORD|, set |flags| to |flags| bitwise OR |f|.</p>
-
-          <p>A [[PCSC5]] `DWORD` |flags:DWORD| <dfn>has a flag</dfn> |f:DWORD|
-          if |flags| bitwise AND |f| is |f|.</p>
-
-        </section>
 
         <section data-dfn-for="SmartCardReaderStateIn">
           <h4><dfn>SmartCardReaderStateIn</dfn> dictionary</h4>
@@ -701,7 +673,65 @@
       </section>
       <section>
         <h3><dfn>connect()</dfn> method</h3>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardContext/connect(readerName, accessMode, options)}}
+        method steps are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If [=this=].{{SmartCardContext/[[operationInProgress]]}} is
+            `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+            {{DOMException}} and return |promise|.</li>
+          <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
+            `true`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Let |accessFlags:DWORD| be a [[PCSC5]] `DWORD`
+              [=SmartCardAccessMode/corresponding=] to
+              |accessMode:SmartCardAccessMode|.</li>
+              <li>Let |protocolFlags:DWORD| be a `DWORD` set to `0`.</li>
+              <li>If
+              |options:SmartCardConnectOptions|["{{SmartCardConnectOptions/preferredProtocols}}"]
+              [=map/exists=], set |protocolFlags| to its
+              [=SmartCardProtocol/corresponding flags=].</li>
+              <li>Let |activeProtocol:DWORD| be a `DWORD` set to `0`.</li>
+              <li>Let |comm:SCARDCOMM| be a new instance of the platform's
+              [[PCSC5]] `SCARDCOMM` class, with
+              [=this=].{{SmartCardContext/[[resourceManager]]}} as its
+              constructor parameter.</li>
+              <li>Call |comm|.`Connect()` with |readerName|, |accessFlags|
+              and |protocolFlags| as input and |activeProtocol| as output parameters.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
+                    `false`.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`:
+                    <ol>
+                      <li>Destroy |comm|.</li>
+                      <li>[=Reject=] |promise| with a {{DOMException}}
+                      {{SmartCardError/corresponding}} to |responseCode| and abort these steps.</li>
+                    </ol>
+                  </li>
+                  <li>Let |result:SmartCardConnectResult| be an empty
+                  {{SmartCardConnectResult}} dictionary.</li>
+                  <li>Let |connection:SmartCardConnection| be a new
+                  {{SmartCardConnection}}.</li>
+                  <li>Set |connection|.{{SmartCardConnection/[[comm]]}} to |comm|.
+                  <li>Set |result|["{{SmartCardConnectResult/connection}}"] to
+                  |connection|.</li>
+                  <li>If |activeProtocol| is a [=SmartCardProtocol/valid
+                  protocol value=], set
+                  |result|["{{SmartCardConnectResult/activeProtocol}}"] to the
+                  corresponding {{SmartCardProtocol}}.</li>
+                  <li>[=Resolve=] |promise| with |result|.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
         <section data-dfn-for="SmartCardProtocol">
           <h4><dfn>SmartCardProtocol</dfn> enum</h4>
           <pre class="idl">
@@ -714,16 +744,33 @@
           <dl>
             <dt><dfn>raw</dfn></dt>
             <dd>"Raw" mode. May be used to support arbitrary data exchange
-              protocols for special-purpose requirements.</dd>
+            protocols for special-purpose requirements. Corresponds to a
+            [[PCSC5]] `SCARD_PROTOCOL_RAW` `DWORD`.</dd>
 
             <dt><dfn>t0</dfn></dt>
-            <dd>[[ISO7186-3]] T=0. Asynchronous half duplex character transmission
-              protocol.</dd>
+            <dd>[[ISO7186-3]] T=0. Asynchronous half duplex character
+            transmission protocol. Corresponds to a [[PCSC5]]
+            `SCARD_PROTOCOL_T0` `DWORD`.</dd>
 
             <dt><dfn>t1</dfn></dt>
             <dd>[[ISO7186-3]] T=1. Asynchronous half duplex block transmission
-              protocol.</dd>
+            protocol. Corresponds to a [[PCSC5]] `SCARD_PROTOCOL_T1`
+            `DWORD`.</dd>
           </dl>
+          <p>A [[PCSC5]] `DWORD` is a <dfn data-dfn-for="SmartCardProtocol">valid protocol value</dfn> if it is either
+          [[PCSC5]] `SCARD_PROTOCOL_T0`, [[PCSC5]] `SCARD_PROTOCOL_T1` or
+          [[PCSC5]] `SCARD_PROTOCOL_RAW`.</p>
+          <p>Given a sequence of {{SmartCardProtocol}} named
+          |protocols:sequence&lt;SmartCardProtocol&gt;|, a [[PCSC5]] `DWORD`
+          with the <dfn data-dfn-for="SmartCardProtocol">corresponding
+          flags</dfn> is created with the following steps:</p>
+          <ol>
+            <li>Let |flags:DWORD| be a `DWORD` set to `0`.</li>
+            <li>[=list/For each=] |protocol:SmartCardProtocol| in |protocols|,
+              [=add a flag|add=] the corresponding `DWORD` of |protocol| to |flags|.
+            </li>
+            <li>Return |flags|.</li>
+          </ol>
         </section>
         <section data-dfn-for="SmartCardConnectResult">
           <h4><dfn>SmartCardConnectResult</dfn> dictionary</h4>
@@ -760,7 +807,59 @@
             <dd>Application requires connection to reader whether or not card
               is present. Implies exclusive access.</dd>
           </dl>
+          <p>Given a {{SmartCardAccessMode}} enum named
+          |accessMode:SmartCardAccessMode|, a <dfn
+          data-dfn-for="SmartCardAccessMode">corresponding</dfn> [[PCSC5]]
+          `DWORD` is created with the following steps:</p>
+          <ol>
+            <li>Let |dword:DWORD| be a `DWORD` set to `0`.
+            <li>If |accessMode| is "{{SmartCardAccessMode/shared}}", set |dword| to [[PCSC5]]
+            `SCARD_SHARE_SHARED`.</li>
+            <li>If |accessMode| is "{{SmartCardAccessMode/exclusive}}", set |dword| to [[PCSC5]]
+            `SCARD_SHARE_EXCLUSIVE`.</li>
+            <li>If |accessMode| is "{{SmartCardAccessMode/direct}}", set |dword| to [[PCSC5]]
+            `SCARD_SHARE_DIRECT`.</li>
+            <li>Return |dword|.</li>
+          </ol>
         </section>
+        <section data-dfn-for="SmartCardConnectOptions">
+          <h4><dfn>SmartCardConnectOptions</dfn> enum</h5>
+          <pre class="idl">
+            dictionary SmartCardConnectOptions {
+              sequence&lt;SmartCardProtocol&gt; preferredProtocols;
+            };
+          </pre>
+          <dl>
+            <dt><dfn>preferredProtocols</dfn></dt>
+            <dd>Card communication protocols that may be used.</dd>
+          </dl>
+        </section>
+      </section>
+      <section>
+        <h3>Auxiliary algorithms and definitions</h4>
+
+        <p>The <dfn>cancel the outstanding GetStatusChange</dfn>
+        algorithm steps are:</p>
+        <ol>
+          <li>Call [=this=].{{SmartCardContext/[[tracker]]}}.`Cancel()`.</li>
+        </ol>
+
+        <p>The <dfn>high word</dfn> of a [[PCSC5]] `DWORD` is the result of an
+        unsigned right shift of 16 bits on that `DWORD`.</p>
+
+        <p>To <dfn>set the high word</dfn> of a [[PCSC5]] `DWORD` named
+        |dword:DWORD| to a given number |n|, perform the following steps.</p>
+        <ol>
+          <li>Set |dword| to |dword| bitwise AND `0xFFFF`.</li>
+          <li>Let |shiftedN| be the result of a left shift of 16 bits on |n|.</li>
+          <li>Set |dword| to |dword| bitwise OR |shiftedN|.</li>
+        </ol>
+
+        <p>To <dfn>add a flag</dfn> |f:DWORD| to a [[PCSC5]] `DWORD`
+        |flags:DWORD|, set |flags| to |flags| bitwise OR |f|.</p>
+
+        <p>A [[PCSC5]] `DWORD` |flags:DWORD| <dfn>has a flag</dfn> |f:DWORD|
+        if |flags| bitwise AND |f| is |f|.</p>
       </section>
     </section>
 
@@ -787,6 +886,20 @@
 
         callback SmartCardTransactionCallback = Promise&lt;SmartCardDisposition?&gt; ();
       </pre>
+      <p>Instances of {{SmartCardConnection}} are created with the internal slots
+      described in the following table:</p>
+      <table class="simple" data-dfn-for="SmartCardConnection">
+        <tr>
+          <th>Internal slot
+          <th>Initial value
+          <th>Description (non-normative)
+        </tr>
+        <tr>
+          <td><dfn>[[\comm]]</dfn></td>
+          <td>`null`</td>
+          <td>The platform's [[PCSC5]] `SCARDCOMM` to be used.</td>
+        </tr>
+      </table>
       <section>
         <h3><dfn>disconnect()</dfn> method</h3>
         <div class="issue">Write an algorithm for this method.</div>
