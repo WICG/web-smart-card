@@ -216,9 +216,23 @@
                 <ol>
                   <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
                     `false`.</li>
-                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
-                    |promise| with a {{DOMException}}
-                    {{SmartCardError/corresponding}} to |responseCode|.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`:
+                    <ol>
+                      <li>If |responseCode| is `SCARD_E_NO_READERS_AVAILABLE`,
+                      [=resolve=] |promise| with an empty `sequence` of
+                      {{DOMString}}.
+                        <aside class="note">
+                          <p>`SCARD_E_NO_READERS_AVAILABLE` is not part of
+                          [[PCSC5]] but it is still considered in this
+                          specification as existing PC/SC implementations use
+                          it.</p>
+                        </aside>
+                      </li>
+                      <li>Otherwise, [=reject=] |promise| with a
+                      {{DOMException}} {{SmartCardError/corresponding}} to
+                      |responseCode|.</li>
+                    </ol>
+                  </li>
                   <li>Otherwise, [=resolve=] |promise| with a `sequence` of
                     {{DOMString}} equivalent to |pcscReaders|.</li>
                 </ol>
