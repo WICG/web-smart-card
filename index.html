@@ -162,25 +162,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "localBiblio": {
-    "ISO7186-3": {
-      "title": "Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols",
-      "href": "https://www.iso.org/standard/38770.html",
-      "rawDate": "2006-11-01",
-      "publisher": "ISO/IEC",
-      "status": "Published",
-      "isoNumber": "ISO/IEC 7816-3:2006",
-      "id": "iso7186-3"
-    }
-  },
-  "publishISODate": "2023-08-04T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 04 August 2023"
+  "publishISODate": "2023-08-10T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 10 August 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-04">04 August 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-10">10 August 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1072,14 +1061,14 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
 };</span></code></pre>
           <dl>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-leave" data-idl="enum-value" data-title="leave" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>leave</code></dfn></dt>
-            <dd>Don't alter card state. SCARD_LEAVE_CARD in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+            <dd>Don't alter card state. <code>SCARD_LEAVE_CARD</code> in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-reset" data-idl="enum-value" data-title="reset" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>reset</code></dfn></dt>
-            <dd>Reset the card. SCARD_RESET_CARD in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+            <dd>Reset the card. <code>SCARD_RESET_CARD</code> in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-unpower" data-idl="enum-value" data-title="unpower" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>unpower</code></dfn></dt>
-            <dd>Unpower and terminate access to the card. SCARD_UNPOWER_CARD in
+            <dd>Unpower and terminate access to the card. <code>SCARD_UNPOWER_CARD</code> in
               the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-eject" data-idl="enum-value" data-title="eject" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>eject</code></dfn></dt>
-            <dd>Eject the card from the reader. SCARD_EJECT_CARD in the
+            <dd>Eject the card from the reader. <code>SCARD_EJECT_CARD</code> in the
               [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
           </dl>
         </section>
@@ -1358,7 +1347,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-iso7186-3">[ISO7186-3]</dt><dd>
-      <a href="https://www.iso.org/standard/38770.html"><cite>Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols</cite></a>.  ISO/IEC. Published. URL: <a href="https://www.iso.org/standard/38770.html">https://www.iso.org/standard/38770.html</a>
+      <a href="https://www.iso.org/standard/38770.html"><cite>Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols</cite></a>.  ISO/IEC. 1 November 2006. Published. URL: <a href="https://www.iso.org/standard/38770.html">https://www.iso.org/standard/38770.html</a>
     </dd><dt id="bib-pcsc5">[PCSC5]</dt><dd>
       <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf"><cite>Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition</cite></a>.  PC/SC Workgroup. 30 September 2005. Published. URL: <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf">https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
