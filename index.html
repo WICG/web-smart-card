@@ -162,14 +162,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2023-08-10T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 10 August 2023"
+  "publishISODate": "2023-08-11T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 11 August 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-10">10 August 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-11">11 August 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -879,6 +879,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                   <li>Let <var data-type="SmartCardConnection">connection</var> be a new
                   <a data-link-type="idl" data-lt="SmartCardConnection" href="#dom-smartcardconnection" class="internalDFN" id="ref-for-dom-smartcardconnection-1"><code>SmartCardConnection</code></a>.</li>
                   <li>Set <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-1"><code>[[comm]]</code></a> to <var data-type="SCARDCOMM">comm</var>.
+                  </li><li>Set <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-1"><code>[[context]]</code></a> to
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.
                   </li><li>Set <var data-type="SmartCardConnectResult">result</var>["<a data-link-type="idl" href="#dom-smartcardconnectresult-connection" class="internalDFN" id="ref-for-dom-smartcardconnectresult-connection-1"><code>connection</code></a>"] to
                   <var data-type="SmartCardConnection">connection</var>.</li>
                   <li>If <var data-type="DWORD">activeProtocol</var> is a <a data-link-type="dfn|abstract-op" href="#dfn-valid-protocol-value" class="internalDFN" id="ref-for-dfn-valid-protocol-value-1">valid protocol value</a>, set
@@ -1047,10 +1049,56 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
           <td><code>null</code></td>
           <td>The platform's [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARDCOMM</code> to be used.</td>
         </tr>
+        <tr>
+          <td><dfn data-idl="" data-dfn-for="SmartCardConnection" data-noexport="" data-dfn-type="attribute" id="dfn-context" tabindex="0" aria-haspopup="dialog">[[context]]</dfn></td>
+          <td><code>null</code></td>
+          <td>The <a data-link-type="idl" data-lt="SmartCardContext" href="#dom-smartcardcontext" class="internalDFN" id="ref-for-dom-smartcardcontext-5"><code>SmartCardContext</code></a> that created this instance.</td>
+        </tr>
       </tbody></table>
       <section id="disconnect-method"><div class="header-wrapper"><h3 id="x5-1-disconnect-method"><bdi class="secno">5.1 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-disconnect" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect" tabindex="0" aria-haspopup="dialog"><code>disconnect()</code></dfn> method</h3><a class="self-link" href="#disconnect-method" aria-label="Permalink for Section 5.1"></a></div>
         
-        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
+        <p>The <a data-link-type="idl" data-lt="disconnect(disposition)" href="#dom-smartcardconnection-disconnect" class="internalDFN" id="ref-for-dom-smartcardconnection-disconnect-2"><code>disconnect</code></a><code>(<var>disposition</var>)</code> method steps
+        are:</p>
+        <ol>
+          <li>Let <var data-type="Promise">promise</var> be <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#a-new-promise">a new promise</a>.</li>
+          <li>If
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-2"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-10"><code>[[operationInProgress]]</code></a>
+            is <code>true</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+          <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return <var data-type="Promise">promise</var>.</li>
+          <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-2"><code>[[comm]]</code></a> is <code>null</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+            <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return
+            <var data-type="Promise">promise</var>.</li>
+          <li>Set
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-3"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-11"><code>[[operationInProgress]]</code></a>
+            to <code>true</code>.</li>
+          <li>Run the following steps <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+            <ol>
+              <li>Call <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-3"><code>[[comm]]</code></a>.<code>Disconnect()</code>
+                with a <code>DWORD</code> corresponding to
+                <var data-type="SmartCardDisposition">disposition</var> as input parameter.</li>
+              <li>Let <var data-type="RESPONSECODE">responseCode</var> be the returned
+                <code>RESPONSECODE</code>.</li>
+              <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-6">smart card task source</a> which performs the
+                following steps:
+                <ol>
+                  <li>Set
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-4"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-12"><code>[[operationInProgress]]</code></a>
+                    to <code>false</code>.</li>
+                  <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+                    <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                    <a data-link-type="idl" href="#dfn-corresponding-4" class="internalDFN" id="ref-for-dfn-corresponding-4-5"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var> and abort
+                    these steps.</li>
+                  <li>Destroy <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-4"><code>[[comm]]</code></a>.</li>
+                  <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-5"><code>[[comm]]</code></a> to <code>null</code>.</li>
+                  <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">Resolve</a> <var data-type="Promise">promise</var>.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return <var data-type="Promise">promise</var>.</li>
+        </ol>
+
         <section data-dfn-for="SmartCardDisposition" id="smartcarddisposition-enum"><div class="header-wrapper"><h4 id="x5-1-1-smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><dfn data-export="" data-dfn-type="enum" id="dom-smartcarddisposition" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardDisposition</code></dfn> enum</h4><a class="self-link" href="#smartcarddisposition-enum" aria-label="Permalink for Section 5.1.1"></a></div>
           
           <pre class="idl def" id="webidl-633517433"><span class="idlHeader"><a class="self-link" href="#webidl-633517433">WebIDL</a></span><code><span data-idl="" class="idlEnum" id="idl-def-smartcarddisposition" data-title="SmartCardDisposition">enum <a class="internalDFN idlID" data-link-type="enum" href="#dom-smartcarddisposition" id="ref-for-dom-smartcarddisposition-3"><code>SmartCardDisposition</code></a> {
@@ -1061,27 +1109,29 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
 };</span></code></pre>
           <dl>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-leave" data-idl="enum-value" data-title="leave" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>leave</code></dfn></dt>
-            <dd>Don't alter card state. <code>SCARD_LEAVE_CARD</code> in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+            <dd>Don't alter card state. Corresponds to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+              <code>SCARD_LEAVE_CARD</code> <code>DWORD</code>.</dd>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-reset" data-idl="enum-value" data-title="reset" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>reset</code></dfn></dt>
-            <dd>Reset the card. <code>SCARD_RESET_CARD</code> in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+            <dd>Reset the card. Corresponds to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_RESET_CARD</code>
+              <code>DWORD</code>.</dd>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-unpower" data-idl="enum-value" data-title="unpower" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>unpower</code></dfn></dt>
-            <dd>Unpower and terminate access to the card. <code>SCARD_UNPOWER_CARD</code> in
-              the [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+            <dd>Unpower and terminate access to the card. Corresponds to a
+              [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_UNPOWER_CARD</code> <code>DWORD</code>.</dd>
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcarddisposition-eject" data-idl="enum-value" data-title="eject" data-dfn-for="SmartCardDisposition" tabindex="0" aria-haspopup="dialog"><code>eject</code></dfn></dt>
-            <dd>Eject the card from the reader. <code>SCARD_EJECT_CARD</code> in the
-              [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] spec.</dd>
+            <dd>Eject the card from the reader. Corresponds to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+              <code>SCARD_EJECT_CARD</code> <code>DWORD</code>.</dd>
           </dl>
         </section>
       </section>
       <section id="transmit-method"><div class="header-wrapper"><h3 id="x5-2-transmit-method"><bdi class="secno">5.2 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-transmit" data-idl="operation" data-title="transmit()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="transmit()|transmit(sendBuffer)" data-local-lt="SmartCardConnection.transmit|SmartCardConnection.transmit()|transmit" tabindex="0" aria-haspopup="dialog"><code>transmit()</code></dfn> method</h3><a class="self-link" href="#transmit-method" aria-label="Permalink for Section 5.2"></a></div>
         
-        <div class="issue" id="issue-container-number-2"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="4"><span>Issue 2</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="starttransaction-method"><div class="header-wrapper"><h3 id="x5-3-starttransaction-method"><bdi class="secno">5.3 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-starttransaction" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)|startTransaction(transaction, options)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction" tabindex="0" aria-haspopup="dialog"><code>startTransaction()</code></dfn> method</h3><a class="self-link" href="#starttransaction-method" aria-label="Permalink for Section 5.3"></a></div>
         
         <p>Starts a transaction. The Transaction is ended when the <a data-link-type="idl" data-lt="Promise" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><code>Promise</code></a>
         returned by the given callback settles.</p>
-        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-2"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="4"><span>Issue 2</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardTransactionOptions" id="smartcardtransactionoptions-dictionary"><div class="header-wrapper"><h4 id="x5-3-1-smartcardtransactionoptions-dictionary"><bdi class="secno">5.3.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardtransactionoptions" data-idl="dictionary" data-title="SmartCardTransactionOptions" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardTransactionOptions</code></dfn> dictionary</h4><a class="self-link" href="#smartcardtransactionoptions-dictionary" aria-label="Permalink for Section 5.3.1"></a></div>
           
           <pre class="idl def" id="webidl-2036951561"><span class="idlHeader"><a class="self-link" href="#webidl-2036951561">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardtransactionoptions" data-title="SmartCardTransactionOptions">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardtransactionoptions" id="ref-for-dom-smartcardtransactionoptions-2"><code>SmartCardTransactionOptions</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardtransactionoptions-signal" data-title="signal" data-dfn-for="SmartCardTransactionOptions"><span class="idlType">
@@ -1098,7 +1148,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
       <section id="status-method"><div class="header-wrapper"><h3 id="x5-4-status-method"><bdi class="secno">5.4 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-status" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status" tabindex="0" aria-haspopup="dialog"><code>status()</code></dfn> method</h3><a class="self-link" href="#status-method" aria-label="Permalink for Section 5.4"></a></div>
         
         <p>Queries the host's PC/SC stack about the current connection status.</p>
-        <div class="issue" id="issue-container-number-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue 4</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardConnectionStatus" id="smartcardconnectionstatus-dictionary"><div class="header-wrapper"><h4 id="x5-4-1-smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardconnectionstatus" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardConnectionStatus</code></dfn> dictionary</h4><a class="self-link" href="#smartcardconnectionstatus-dictionary" aria-label="Permalink for Section 5.4.1"></a></div>
           
           <pre class="idl def" id="webidl-686619780"><span class="idlHeader"><a class="self-link" href="#webidl-686619780">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardconnectionstatus" data-title="SmartCardConnectionStatus">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardconnectionstatus" id="ref-for-dom-smartcardconnectionstatus-2"><code>SmartCardConnectionStatus</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardconnectionstatus-readername" data-title="readerName" data-dfn-for="SmartCardConnectionStatus">
@@ -1160,17 +1210,17 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
         commands. The returned <a data-link-type="idl" data-lt="Promise" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><code>Promise</code></a> might contain output data, if applicable
         for the given control code. Otherwise the returned buffer will be
         empty.</p>
-        <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue 5</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue 4</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="getattribute-method"><div class="header-wrapper"><h3 id="x5-6-getattribute-method"><bdi class="secno">5.6 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-getattribute" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute" tabindex="0" aria-haspopup="dialog"><code>getAttribute()</code></dfn> method</h3><a class="self-link" href="#getattribute-method" aria-label="Permalink for Section 5.6"></a></div>
         
         <p>Queries a card reader's attribute or capability value, given its tag.</p>
-        <div class="issue" id="issue-container-number-6"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue 6</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue 5</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="setattribute-method"><div class="header-wrapper"><h3 id="x5-7-setattribute-method"><bdi class="secno">5.7 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-setattribute" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute" tabindex="0" aria-haspopup="dialog"><code>setAttribute()</code></dfn> method</h3><a class="self-link" href="#setattribute-method" aria-label="Permalink for Section 5.7"></a></div>
         
         <p>Sets a card reader's attribute or capability.</p>
-        <div class="issue" id="issue-container-number-7"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>Issue 7</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-6"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue 6</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
     </section>
 
@@ -1423,6 +1473,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-smart-card-task-source-4" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li><li>
       <a href="#ref-for-dfn-smart-card-task-source-5" title="§ 4.3 connect() method">§ 4.3 connect() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-smart-card-task-source-6" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresourcemanager-establishcontext" aria-label="Links in this document to definition: establishContext()">
@@ -1453,6 +1505,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dom-smartcardcontext-2" title="§ 3.1 establishContext() method">§ 3.1 establishContext() method</a> 
     </li><li>
       <a href="#ref-for-dom-smartcardcontext-3" title="§ 4. SmartCardContext interface">§ 4. SmartCardContext interface</a> <a href="#ref-for-dom-smartcardcontext-4" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardcontext-5" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-resourcemanager" aria-label="Links in this document to definition: [[resourceManager]]">
@@ -1487,6 +1541,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-operationinprogress-4" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> <a href="#ref-for-dfn-operationinprogress-5" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-6" title="Reference 3">(3)</a> 
     </li><li>
       <a href="#ref-for-dfn-operationinprogress-7" title="§ 4.3 connect() method">§ 4.3 connect() method</a> <a href="#ref-for-dfn-operationinprogress-8" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-9" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-operationinprogress-10" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> <a href="#ref-for-dfn-operationinprogress-11" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-12" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-tracker" aria-label="Links in this document to definition: [[tracker]]">
@@ -2305,6 +2361,22 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dfn-comm-1" title="§ 4.3 connect() method">§ 4.3 connect() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-comm-2" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> <a href="#ref-for-dfn-comm-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-comm-4" title="Reference 3">(3)</a> <a href="#ref-for-dfn-comm-5" title="Reference 4">(4)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-context" aria-label="Links in this document to definition: [[context]]">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-context" aria-label="Permalink for definition: [[context]]. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-context-1" title="§ 4.3 connect() method">§ 4.3 connect() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-context-2" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> <a href="#ref-for-dfn-context-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardconnection-disconnect" aria-label="Links in this document to definition: disconnect()">
@@ -2317,6 +2389,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dom-smartcardconnection-disconnect-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardconnection-disconnect-2" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarddisposition" aria-label="Links in this document to definition: SmartCardDisposition">
@@ -2693,6 +2767,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-corresponding-4-3" title="§ 4.2 getStatusChange() method">§ 4.2 getStatusChange() method</a> 
     </li><li>
       <a href="#ref-for-dfn-corresponding-4-4" title="§ 4.3 connect() method">§ 4.3 connect() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-corresponding-4-5" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderroroptions" aria-label="Links in this document to definition: SmartCardErrorOptions">
