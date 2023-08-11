@@ -708,6 +708,8 @@
                   <li>Let |connection:SmartCardConnection| be a new
                   {{SmartCardConnection}}.</li>
                   <li>Set |connection|.{{SmartCardConnection/[[comm]]}} to |comm|.
+                  <li>Set |connection|.{{SmartCardConnection/[[context]]}} to
+                    [=this=].
                   <li>Set |result|["{{SmartCardConnectResult/connection}}"] to
                   |connection|.</li>
                   <li>If |activeProtocol| is a [=SmartCardProtocol/valid
@@ -888,10 +890,56 @@
           <td>`null`</td>
           <td>The platform's [[PCSC5]] `SCARDCOMM` to be used.</td>
         </tr>
+        <tr>
+          <td><dfn>[[\context]]</dfn></td>
+          <td>`null`</td>
+          <td>The {{SmartCardContext}} that created this instance.</td>
+        </tr>
       </table>
       <section>
         <h3><dfn>disconnect()</dfn> method</h3>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardConnection/disconnect(disposition)}} method steps
+        are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+          {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
+            |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
+          <li>Set
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            to `true`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Call [=this=].{{SmartCardConnection/[[comm]]}}.`Disconnect()`
+                with a `DWORD` corresponding to
+                |disposition:SmartCardDisposition| as input parameter.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>Set
+                    [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+                    to `false`.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with a {{DOMException}}
+                    {{SmartCardError/corresponding}} to |responseCode| and abort
+                    these steps.</li>
+                  <li>Destroy [=this=].{{SmartCardConnection/[[comm]]}}.</li>
+                  <li>Set [=this=].{{SmartCardConnection/[[comm]]}} to `null`.</li>
+                  <li>[=Resolve=] |promise|.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
+
         <section data-dfn-for="SmartCardDisposition">
           <h4><dfn>SmartCardDisposition</dfn> enum</h3>
           <pre class="idl">
@@ -904,15 +952,17 @@
           </pre>
           <dl>
             <dt><dfn>leave</dfn></dt>
-            <dd>Don't alter card state. `SCARD_LEAVE_CARD` in the [[PCSC5]] spec.</dd>
+            <dd>Don't alter card state. Corresponds to a [[PCSC5]]
+              `SCARD_LEAVE_CARD` `DWORD`.</dd>
             <dt><dfn>reset</dfn></dt>
-            <dd>Reset the card. `SCARD_RESET_CARD` in the [[PCSC5]] spec.</dd>
+            <dd>Reset the card. Corresponds to a [[PCSC5]] `SCARD_RESET_CARD`
+              `DWORD`.</dd>
             <dt><dfn>unpower</dfn></dt>
-            <dd>Unpower and terminate access to the card. `SCARD_UNPOWER_CARD` in
-              the [[PCSC5]] spec.</dd>
+            <dd>Unpower and terminate access to the card. Corresponds to a
+              [[PCSC5]] `SCARD_UNPOWER_CARD` `DWORD`.</dd>
             <dt><dfn>eject</dfn></dt>
-            <dd>Eject the card from the reader. `SCARD_EJECT_CARD` in the
-              [[PCSC5]] spec.</dd>
+            <dd>Eject the card from the reader. Corresponds to a [[PCSC5]]
+              `SCARD_EJECT_CARD` `DWORD`.</dd>
           </dl>
         </section>
       </section>
