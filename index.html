@@ -863,7 +863,8 @@
         interface SmartCardConnection {
           Promise&lt;undefined&gt; disconnect(optional SmartCardDisposition disposition = "leave");
 
-          Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer);
+          Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer,
+              optional SmartCardTransmitOptions options = {});
 
           Promise&lt;undefined&gt; startTransaction(SmartCardTransactionCallback transaction,
               optional SmartCardTransactionOptions options = {});
@@ -976,7 +977,7 @@
       </section>
       <section>
         <h3><dfn>transmit()</dfn> method</h3>
-        <p>The {{SmartCardConnection/transmit(sendBuffer)}} method steps
+        <p>The {{SmartCardConnection/transmit(sendBuffer, options)}} method steps
         are:</p>
         <ol>
           <li>Let |promise:Promise| be [=a new promise=].</li>
@@ -987,10 +988,15 @@
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
-          <li>If [=this=].{{SmartCardConnection/[[activeProtocol]]}} is not a
-            [=SmartCardProtocol/valid protocol value=], [=reject=] |promise|
-            with a "{{InvalidStateError}}" {{DOMException}} and return
-            |promise|.</li>
+          <li>Let |protocol:DWORD| be a [[PCSC5]] `DWORD` set to
+            [=this=].{{SmartCardConnection/[[activeProtocol]]}}.
+          <li>If
+            |options:SmartCardTransmitOptions|["{{SmartCardTransmitOptions/protocol}}"]
+            [=map/exists=], set |protocol| to the `DWORD` corresponding to
+            |options:SmartCardTransmitOptions|["{{SmartCardTransmitOptions/protocol}}"].
+          <li>If |protocol| is not a [=SmartCardProtocol/valid protocol value=],
+            [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}}
+            and return |promise|.</li>
           <li>Set
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             to `true`.</li>
@@ -1030,6 +1036,18 @@
           </li>
           <li>Return |promise|.</li>
         </ol>
+        <section data-dfn-for="SmartCardTransmitOptions">
+          <h4><dfn>SmartCardTransmitOptions</dfn> dictionary</h3>
+          <pre class="idl">
+            dictionary SmartCardTransmitOptions {
+              SmartCardProtocol protocol;
+            };
+          </pre>
+          <dl>
+            <dt><dfn>protocol</dfn> member</dt>
+            <dd>The protocol to be used in the transmission.</dd>
+          </dl>
+        </section>
       </section>
       <section>
         <h3><dfn>startTransaction()</dfn> method</h3>
