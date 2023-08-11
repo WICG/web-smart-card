@@ -904,6 +904,13 @@
           <td>The active protocol `DWORD`, as returned by the platform's
             [[PCSC5]] implementation.</td>
         </tr>
+        <tr>
+          <td><dfn>[[\transactionState]]</dfn></td>
+          <td>`null`</td>
+          <td>Holds the [=transaction state|state=] of an ongoing transaction
+            started with {{SmartCardConnection/startTransaction()}}, if
+            any.</td>
+        </tr>
       </table>
       <section>
         <h3><dfn>disconnect()</dfn> method</h3>
@@ -942,6 +949,7 @@
                   <li>Destroy [=this=].{{SmartCardConnection/[[comm]]}}.</li>
                   <li>Set [=this=].{{SmartCardConnection/[[comm]]}} to `null`.</li>
                   <li>[=Resolve=] |promise|.</li>
+                  <li>[=End any pending transaction=] of [=this=].</li>
                 </ol>
               </li>
             </ol>
@@ -1030,6 +1038,7 @@
                     these steps.</li>
                   <li>[=Resolve=] |promise| with an {{ArrayBuffer}} containing
                     the first |recvLength| bytes of |recvBuffer|.</li>
+                  <li>[=End any pending transaction=] of [=this=].</li>
                 </ol>
               </li>
             </ol>
@@ -1051,9 +1060,54 @@
       </section>
       <section>
         <h3><dfn>startTransaction()</dfn> method</h3>
-        <p>Starts a transaction. The Transaction is ended when the {{Promise}}
-        returned by the given callback settles.</p>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardConnection/startTransaction(transaction, options)}}
+        method steps are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+          {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
+            |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[transactionState]]}} is not
+            `null`,  [=reject=] |promise| with a "{{InvalidStateError}}"
+            {{DOMException}} and return |promise|.</li>
+          <li>Let |signal| be an {{AbortSignal}} set to `null`.</li>
+          <li>If
+            |options:SmartCardTransactionOptions|["{{SmartCardTransactionOptions/signal}}"]
+            [=map/exists=], run the following steps:
+            <ol>
+              <li>If
+                |options:SmartCardTransactionOptions|["{{SmartCardTransactionOptions/signal}}"]
+                is [=AbortSignal/aborted=], [=reject=] |promise| with
+                |options:SmartCardTransactionOptions|["{{SmartCardTransactionOptions/signal}}"]'s
+                [=AbortSignal/abort reason=] and return |promise|.</li>
+              <li>Set |signal| to
+                |options|["{{SmartCardTransactionOptions/signal}}"].</li>
+              <li>[=AbortSignal/Add=] the {{SmartCardConnection/cancel}}
+                algorithm to |signal|.</li>
+            </ol>
+          </li>
+          <li>Set
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            to `true`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Call
+                [=this=].{{SmartCardConnection/[[comm]]}}.`BeginTransaction()`.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned [[PCSC5]]
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] to
+                [=process the result of a BeginTransaction=] with [=this=],
+                |responseCode|, |signal|, |transaction| and |promise|.
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
         <section data-dfn-for="SmartCardTransactionOptions">
           <h4><dfn>SmartCardTransactionOptions</dfn> dictionary</h4>
           <pre class="idl">
@@ -1067,6 +1121,196 @@
             <dd>When triggered, the platform's [[PCSC5]] Cancel() method is
             called.</dd>
           </dl>
+        </section>
+        <section>
+          <h4>Auxiliary algorithms and definitions</h4>
+          <p>A <dfn>transaction state</dfn> is a [=struct=] with the following
+          [=struct/items=]:</p>
+          <table class="simple" data-dfn-for="transaction state">
+            <tr>
+              <th>Item
+              <th>Description (non-normative)
+            </tr>
+              <td><dfn>pendingEnd</dfn></td>
+              <td>If set, it means once the ongoing PC/SC operation finishes
+                [[PCSC5]] `EndTransaction()` should be called with this value as the
+                {{SmartCardDisposition}} parameter.</td>
+            </tr>
+            <tr>
+              <td><dfn>exception</dfn></td>
+              <td>The exception to be used when rejecting
+                [=transaction state/promise=].</td>
+            </tr>
+            <tr>
+              <td><dfn>promise</dfn></td>
+              <td>The pending {{Promise}} returned by a
+                {{SmartCardConnection/startTransaction()}} call.</td>
+            </tr>
+          </table>
+          <p>To <dfn>process the result of a BeginTransaction</dfn> given a
+          {{SmartCardConnection}} |connection:SmartCardConnection|, a [[PCSC5]]
+          `RESPONSECODE` |responseCode:RESPONSECODE|, an {{AbortSignal}}
+          |signal:AbortSignal|, a {{SmartCardTransactionCallback}}
+          |transaction:SmartCardTransactionCallback| and a {{Promise}}
+          |promise:Promise|, perform the following steps:</p>
+          <ol>
+            <li>Set
+              |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+              to `false`.</li>
+            <li>Let |abortReason| be {{undefined}}.</li>
+            <li>If |signal| is not `null`:
+              <ol>
+                <li>[=AbortSignal/Remove=] the
+                  {{SmartCardConnection/cancel}} algorithm from
+                  |signal|.</li>
+                <li>If |signal| is [=AbortSignal/aborted=] then set
+                  |abortReason| to |signal|'s [=AbortSignal/abort
+                  reason=].</li>
+              </ol>
+            </li>
+            <li>If |responseCode| is not `SCARD_S_SUCCESS`:
+              <ol>
+                <li>If |responseCode| is `SCARD_E_CANCELLED` and
+                  |abortReason| is not {{undefined}} then [=reject=]
+                  |promise| with |abortReason|.</li>
+                <li>Otherwise, [=reject=] |promise| with a
+                  {{DOMException}} {{SmartCardError/corresponding}} to
+                  |responseCode|.</li>
+                <li>Return.</li>
+              </ol>
+            </li>
+            <li>Let |transactionState:transaction state| be a new [=transaction
+              state=] with its [=transaction state/promise=] item set to
+              |promise|.</li>
+            <li>Set |connection|.{{SmartCardConnection/[[transactionState]]}}
+              to |transactionState|.</li>
+            <li>Let |callbackPromise:Promise| be the result of [=invoking=]
+              |transaction|.</li>
+            <li>[=promise/React=] to |callbackPromise|:
+              <ul>
+                <li>If |callbackPromise| was fulfilled with value |v|
+                  then:
+                  <ol>
+                    <li>Let |disposition:SmartCardDisposition| be a
+                      {{SmartCardDisposition}} set to
+                      "{{SmartCardDisposition/leave}}".
+                    <li>If |v| is not {{undefined}}, set |disposition| to
+                      |v|.</li>
+                    <li>If
+                      |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+                      is `true`:
+                      <ol>
+                        <li>Set
+                          |transactionState|'s [=transaction state/exception=]
+                          to a "{{InvalidStateError}}" {{DOMException}}.</li>
+                        <li>Set
+                          |transactionState|'s [=transaction state/pendingEnd=]
+                          to |disposition|.</li>
+                      </ol>
+                    </li>
+                    <li>Otherwise, [=end the transaction=] of |connection| with
+                      |disposition|.</li>
+                  </ol>
+                </li>
+                <li>If |callbackPromise| was rejected with reason |r|, then:
+                  <ol>
+                    <li>Set |transactionState|'s [=transaction state/exception=]
+                      to |r|.</li>
+                    <li>If
+                      |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+                      is `true`, set
+                      |transactionState|'s [=transaction state/pendingEnd=] to
+                      "{{SmartCardDisposition/leave}}".</li>
+                    <li>Otherwise, [=end the transaction=] of |connection| with
+                      "{{SmartCardDisposition/leave}}".</li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>To <dfn>end the transaction</dfn> of a {{SmartCardConnection}}
+          |connection:SmartCardConnection| with a {{SmartCardDisposition}}
+          |disposition:SmartCardDisposition|, perform the following steps:</p>
+          <ol>
+            <li>[=Assert=]:
+              |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+              is `false`.</li>
+            <li>[=Assert=]:
+              |connection|.{{SmartCardConnection/[[transactionState]]}} is not
+              `null`.</li>
+            <li>[=Assert=]: |connection|.{{SmartCardConnection/[[transactionState]]}}'s
+              [=transaction state/pendingEnd=] is `null`.</li>
+            <li>Let |transactionPromise:Promise| be
+              |connection|.{{SmartCardConnection/[[transactionState]]}}'s
+              [=transaction state/promise=].</li>
+            <li>If |connection|.{{SmartCardConnection/[[comm]]}} is `null`:
+              <ol>
+                <li>[=Reject=] |transactionPromise| with a "{{InvalidStateError}}"
+                  {{DOMException}}.</li>
+                <li>Set
+                  |connection|.{{SmartCardConnection/[[transactionState]]}} to
+                  `null`.</li>
+                <li>Return.</li>
+              </ol>
+            </li>
+            <li>Set
+              |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+              to `true`.</li>
+            <li>Run the following steps [=in parallel=]:
+              <ol>
+                <li>Call
+                  [=this=].{{SmartCardConnection/[[comm]]}}.`EndTransaction()` with
+                  a `DWORD` corresponding to |disposition| as input parameter.</li>
+                <li>Let |responseCode:RESPONSECODE| be the returned [[PCSC5]]
+                  `RESPONSECODE`.</li>
+                <li>[=Queue a global task=] on the [=relevant global object=] of
+                  [=this=] using the [=smart card task source=] which performs
+                  the following steps:
+                  <ol>
+                    <li>Set
+                      |connection|.{{SmartCardContext/[[operationInProgress]]}}
+                      to `false`.</li>
+                    <li>Let |exception| be
+                      |connection|.{{SmartCardConnection/[[transactionState]]}}'s
+                      [=transaction state/exception=].</li>
+                    <li>If |exception| is `null`, perform the following steps:
+                      <ol>
+                        <li>If |responseCode| is `SCARD_S_SUCCESS`,
+                          [=resolve=] |transactionPromise|.</li>
+                        <li>Otherwise, [=reject=] |transactionPromise| with a
+                          {{DOMException}} {{SmartCardError/corresponding}} to
+                          |responseCode|.</li>
+                      </ol>
+                    </li>
+                    <li>Otherwise, [=reject=] |transactionPromise| with
+                      |exception|.</li>
+                    <li>Set
+                      |connection|.{{SmartCardConnection/[[transactionState]]}}
+                      to `null`.</li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+          <p>To <dfn>end any pending transaction</dfn> of a
+          {{SmartCardConnection}} |connection:SmartCardConnection|, perform the
+          following steps:</p>
+          <ol>
+            <li>If |connection|.{{SmartCardConnection/[[transactionState]]}} is
+            `null`, abort these steps.</li>
+            <li>Let |disposition| be
+              |connection|.{{SmartCardConnection/[[transactionState]]}}'s
+              [=transaction state/pendingEnd=].</li>
+            <li>If |disposition| is `null`, abort these steps.</li>
+            <li>Set |connection|.{{SmartCardConnection/[[transactionState]]}}'s
+              [=transaction state/pendingEnd=] to `null`.</li>
+            <li>[=End the transaction=] of |connection| with |disposition|.</li>
+          </ol>
+
+          <p>To <dfn>cancel</dfn> outstanding [[PCSC5]] `SCARDCOMM` operations,
+          call [=this=].{{SmartCardConnection/[[comm]]}}.`Cancel()`.</p>
         </section>
       </section>
       <section>
