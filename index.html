@@ -1199,9 +1199,9 @@
                       |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
                       is `true`:
                       <ol>
-                        <li>Set
-                          |transactionState|'s [=transaction state/exception=]
-                          to a "{{InvalidStateError}}" {{DOMException}}.</li>
+                        <li>Set |transactionState|'s [=transaction
+                          state/pendingException=] to a "{{InvalidStateError}}"
+                          {{DOMException}}.</li>
                         <li>Set
                           |transactionState|'s [=transaction state/pendingDisposition=]
                           to |disposition|.</li>
@@ -1213,8 +1213,8 @@
                 </li>
                 <li>If |callbackPromise| was rejected with reason |r|, then:
                   <ol>
-                    <li>Set |transactionState|'s [=transaction state/exception=]
-                      to |r|.</li>
+                    <li>Set |transactionState|'s [=transaction
+                      state/pendingException=] to |r|.</li>
                     <li>If
                       |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
                       is `true`, set
@@ -1272,7 +1272,7 @@
                       to `false`.</li>
                     <li>Let |exception| be
                       |connection|.{{SmartCardConnection/[[transactionState]]}}'s
-                      [=transaction state/exception=].</li>
+                      [=transaction state/pendingException=].</li>
                     <li>If |exception| is `null`, perform the following steps:
                       <ol>
                         <li>If |responseCode| is `SCARD_S_SUCCESS`,
