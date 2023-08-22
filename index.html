@@ -162,14 +162,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2023-08-11T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 11 August 2023"
+  "publishISODate": "2023-08-22T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 22 August 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-11">11 August 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-22">22 August 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -229,7 +229,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       any standards organization.
     </p>
       
-    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-navigator-interface"><bdi class="secno">1. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="Navigator" data-cite="html" data-cite-path="/system-state.html" data-cite-frag="navigator" data-type="interface" class="formerLink"><code>Navigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute"><bdi class="secno">1.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="Navigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="Navigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-workernavigator-interface"><bdi class="secno">2. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="WorkerNavigator" data-cite="html" data-cite-path="/workers.html" data-cite-frag="workernavigator" data-type="interface" class="formerLink"><code>WorkerNavigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute-0"><bdi class="secno">2.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="WorkerNavigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="WorkerNavigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardresourcemanager-interface"><bdi class="secno">3. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardResourceManager" data-dfn-for=""><code>SmartCardResourceManager</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#establishcontext-method"><bdi class="secno">3.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="establishContext()" data-dfn-for="SmartCardResourceManager" data-type="Promise" data-lt="establishContext()" data-local-lt="SmartCardResourceManager.establishContext|SmartCardResourceManager.establishContext()|establishContext"><code>establishContext()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardcontext-interface"><bdi class="secno">4. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardContext" data-dfn-for=""><code>SmartCardContext</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#listreaders-method"><bdi class="secno">4.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="listReaders()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="listReaders()" data-local-lt="SmartCardContext.listReaders|SmartCardContext.listReaders()|listReaders"><code>listReaders()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getstatuschange-method"><bdi class="secno">4.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getStatusChange()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="getStatusChange()|getStatusChange(readerStates)|getStatusChange(readerStates, options)" data-local-lt="SmartCardContext.getStatusChange|SmartCardContext.getStatusChange()|getStatusChange"><code>getStatusChange()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstatein-dictionary"><bdi class="secno">4.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateIn" data-dfn-for=""><code>SmartCardReaderStateIn</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.1.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for=""><code>SmartCardReaderStateFlagsIn</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardreaderstateout-dictionary"><bdi class="secno">4.2.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateOut" data-dfn-for=""><code>SmartCardReaderStateOut</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsout-dictionary"><bdi class="secno">4.2.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsOut" data-dfn-for=""><code>SmartCardReaderStateFlagsOut</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardgetstatuschangeoptions-dictionary"><bdi class="secno">4.2.3 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardGetStatusChangeOptions" data-dfn-for=""><code>SmartCardGetStatusChangeOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#connect-method"><bdi class="secno">4.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="connect()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="connect()|connect(readerName, accessMode)|connect(readerName, accessMode, options)" data-local-lt="SmartCardContext.connect|SmartCardContext.connect()|connect"><code>connect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardprotocol-enum"><bdi class="secno">4.3.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardProtocol" data-dfn-for=""><code>SmartCardProtocol</code></span> enum</a></li><li class="tocline"><a class="tocxref" href="#smartcardconnectresult-dictionary"><bdi class="secno">4.3.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectResult" data-dfn-for=""><code>SmartCardConnectResult</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardaccessmode-enum"><bdi class="secno">4.3.3 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardAccessMode" data-dfn-for=""><code>SmartCardAccessMode</code></span> enum</a></li><li class="tocline"><a class="tocxref" href="#smartcardconnectoptions-enum"><bdi class="secno">4.3.4 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectOptions" data-dfn-for=""><code>SmartCardConnectOptions</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#auxiliary-algorithms-and-definitions"><bdi class="secno">4.4 </bdi>Auxiliary algorithms and definitions</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardconnection-interface"><bdi class="secno">5. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardConnection" data-dfn-for=""><code>SmartCardConnection</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#disconnect-method"><bdi class="secno">5.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect"><code>disconnect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for=""><code>SmartCardDisposition</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#transmit-method"><bdi class="secno">5.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="transmit()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="transmit()|transmit(sendBuffer)|transmit(sendBuffer, options)" data-local-lt="SmartCardConnection.transmit|SmartCardConnection.transmit()|transmit"><code>transmit()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardtransmitoptions-dictionary"><bdi class="secno">5.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardTransmitOptions" data-dfn-for=""><code>SmartCardTransmitOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#starttransaction-method"><bdi class="secno">5.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)|startTransaction(transaction, options)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction"><code>startTransaction()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardtransactionoptions-dictionary"><bdi class="secno">5.3.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardTransactionOptions" data-dfn-for=""><code>SmartCardTransactionOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#status-method"><bdi class="secno">5.4 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status"><code>status()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for=""><code>SmartCardConnectionStatus</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstate-enum"><bdi class="secno">5.4.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardConnectionState" data-dfn-for=""><code>SmartCardConnectionState</code></span> enum</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#control-method"><bdi class="secno">5.5 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="control()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="control()|control(controlCode, data)" data-local-lt="SmartCardConnection.control|SmartCardConnection.control()|control"><code>control()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getattribute-method"><bdi class="secno">5.6 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute"><code>getAttribute()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#setattribute-method"><bdi class="secno">5.7 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute"><code>setAttribute()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcarderror-interface"><bdi class="secno">6. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardError" data-dfn-for=""><code>SmartCardError</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarderroroptions-dictionary"><bdi class="secno">6.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardErrorOptions" data-dfn-for=""><code>SmartCardErrorOptions</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardresponsecode-enum"><bdi class="secno">6.2 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardResponseCode" data-dfn-for=""><code>SmartCardResponseCode</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#integrations"><bdi class="secno">7. </bdi>Integrations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#permissions-policy"><bdi class="secno">7.1 </bdi>Permissions Policy</a></li></ol></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">8. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li></ol></li></ol></nav>
+    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-navigator-interface"><bdi class="secno">1. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="Navigator" data-cite="html" data-cite-path="/system-state.html" data-cite-frag="navigator" data-type="interface" class="formerLink"><code>Navigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute"><bdi class="secno">1.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="Navigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="Navigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#extensions-to-the-workernavigator-interface"><bdi class="secno">2. </bdi>Extensions to the <span data-xref-type="_IDL_" data-link-type="idl" data-lt="WorkerNavigator" data-cite="html" data-cite-path="/workers.html" data-cite-frag="workernavigator" data-type="interface" class="formerLink"><code>WorkerNavigator</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcard-attribute-0"><bdi class="secno">2.1 </bdi><span data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="smartCard" data-dfn-for="WorkerNavigator" data-type="SmartCardResourceManager" data-lt="smartCard" data-local-lt="WorkerNavigator.smartCard"><code>smartCard</code></span> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardresourcemanager-interface"><bdi class="secno">3. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardResourceManager" data-dfn-for=""><code>SmartCardResourceManager</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#establishcontext-method"><bdi class="secno">3.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="establishContext()" data-dfn-for="SmartCardResourceManager" data-type="Promise" data-lt="establishContext()" data-local-lt="SmartCardResourceManager.establishContext|SmartCardResourceManager.establishContext()|establishContext"><code>establishContext()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardcontext-interface"><bdi class="secno">4. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardContext" data-dfn-for=""><code>SmartCardContext</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#listreaders-method"><bdi class="secno">4.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="listReaders()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="listReaders()" data-local-lt="SmartCardContext.listReaders|SmartCardContext.listReaders()|listReaders"><code>listReaders()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getstatuschange-method"><bdi class="secno">4.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getStatusChange()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="getStatusChange()|getStatusChange(readerStates)|getStatusChange(readerStates, options)" data-local-lt="SmartCardContext.getStatusChange|SmartCardContext.getStatusChange()|getStatusChange"><code>getStatusChange()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstatein-dictionary"><bdi class="secno">4.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateIn" data-dfn-for=""><code>SmartCardReaderStateIn</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsin-dictionary"><bdi class="secno">4.2.1.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsIn" data-dfn-for=""><code>SmartCardReaderStateFlagsIn</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardreaderstateout-dictionary"><bdi class="secno">4.2.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateOut" data-dfn-for=""><code>SmartCardReaderStateOut</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardreaderstateflagsout-dictionary"><bdi class="secno">4.2.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardReaderStateFlagsOut" data-dfn-for=""><code>SmartCardReaderStateFlagsOut</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardgetstatuschangeoptions-dictionary"><bdi class="secno">4.2.3 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardGetStatusChangeOptions" data-dfn-for=""><code>SmartCardGetStatusChangeOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#connect-method"><bdi class="secno">4.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="connect()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="connect()|connect(readerName, accessMode)|connect(readerName, accessMode, options)" data-local-lt="SmartCardContext.connect|SmartCardContext.connect()|connect"><code>connect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardprotocol-enum"><bdi class="secno">4.3.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardProtocol" data-dfn-for=""><code>SmartCardProtocol</code></span> enum</a></li><li class="tocline"><a class="tocxref" href="#smartcardconnectresult-dictionary"><bdi class="secno">4.3.2 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectResult" data-dfn-for=""><code>SmartCardConnectResult</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardaccessmode-enum"><bdi class="secno">4.3.3 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardAccessMode" data-dfn-for=""><code>SmartCardAccessMode</code></span> enum</a></li><li class="tocline"><a class="tocxref" href="#smartcardconnectoptions-enum"><bdi class="secno">4.3.4 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectOptions" data-dfn-for=""><code>SmartCardConnectOptions</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#auxiliary-algorithms-and-definitions"><bdi class="secno">4.4 </bdi>Auxiliary algorithms and definitions</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcardconnection-interface"><bdi class="secno">5. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardConnection" data-dfn-for=""><code>SmartCardConnection</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#disconnect-method"><bdi class="secno">5.1 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect"><code>disconnect()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarddisposition-enum"><bdi class="secno">5.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardDisposition" data-dfn-for=""><code>SmartCardDisposition</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#transmit-method"><bdi class="secno">5.2 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="transmit()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="transmit()|transmit(sendBuffer)|transmit(sendBuffer, options)" data-local-lt="SmartCardConnection.transmit|SmartCardConnection.transmit()|transmit"><code>transmit()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardtransmitoptions-dictionary"><bdi class="secno">5.2.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardTransmitOptions" data-dfn-for=""><code>SmartCardTransmitOptions</code></span> dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#starttransaction-method"><bdi class="secno">5.3 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)|startTransaction(transaction, options)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction"><code>startTransaction()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardtransactionoptions-dictionary"><bdi class="secno">5.3.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardTransactionOptions" data-dfn-for=""><code>SmartCardTransactionOptions</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#auxiliary-algorithms-and-definitions-0"><bdi class="secno">5.3.2 </bdi>Auxiliary algorithms and definitions</a></li></ol></li><li class="tocline"><a class="tocxref" href="#status-method"><bdi class="secno">5.4 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status"><code>status()</code></span> method</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for=""><code>SmartCardConnectionStatus</code></span> dictionary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcardconnectionstate-enum"><bdi class="secno">5.4.1.1 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardConnectionState" data-dfn-for=""><code>SmartCardConnectionState</code></span> enum</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#control-method"><bdi class="secno">5.5 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="control()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="control()|control(controlCode, data)" data-local-lt="SmartCardConnection.control|SmartCardConnection.control()|control"><code>control()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#getattribute-method"><bdi class="secno">5.6 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute"><code>getAttribute()</code></span> method</a></li><li class="tocline"><a class="tocxref" href="#setattribute-method"><bdi class="secno">5.7 </bdi><span data-export="" data-dfn-type="method" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute"><code>setAttribute()</code></span> method</a></li></ol></li><li class="tocline"><a class="tocxref" href="#smartcarderror-interface"><bdi class="secno">6. </bdi><span data-export="" data-dfn-type="interface" data-idl="interface" data-title="SmartCardError" data-dfn-for=""><code>SmartCardError</code></span> interface</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#smartcarderroroptions-dictionary"><bdi class="secno">6.1 </bdi><span data-export="" data-dfn-type="dictionary" data-idl="dictionary" data-title="SmartCardErrorOptions" data-dfn-for=""><code>SmartCardErrorOptions</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#smartcardresponsecode-enum"><bdi class="secno">6.2 </bdi><span data-export="" data-dfn-type="enum" data-idl="enum" data-title="SmartCardResponseCode" data-dfn-for=""><code>SmartCardResponseCode</code></span> enum</a></li></ol></li><li class="tocline"><a class="tocxref" href="#integrations"><bdi class="secno">7. </bdi>Integrations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#permissions-policy"><bdi class="secno">7.1 </bdi>Permissions Policy</a></li></ol></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">8. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li></ol></li></ol></nav>
 
     <section data-dfn-for="Navigator" id="extensions-to-the-navigator-interface"><div class="header-wrapper"><h2 id="x1-extensions-to-the-navigator-interface"><bdi class="secno">1. </bdi>Extensions to the <a data-link-type="idl" data-lt="Navigator" data-type="interface" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator"><code>Navigator</code></a> interface</h2><a class="self-link" href="#extensions-to-the-navigator-interface" aria-label="Permalink for Section 1."></a></div>
       
@@ -1063,6 +1063,13 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
           <td>The active protocol <code>DWORD</code>, as returned by the platform's
             [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] implementation.</td>
         </tr>
+        <tr>
+          <td><dfn data-idl="" data-dfn-for="SmartCardConnection" data-noexport="" data-dfn-type="attribute" id="dfn-transactionstate" tabindex="0" aria-haspopup="dialog">[[transactionState]]</dfn></td>
+          <td><code>null</code></td>
+          <td>Holds the <a data-link-type="dfn|abstract-op" data-lt="transaction state" href="#dfn-transaction-state" class="internalDFN" id="ref-for-dfn-transaction-state-1">state</a> of an ongoing transaction
+            started with <a data-link-type="idl" data-lt="startTransaction()" href="#dom-smartcardconnection-starttransaction" class="internalDFN" id="ref-for-dom-smartcardconnection-starttransaction-2"><code>startTransaction</code></a><code>()</code>, if
+            any.</td>
+        </tr>
       </tbody></table>
       <section id="disconnect-method"><div class="header-wrapper"><h3 id="x5-1-disconnect-method"><bdi class="secno">5.1 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-disconnect" data-idl="operation" data-title="disconnect()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="disconnect()|disconnect(disposition)" data-local-lt="SmartCardConnection.disconnect|SmartCardConnection.disconnect()|disconnect" tabindex="0" aria-haspopup="dialog"><code>disconnect()</code></dfn> method</h3><a class="self-link" href="#disconnect-method" aria-label="Permalink for Section 5.1"></a></div>
         
@@ -1101,6 +1108,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                   <li>Destroy <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-4"><code>[[comm]]</code></a>.</li>
                   <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-5"><code>[[comm]]</code></a> to <code>null</code>.</li>
                   <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">Resolve</a> <var data-type="Promise">promise</var>.</li>
+                  <li><a data-link-type="dfn|abstract-op" href="#dfn-end-any-pending-transaction" class="internalDFN" id="ref-for-dfn-end-any-pending-transaction-1">End any pending transaction</a> of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.</li>
                 </ol>
               </li>
             </ol>
@@ -1187,6 +1195,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                     these steps.</li>
                   <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">Resolve</a> <var data-type="Promise">promise</var> with an <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> containing
                     the first <var data-type="DWORD">recvLength</var> bytes of <var data-type="array of BYTE">recvBuffer</var>.</li>
+                  <li><a data-link-type="dfn|abstract-op" href="#dfn-end-any-pending-transaction" class="internalDFN" id="ref-for-dfn-end-any-pending-transaction-2">End any pending transaction</a> of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.</li>
                 </ol>
               </li>
             </ol>
@@ -1206,13 +1215,58 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
       </section>
       <section id="starttransaction-method"><div class="header-wrapper"><h3 id="x5-3-starttransaction-method"><bdi class="secno">5.3 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-starttransaction" data-idl="operation" data-title="startTransaction()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="startTransaction()|startTransaction(transaction)|startTransaction(transaction, options)" data-local-lt="SmartCardConnection.startTransaction|SmartCardConnection.startTransaction()|startTransaction" tabindex="0" aria-haspopup="dialog"><code>startTransaction()</code></dfn> method</h3><a class="self-link" href="#starttransaction-method" aria-label="Permalink for Section 5.3"></a></div>
         
-        <p>Starts a transaction. The Transaction is ended when the <a data-link-type="idl" data-lt="Promise" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><code>Promise</code></a>
-        returned by the given callback settles.</p>
-        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
+        <p>The <a data-link-type="idl" data-lt="startTransaction(transaction, options)" href="#dom-smartcardconnection-starttransaction" class="internalDFN" id="ref-for-dom-smartcardconnection-starttransaction-3"><code>startTransaction</code></a><code>(<var>transaction</var>, <var>options</var>)</code>
+        method steps are:</p>
+        <ol>
+          <li>Let <var data-type="Promise">promise</var> be <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#a-new-promise">a new promise</a>.</li>
+          <li>If
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-8"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-16"><code>[[operationInProgress]]</code></a>
+            is <code>true</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+          <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return <var data-type="Promise">promise</var>.</li>
+          <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-8"><code>[[comm]]</code></a> is <code>null</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+            <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return
+            <var data-type="Promise">promise</var>.</li>
+          <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-1"><code>[[transactionState]]</code></a> is not
+            <code>null</code>,  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+            <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return <var data-type="Promise">promise</var>.</li>
+          <li>Let <var>signal</var> be an <a data-link-type="idl" data-lt="AbortSignal" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal"><code>AbortSignal</code></a> set to <code>null</code>.</li>
+          <li>If
+            <var data-type="SmartCardTransactionOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardtransactionoptions-signal" class="internalDFN" id="ref-for-dom-smartcardtransactionoptions-signal-1"><code>signal</code></a>"]
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#map-exists">exists</a>, run the following steps:
+            <ol>
+              <li>If
+                <var data-type="SmartCardTransactionOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardtransactionoptions-signal" class="internalDFN" id="ref-for-dom-smartcardtransactionoptions-signal-2"><code>signal</code></a>"]
+                is <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-aborted">aborted</a>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with
+                <var data-type="SmartCardTransactionOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardtransactionoptions-signal" class="internalDFN" id="ref-for-dom-smartcardtransactionoptions-signal-3"><code>signal</code></a>"]'s
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-abort-reason">abort reason</a> and return <var data-type="Promise">promise</var>.</li>
+              <li>Set <var>signal</var> to
+                <var data-type="SmartCardTransactionOptions">options</var>["<a data-link-type="idl" href="#dom-smartcardtransactionoptions-signal" class="internalDFN" id="ref-for-dom-smartcardtransactionoptions-signal-4"><code>signal</code></a>"].</li>
+              <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-add">Add</a> the <a data-link-type="idl" href="#dfn-cancel" class="internalDFN" id="ref-for-dfn-cancel-1"><code>cancel</code></a>
+                algorithm to <var>signal</var>.</li>
+            </ol>
+          </li>
+          <li>Set
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-9"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-17"><code>[[operationInProgress]]</code></a>
+            to <code>true</code>.</li>
+          <li>Run the following steps <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+            <ol>
+              <li>Call
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-9"><code>[[comm]]</code></a>.<code>BeginTransaction()</code>.</li>
+              <li>Let <var data-type="RESPONSECODE">responseCode</var> be the returned [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                <code>RESPONSECODE</code>.</li>
+              <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-8">smart card task source</a> to
+                <a data-link-type="dfn|abstract-op" href="#dfn-process-the-result-of-a-begintransaction" class="internalDFN" id="ref-for-dfn-process-the-result-of-a-begintransaction-1">process the result of a BeginTransaction</a> with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>,
+                <var data-type="RESPONSECODE">responseCode</var>, <var>signal</var>, <var>transaction</var> and <var data-type="Promise">promise</var>.
+              </li>
+            </ol>
+          </li>
+          <li>Return <var data-type="Promise">promise</var>.</li>
+        </ol>
         <section data-dfn-for="SmartCardTransactionOptions" id="smartcardtransactionoptions-dictionary"><div class="header-wrapper"><h4 id="x5-3-1-smartcardtransactionoptions-dictionary"><bdi class="secno">5.3.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardtransactionoptions" data-idl="dictionary" data-title="SmartCardTransactionOptions" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardTransactionOptions</code></dfn> dictionary</h4><a class="self-link" href="#smartcardtransactionoptions-dictionary" aria-label="Permalink for Section 5.3.1"></a></div>
           
           <pre class="idl def" id="webidl-2036951561"><span class="idlHeader"><a class="self-link" href="#webidl-2036951561">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardtransactionoptions" data-title="SmartCardTransactionOptions">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardtransactionoptions" id="ref-for-dom-smartcardtransactionoptions-2"><code>SmartCardTransactionOptions</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardtransactionoptions-signal" data-title="signal" data-dfn-for="SmartCardTransactionOptions"><span class="idlType">
-  <a data-link-type="idl" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal">AbortSignal</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardtransactionoptions-signal" id="ref-for-dom-smartcardtransactionoptions-signal-1"><code>signal</code></a>;</span>
+  <a data-link-type="idl" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal">AbortSignal</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-smartcardtransactionoptions-signal" id="ref-for-dom-smartcardtransactionoptions-signal-5"><code>signal</code></a>;</span>
 };</span></code></pre>
 
           <dl>
@@ -1221,11 +1275,196 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
             called.</dd>
           </dl>
         </section>
+        <section id="auxiliary-algorithms-and-definitions-0"><div class="header-wrapper"><h4 id="x5-3-2-auxiliary-algorithms-and-definitions"><bdi class="secno">5.3.2 </bdi>Auxiliary algorithms and definitions</h4><a class="self-link" href="#auxiliary-algorithms-and-definitions-0" aria-label="Permalink for Section 5.3.2"></a></div>
+          
+          <p>A <dfn id="dfn-transaction-state" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">transaction state</dfn> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> with the following
+          <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:</p>
+          <table class="simple" data-dfn-for="transaction state">
+            <tbody><tr>
+              <th>Item
+              </th><th>Description (non-normative)
+            </th></tr>
+              <tr><td><dfn id="dfn-pendingdisposition" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">pendingDisposition</dfn></td>
+              <td>If set, it means once the ongoing PC/SC operation finishes
+                [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>EndTransaction()</code> should be called with this value as the
+                <a data-link-type="idl" data-lt="SmartCardDisposition" href="#dom-smartcarddisposition" class="internalDFN" id="ref-for-dom-smartcarddisposition-4"><code>SmartCardDisposition</code></a> parameter.</td>
+            </tr>
+            <tr>
+              <td><dfn id="dfn-pendingexception" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">pendingException</dfn></td>
+              <td>The exception to be used when rejecting
+                <a data-link-type="dfn|abstract-op" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-1">promise</a>.</td>
+            </tr>
+            <tr>
+              <td><dfn id="dfn-promise" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">promise</dfn></td>
+              <td>The pending <a data-link-type="idl" data-lt="Promise" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-2"><code>Promise</code></a> returned by a
+                <a data-link-type="idl" data-lt="startTransaction()" href="#dom-smartcardconnection-starttransaction" class="internalDFN" id="ref-for-dom-smartcardconnection-starttransaction-4"><code>startTransaction</code></a><code>()</code> call.</td>
+            </tr>
+          </tbody></table>
+          <p>To <dfn id="dfn-process-the-result-of-a-begintransaction" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">process the result of a BeginTransaction</dfn> given a
+          <a data-link-type="idl" data-lt="SmartCardConnection" href="#dom-smartcardconnection" class="internalDFN" id="ref-for-dom-smartcardconnection-5"><code>SmartCardConnection</code></a> <var data-type="SmartCardConnection">connection</var>, a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+          <code>RESPONSECODE</code> <var data-type="RESPONSECODE">responseCode</var>, an <a data-link-type="idl" data-lt="AbortSignal" data-type="interface" href="https://dom.spec.whatwg.org/#abortsignal"><code>AbortSignal</code></a>
+          <var data-type="AbortSignal">signal</var>, a <a data-link-type="idl" data-lt="SmartCardTransactionCallback" href="#dom-smartcardtransactioncallback" class="internalDFN" id="ref-for-dom-smartcardtransactioncallback-2"><code>SmartCardTransactionCallback</code></a>
+          <var data-type="SmartCardTransactionCallback">transaction</var> and a <a data-link-type="idl" data-lt="Promise" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-3"><code>Promise</code></a>
+          <var data-type="Promise">promise</var>, perform the following steps:</p>
+          <ol>
+            <li>Set
+              <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-10"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-18"><code>[[operationInProgress]]</code></a>
+              to <code>false</code>.</li>
+            <li>Let <var>abortReason</var> be <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a>.</li>
+            <li>If <var data-type="AbortSignal">signal</var> is not <code>null</code>:
+              <ol>
+                <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-remove">Remove</a> the
+                  <a data-link-type="idl" href="#dfn-cancel" class="internalDFN" id="ref-for-dfn-cancel-2"><code>cancel</code></a> algorithm from
+                  <var data-type="AbortSignal">signal</var>.</li>
+                <li>If <var data-type="AbortSignal">signal</var> is <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-aborted">aborted</a> then set
+                  <var>abortReason</var> to <var data-type="AbortSignal">signal</var>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://dom.spec.whatwg.org/#abortsignal-abort-reason">abort reason</a>.</li>
+              </ol>
+            </li>
+            <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>:
+              <ol>
+                <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_E_CANCELLED</code> and
+                  <var>abortReason</var> is not <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a> then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+                  <var data-type="Promise">promise</var> with <var>abortReason</var>.</li>
+                <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a
+                  <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> <a data-link-type="idl" href="#dfn-corresponding-4" class="internalDFN" id="ref-for-dfn-corresponding-4-7"><code>corresponding</code></a> to
+                  <var data-type="RESPONSECODE">responseCode</var>.</li>
+                <li>Return.</li>
+              </ol>
+            </li>
+            <li>Let <var data-type="transaction state">transactionState</var> be a new <a data-link-type="dfn|abstract-op" href="#dfn-transaction-state" class="internalDFN" id="ref-for-dfn-transaction-state-2">transaction state</a> with its <a data-link-type="dfn|abstract-op" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-4">promise</a> item set to
+              <var data-type="Promise">promise</var>.</li>
+            <li>Set <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-2"><code>[[transactionState]]</code></a>
+              to <var data-type="transaction state">transactionState</var>.</li>
+            <li>Let <var data-type="Promise">callbackPromise</var> be the result of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function">invoking</a>
+              <var data-type="SmartCardTransactionCallback">transaction</var>.</li>
+            <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-perform-steps-once-promise-is-settled">React</a> to <var data-type="Promise">callbackPromise</var>:
+              <ul>
+                <li>If <var data-type="Promise">callbackPromise</var> was fulfilled with value <var>v</var>
+                  then:
+                  <ol>
+                    <li>Let <var data-type="SmartCardDisposition">disposition</var> be
+                      "<a data-link-type="idl" href="#dom-smartcarddisposition-leave" class="internalDFN" id="ref-for-dom-smartcarddisposition-leave-2"><code>leave</code></a>".
+                    </li><li>If <var>v</var> is not <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a>, set <var data-type="SmartCardDisposition">disposition</var> to
+                      <var>v</var>.</li>
+                    <li>If
+                      <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-11"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-19"><code>[[operationInProgress]]</code></a>
+                      is <code>true</code>:
+                      <ol>
+                        <li>Set <var data-type="transaction state">transactionState</var>'s <a data-link-type="dfn|abstract-op" href="#dfn-pendingexception" class="internalDFN" id="ref-for-dfn-pendingexception-1">pendingException</a> to a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+                          <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+                        <li>Set
+                          <var data-type="transaction state">transactionState</var>'s <a data-link-type="dfn|abstract-op" href="#dfn-pendingdisposition" class="internalDFN" id="ref-for-dfn-pendingdisposition-1">pendingDisposition</a>
+                          to <var data-type="SmartCardDisposition">disposition</var>.</li>
+                      </ol>
+                    </li>
+                    <li>Otherwise, <a data-link-type="dfn|abstract-op" href="#dfn-end-the-transaction" class="internalDFN" id="ref-for-dfn-end-the-transaction-1">end the transaction</a> of <var data-type="SmartCardConnection">connection</var> with
+                      <var data-type="SmartCardDisposition">disposition</var>.</li>
+                  </ol>
+                </li>
+                <li>If <var data-type="Promise">callbackPromise</var> was rejected with reason <var>r</var>, then:
+                  <ol>
+                    <li>Set <var data-type="transaction state">transactionState</var>'s <a data-link-type="dfn|abstract-op" href="#dfn-pendingexception" class="internalDFN" id="ref-for-dfn-pendingexception-2">pendingException</a> to <var>r</var>.</li>
+                    <li>If
+                      <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-12"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-20"><code>[[operationInProgress]]</code></a>
+                      is <code>true</code>, set
+                      <var data-type="transaction state">transactionState</var>'s <a data-link-type="dfn|abstract-op" href="#dfn-pendingdisposition" class="internalDFN" id="ref-for-dfn-pendingdisposition-2">pendingDisposition</a> to
+                      "<a data-link-type="idl" href="#dom-smartcarddisposition-leave" class="internalDFN" id="ref-for-dom-smartcarddisposition-leave-3"><code>leave</code></a>".</li>
+                    <li>Otherwise, <a data-link-type="dfn|abstract-op" href="#dfn-end-the-transaction" class="internalDFN" id="ref-for-dfn-end-the-transaction-2">end the transaction</a> of <var data-type="SmartCardConnection">connection</var> with
+                      "<a data-link-type="idl" href="#dom-smartcarddisposition-leave" class="internalDFN" id="ref-for-dom-smartcarddisposition-leave-4"><code>leave</code></a>".</li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>To <dfn id="dfn-end-the-transaction" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">end the transaction</dfn> of a <a data-link-type="idl" data-lt="SmartCardConnection" href="#dom-smartcardconnection" class="internalDFN" id="ref-for-dom-smartcardconnection-6"><code>SmartCardConnection</code></a>
+          <var data-type="SmartCardConnection">connection</var> with a <a data-link-type="idl" data-lt="SmartCardDisposition" href="#dom-smartcarddisposition" class="internalDFN" id="ref-for-dom-smartcarddisposition-5"><code>SmartCardDisposition</code></a>
+          <var data-type="SmartCardDisposition">disposition</var>, perform the following steps:</p>
+          <ol>
+            <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#assert">Assert</a>:
+              <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-13"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-21"><code>[[operationInProgress]]</code></a>
+              is <code>false</code>.</li>
+            <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#assert">Assert</a>:
+              <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-3"><code>[[transactionState]]</code></a> is not
+              <code>null</code>.</li>
+            <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#assert">Assert</a>: <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-4"><code>[[transactionState]]</code></a>'s
+              <a data-link-type="dfn|abstract-op" href="#dfn-pendingdisposition" class="internalDFN" id="ref-for-dfn-pendingdisposition-3">pendingDisposition</a> is <code>null</code>.</li>
+            <li>Let <var data-type="Promise">transactionPromise</var> be
+              <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-5"><code>[[transactionState]]</code></a>'s
+              <a data-link-type="dfn|abstract-op" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-5">promise</a>.</li>
+            <li>If <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-10"><code>[[comm]]</code></a> is <code>null</code>:
+              <ol>
+                <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">Reject</a> <var data-type="Promise">transactionPromise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+                  <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+                <li>Set
+                  <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-6"><code>[[transactionState]]</code></a> to
+                  <code>null</code>.</li>
+                <li>Return.</li>
+              </ol>
+            </li>
+            <li>Set
+              <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-14"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-22"><code>[[operationInProgress]]</code></a>
+              to <code>true</code>.</li>
+            <li>Run the following steps <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+              <ol>
+                <li>Call
+                  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-11"><code>[[comm]]</code></a>.<code>EndTransaction()</code> with
+                  a <code>DWORD</code> corresponding to <var data-type="SmartCardDisposition">disposition</var> as input parameter.</li>
+                <li>Let <var data-type="RESPONSECODE">responseCode</var> be the returned [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
+                  <code>RESPONSECODE</code>.</li>
+                <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
+                  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-9">smart card task source</a> which performs
+                  the following steps:
+                  <ol>
+                    <li>Set
+                      <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-23"><code>[[operationInProgress]]</code></a>
+                      to <code>false</code>.</li>
+                    <li>Let <var>exception</var> be
+                      <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-7"><code>[[transactionState]]</code></a>'s
+                      <a data-link-type="dfn|abstract-op" href="#dfn-pendingexception" class="internalDFN" id="ref-for-dfn-pendingexception-3">pendingException</a>.</li>
+                    <li>If <var>exception</var> is <code>null</code>, perform the following steps:
+                      <ol>
+                        <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_S_SUCCESS</code>,
+                          <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">resolve</a> <var data-type="Promise">transactionPromise</var>.</li>
+                        <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">transactionPromise</var> with a
+                          <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> <a data-link-type="idl" href="#dfn-corresponding-4" class="internalDFN" id="ref-for-dfn-corresponding-4-8"><code>corresponding</code></a> to
+                          <var data-type="RESPONSECODE">responseCode</var>.</li>
+                      </ol>
+                    </li>
+                    <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">transactionPromise</var> with
+                      <var>exception</var>.</li>
+                    <li>Set
+                      <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-8"><code>[[transactionState]]</code></a>
+                      to <code>null</code>.</li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+
+          <p>To <dfn id="dfn-end-any-pending-transaction" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">end any pending transaction</dfn> of a
+          <a data-link-type="idl" data-lt="SmartCardConnection" href="#dom-smartcardconnection" class="internalDFN" id="ref-for-dom-smartcardconnection-7"><code>SmartCardConnection</code></a> <var data-type="SmartCardConnection">connection</var>, perform the
+          following steps:</p>
+          <ol>
+            <li>If <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-9"><code>[[transactionState]]</code></a> is
+            <code>null</code>, abort these steps.</li>
+            <li>Let <var data-type="SmartCardDisposition">disposition</var> be
+              <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-10"><code>[[transactionState]]</code></a>'s
+              <a data-link-type="dfn|abstract-op" href="#dfn-pendingdisposition" class="internalDFN" id="ref-for-dfn-pendingdisposition-4">pendingDisposition</a>.</li>
+            <li>If <var data-type="SmartCardDisposition">disposition</var> is <code>null</code>, abort these steps.</li>
+            <li>Set <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[transactionState]]" href="#dfn-transactionstate" class="internalDFN" id="ref-for-dfn-transactionstate-11"><code>[[transactionState]]</code></a>'s
+              <a data-link-type="dfn|abstract-op" href="#dfn-pendingdisposition" class="internalDFN" id="ref-for-dfn-pendingdisposition-5">pendingDisposition</a> to <code>null</code>.</li>
+            <li><a data-link-type="dfn|abstract-op" href="#dfn-end-the-transaction" class="internalDFN" id="ref-for-dfn-end-the-transaction-3">End the transaction</a> of <var data-type="SmartCardConnection">connection</var> with <var data-type="SmartCardDisposition">disposition</var>.</li>
+          </ol>
+
+          <p>To <dfn id="dfn-cancel" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">cancel</dfn> outstanding [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARDCOMM</code> operations,
+          call <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-12"><code>[[comm]]</code></a>.<code>Cancel()</code>.</p>
+        </section>
       </section>
       <section id="status-method"><div class="header-wrapper"><h3 id="x5-4-status-method"><bdi class="secno">5.4 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-status" data-idl="operation" data-title="status()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="status()" data-local-lt="SmartCardConnection.status|SmartCardConnection.status()|status" tabindex="0" aria-haspopup="dialog"><code>status()</code></dfn> method</h3><a class="self-link" href="#status-method" aria-label="Permalink for Section 5.4"></a></div>
         
         <p>Queries the host's PC/SC stack about the current connection status.</p>
-        <div class="issue" id="issue-container-number-2"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="4"><span>Issue 2</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
         <section data-dfn-for="SmartCardConnectionStatus" id="smartcardconnectionstatus-dictionary"><div class="header-wrapper"><h4 id="x5-4-1-smartcardconnectionstatus-dictionary"><bdi class="secno">5.4.1 </bdi><dfn data-export="" data-dfn-type="dictionary" id="dom-smartcardconnectionstatus" data-idl="dictionary" data-title="SmartCardConnectionStatus" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardConnectionStatus</code></dfn> dictionary</h4><a class="self-link" href="#smartcardconnectionstatus-dictionary" aria-label="Permalink for Section 5.4.1"></a></div>
           
           <pre class="idl def" id="webidl-686619780"><span class="idlHeader"><a class="self-link" href="#webidl-686619780">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-smartcardconnectionstatus" data-title="SmartCardConnectionStatus">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-smartcardconnectionstatus" id="ref-for-dom-smartcardconnectionstatus-2"><code>SmartCardConnectionStatus</code></a> {<span data-idl="" class="idlMember" id="idl-def-smartcardconnectionstatus-readername" data-title="readerName" data-dfn-for="SmartCardConnectionStatus">
@@ -1284,20 +1523,20 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
       <section id="control-method"><div class="header-wrapper"><h3 id="x5-5-control-method"><bdi class="secno">5.5 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-control" data-idl="operation" data-title="control()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="control()|control(controlCode, data)" data-local-lt="SmartCardConnection.control|SmartCardConnection.control()|control" tabindex="0" aria-haspopup="dialog"><code>control()</code></dfn> method</h3><a class="self-link" href="#control-method" aria-label="Permalink for Section 5.5"></a></div>
         
         <p>Direct communication with the reader device. Sends vendor-specific
-        commands. The returned <a data-link-type="idl" data-lt="Promise" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><code>Promise</code></a> might contain output data, if applicable
+        commands. The returned <a data-link-type="idl" data-lt="Promise" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-6"><code>Promise</code></a> might contain output data, if applicable
         for the given control code. Otherwise the returned buffer will be
         empty.</p>
-        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-2"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="4"><span>Issue 2</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="getattribute-method"><div class="header-wrapper"><h3 id="x5-6-getattribute-method"><bdi class="secno">5.6 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-getattribute" data-idl="operation" data-title="getAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="getAttribute()|getAttribute(tag)" data-local-lt="SmartCardConnection.getAttribute|SmartCardConnection.getAttribute()|getAttribute" tabindex="0" aria-haspopup="dialog"><code>getAttribute()</code></dfn> method</h3><a class="self-link" href="#getattribute-method" aria-label="Permalink for Section 5.6"></a></div>
         
         <p>Queries a card reader's attribute or capability value, given its tag.</p>
-        <div class="issue" id="issue-container-number-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue 4</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
       <section id="setattribute-method"><div class="header-wrapper"><h3 id="x5-7-setattribute-method"><bdi class="secno">5.7 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-setattribute" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute" tabindex="0" aria-haspopup="dialog"><code>setAttribute()</code></dfn> method</h3><a class="self-link" href="#setattribute-method" aria-label="Permalink for Section 5.7"></a></div>
         
         <p>Sets a card reader's attribute or capability.</p>
-        <div class="issue" id="issue-container-number-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue 5</span></div><div class="">Write an algorithm for this method.</div></div>
+        <div class="issue" id="issue-container-number-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue 4</span></div><div class="">Write an algorithm for this method.</div></div>
       </section>
     </section>
 
@@ -1554,6 +1793,10 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-smart-card-task-source-6" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> 
     </li><li>
       <a href="#ref-for-dfn-smart-card-task-source-7" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-smart-card-task-source-8" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-smart-card-task-source-9" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresourcemanager-establishcontext" aria-label="Links in this document to definition: establishContext()">
@@ -1624,6 +1867,10 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-operationinprogress-10" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> <a href="#ref-for-dfn-operationinprogress-11" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-12" title="Reference 3">(3)</a> 
     </li><li>
       <a href="#ref-for-dfn-operationinprogress-13" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> <a href="#ref-for-dfn-operationinprogress-14" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-15" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-operationinprogress-16" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> <a href="#ref-for-dfn-operationinprogress-17" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-operationinprogress-18" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-operationinprogress-19" title="Reference 2">(2)</a> <a href="#ref-for-dfn-operationinprogress-20" title="Reference 3">(3)</a> <a href="#ref-for-dfn-operationinprogress-21" title="Reference 4">(4)</a> <a href="#ref-for-dfn-operationinprogress-22" title="Reference 5">(5)</a> <a href="#ref-for-dfn-operationinprogress-23" title="Reference 6">(6)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-tracker" aria-label="Links in this document to definition: [[tracker]]">
@@ -2422,6 +2669,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dom-smartcardconnection-2" title="§ 4.3.2 SmartCardConnectResult dictionary">§ 4.3.2 SmartCardConnectResult dictionary</a> 
     </li><li>
       <a href="#ref-for-dom-smartcardconnection-3" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> <a href="#ref-for-dom-smartcardconnection-4" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardconnection-5" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dom-smartcardconnection-6" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardconnection-7" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardtransactioncallback" aria-label="Links in this document to definition: SmartCardTransactionCallback">
@@ -2434,6 +2683,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dom-smartcardtransactioncallback-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardtransactioncallback-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-comm" aria-label="Links in this document to definition: [[comm]]">
@@ -2450,6 +2701,10 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-comm-2" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> <a href="#ref-for-dfn-comm-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-comm-4" title="Reference 3">(3)</a> <a href="#ref-for-dfn-comm-5" title="Reference 4">(4)</a> 
     </li><li>
       <a href="#ref-for-dfn-comm-6" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> <a href="#ref-for-dfn-comm-7" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-comm-8" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> <a href="#ref-for-dfn-comm-9" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-comm-10" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-comm-11" title="Reference 2">(2)</a> <a href="#ref-for-dfn-comm-12" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-context" aria-label="Links in this document to definition: [[context]]">
@@ -2466,6 +2721,10 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-context-2" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> <a href="#ref-for-dfn-context-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-4" title="Reference 3">(3)</a> 
     </li><li>
       <a href="#ref-for-dfn-context-5" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> <a href="#ref-for-dfn-context-6" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-7" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-context-8" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> <a href="#ref-for-dfn-context-9" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-context-10" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-context-11" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-12" title="Reference 3">(3)</a> <a href="#ref-for-dfn-context-13" title="Reference 4">(4)</a> <a href="#ref-for-dfn-context-14" title="Reference 5">(5)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-activeprotocol" aria-label="Links in this document to definition: [[activeProtocol]]">
@@ -2480,6 +2739,20 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-activeprotocol-1" title="§ 4.3 connect() method">§ 4.3 connect() method</a> 
     </li><li>
       <a href="#ref-for-dfn-activeprotocol-2" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> <a href="#ref-for-dfn-activeprotocol-3" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-transactionstate" aria-label="Links in this document to definition: [[transactionState]]">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-transactionstate" aria-label="Permalink for definition: [[transactionState]]. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-transactionstate-1" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-transactionstate-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-transactionstate-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-transactionstate-4" title="Reference 3">(3)</a> <a href="#ref-for-dfn-transactionstate-5" title="Reference 4">(4)</a> <a href="#ref-for-dfn-transactionstate-6" title="Reference 5">(5)</a> <a href="#ref-for-dfn-transactionstate-7" title="Reference 6">(6)</a> <a href="#ref-for-dfn-transactionstate-8" title="Reference 7">(7)</a> <a href="#ref-for-dfn-transactionstate-9" title="Reference 8">(8)</a> <a href="#ref-for-dfn-transactionstate-10" title="Reference 9">(9)</a> <a href="#ref-for-dfn-transactionstate-11" title="Reference 10">(10)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardconnection-disconnect" aria-label="Links in this document to definition: disconnect()">
@@ -2508,6 +2781,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dom-smartcarddisposition-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> <a href="#ref-for-dom-smartcarddisposition-2" title="Reference 2">(2)</a> 
     </li><li>
       <a href="#ref-for-dom-smartcarddisposition-3" title="§ 5.1.1 SmartCardDisposition enum">§ 5.1.1 SmartCardDisposition enum</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcarddisposition-4" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dom-smartcarddisposition-5" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarddisposition-leave" aria-label="Links in this document to definition: leave">
@@ -2520,6 +2795,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dom-smartcarddisposition-leave-1" title="§ 5.1.1 SmartCardDisposition enum">§ 5.1.1 SmartCardDisposition enum</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcarddisposition-leave-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dom-smartcarddisposition-leave-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcarddisposition-leave-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarddisposition-reset" aria-label="Links in this document to definition: reset">
@@ -2609,7 +2886,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardconnection-starttransaction-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+      <a href="#ref-for-dom-smartcardconnection-starttransaction-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> <a href="#ref-for-dom-smartcardconnection-starttransaction-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardconnection-starttransaction-3" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardconnection-starttransaction-4" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardtransactionoptions" aria-label="Links in this document to definition: SmartCardTransactionOptions">
@@ -2635,7 +2916,113 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardtransactionoptions-signal-1" title="§ 5.3.1 SmartCardTransactionOptions dictionary">§ 5.3.1 SmartCardTransactionOptions dictionary</a> 
+      <a href="#ref-for-dom-smartcardtransactionoptions-signal-1" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> <a href="#ref-for-dom-smartcardtransactionoptions-signal-2" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardtransactionoptions-signal-3" title="Reference 3">(3)</a> <a href="#ref-for-dom-smartcardtransactionoptions-signal-4" title="Reference 4">(4)</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardtransactionoptions-signal-5" title="§ 5.3.1 SmartCardTransactionOptions dictionary">§ 5.3.1 SmartCardTransactionOptions dictionary</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-transaction-state" aria-label="Links in this document to definition: transaction state">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-transaction-state" aria-label="Permalink for definition: transaction state. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-transaction-state-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+    </li><li>
+      <a href="#ref-for-dfn-transaction-state-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-pendingdisposition" aria-label="Links in this document to definition: pendingDisposition">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-pendingdisposition" aria-label="Permalink for definition: pendingDisposition. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-pendingdisposition-1" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-pendingdisposition-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-pendingdisposition-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-pendingdisposition-4" title="Reference 4">(4)</a> <a href="#ref-for-dfn-pendingdisposition-5" title="Reference 5">(5)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-pendingexception" aria-label="Links in this document to definition: pendingException">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-pendingexception" aria-label="Permalink for definition: pendingException. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-pendingexception-1" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-pendingexception-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-pendingexception-3" title="Reference 3">(3)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-promise" aria-label="Links in this document to definition: promise">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-promise" aria-label="Permalink for definition: promise. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-promise-1" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-promise-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-promise-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-promise-4" title="Reference 4">(4)</a> <a href="#ref-for-dfn-promise-5" title="Reference 5">(5)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-promise-6" title="§ 5.5 control() method">§ 5.5 control() method</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-process-the-result-of-a-begintransaction" aria-label="Links in this document to definition: process the result of a BeginTransaction">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-process-the-result-of-a-begintransaction" aria-label="Permalink for definition: process the result of a BeginTransaction. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-process-the-result-of-a-begintransaction-1" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-end-the-transaction" aria-label="Links in this document to definition: end the transaction">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-end-the-transaction" aria-label="Permalink for definition: end the transaction. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-end-the-transaction-1" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-end-the-transaction-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-end-the-transaction-3" title="Reference 3">(3)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-end-any-pending-transaction" aria-label="Links in this document to definition: end any pending transaction">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-end-any-pending-transaction" aria-label="Permalink for definition: end any pending transaction. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-end-any-pending-transaction-1" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-end-any-pending-transaction-2" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-cancel" aria-label="Links in this document to definition: cancel">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-cancel" aria-label="Permalink for definition: cancel. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-cancel-1" title="§ 5.3 startTransaction() method">§ 5.3 startTransaction() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-cancel-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardconnection-status" aria-label="Links in this document to definition: status()">
@@ -2904,6 +3291,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-corresponding-4-5" title="§ 5.1 disconnect() method">§ 5.1 disconnect() method</a> 
     </li><li>
       <a href="#ref-for-dfn-corresponding-4-6" title="§ 5.2 transmit() method">§ 5.2 transmit() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-corresponding-4-7" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dfn-corresponding-4-8" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderroroptions" aria-label="Links in this document to definition: SmartCardErrorOptions">
