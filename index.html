@@ -1203,7 +1203,7 @@
                           |transactionState|'s [=transaction state/exception=]
                           to a "{{InvalidStateError}}" {{DOMException}}.</li>
                         <li>Set
-                          |transactionState|'s [=transaction state/pendingEnd=]
+                          |transactionState|'s [=transaction state/pendingDisposition=]
                           to |disposition|.</li>
                       </ol>
                     </li>
@@ -1218,7 +1218,7 @@
                     <li>If
                       |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
                       is `true`, set
-                      |transactionState|'s [=transaction state/pendingEnd=] to
+                      |transactionState|'s [=transaction state/pendingDisposition=] to
                       "{{SmartCardDisposition/leave}}".</li>
                     <li>Otherwise, [=end the transaction=] of |connection| with
                       "{{SmartCardDisposition/leave}}".</li>
@@ -1239,7 +1239,7 @@
               |connection|.{{SmartCardConnection/[[transactionState]]}} is not
               `null`.</li>
             <li>[=Assert=]: |connection|.{{SmartCardConnection/[[transactionState]]}}'s
-              [=transaction state/pendingEnd=] is `null`.</li>
+              [=transaction state/pendingDisposition=] is `null`.</li>
             <li>Let |transactionPromise:Promise| be
               |connection|.{{SmartCardConnection/[[transactionState]]}}'s
               [=transaction state/promise=].</li>
@@ -1301,10 +1301,10 @@
             `null`, abort these steps.</li>
             <li>Let |disposition| be
               |connection|.{{SmartCardConnection/[[transactionState]]}}'s
-              [=transaction state/pendingEnd=].</li>
+              [=transaction state/pendingDisposition=].</li>
             <li>If |disposition| is `null`, abort these steps.</li>
             <li>Set |connection|.{{SmartCardConnection/[[transactionState]]}}'s
-              [=transaction state/pendingEnd=] to `null`.</li>
+              [=transaction state/pendingDisposition=] to `null`.</li>
             <li>[=End the transaction=] of |connection| with |disposition|.</li>
           </ol>
 
