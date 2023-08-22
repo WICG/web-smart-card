@@ -1131,13 +1131,13 @@
               <th>Item
               <th>Description (non-normative)
             </tr>
-              <td><dfn>pendingEnd</dfn></td>
+              <td><dfn>pendingDisposition</dfn></td>
               <td>If set, it means once the ongoing PC/SC operation finishes
                 [[PCSC5]] `EndTransaction()` should be called with this value as the
                 {{SmartCardDisposition}} parameter.</td>
             </tr>
             <tr>
-              <td><dfn>exception</dfn></td>
+              <td><dfn>pendingException</dfn></td>
               <td>The exception to be used when rejecting
                 [=transaction state/promise=].</td>
             </tr>
@@ -1191,8 +1191,7 @@
                 <li>If |callbackPromise| was fulfilled with value |v|
                   then:
                   <ol>
-                    <li>Let |disposition:SmartCardDisposition| be a
-                      {{SmartCardDisposition}} set to
+                    <li>Let |disposition:SmartCardDisposition| be
                       "{{SmartCardDisposition/leave}}".
                     <li>If |v| is not {{undefined}}, set |disposition| to
                       |v|.</li>
