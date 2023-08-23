@@ -845,13 +845,24 @@
           <li>[=set/For each=] |connection:SmartCardConnection| of
             |context|.{{SmartCardContext/[[connections]]}}:
             <ol>
-              <li>[=SmartCardConnection/End any pending transaction=] of
+              <li>[=SmartCardConnection/End any settled transaction=] of
                 |connection|.</li>
               <li>If |context|.{{SmartCardContext/[[operationInProgress]]}} is
                 `true`, abort there steps.</li>
             </ol>
           </li>
         </ol>
+        <aside class="note">
+          <p>A transaction ends when the {{Promise}} returned by the
+          {{SmartCardTransactionCallback}} passed to
+          {{SmartCardConnection/startTransaction()}} settles. At this
+          point the browser should call [[PCSC5]] `EndTransaction()` to
+          effect that on the platform's PC/SC stack. But that won't be
+          possible if at that moment there's already another PC/SC
+          operation taking place in the connection's PC/SC context. The
+          browser then has to wait until this ongoing PC/SC operation
+          finishes before ending that settled transaction.</p>
+        </aside>
 
         <p>The <dfn>cancel the outstanding GetStatusChange</dfn>
         algorithm steps are:</p>
@@ -1309,7 +1320,7 @@
             </li>
           </ol>
 
-          <p>To <dfn>end any pending transaction</dfn> of a
+          <p>To <dfn>end any settled transaction</dfn> of a
           {{SmartCardConnection}} |connection:SmartCardConnection|, perform the
           following steps:</p>
           <ol>
