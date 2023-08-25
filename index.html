@@ -100,7 +100,7 @@
                 <li>[=Queue a global task=] on the [=relevant global object=] of
                   [=this=] using the [=smart card task source=] to [=reject=]
                   |promise| with a {{SmartCardError/corresponding}}
-                {{DOMException}}.</li>
+                  [=exception=].</li>
               </ol>
             </li>
             <li>Otherwise, perform the following steps:
@@ -221,8 +221,8 @@
                           it.</p>
                         </aside>
                       </li>
-                      <li>Otherwise, [=reject=] |promise| with a
-                      {{DOMException}} {{SmartCardError/corresponding}} to
+                      <li>Otherwise, [=reject=] |promise| with an
+                      [=exception=] {{SmartCardError/corresponding}} to
                       |responseCode|.</li>
                     </ol>
                   </li>
@@ -307,7 +307,7 @@
                       <li>If |responseCode| is `SCARD_E_CANCELLED` and
                         |abortReason| is not {{undefined}} then [=reject=]
                         |promise| with |abortReason|.</li>
-                      <li>Otherwise, [=reject=] |promise| with a {{DOMException}}
+                      <li>Otherwise, [=reject=] |promise| with an [=exception=]
                         {{SmartCardError/corresponding}} to |responseCode|.</li>
                       <li>Return.</li>
                     </ol>
@@ -701,7 +701,7 @@
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`:
                     <ol>
                       <li>Destroy |comm|.</li>
-                      <li>[=Reject=] |promise| with a {{DOMException}}
+                      <li>[=Reject=] |promise| with an [=exception=]
                       {{SmartCardError/corresponding}} to |responseCode| and abort these steps.</li>
                     </ol>
                   </li>
@@ -975,7 +975,7 @@
                   <li>[=Clear the operationInProgress=] of
                     [=this=].{{SmartCardConnection/[[context]]}}.</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
-                    |promise| with a {{DOMException}}
+                    |promise| with an [=exception=]
                     {{SmartCardError/corresponding}} to |responseCode| and abort
                     these steps.</li>
                   <li>Destroy [=this=].{{SmartCardConnection/[[comm]]}}.</li>
@@ -1063,7 +1063,7 @@
                   <li>[=Clear the operationInProgress=] of
                     [=this=].{{SmartCardConnection/[[context]]}}.</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
-                    |promise| with a {{DOMException}}
+                    |promise| with an [=exception=]
                     {{SmartCardError/corresponding}} to |responseCode| and abort
                     these steps.</li>
                   <li>[=Resolve=] |promise| with an {{ArrayBuffer}} containing
@@ -1201,8 +1201,8 @@
                 <li>If |responseCode| is `SCARD_E_CANCELLED` and
                   |abortReason| is not {{undefined}} then [=reject=]
                   |promise| with |abortReason|.</li>
-                <li>Otherwise, [=reject=] |promise| with a
-                  {{DOMException}} {{SmartCardError/corresponding}} to
+                <li>Otherwise, [=reject=] |promise| with an
+                  [=exception=] {{SmartCardError/corresponding}} to
                   |responseCode|.</li>
                 <li>Return.</li>
               </ol>
@@ -1304,8 +1304,8 @@
                       <ol>
                         <li>If |responseCode| is `SCARD_S_SUCCESS`,
                           [=resolve=] |transactionPromise|.</li>
-                        <li>Otherwise, [=reject=] |transactionPromise| with a
-                          {{DOMException}} {{SmartCardError/corresponding}} to
+                        <li>Otherwise, [=reject=] |transactionPromise| with an
+                          [=exception=] {{SmartCardError/corresponding}} to
                           |responseCode|.</li>
                       </ol>
                     </li>
@@ -1373,7 +1373,7 @@
                   <li>[=Clear the operationInProgress=] of
                     [=this=].{{SmartCardConnection/[[context]]}}.</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
-                    |promise| with a {{DOMException}}
+                    |promise| with an [=exception=]
                     {{SmartCardError/corresponding}} to |responseCode| and abort
                     these steps.</li>
                   <li>Let |state:SmartCardConnectionState| be a
@@ -1519,7 +1519,7 @@
       <p>The <dfn>responseCode</dfn> attribute is the error or warning response
       code returned by the related [[PCSC5]] method.</p>
       <p>Given a [[PCSC5]] `RESPONSECODE` different from `SCARD_S_SUCCESS`, a
-      <dfn data-dfn-for="SmartCardError">corresponding</dfn> {{DOMException}} is
+      <dfn data-dfn-for="SmartCardError">corresponding</dfn> [=exception=] is
       created with the following steps:</p>
       <aside class="note" title="Unspecified response codes">
         <p>The following `RESPONSECODE`s are not part of [[PCSC5]] but are still
@@ -1577,6 +1577,8 @@
         <li>If |pcscCode| is `SCARD_E_UNSUPPORTED_FEATURE`, return a [=new=]
           {{SmartCardResponseCode/"unsupported-feature"}}
           {{SmartCardError}}.</li>
+        <li>If |pcscCode| is `SCARD_E_INVALID_PARAMETER`, return a [=new=]
+          {{TypeError}}.</li>
         <li>If |pcscCode| is `SCARD_E_INVALID_HANDLE`, return a [=new=]
           "{{InvalidStateError}}" {{DOMException}}.</li>
         <li>If |pcscCode| is `SCARD_E_SERVICE_STOPPED`, return a [=new=]
