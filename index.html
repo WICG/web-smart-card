@@ -1341,8 +1341,64 @@
       </section>
       <section>
         <h3><dfn>status()</dfn> method</h3>
-        <p>Queries the host's PC/SC stack about the current connection status.</p>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardConnection/status()}} method steps are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+          {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
+            |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
+          <li>Set
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            to `true`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Let |pcscReader:array of STR| be an empty `STR[]`.</li>
+              <li>Let |pcscState:DWORD| be a [[PCSC5]] `DWORD` set to `0`.</li>
+              <li>Let |activeProtocol:DWORD| be a [[PCSC5]] `DWORD` set to `0`.</li>
+              <li>Let |pcscAtr:array of BYTE| be a `BYTE[]` big enough to hold
+                any [[ISO7186-3]] Answer To Reset (ATR).</li>
+              <li>Call [=this=].{{SmartCardConnection/[[comm]]}}.`Status()`
+                with |pcscReader|, |pcscState|, |activeProtocol| and |pcscAtr| as
+                output parameters.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>[=Clear the operationInProgress=] of
+                    [=this=].{{SmartCardConnection/[[context]]}}.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with a {{DOMException}}
+                    {{SmartCardError/corresponding}} to |responseCode| and abort
+                    these steps.</li>
+                  <li>Let |state:SmartCardConnectionState| be a
+                    {{SmartCardConnectionState}}
+                    [=SmartCardConnectionState/corresponding=] to |pcscState|
+                    and |activeProtocol|.</li>
+                  <li>If |state| is {{undefined}}, [=reject=] |promise| with an
+                    "{{UnknownError}}" {{DOMException}} and abort these steps.</li>
+                  <li>Let |status:SmartCardConnectionStatus| be a new
+                    {{SmartCardConnectionStatus}}.</li>
+                  <li>Set |status|["{{SmartCardConnectionStatus/readerName}}"]
+                    to |pcscReader|.</li>
+                  <li>Set |status|["{{SmartCardConnectionStatus/state}}"]
+                    to |state|.</li>
+                  <li>Set
+                    |status|["{{SmartCardConnectionStatus/answerToReset}}"] to
+                    an {{ArrayBuffer}} with the bytes that were written to
+                    |pcscAtr|.</li>
+                  <li>[=Resolve=] |promise| with |status|.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
         <section data-dfn-for="SmartCardConnectionStatus">
           <h4><dfn>SmartCardConnectionStatus</dfn> dictionary</h3>
           <pre class="idl">
@@ -1399,6 +1455,35 @@
               <dd>The card is in raw protocol mode and a new protocol may not be
                 negotiated.</dd>
             </dl>
+
+            <p>Given a [[PCSC5]] `DWORD` |pcscState:DWORD| and a `DWORD`
+            |activeProtocol:DWORD|, a
+            <dfn data-dfn-for="SmartCardConnectionState">corresponding</dfn>
+            {{SmartCardConnectionState}} is created with the following steps:</p>
+            <ol>
+              <li>If |pcscState| is [[PCSC5]] `SCARD_ABSENT`, return
+                "{{SmartCardConnectionState/absent}}".</li>
+              <li>If |pcscState| is [[PCSC5]] `SCARD_PRESENT`, return
+                "{{SmartCardConnectionState/present}}".</li>
+              <li>If |pcscState| is [[PCSC5]] `SCARD_SWALLOWED`, return
+                "{{SmartCardConnectionState/swallowed}}".</li>
+              <li>If |pcscState| is [[PCSC5]] `SCARD_POWERED`, return
+                "{{SmartCardConnectionState/powered}}".</li>
+              <li>If |pcscState| is [[PCSC5]] `SCARD_NEGOTIABLE`, return
+                "{{SmartCardConnectionState/negotiable}}".</li>
+              <li>If |pcscState| is [[PCSC5]] `SCARD_SPECIFIC`, perform the
+                following steps:
+                <ol>
+                  <li>If |activeProtocol| is [[PCSC5]] `SCARD_PROTOCOL_T0`,
+                    return "{{SmartCardConnectionState/t0}}".</li>
+                  <li>If |activeProtocol| is [[PCSC5]] `SCARD_PROTOCOL_T1`,
+                    return "{{SmartCardConnectionState/t1}}".</li>
+                  <li>If |activeProtocol| is [[PCSC5]] `SCARD_PROTOCOL_RAW`,
+                    return "{{SmartCardConnectionState/raw}}".</li>
+                </ol>
+              </li>
+              <li>Return {{undefined}}.</li>
+            </ol>
           </section>
         </section>
       </section>
