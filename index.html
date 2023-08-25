@@ -1489,11 +1489,52 @@
       </section>
       <section>
         <h3><dfn>control()</dfn> method</h3>
-        <p>Direct communication with the reader device. Sends vendor-specific
-        commands. The returned {{Promise}} might contain output data, if applicable
-        for the given control code. Otherwise the returned buffer will be
-        empty.</p>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardConnection/control(controlCode, data)}} method steps are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+          {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
+            |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
+          <li>Set
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            to `true`.</li>
+          <li>Let |pcscControlCode:DWORD| be a [[PCSC5]] `DWORD` containing
+            |controlCode|</li>
+          <li>[=Get a copy of the buffer source=] |data:BufferSource| and save
+            the result in a [[PCSC5]] `BYTE[]` |inBuffer:array of BYTE|.</li>
+          <li>Let |outBuffer:array of BYTE| be a [[PCSC5]] `BYTE[]` large enough
+          to hold any control command response.</li>
+          <li>Let |outBufferLength:DWORD| be a `DWORD` set to `0`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Call [=this=].{{SmartCardConnection/[[comm]]}}.`Control()`
+                with |pcscControlCode|, |inBuffer|, |outBuffer| and
+                |outBufferLength| as arguments.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>[=Clear the operationInProgress=] of
+                    [=this=].{{SmartCardConnection/[[context]]}}.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with an [=exception=]
+                    {{SmartCardError/corresponding}} to |responseCode| and abort
+                    these steps.</li>
+                  <li>Let |resultBytes:byte sequence| be the first
+                    |outBufferLength| bytes of |outBuffer|.</li>
+                  <li>[=Resolve=] |promise| with the result of
+                    [=ArrayBuffer/Create|creating=] an {{ArrayBuffer}} from
+                    |resultBytes| in [=this=]'s [=relevant Realm=].</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
       </section>
       <section>
         <h3><dfn>getAttribute()</dfn> method</h3>
