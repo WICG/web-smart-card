@@ -158,6 +158,11 @@
           <td>Whether there is an ongoing PC/SC operation in this context.</td>
         </tr>
         <tr>
+          <td><dfn>[[\connections]]</dfn></td>
+          <td>An empty [=ordered set=]</td>
+          <td>The existing {{SmartCardConnection}}s created by this context.</td>
+        </tr>
+        <tr>
           <td><dfn>[[\tracker]]</dfn></td>
           <td>`null`</td>
           <td>A [[PCSC5]] `SCARDTRACK` instance.</td>
@@ -203,8 +208,7 @@
                 [=this=] using the [=smart card task source=] which performs the
                 following steps:
                 <ol>
-                  <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
-                    `false`.</li>
+                  <li>[=Clear the operationInProgress=] of [=this=].</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`:
                     <ol>
                       <li>If |responseCode| is `SCARD_E_NO_READERS_AVAILABLE`,
@@ -281,8 +285,7 @@
                 following steps:
                 <ol>
                   <li>Set [=this=].{{SmartCardContext/[[tracker]]}} to `null`.</li>
-                  <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
-                    `false`.</li>
+                  <li>[=Clear the operationInProgress=] of [=this=].</li>
                   <li>Let |abortReason| be {{undefined}}.</li>
                   <li>If [=this=].{{SmartCardContext/[[signal]]}} is not `null`,
                     run the following steps:
@@ -694,8 +697,7 @@
                 [=this=] using the [=smart card task source=] which performs the
                 following steps:
                 <ol>
-                  <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
-                    `false`.</li>
+                  <li>[=Clear the operationInProgress=] of [=this=].</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`:
                     <ol>
                       <li>Destroy |comm|.</li>
@@ -707,6 +709,8 @@
                   {{SmartCardConnectResult}} dictionary.</li>
                   <li>Let |connection:SmartCardConnection| be a new
                   {{SmartCardConnection}}.</li>
+                  <li>[=set/Append=] |connection| to
+                    [=this=].{{SmartCardContext/[[connections]]}}.</li>
                   <li>Set |connection|.{{SmartCardConnection/[[comm]]}} to |comm|.
                   <li>Set |connection|.{{SmartCardConnection/[[context]]}} to
                     [=this=].
@@ -831,6 +835,35 @@
       <section>
         <h3>Auxiliary algorithms and definitions</h4>
 
+        <p>To <dfn>clear the operationInProgress</dfn> of a
+        {{SmartCardContext}} |context:SmartCardContext|, perform the following steps:</p>
+        <ol>
+          <li>[=Assert=]: |context|.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`.</li>
+          <li>Set |context|.{{SmartCardContext/[[operationInProgress]]}} to
+            `false`.</li>
+          <li>[=set/For each=] |connection:SmartCardConnection| of
+            |context|.{{SmartCardContext/[[connections]]}}:
+            <ol>
+              <li>[=SmartCardConnection/End any settled transaction=] of
+                |connection|.</li>
+              <li>If |context|.{{SmartCardContext/[[operationInProgress]]}} is
+                `true`, abort there steps.</li>
+            </ol>
+          </li>
+        </ol>
+        <aside class="note">
+          <p>A transaction ends when the {{Promise}} returned by the
+          {{SmartCardTransactionCallback}} passed to
+          {{SmartCardConnection/startTransaction()}} settles. At this
+          point the user agent should call [[PCSC5]] `EndTransaction()` to
+          effect that on the platform's PC/SC stack. But that won't be
+          possible if at that moment there's already another PC/SC
+          operation taking place in the connection's PC/SC context. The
+          user agent then has to wait until this ongoing PC/SC operation
+          finishes before ending that settled transaction.</p>
+        </aside>
+
         <p>The <dfn>cancel the outstanding GetStatusChange</dfn>
         algorithm steps are:</p>
         <ol>
@@ -939,9 +972,8 @@
                 [=this=] using the [=smart card task source=] which performs the
                 following steps:
                 <ol>
-                  <li>Set
-                    [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
-                    to `false`.</li>
+                  <li>[=Clear the operationInProgress=] of
+                    [=this=].{{SmartCardConnection/[[context]]}}.</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
                     |promise| with a {{DOMException}}
                     {{SmartCardError/corresponding}} to |responseCode| and abort
@@ -949,7 +981,6 @@
                   <li>Destroy [=this=].{{SmartCardConnection/[[comm]]}}.</li>
                   <li>Set [=this=].{{SmartCardConnection/[[comm]]}} to `null`.</li>
                   <li>[=Resolve=] |promise|.</li>
-                  <li>[=End any pending transaction=] of [=this=].</li>
                 </ol>
               </li>
             </ol>
@@ -1029,16 +1060,14 @@
                 [=this=] using the [=smart card task source=] which performs the
                 following steps:
                 <ol>
-                  <li>Set
-                    [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
-                    to `false`.</li>
+                  <li>[=Clear the operationInProgress=] of
+                    [=this=].{{SmartCardConnection/[[context]]}}.</li>
                   <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
                     |promise| with a {{DOMException}}
                     {{SmartCardError/corresponding}} to |responseCode| and abort
                     these steps.</li>
                   <li>[=Resolve=] |promise| with an {{ArrayBuffer}} containing
                     the first |recvLength| bytes of |recvBuffer|.</li>
-                  <li>[=End any pending transaction=] of [=this=].</li>
                 </ol>
               </li>
             </ol>
@@ -1154,9 +1183,8 @@
           |transaction:SmartCardTransactionCallback| and a {{Promise}}
           |promise:Promise|, perform the following steps:</p>
           <ol>
-            <li>Set
-              |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
-              to `false`.</li>
+            <li>[=Clear the operationInProgress=] of
+              |connection|.{{SmartCardConnection/[[context]]}}.</li>
             <li>Let |abortReason| be {{undefined}}.</li>
             <li>If |signal| is not `null`:
               <ol>
@@ -1267,9 +1295,8 @@
                   [=this=] using the [=smart card task source=] which performs
                   the following steps:
                   <ol>
-                    <li>Set
-                      |connection|.{{SmartCardContext/[[operationInProgress]]}}
-                      to `false`.</li>
+                    <li>[=Clear the operationInProgress=] of
+                      |connection|.{{SmartCardConnection/[[context]]}}.</li>
                     <li>Let |exception| be
                       |connection|.{{SmartCardConnection/[[transactionState]]}}'s
                       [=transaction state/pendingException=].</li>
@@ -1293,7 +1320,7 @@
             </li>
           </ol>
 
-          <p>To <dfn>end any pending transaction</dfn> of a
+          <p>To <dfn>end any settled transaction</dfn> of a
           {{SmartCardConnection}} |connection:SmartCardConnection|, perform the
           following steps:</p>
           <ol>
