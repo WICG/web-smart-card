@@ -856,11 +856,11 @@
           <p>A transaction ends when the {{Promise}} returned by the
           {{SmartCardTransactionCallback}} passed to
           {{SmartCardConnection/startTransaction()}} settles. At this
-          point the browser should call [[PCSC5]] `EndTransaction()` to
+          point the user agent should call [[PCSC5]] `EndTransaction()` to
           effect that on the platform's PC/SC stack. But that won't be
           possible if at that moment there's already another PC/SC
           operation taking place in the connection's PC/SC context. The
-          browser then has to wait until this ongoing PC/SC operation
+          user agent then has to wait until this ongoing PC/SC operation
           finishes before ending that settled transaction.</p>
         </aside>
 
