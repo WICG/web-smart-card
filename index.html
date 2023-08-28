@@ -162,14 +162,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2023-08-25T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 25 August 2023"
+  "publishISODate": "2023-08-28T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 28 August 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-25">25 August 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-08-28">28 August 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -288,7 +288,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
                   <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-1">smart card task source</a> to <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
                   <var data-type="Promise">promise</var> with a <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-1"><code>corresponding</code></a>
-                <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
+                  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>.</li>
               </ol>
             </li>
             <li>Otherwise, perform the following steps:
@@ -407,8 +407,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                           it.</p>
                         </aside></div>
                       </li>
-                      <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a
-                      <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-2"><code>corresponding</code></a> to
+                      <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with an
+                      <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a> <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-2"><code>corresponding</code></a> to
                       <var data-type="RESPONSECODE">responseCode</var>.</li>
                     </ol>
                   </li>
@@ -491,7 +491,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                       <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_E_CANCELLED</code> and
                         <var>abortReason</var> is not <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a> then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
                         <var data-type="Promise">promise</var> with <var>abortReason</var>.</li>
-                      <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                      <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>
                         <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-3"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var>.</li>
                       <li>Return.</li>
                     </ol>
@@ -872,7 +872,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                   <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>:
                     <ol>
                       <li>Destroy <var data-type="SCARDCOMM">comm</var>.</li>
-                      <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">Reject</a> <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                      <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">Reject</a> <var data-type="Promise">promise</var> with an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>
                       <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-4"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var> and abort these steps.</li>
                     </ol>
                   </li>
@@ -1134,7 +1134,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                   <li><a data-link-type="dfn|abstract-op" href="#dfn-clear-the-operationinprogress" class="internalDFN" id="ref-for-dfn-clear-the-operationinprogress-4">Clear the operationInProgress</a> of
                     <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-4"><code>[[context]]</code></a>.</li>
                   <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
-                    <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                    <var data-type="Promise">promise</var> with an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>
                     <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-5"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var> and abort
                     these steps.</li>
                   <li>Destroy <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-4"><code>[[comm]]</code></a>.</li>
@@ -1220,7 +1220,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                   <li><a data-link-type="dfn|abstract-op" href="#dfn-clear-the-operationinprogress" class="internalDFN" id="ref-for-dfn-clear-the-operationinprogress-5">Clear the operationInProgress</a> of
                     <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-7"><code>[[context]]</code></a>.</li>
                   <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
-                    <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                    <var data-type="Promise">promise</var> with an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>
                     <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-6"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var> and abort
                     these steps.</li>
                   <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">Resolve</a> <var data-type="Promise">promise</var> with an <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> containing
@@ -1353,8 +1353,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                 <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_E_CANCELLED</code> and
                   <var>abortReason</var> is not <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a> then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
                   <var data-type="Promise">promise</var> with <var>abortReason</var>.</li>
-                <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a
-                  <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-7"><code>corresponding</code></a> to
+                <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with an
+                  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a> <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-7"><code>corresponding</code></a> to
                   <var data-type="RESPONSECODE">responseCode</var>.</li>
                 <li>Return.</li>
               </ol>
@@ -1453,8 +1453,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                       <ol>
                         <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_S_SUCCESS</code>,
                           <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">resolve</a> <var data-type="Promise">transactionPromise</var>.</li>
-                        <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">transactionPromise</var> with a
-                          <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-8"><code>corresponding</code></a> to
+                        <li>Otherwise, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">transactionPromise</var> with an
+                          <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a> <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-8"><code>corresponding</code></a> to
                           <var data-type="RESPONSECODE">responseCode</var>.</li>
                       </ol>
                     </li>
@@ -1522,7 +1522,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                   <li><a data-link-type="dfn|abstract-op" href="#dfn-clear-the-operationinprogress" class="internalDFN" id="ref-for-dfn-clear-the-operationinprogress-8">Clear the operationInProgress</a> of
                     <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-18"><code>[[context]]</code></a>.</li>
                   <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
-                    <var data-type="Promise">promise</var> with a <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>
+                    <var data-type="Promise">promise</var> with an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>
                     <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-9"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var> and abort
                     these steps.</li>
                   <li>Let <var data-type="SmartCardConnectionState">state</var> be a
@@ -1662,7 +1662,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p>The <dfn data-export="" data-dfn-type="attribute" id="dom-smartcarderror-responsecode" data-idl="attribute" data-title="responseCode" data-dfn-for="SmartCardError" data-type="SmartCardResponseCode" data-lt="responseCode" data-local-lt="SmartCardError.responseCode" tabindex="0" aria-haspopup="dialog"><code>responseCode</code></dfn> attribute is the error or warning response
       code returned by the related [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] method.</p>
       <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>RESPONSECODE</code> different from <code>SCARD_S_SUCCESS</code>, a
-      <dfn data-dfn-for="SmartCardError" id="dfn-corresponding-5" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> is
+      <dfn data-dfn-for="SmartCardError" id="dfn-corresponding-5" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a> is
       created with the following steps:</p>
       <div class="note" role="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-5" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
         <p>The following <code>RESPONSECODE</code>s are not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still
@@ -1720,6 +1720,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_UNSUPPORTED_FEATURE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
           "<a data-link-type="idl" href="#dom-smartcardresponsecode-unsupported-feature" class="internalDFN" id="ref-for-dom-smartcardresponsecode-unsupported-feature-1"><code>unsupported-feature</code></a>"
           <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-19"><code>SmartCardError</code></a>.</li>
+        <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_INVALID_PARAMETER</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
+          <a data-link-type="idl" data-lt="TypeError" data-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror"><code>TypeError</code></a>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_INVALID_HANDLE</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
           "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_SERVICE_STOPPED</code>, return a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
