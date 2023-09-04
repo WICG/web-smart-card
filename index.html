@@ -1545,8 +1545,47 @@
       </section>
       <section>
         <h3><dfn>setAttribute()</dfn> method</h3>
-        <p>Sets a card reader's attribute or capability.</p>
-        <div class="issue">Write an algorithm for this method.</div>
+        <p>The {{SmartCardConnection/setAttribute(tag, value)}} method steps are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+          {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
+            |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
+          <li>Set
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            to `true`.</li>
+          <li>Let |pcscTag:DWORD| be a [[PCSC5]] `DWORD` containing
+            |tag|.</li>
+          <li>[=Get a copy of the buffer source=] |value:BufferSource| and save
+            the result in a [[PCSC5]] `BYTE[]` |buffer:array of BYTE|.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Call
+                [=this=].{{SmartCardConnection/[[comm]]}}.`SetReaderCapabilities()`
+                with |pcscTag| and |buffer| as arguments.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>[=Clear the operationInProgress=] of
+                    [=this=].{{SmartCardConnection/[[context]]}}.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with an [=exception=]
+                    {{SmartCardError/corresponding}} to |responseCode| and abort
+                    these steps.</li>
+                  <li>[=Resolve=] |promise|.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
       </section>
     </section>
 
