@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 34.1.6">
+<meta name="generator" content="ReSpec 34.1.8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 .issue-label{text-transform:initial}
@@ -162,14 +162,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2023-09-08T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 08 September 2023"
+  "publishISODate": "2023-09-18T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 18 September 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-09-08">08 September 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-09-18">18 September 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -545,8 +545,10 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <li>Set <var data-type="SCARD_READERSTATE">pcscState</var>.<code>CurrentState</code> to the <code>DWORD</code>
                   <a data-link-type="dfn|abstract-op" href="#dfn-corresponding-0" class="internalDFN" id="ref-for-dfn-corresponding-0-1">corresponding</a>
                 to <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-currentstate" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-currentstate-2"><code>currentState</code></a>"].</li>
-                <li><a data-link-type="dfn|abstract-op" href="#dfn-set-the-high-word" class="internalDFN" id="ref-for-dfn-set-the-high-word-1">Set the high word</a> of <var data-type="SCARD_READERSTATE">pcscState</var>.<code>CurrentState</code> to
-                  <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-currentcount" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-currentcount-2"><code>currentCount</code></a>"].</li>
+                <li>If <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-currentcount" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-currentcount-2"><code>currentCount</code></a>"]
+                  <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#map-exists">exists</a>, <a data-link-type="dfn|abstract-op" href="#dfn-set-the-high-word" class="internalDFN" id="ref-for-dfn-set-the-high-word-1">set the high word</a> of
+                  <var data-type="SCARD_READERSTATE">pcscState</var>.<code>CurrentState</code> to
+                  <var data-type="SmartCardReaderStateIn">stateIn</var>["<a data-link-type="idl" href="#dom-smartcardreaderstatein-currentcount" class="internalDFN" id="ref-for-dom-smartcardreaderstatein-currentcount-3"><code>currentCount</code></a>"].</li>
                 <li>Set <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code> to zero.</li>
                 <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-append">Append</a> <var data-type="SCARD_READERSTATE">pcscState</var> to <var data-type="array of SCARD_READERSTATE">pcscReaderStates</var>.</li>
               </ol>
@@ -1737,8 +1739,47 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
       </section>
       <section id="setattribute-method"><div class="header-wrapper"><h3 id="x5-7-setattribute-method"><bdi class="secno">5.7 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardconnection-setattribute" data-idl="operation" data-title="setAttribute()" data-dfn-for="SmartCardConnection" data-type="Promise" data-lt="setAttribute()|setAttribute(tag, value)" data-local-lt="SmartCardConnection.setAttribute|SmartCardConnection.setAttribute()|setAttribute" tabindex="0" aria-haspopup="dialog"><code>setAttribute()</code></dfn> method</h3><a class="self-link" href="#setattribute-method" aria-label="Permalink for Section 5.7"></a></div>
         
-        <p>Sets a card reader's attribute or capability.</p>
-        <div class="issue" id="issue-container-number-1"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><span>Issue 1</span></div><div class="">Write an algorithm for this method.</div></div>
+        <p>The <a data-link-type="idl" data-lt="setAttribute(tag, value)" href="#dom-smartcardconnection-setattribute" class="internalDFN" id="ref-for-dom-smartcardconnection-setattribute-2"><code>setAttribute</code></a><code>(<var>tag</var>, <var>value</var>)</code> method steps are:</p>
+        <ol>
+          <li>Let <var data-type="Promise">promise</var> be <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#a-new-promise">a new promise</a>.</li>
+          <li>If
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-25"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-26"><code>[[operationInProgress]]</code></a>
+            is <code>true</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a> <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>"
+          <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return <var data-type="Promise">promise</var>.</li>
+          <li>If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-19"><code>[[comm]]</code></a> is <code>null</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+            <var data-type="Promise">promise</var> with a "<a data-link-type="idl" data-lt="InvalidStateError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidstateerror"><code>InvalidStateError</code></a>" <a data-link-type="idl" data-lt="DOMException" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException"><code>DOMException</code></a> and return
+            <var data-type="Promise">promise</var>.</li>
+          <li>Set
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-26"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-27"><code>[[operationInProgress]]</code></a>
+            to <code>true</code>.</li>
+          <li>Let <var data-type="DWORD">pcscTag</var> be a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> containing
+            <var>tag</var>.</li>
+          <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-get-buffer-source-copy">Get a copy of the buffer source</a> <var data-type="BufferSource">value</var> and save
+            the result in a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>BYTE[]</code> <var data-type="array of BYTE">buffer</var>.</li>
+          <li>Run the following steps <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+            <ol>
+              <li>Call
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-20"><code>[[comm]]</code></a>.<code>SetReaderCapabilities()</code>
+                with <var data-type="DWORD">pcscTag</var> and <var data-type="array of BYTE">buffer</var> as arguments.</li>
+              <li>Let <var data-type="RESPONSECODE">responseCode</var> be the returned
+                <code>RESPONSECODE</code>.</li>
+              <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">Queue a global task</a> on the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a> of
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a> using the <a data-link-type="dfn|abstract-op" href="#dfn-smart-card-task-source" class="internalDFN" id="ref-for-dfn-smart-card-task-source-13">smart card task source</a> which performs the
+                following steps:
+                <ol>
+                  <li><a data-link-type="dfn|abstract-op" href="#dfn-clear-the-operationinprogress" class="internalDFN" id="ref-for-dfn-clear-the-operationinprogress-11">Clear the operationInProgress</a> of
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-27"><code>[[context]]</code></a>.</li>
+                  <li>If <var data-type="RESPONSECODE">responseCode</var> is not <code>SCARD_S_SUCCESS</code>, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#reject">reject</a>
+                    <var data-type="Promise">promise</var> with an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a>
+                    <a data-link-type="idl" href="#dfn-corresponding-5" class="internalDFN" id="ref-for-dfn-corresponding-5-12"><code>corresponding</code></a> to <var data-type="RESPONSECODE">responseCode</var> and abort
+                    these steps.</li>
+                  <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">Resolve</a> <var data-type="Promise">promise</var>.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return <var data-type="Promise">promise</var>.</li>
+        </ol>
       </section>
     </section>
 
@@ -1921,7 +1962,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     </dd><dt id="bib-pcsc5">[PCSC5]</dt><dd>
       <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf"><cite>Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition</cite></a>.  PC/SC Workgroup. 30 September 2005. Published. URL: <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf">https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 17 July 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 12 September 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-webidl">[WEBIDL]</dt><dd>
       <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
     </dd></dl>
@@ -2007,6 +2048,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-smart-card-task-source-11" title="§ 5.5 control() method">§ 5.5 control() method</a> 
     </li><li>
       <a href="#ref-for-dfn-smart-card-task-source-12" title="§ 5.6 getAttribute() method">§ 5.6 getAttribute() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-smart-card-task-source-13" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcardresourcemanager-establishcontext" aria-label="Links in this document to definition: establishContext()">
@@ -2091,6 +2134,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-operationinprogress-22" title="§ 5.5 control() method">§ 5.5 control() method</a> <a href="#ref-for-dfn-operationinprogress-23" title="Reference 2">(2)</a> 
     </li><li>
       <a href="#ref-for-dfn-operationinprogress-24" title="§ 5.6 getAttribute() method">§ 5.6 getAttribute() method</a> <a href="#ref-for-dfn-operationinprogress-25" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-operationinprogress-26" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> <a href="#ref-for-dfn-operationinprogress-27" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-connections" aria-label="Links in this document to definition: [[connections]]">
@@ -2208,7 +2253,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-smartcardreaderstatein-currentcount-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstatein-currentcount-2" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dom-smartcardreaderstatein-currentcount-1" title="§ 4.2.1 SmartCardReaderStateIn dictionary">§ 4.2.1 SmartCardReaderStateIn dictionary</a> <a href="#ref-for-dom-smartcardreaderstatein-currentcount-2" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcardreaderstatein-currentcount-3" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-corresponding" aria-label="Links in this document to definition: corresponding">
@@ -2853,6 +2898,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-clear-the-operationinprogress-9" title="§ 5.5 control() method">§ 5.5 control() method</a> 
     </li><li>
       <a href="#ref-for-dfn-clear-the-operationinprogress-10" title="§ 5.6 getAttribute() method">§ 5.6 getAttribute() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-clear-the-operationinprogress-11" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-cancel-the-outstanding-getstatuschange" aria-label="Links in this document to definition: cancel the outstanding GetStatusChange">
@@ -2977,6 +3024,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-comm-15" title="§ 5.5 control() method">§ 5.5 control() method</a> <a href="#ref-for-dfn-comm-16" title="Reference 2">(2)</a> 
     </li><li>
       <a href="#ref-for-dfn-comm-17" title="§ 5.6 getAttribute() method">§ 5.6 getAttribute() method</a> <a href="#ref-for-dfn-comm-18" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-comm-19" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> <a href="#ref-for-dfn-comm-20" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-context" aria-label="Links in this document to definition: [[context]]">
@@ -3003,6 +3052,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-context-19" title="§ 5.5 control() method">§ 5.5 control() method</a> <a href="#ref-for-dfn-context-20" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-21" title="Reference 3">(3)</a> 
     </li><li>
       <a href="#ref-for-dfn-context-22" title="§ 5.6 getAttribute() method">§ 5.6 getAttribute() method</a> <a href="#ref-for-dfn-context-23" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-24" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-context-25" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> <a href="#ref-for-dfn-context-26" title="Reference 2">(2)</a> <a href="#ref-for-dfn-context-27" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-activeprotocol" aria-label="Links in this document to definition: [[activeProtocol]]">
@@ -3537,6 +3588,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dom-smartcardconnection-setattribute-1" title="§ 5. SmartCardConnection interface">§ 5. SmartCardConnection interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcardconnection-setattribute-2" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderror" aria-label="Links in this document to definition: SmartCardError">
@@ -3605,6 +3658,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <a href="#ref-for-dfn-corresponding-5-10" title="§ 5.5 control() method">§ 5.5 control() method</a> 
     </li><li>
       <a href="#ref-for-dfn-corresponding-5-11" title="§ 5.6 getAttribute() method">§ 5.6 getAttribute() method</a> 
+    </li><li>
+      <a href="#ref-for-dfn-corresponding-5-12" title="§ 5.7 setAttribute() method">§ 5.7 setAttribute() method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarderroroptions" aria-label="Links in this document to definition: SmartCardErrorOptions">
