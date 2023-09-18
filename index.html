@@ -363,7 +363,9 @@
                 <li>Set |pcscState|.`CurrentState` to the `DWORD`
                   [=SmartCardReaderStateFlagsIn/corresponding=]
                 to |stateIn|["{{SmartCardReaderStateIn/currentState}}"].</li>
-                <li>[=SmartCardContext/Set the high word=] of |pcscState|.`CurrentState` to
+                <li>If |stateIn|["{{SmartCardReaderStateIn/currentCount}}"]
+                  [=map/exists=], [=SmartCardContext/set the high word=] of
+                  |pcscState|.`CurrentState` to
                   |stateIn|["{{SmartCardReaderStateIn/currentCount}}"].</li>
                 <li>Set |pcscState|.`EventState` to zero.</li>
                 <li>[=list/Append=] |pcscState| to |pcscReaderStates|.</li>
