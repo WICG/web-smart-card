@@ -387,6 +387,7 @@
                 boolean exclusive = false;
                 boolean inuse = false;
                 boolean mute = false;
+                boolean unpowered = false;
               };
             </pre>
 
@@ -423,6 +424,10 @@
               <dt><dfn>mute</dfn> member</dt>
               <dd>The application believes that there is an unresponsive card in
                 the reader.</dd>
+
+              <dt><dfn>unpowered</dfn> member</dt>
+              <dd>The application believes that the card in the reader has not
+                been powered up.</dd>
             </dl>
 
             <p>The [[PCSC5]] `DWORD`
@@ -457,14 +462,17 @@
               <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/mute}}"] is
                 `true`, [=add a flag|add=] `SCARD_STATE_MUTE` to
                 |pcscFlags|.
-                <aside class="note">
-                  <p>`SCARD_STATE_MUTE` is not part of [[PCSC5]] but it is still
-                  considered in this specification as existing PC/SC
-                  implementations use it.</p>
-                </aside>
               </li>
+              <li>If |flagsIn|["{{SmartCardReaderStateFlagsIn/unpowered}}"] is
+                `true`, [=add a flag|add=] `SCARD_STATE_UNPOWERED` to
+                |pcscFlags|.</li>
               <li>Return |pcscFlags|.</li>
             </ol>
+            <aside class="note">
+              <p>`SCARD_STATE_MUTE` and `SCARD_STATE_UNPOWERED` are not part of
+              [[PCSC5]] but are still considered in this specification as
+              existing PC/SC implementations use it.</p>
+            </aside>
           </section>
         </section>
         <section data-dfn-for="SmartCardReaderStateOut">
@@ -556,6 +564,7 @@
                 boolean exclusive = false;
                 boolean inuse = false;
                 boolean mute = false;
+                boolean unpowered = false;
               };
             </pre>
 
@@ -589,6 +598,9 @@
 
               <dt><dfn>mute</dfn> member</dt>
               <dd>There is an unresponsive card in the reader.</dd>
+
+              <dt><dfn>unpowered</dfn> member</dt>
+              <dd>The card in the reader has not been powered up.</dd>
             </dl>
 
             <p>Given a [[PCSC5]] `DWORD` named |pcscFlags:DWORD|, a <dfn
@@ -633,15 +645,17 @@
                 `true`.</li>
               <li>If |pcscFlags| [=has a flag|has=] `SCARD_STATE_MUTE`, set
                 |flagsOut|["{{SmartCardReaderStateFlagsOut/mute}}"] to
-                `true`.
-                <aside class="note">
-                  <p>`SCARD_STATE_MUTE` is not part of [[PCSC5]] but it is still
-                  considered in this speficiation as existing PC/SC
-                  implementations use it.</p>
-                </aside>
-              </li>
+                `true`.</li>
+              <li>If |pcscFlags| [=has a flag|has=] `SCARD_STATE_UNPOWERED`, set
+                |flagsOut|["{{SmartCardReaderStateFlagsOut/unpowered}}"] to
+                `true`.</li>
               <li>Return |flagsOut|.</li>
             </ol>
+            <aside class="note">
+              <p>`SCARD_STATE_MUTE` and `SCARD_STATE_UNPOWERED` are not part of
+              [[PCSC5]] but are still considered in this specification as
+              existing PC/SC implementations use it.</p>
+            </aside>
           </section>
         </section>
         <section data-dfn-for="SmartCardGetStatusChangeOptions">
