@@ -1236,7 +1236,7 @@
                   then:
                   <ol>
                     <li>Let |disposition:SmartCardDisposition| be
-                      "{{SmartCardDisposition/leave}}".
+                      "{{SmartCardDisposition/reset}}".
                     <li>If |v| is not {{undefined}}, set |disposition| to
                       |v|.</li>
                     <li>If
@@ -1263,9 +1263,9 @@
                       |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
                       is `true`, set
                       |transactionState|'s [=transaction state/pendingDisposition=] to
-                      "{{SmartCardDisposition/leave}}".</li>
+                      "{{SmartCardDisposition/reset}}".</li>
                     <li>Otherwise, [=end the transaction=] of |connection| with
-                      "{{SmartCardDisposition/leave}}".</li>
+                      "{{SmartCardDisposition/reset}}".</li>
                   </ol>
                 </li>
               </ul>
