@@ -162,14 +162,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2023-09-25T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 25 September 2023"
+  "publishISODate": "2023-10-06T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 06 October 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-09-25">25 September 2023</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2023-10-06">06 October 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1387,7 +1387,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                   then:
                   <ol>
                     <li>Let <var data-type="SmartCardDisposition">disposition</var> be
-                      "<a data-link-type="idl" href="#dom-smartcarddisposition-leave" class="internalDFN" id="ref-for-dom-smartcarddisposition-leave-2"><code>leave</code></a>".
+                      "<a data-link-type="idl" href="#dom-smartcarddisposition-reset" class="internalDFN" id="ref-for-dom-smartcarddisposition-reset-2"><code>reset</code></a>".
                     </li><li>If <var>v</var> is not <a data-link-type="idl" data-lt="undefined" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><code>undefined</code></a>, set <var data-type="SmartCardDisposition">disposition</var> to
                       <var>v</var>.</li>
                     <li>If
@@ -1412,9 +1412,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
                       <var data-type="SmartCardConnection">connection</var>.<a data-link-type="attribute" data-lt="[[context]]" href="#dfn-context" class="internalDFN" id="ref-for-dfn-context-12"><code>[[context]]</code></a>.<a data-link-type="attribute" data-lt="[[operationInProgress]]" href="#dfn-operationinprogress" class="internalDFN" id="ref-for-dfn-operationinprogress-17"><code>[[operationInProgress]]</code></a>
                       is <code>true</code>, set
                       <var data-type="transaction state">transactionState</var>'s <a data-link-type="dfn|abstract-op" href="#dfn-pendingdisposition" class="internalDFN" id="ref-for-dfn-pendingdisposition-2">pendingDisposition</a> to
-                      "<a data-link-type="idl" href="#dom-smartcarddisposition-leave" class="internalDFN" id="ref-for-dom-smartcarddisposition-leave-3"><code>leave</code></a>".</li>
+                      "<a data-link-type="idl" href="#dom-smartcarddisposition-reset" class="internalDFN" id="ref-for-dom-smartcarddisposition-reset-3"><code>reset</code></a>".</li>
                     <li>Otherwise, <a data-link-type="dfn|abstract-op" href="#dfn-end-the-transaction" class="internalDFN" id="ref-for-dfn-end-the-transaction-2">end the transaction</a> of <var data-type="SmartCardConnection">connection</var> with
-                      "<a data-link-type="idl" href="#dom-smartcarddisposition-leave" class="internalDFN" id="ref-for-dom-smartcarddisposition-leave-4"><code>leave</code></a>".</li>
+                      "<a data-link-type="idl" href="#dom-smartcarddisposition-reset" class="internalDFN" id="ref-for-dom-smartcarddisposition-reset-4"><code>reset</code></a>".</li>
                   </ol>
                 </li>
               </ul>
@@ -3162,8 +3162,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dom-smartcarddisposition-leave-1" title="§ 5.1.1 SmartCardDisposition enum">§ 5.1.1 SmartCardDisposition enum</a> 
-    </li><li>
-      <a href="#ref-for-dom-smartcarddisposition-leave-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dom-smartcarddisposition-leave-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcarddisposition-leave-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarddisposition-reset" aria-label="Links in this document to definition: reset">
@@ -3176,6 +3174,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <ul>
     <li>
       <a href="#ref-for-dom-smartcarddisposition-reset-1" title="§ 5.1.1 SmartCardDisposition enum">§ 5.1.1 SmartCardDisposition enum</a> 
+    </li><li>
+      <a href="#ref-for-dom-smartcarddisposition-reset-2" title="§ 5.3.2 Auxiliary algorithms and definitions">§ 5.3.2 Auxiliary algorithms and definitions</a> <a href="#ref-for-dom-smartcarddisposition-reset-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-smartcarddisposition-reset-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-smartcarddisposition-unpower" aria-label="Links in this document to definition: unpower">
