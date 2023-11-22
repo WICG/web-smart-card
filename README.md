@@ -22,6 +22,12 @@ A remote access (aka "remote desktop") web app letting the remote machine access
 
 A web-based kiosk could read even simple RFID badges via PC/SC and then display relevant information on a display. It's also not uncommon for such readers to need control commands to put them into the proper state for reading the particular type of card the application supports.
 
+### Enable new and niche smart card use cases 
+
+You can see smart cards as a platform to communicate with applications (also known as applets) running on small, resource-constricted, computers with tamper-proof memory. Thus, being an application-indepentent platform, there are in theory no restrictions to its possible use cases.
+
+While a higher level API is preferable, safer, and more convenient (such WebAuthN for FIDO2 applets), there's also a variety of both standardized and proprietary applets for which there's not enough "general usefulness" to justify a specific, higher-level, Web API for it. Or it's simply a new applet for a new use case.
+
 ## Non-goals
 
 * Provide an API that is at a higher level than PC/SC.
