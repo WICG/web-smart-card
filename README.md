@@ -26,7 +26,7 @@ A web-based kiosk could read even simple RFID badges via PC/SC and then display 
 
 You can see smart cards as a platform to communicate with applications (also known as applets) running on small, resource-constricted, computers with tamper-proof memory. Thus, being an application-indepentent platform, there are in theory no restrictions to its possible use cases.
 
-While a higher level API is preferable, safer, and more convenient (think WebAuthN for FIDO2 applets), there's also a variety of both standardized and proprietary applets for which there's not enough "general usefulness" to justify a specific, higher-level, Web API for it. Or it's simply a new applet for a new use case.
+While a higher level API is preferable, safer, more convenient or even necessary (think WebAuthN for FIDO2 applets), there's also a variety of both standardized and proprietary applets for which there's not enough "general usefulness" to justify a specific, higher-level, Web API for it. Or it's simply a new applet for a new use case.
 
 ## Non-goals
 
