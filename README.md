@@ -73,7 +73,7 @@ If a connection is established in `"shared"` access mode, to ensure consecutive 
 
 ```js
 try {
-  await connection.startTransaction(async connection => {
+  await connection.startTransaction(async () => {
     // A transaction has successfully started.
     let firstCommand = new UInt8Array([0x00, 0xA4, 0x04, 0x00, 0x0A, 0xA0, 0x00,
         0x00, 0x00, 0x62, 0x03, 0x01, 0x0C, 0x06, 0x01]);
