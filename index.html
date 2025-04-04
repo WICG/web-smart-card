@@ -12,6 +12,12 @@
           company: "Google",
           companyURL: "https://google.com/",
           mailto: "dandrader@google.com",
+        },
+        {
+          name: "Luke Klimek",
+          company: "Google",
+          companyURL: "https://google.com/",
+          mailto: "zgroza@google.com",
         }],
         github: {
           branch: "main",
@@ -912,6 +918,9 @@
         interface SmartCardConnection {
           Promise&lt;undefined&gt; disconnect(optional SmartCardDisposition disposition = "leave");
 
+          Promise&lt;SmartCardProtocol?&gt; reconnect(
+            optional SmartCardReconnectOptions options = {});
+
           Promise&lt;ArrayBuffer&gt; transmit(BufferSource sendBuffer,
               optional SmartCardTransmitOptions options = {});
 
@@ -1030,6 +1039,90 @@
           </dl>
         </section>
       </section>
+
+      <section>
+        <h3><dfn>reconnect()</dfn> method</h3>
+        <p>The {{SmartCardConnection/reconnect(options)}} method steps are:</p>
+        <ol>
+          <li>Let |promise:Promise| be [=a new promise=].</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+          {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
+            |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
+          <li>Set
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
+            to `true`.</li>
+          <li>Run the following steps [=in parallel=]:
+            <ol>
+              <li>Let |accessFlags:DWORD| be a [[PCSC5]] `DWORD`
+                [=SmartCardAccessMode/corresponding=] to
+                |options:SmartCardReconnectOptions|.["{{SmartCardReconnectOptions/accessMode}}"].</li>
+              <li>Let |protocolFlags:DWORD| be a `DWORD` set to `0`.</li>
+              <li>If
+                |options:SmartCardReconnectOptions|["{{SmartCardReconnectOptions/preferredProtocols}}"]
+                [=map/exists=], set |protocolFlags| to its
+                [=SmartCardProtocol/corresponding flags=].</li>
+              <li>Let |initialization:DWORD| be a [[PCSC5]] `DWORD` corresponding to
+                |options:SmartCardReconnectOptions|.["{{SmartCardReconnectOptions/initialization}}"].</li>
+              <li>Let |activeProtocol:DWORD| be a `DWORD` set to `0`.</li>
+              <li>Call [=this=].{{SmartCardConnection/[[comm]]}}.`Reconnect()`
+                with |accessFlags|, |protocolFlags|, and |initialization| as input and |activeProtocol| as output parameters.</li>
+              <li>Let |responseCode:RESPONSECODE| be the returned
+                `RESPONSECODE`.</li>
+              <li>[=Queue a global task=] on the [=relevant global object=] of
+                [=this=] using the [=smart card task source=] which performs the
+                following steps:
+                <ol>
+                  <li>[=Clear the operationInProgress=] of
+                    [=this=].{{SmartCardConnection/[[context]]}}.</li>
+                  <li>If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+                    |promise| with an [=exception=]
+                    {{SmartCardError/corresponding}} to |responseCode| and abort
+                    these steps.</li>
+                  <li>Set [=this=].{{SmartCardConnection/[[activeProtocol]]}} to
+                    |activeProtocol|.</li>
+                  <li>Let |resultProtocol:SmartCardProtocol?| be `null`.</li>
+                  <li>If |activeProtocol| is a [=SmartCardProtocol/valid
+                    protocol value=], set |resultProtocol| to the
+                    corresponding {{SmartCardProtocol}}.</li>
+                  <li>[=Resolve=] |promise| with |resultProtocol|.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |promise|.</li>
+        </ol>
+        <aside class="note">
+          <p>This method allows clearing error conditions like `SCARD_W_RESET_CARD`
+          or `SCARD_W_REMOVED_CARD` that might occur if another application
+          interacted with the card. It also allows changing the access mode
+          or re-initializing the card.</p>
+        </aside>
+
+        <section data-dfn-for="SmartCardReconnectOptions">
+          <h4><dfn>SmartCardReconnectOptions</dfn> dictionary</h3>
+          <pre class="idl">
+            dictionary SmartCardReconnectOptions {
+              SmartCardAccessMode accessMode;
+              sequence&lt;SmartCardProtocol&gt; preferredProtocols;
+              SmartCardDisposition initialization = "leave";
+            };
+          </pre>
+          <dl>
+            <dt><dfn>accessMode</dfn> member</dt>
+            <dd>Desired access mode for the re-established connection.</dd>
+            <dt><dfn>preferredProtocols</dfn> member</dt>
+            <dd>Card communication protocols that may be used.</dd>
+            <dt><dfn>initialization</dfn> member</dt>
+            <dd>Specifies the action to take on the card upon reconnection, such as
+            resetting or unpowering it. Defaults to "leave".</dd>
+          </dl>
+        </section>
+      </section>
+
       <section>
         <h3><dfn>transmit()</dfn> method</h3>
         <p>The {{SmartCardConnection/transmit(sendBuffer, options)}} method steps
