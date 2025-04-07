@@ -965,9 +965,9 @@
           <p>[[PCSC5]] mentions also the `Reconnect` method, which has no equivalent here.
             This is because its behavior differs between implementations&mdash;PC/SC Lite does
             not release the transactions held by the process, while Microsoft's WinSCard
-            does. While PCSC lite behavior cannot be replicated cross-platform, Microsoft
+            does. While PCSC lite's behavior cannot be replicated cross-platform, Microsoft
             Windows WinSCard can be achieved via calling `Disconnect` + `Connect`. Moreover,
-            in case of Javascript API the benefit of maintaining the same connection handle
+            in case of the Javascript API the benefit of maintaining the same connection handle
             ID is lost, as the ID is not exposed, only the `SmartCardConnection` which is an
             abstraction over it. Hence, there are no material benefits to including this method in
             the web API.</p>
