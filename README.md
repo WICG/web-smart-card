@@ -162,7 +162,7 @@ The user would have to explicitly grant permission for the malicious website to 
 The names of the available smart card readers provide an [active fingerprinting](https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting) surface. This is made available via the `SmartCardContext.listReaders()` API call and does not require user consent.
 The name of a reader is also dependent on its driver, which is platform-specific. Ie, the same device when plugged on a Windows machine may show a different name than when plugged on a macOS, as the corresponding PC/SC stacks also come with their own different reader drivers and the reader name comes from its driver.
 
-The `SmartCardConnection.status()` and `SmartCardContext.getStatusChange()` methods extend that fingerprinting surface by providing `answerToReset` that allows one to also know the model and, in some cases, issuer of the smart card inserted in that reader. Eg: the SIM card of a particular phone carrier is inserted in a particular card reader model.
+The `SmartCardConnection.status()` and `SmartCardContext.getStatusChange()` methods extend that fingerprinting surface by providing `answerToReset` that allows one to also know the model and, in some cases, issuer of the smart card inserted in that reader. For example, the SIM card of a particular phone carrier is inserted in a particular card reader model.
 
 Some devices such as YubiKeys show up as both a smart card and its own card reader (ie, a card reader that has always the same card inserted). In this situation the ATR doesn't provide additional entropy as there is a one-to-one mapping between the reader name its constant ATR.
 
@@ -186,7 +186,7 @@ The surface is consistent across origins.
 
 A possible user-level mitigation is to simply remove readers (or cards) when not in active use (assuming they are not built in), which removes that fingerprinting surface.
 
-`navigator.smartCard.establishContext()`, which is an entry point to getting any of the API capabilities, is `Promise` based and hence suitable for permission prompts and rejections. It is also guarded by the `"smart-card"` permission check. A browser may move to adding a permission prompt at this point - this however, along with the permission prompts before the actually powerful `connect()`, carries the threat of overwhelming the user with dialogues to the point where they are auto-accepting them.
+`navigator.smartCard.establishContext()`, which is an entrypoint to any of the API capabilities, is `Promise`-based and hence suitable for permission prompts and rejections. It is also guarded by the `"smart-card"` permission check. A browser may move to adding a permission prompt at this point - this however, along with the permission prompts before the actually powerful `connect()`, carries the threat of overwhelming the user with dialogues to the point where they are auto-accepting them.
 
 ## Considered alternatives
 
@@ -196,7 +196,7 @@ Device APIs like WebUSB, Web Serial, Web Bluetooth and WebHID all implement a ch
 
 In the case of the Web Smart Card API, the privacy and security sensitive interface is essentially `SmartCardConnection`. Freely enumerating all smart card readers does open an active fingerprinting surface but nothing more than that. Therefore it was decided to have the permission prompting at the point a website tries to establish a connection with a card (and/or with the reader itself, as reader control commands and reader attributes can then be sent/read). This is the point where that powerful interface would be made available to the website. Ie, the [powerful feature](https://w3c.github.io/permissions/#dfn-powerful-feature) is `SmartCardConnection` and not the entire Web Smart Card API.
 
-Having said that, as mentioned above, the asynchronous design of the `establishContext()` method does provide optionality for implementing a permission prompt before any reader information is provided to the page, but no implementation is currently pursuing this route due to the aforementioned reasons. However, a browser setting allowing the user to manually remove the `"smart-card"` permission for the individual installed applications - or for all by default - is a desirable thing.
+Having said that, as mentioned above, the asynchronous design of the `establishContext()` method does provide optionality for implementing a permission prompt before any reader information is provided to the page, but no implementation is currently pursuing this route due to the aforementioned reasons. However, a browser setting allowing the user to manually remove the `"smart-card"` permission for the individual installed applications—or for all by default—is a desirable thing.
 
 ### Access permissions based on card type
 
