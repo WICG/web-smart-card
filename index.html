@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.3.0">
+<meta name="generator" content="ReSpec 35.4.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 .issue-label{text-transform:initial}
@@ -83,7 +83,7 @@ a.bibref{text-decoration:none}
 .respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
 }
 #references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
-cite .bibref{font-style:normal}
+cite .bibref{font-style:italic}
 a[href].orcid{padding-left:4px;padding-right:4px}
 a[href].orcid>svg{margin-bottom:-2px}
 ol.tof,ul.tof{list-style:none outside none}
@@ -166,14 +166,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2025-04-07T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 07 April 2025"
+  "publishISODate": "2025-05-16T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 16 May 2025"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2025-04-07">07 April 2025</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2025-05-16">16 May 2025</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -364,6 +364,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
             <a data-link-type="idl" data-lt="getStatusChange()" href="#dom-smartcardcontext-getstatuschange" class="internalDFN" id="ref-for-dom-smartcardcontext-getstatuschange-2"><code>getStatusChange</code></a><code>()</code> call, if any.</td>
         </tr>
       </tbody></table>
+      <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Note</span><span class="issue-label">: Lack of reader groups support</span></div><aside class="">
+        <p>This API does not include an equivalent for the "reader groups"
+          concept found in [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]. The primary reason for this omission is
+          that PC/SC Lite does not support it—and thus, it's unavailable
+          on most platforms.</p>
+      </aside></div>
       <section id="listreaders-method"><div class="header-wrapper"><h3 id="x4-1-listreaders-method"><bdi class="secno">4.1 </bdi><dfn data-export="" data-dfn-type="method" id="dom-smartcardcontext-listreaders" data-idl="operation" data-title="listReaders()" data-dfn-for="SmartCardContext" data-type="Promise" data-lt="listReaders()" data-local-lt="SmartCardContext.listReaders|SmartCardContext.listReaders()|listReaders" tabindex="0" aria-haspopup="dialog"><code>listReaders()</code></dfn> method</h3><a class="self-link" href="#listreaders-method" aria-label="Permalink for Section 4.1"></a></div>
         
         <p>The <a data-link-type="idl" data-lt="listReaders()" href="#dom-smartcardcontext-listreaders" class="internalDFN" id="ref-for-dom-smartcardcontext-listreaders-2"><code>listReaders</code></a><code>()</code> method steps
@@ -385,7 +391,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               <li>Let <var data-type="array of STR">groups</var> be the platform's [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>STR[]</code>
                 containing the list of group names that is equivalent to "all
                 readers in the system" in that platform.
-                <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span></div><aside class="">This could be an empty <code>STR[]</code> in some
+                <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span></div><aside class="">This could be an empty <code>STR[]</code> in some
                   [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] implementations.</aside></div>
               </li>
               <li>Let <var data-type="array of STR">pcscReaders</var> be an empty <code>STR[]</code>.
@@ -404,7 +410,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                       <li>If <var data-type="RESPONSECODE">responseCode</var> is <code>SCARD_E_NO_READERS_AVAILABLE</code>,
                       <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#resolve">resolve</a> <var data-type="Promise">promise</var> with an empty <code>sequence</code> of
                       <a data-link-type="interface" data-lt="DOMString" href="https://webidl.spec.whatwg.org/#idl-DOMString"><code>DOMString</code></a>.
-                        <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span></div><aside class="">
+                        <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><aside class="">
                           <p><code>SCARD_E_NO_READERS_AVAILABLE</code> is not part of
                           [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but it is still considered in this
                           specification as existing PC/SC implementations use
@@ -652,7 +658,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <var data-type="DWORD">pcscFlags</var>.</li>
               <li>Return <var data-type="DWORD">pcscFlags</var>.</li>
             </ol>
-            <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="6"><span>Note</span></div><aside class="">
+            <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="6"><span>Note</span></div><aside class="">
               <p><code>SCARD_STATE_MUTE</code> and <code>SCARD_STATE_UNPOWERED</code> are not part of
               [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still considered in this specification as
               existing PC/SC implementations use it.</p>
@@ -705,7 +711,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                   to <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.</li>
                 <li>Set <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-eventcount" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-eventcount-2"><code>eventCount</code></a>"] to
                   the <a data-link-type="dfn|abstract-op" href="#dfn-high-word" class="internalDFN" id="ref-for-dfn-high-word-1">high word</a> of <var data-type="SCARD_READERSTATE">pcscState</var>.<code>EventState</code>.
-                  <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="5"><span>Note</span><span class="issue-label">: Number of card insertion and removal
+                  <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="5"><span>Note</span><span class="issue-label">: Number of card insertion and removal
                     events</span></div><aside class="">
                     <p>Having the number of card insertion and removal events
                     stored in the upper 2 bytes of the <code>EventState</code> and
@@ -828,7 +834,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                 <code>true</code>.</li>
               <li>Return <var data-type="SmartCardReaderStateFlagsOut">flagsOut</var>.</li>
             </ol>
-            <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="6"><span>Note</span></div><aside class="">
+            <div class="note" role="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-4" aria-level="6"><span>Note</span></div><aside class="">
               <p><code>SCARD_STATE_MUTE</code> and <code>SCARD_STATE_UNPOWERED</code> are not part of
               [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still considered in this specification as
               existing PC/SC implementations use it.</p>
@@ -1033,7 +1039,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
             </ol>
           </li>
         </ol>
-        <div class="note" role="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span></div><aside class="">
+        <div class="note" role="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span></div><aside class="">
           <p>A transaction ends when the <a data-link-type="idl" data-lt="Promise" href="#dfn-promise" class="internalDFN" id="ref-for-dfn-promise-1"><code>Promise</code></a> returned by the
           <a data-link-type="idl" data-lt="SmartCardTransactionCallback" href="#dom-smartcardtransactioncallback" class="internalDFN" id="ref-for-dom-smartcardtransactioncallback-1"><code>SmartCardTransactionCallback</code></a> passed to
           <a data-link-type="idl" data-lt="startTransaction()" href="#dom-smartcardconnection-starttransaction" class="internalDFN" id="ref-for-dom-smartcardconnection-starttransaction-1"><code>startTransaction</code></a><code>()</code> settles. At this
@@ -1124,7 +1130,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
             any.</td>
         </tr>
       </tbody></table>
-        <div class="note" role="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-5" aria-level="3"><span>Note</span><span class="issue-label">: Lack of the reconnect method</span></div><aside class="">
+        <div class="note" role="note" id="issue-container-generatedID-6"><div role="heading" class="note-title marker" id="h-note-6" aria-level="3"><span>Note</span><span class="issue-label">: Lack of the reconnect method</span></div><aside class="">
           <p>[<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] mentions also the <code>Reconnect</code> method, which has no equivalent here.
             This is because its behavior differs between implementations—PC/SC Lite does
             not release the transactions held by the process, while Microsoft's WinSCard
@@ -1760,7 +1766,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
           </li>
           <li>Return <var data-type="Promise">promise</var>.</li>
         </ol>
-        <div class="note" role="note" id="issue-container-generatedID-6"><div role="heading" class="note-title marker" id="h-note-6" aria-level="4"><span>Note</span><span class="issue-label">: Output buffer size</span></div><aside class="">
+        <div class="note" role="note" id="issue-container-generatedID-7"><div role="heading" class="note-title marker" id="h-note-7" aria-level="4"><span>Note</span><span class="issue-label">: Output buffer size</span></div><aside class="">
           <p>Known [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] platform implementations allow either the output
           buffer to be automatically allocated or to query the size needed for
           it. This covers the gap left by [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] in that regard.</p>
@@ -1824,7 +1830,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <p>Given a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>RESPONSECODE</code> different from <code>SCARD_S_SUCCESS</code>, a
       <dfn data-dfn-for="SmartCardError" id="dfn-corresponding-5" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">corresponding</dfn> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exception">exception</a> is
       created with the following steps:</p>
-      <div class="note" role="note" id="issue-container-generatedID-7"><div role="heading" class="note-title marker" id="h-note-7" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
+      <div class="note" role="note" id="issue-container-generatedID-8"><div role="heading" class="note-title marker" id="h-note-8" aria-level="3"><span>Note</span><span class="issue-label">: Unspecified response codes</span></div><aside class="">
         <p>The following <code>RESPONSECODE</code>s are not part of [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] but are still
         considered in this specification as existing PC/SC
         implementations use them:</p>
@@ -1838,7 +1844,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
         <li>Let <var data-type="RESPONSECODE">pcscCode</var> be that <code>RESPONSECODE</code>.</li>
         <li>If <var data-type="RESPONSECODE">pcscCode</var> is <code>SCARD_E_NO_SERVICE</code>, return a <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a>
           "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-1"><code>no-service</code></a>" <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-2"><code>SmartCardError</code></a>.
-          <div class="note" role="note" id="issue-container-generatedID-8"><div role="heading" class="note-title marker" id="h-note-8" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
+          <div class="note" role="note" id="issue-container-generatedID-9"><div role="heading" class="note-title marker" id="h-note-9" aria-level="3"><span>Note</span><span class="issue-label">: Creating SmartCardError instances</span></div><aside class="">
             <p>In statements such as:</p>
             <blockquote><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#new">new</a> "<a data-link-type="idl" href="#dom-smartcardresponsecode-no-service" class="internalDFN" id="ref-for-dom-smartcardresponsecode-no-service-2"><code>no-service</code></a>"
               <a data-link-type="idl" data-lt="SmartCardError" href="#dom-smartcarderror" class="internalDFN" id="ref-for-dom-smartcarderror-3"><code>SmartCardError</code></a></blockquote>
@@ -1991,7 +1997,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     </dd><dt id="bib-pcsc5">[PCSC5]</dt><dd>
       <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf"><cite>Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition</cite></a>.  PC/SC Workgroup. 30 September 2005. Published. URL: <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf">https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 10 February 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 May 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-webidl">[WEBIDL]</dt><dd>
       <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
     </dd></dl>
