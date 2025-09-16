@@ -1841,7 +1841,7 @@
           Access to a smart card reader and any card present within it is a
           [=powerful feature=]. A user agent <em class="rfc2119">MUST NOT</em>
           allow a web application to gain access to a {{SmartCardConnection}}
-          object without explicit <dfn>user consent</dfn>.
+          object without [=express permission=].
         </p>
         <p>
           User consent <em class="rfc2119">MUST</em> be obtained for a specific
@@ -1903,7 +1903,7 @@
         </p>
         <p>
           The primary mitigation for these threats is the requirement for
-          [=user consent=] before a {{SmartCardConnection}} object is created,
+          [=express permission=] before a {{SmartCardConnection}} object is created,
           as this gates access to all subsequent powerful methods.
         </p>
       </section>
@@ -1929,7 +1929,7 @@
         <p>
           A smart card with writable memory could be used as a side-channel for
           different origins to exchange data, bypassing other same-origin
-          policies. The mitigation for this is that [=user consent=] is granted
+          policies. The mitigation for this is that [=express permission=] is granted
           to a specific [=origin=]. An attack would require the user to grant
           smart card access to multiple, potentially malicious, origins.
         </p>
