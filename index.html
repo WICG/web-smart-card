@@ -7,17 +7,27 @@
       var respecConfig = {
         group: "wicg",
         specStatus: "unofficial",
-        editors: [{
-          name: "Daniel d'Andrada",
-          company: "Google",
-          companyURL: "https://google.com/",
-          mailto: "dandrader@google.com",
-        }],
+        editors: [
+          {
+            name: "Daniel d'Andrada",
+            company: "Google",
+            companyURL: "https://google.com/",
+            mailto: "dandrader@google.com",
+            w3cid: 139380,
+          },
+          {
+            name: "Luke Klimek",
+            company: "Google",
+            companyURL: "https://google.com/",
+            mailto: "zgroza@chromium.org",
+            w3cid: 158577,
+          }
+        ],
         github: {
           branch: "main",
           repoURL: "WICG/web-smart-card",
         },
-        xref: ["dom", "hr-time-3", "html", "infra", "permissions-policy", "webidl"],
+        xref: ["dom", "hr-time-3", "html", "infra", "isolated-contexts", "permissions", "permissions-policy", "webidl"],
       };
     </script>
   </head>
@@ -40,7 +50,7 @@
     <section data-dfn-for="Navigator">
       <h2>Extensions to the {{Navigator}} interface</h2>
       <pre class="idl">
-        [Exposed=Window, SecureContext]
+        [Exposed=Window, SecureContext, IsolatedContext]
         partial interface Navigator {
           [SameObject] readonly attribute SmartCardResourceManager smartCard;
         };
@@ -68,7 +78,7 @@
     <section data-dfn-for="SmartCardResourceManager">
       <h2><dfn>SmartCardResourceManager</dfn> interface</h2>
       <pre class="idl">
-        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext]
+        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext, IsolatedContext]
         interface SmartCardResourceManager {
           Promise&lt;SmartCardContext&gt; establishContext();
         };
@@ -1817,6 +1827,139 @@
         </dl>
       </section>
     </section>
+    <section id="security-privacy">
+      <h2>Security and Privacy Considerations</h2>
+      <p>
+        This API provides web applications with access to the host's PC/SC smart
+        card subsystem. This is a [=powerful feature=] that, if misused,
+        could have significant negative impacts on a user's security and
+        privacy. This section outlines the threats considered and the normative
+        requirements for user agents to mitigate them.
+      </p>
+
+      <section id="user-consent">
+        <h3>User Consent</h3>
+        <p>
+          Access to a smart card reader and any card present within it is a
+          [=powerful feature=]. A user agent <em class="rfc2119">MUST NOT</em>
+          allow a web application to gain access to a {{SmartCardConnection}}
+          object without [=express permission=].
+        </p>
+        <p>
+          User consent <em class="rfc2119">MUST</em> be obtained for a specific
+          [=origin=]. The request for consent <em class="rfc2119">MUST</em> be
+          triggered by a call to the {{SmartCardContext/connect()}} method. The
+          user agent <em class="rfc2119">MUST</em> display a permission prompt
+          that clearly indicates which origin is requesting access and provides
+          the user with enough information to make an informed decision (for
+          example, by displaying the name of the smart card reader).
+        </p>
+        <p>
+          User agents <em class="rfc2119">SHOULD</em> provide options for both
+          transient (e.g., "for this session only") and persistent permission.
+          To mitigate the risk of users forgetting they have granted persistent
+          access, transient permission <em class="rfc2119">SHOULD</em> be the
+          default and more prominent option.
+        </p>
+        <p>
+          Users <em class="rfc2119">MUST</em> be provided with a mechanism to
+          view and revoke any previously granted permissions for this API.
+        </p>
+      </section>
+
+      <section id="fingerprinting">
+        <h3>Fingerprinting</h3>
+        <p>
+          The {{SmartCardContext/listReaders()}} method and the
+          {{SmartCardReaderStateOut/answerToReset}} member of the
+          {{SmartCardReaderStateOut}} dictionary expose information that can be
+          used for passive fingerprinting. The presence and model of smart card
+          readers can reveal information about the user, such as whether they
+          are in a corporate environment. The Answer to Reset (ATR) can further
+          identify the type and issuer of a smart card.
+        </p>
+        <p>
+          While this specification does not require a permission prompt before
+          calling {{SmartCardContext/listReaders()}}, access to the entire API
+          is controlled by the "[=policy-controlled feature/smart-card=]"
+          [=policy-controlled feature=]. This allows administrators or users to
+          disable the API for specific origins, mitigating the fingerprinting
+          risk.
+        </p>
+      </section>
+
+      <section id="device-integrity">
+        <h3>Device and Data Integrity</h3>
+        <p>
+          The {{SmartCardConnection/control()}} and
+          {{SmartCardConnection/setAttribute()}} methods provide direct,
+          low-level access to the smart card reader hardware. A malicious site
+          could potentially use these methods to upload malicious firmware,
+          render the device inoperable, or otherwise interfere with its normal
+          operation.
+        </p>
+        <p>
+          Similarly, a malicious site with a connection to a smart card could
+          repeatedly attempt PIN verification to permanently block the card, or
+          access or overwrite sensitive, unprotected data.
+        </p>
+        <p>
+          The primary mitigation for these threats is the requirement for
+          [=express permission=] before a {{SmartCardConnection}} object is created,
+          as this gates access to all subsequent powerful methods.
+        </p>
+      </section>
+
+      <section id="authentication-spoofing">
+        <h3>Authentication and Spoofing</h3>
+        <p class="note">
+          This API operates at a low level and does not have inherent
+          protections against phishing or other forms of spoofing attacks that
+          are present in higher-level APIs like WebAuthn. A malicious site could
+          trick a user into performing an authentication ceremony that is then
+          used to impersonate the user on a different site.
+        </p>
+        <p>
+          For authentication use cases, developers
+          <em class="rfc2119">SHOULD</em> prefer using the Web Authentication
+          API wherever possible.
+        </p>
+      </section>
+
+      <section id="cross-origin-communication">
+        <h3>Cross-Origin Communication</h3>
+        <p>
+          A smart card with writable memory could be used as a side-channel for
+          different origins to exchange data, bypassing other same-origin
+          policies. The mitigation for this is that [=express permission=] is granted
+          to a specific [=origin=]. An attack would require the user to grant
+          smart card access to multiple, potentially malicious, origins.
+        </p>
+      </section>
+
+      <section id="isolated-context">
+        <h3>Isolated Context</h3>
+        <p>
+          This API <em class="rfc2119">MUST</em> only be exposed in an
+          [=isolated context=].
+        </p>
+      </section>
+      <section id="document-lifecycle">
+        <h3>Document Lifecycle</h3>
+        <p>
+          To prevent documents from holding connections to sensitive hardware
+          while not in the user's direct control, a user agent
+          <em class="rfc2119">MUST</em> dispose of all active
+          {{SmartCardContext}} objects and their associated
+          {{SmartCardConnection}}s when a [=document=] is no longer
+          [=Document/fully active=]. This includes automatically disconnecting
+          any active connections as if {{SmartCardConnection/disconnect()}} were
+          called.
+        </p>
+      </section>
+
+    </section>
+
     <section id="integrations">
       <h2>Integrations</h2>
 
@@ -1831,7 +1974,9 @@
         "<dfn data-dfn-for="policy-controlled feature">smart-card</dfn>".</p>
 
         <p>The [=policy-controlled feature/default allowlist=] for this feature
-        is `'self'`.</p>
+        is `'none'`. User agents <em class="rfc2119">MAY</em> override this 
+        to `'self'` for particular origins (for example based on user decision).
+        </p>
       </section>
     </section>
     <section id='conformance'>
