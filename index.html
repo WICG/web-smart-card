@@ -64,7 +64,7 @@
     <section data-dfn-for="WorkerNavigator">
       <h2>Extensions to the {{WorkerNavigator}} interface</h2>
       <pre class="idl">
-        [Exposed=(DedicatedWorker, SharedWorker), SecureContext]
+        [Exposed=(DedicatedWorker, SharedWorker), SecureContext, IsolatedContext]
         partial interface WorkerNavigator {
           [SameObject] readonly attribute SmartCardResourceManager smartCard;
         };
@@ -135,7 +135,7 @@
       <h2><dfn>SmartCardContext</dfn> interface</h2>
       <p>A context for communicating with the PC/SC resource manager.</p>
       <pre class="idl">
-        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext]
+        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext, IsolatedContext]
         interface SmartCardContext {
           Promise&lt;sequence&lt;DOMString&gt;&gt; listReaders();
 
@@ -924,7 +924,7 @@
     <section data-dfn-for="SmartCardConnection">
       <h2><dfn>SmartCardConnection</dfn> interface</h2>
       <pre class="idl">
-        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext]
+        [Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext, IsolatedContext]
         interface SmartCardConnection {
           Promise&lt;undefined&gt; disconnect(optional SmartCardDisposition disposition = "leave");
 
@@ -1682,8 +1682,12 @@
     <section data-dfn-for="SmartCardError">
       <h2><dfn>SmartCardError</dfn> interface</h2>
       <pre class="idl">
-        [Exposed=(DedicatedWorker, SharedWorker, Window), Serializable]
-        interface SmartCardError : DOMException {
+        [
+          Exposed=(DedicatedWorker, SharedWorker, Window),
+          Serializable,
+          SecureContext,
+          IsolatedContext
+        ] interface SmartCardError : DOMException {
           constructor(optional DOMString message = "", SmartCardErrorOptions options);
           readonly attribute SmartCardResponseCode responseCode;
         };
