@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.5.1">
+<meta name="generator" content="ReSpec 35.6.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 .issue-label{text-transform:initial}
@@ -177,14 +177,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2025-09-17T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 17 September 2025"
+  "publishISODate": "2025-10-29T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 29 October 2025"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra isolated-contexts permissions permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2025-09-17">17 September 2025</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2025-10-29">29 October 2025</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -262,7 +262,7 @@ partial interface <a data-idl="partial" data-link-type="interface" data-title="N
 
     <section data-dfn-for="WorkerNavigator" id="extensions-to-the-workernavigator-interface"><div class="header-wrapper"><h2 id="x2-extensions-to-the-workernavigator-interface"><bdi class="secno">2. </bdi>Extensions to the <a data-link-type="interface" data-lt="WorkerNavigator" href="https://html.spec.whatwg.org/multipage/workers.html#workernavigator"><code>WorkerNavigator</code></a> interface</h2><a class="self-link" href="#extensions-to-the-workernavigator-interface" aria-label="Permalink for Section 2."></a></div>
       
-      <pre class="idl def" id="webidl-1770504677"><span class="idlHeader"><a class="self-link" href="#webidl-1770504677">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-workernavigator-partial-1" data-title="WorkerNavigator">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>]
+      <pre class="idl def" id="webidl-1250775273"><span class="idlHeader"><a class="self-link" href="#webidl-1250775273">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-workernavigator-partial-1" data-title="WorkerNavigator">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://wicg.github.io/isolated-web-apps/isolated-contexts.html#IsolatedContext">IsolatedContext</a></span>]
 partial interface <a data-idl="partial" data-link-type="interface" data-title="WorkerNavigator" class="idlID" data-dfn-for="WorkerNavigator" href="https://html.spec.whatwg.org/multipage/workers.html#workernavigator">WorkerNavigator</a> {<span data-idl="" class="idlAttribute" id="idl-def-workernavigator-smartcard" data-title="smartCard" data-dfn-for="WorkerNavigator">
   [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardresourcemanager" class="internalDFN" id="ref-for-dom-smartcardresourcemanager-3"><code>SmartCardResourceManager</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-workernavigator-smartcard" id="ref-for-dom-workernavigator-smartcard-1"><code>smartCard</code></a>;</span>
 };</span></code></pre>
@@ -329,7 +329,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     <section data-dfn-for="SmartCardContext" id="smartcardcontext-interface"><div class="header-wrapper"><h2 id="x4-smartcardcontext-interface"><bdi class="secno">4. </bdi><dfn data-export="" data-dfn-type="interface" id="dom-smartcardcontext" data-idl="interface" data-title="SmartCardContext" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardContext</code></dfn> interface</h2><a class="self-link" href="#smartcardcontext-interface" aria-label="Permalink for Section 4."></a></div>
       
       <p>A context for communicating with the PC/SC resource manager.</p>
-      <pre class="idl def" id="webidl-1022524311"><span class="idlHeader"><a class="self-link" href="#webidl-1022524311">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcardcontext" data-title="SmartCardContext">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>]
+      <pre class="idl def" id="webidl-457612397"><span class="idlHeader"><a class="self-link" href="#webidl-457612397">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcardcontext" data-title="SmartCardContext">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://wicg.github.io/isolated-web-apps/isolated-contexts.html#IsolatedContext">IsolatedContext</a></span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcardcontext" id="ref-for-dom-smartcardcontext-3"><code>SmartCardContext</code></a> {<span data-idl="" class="idlMethod" id="idl-def-smartcardcontext-listreaders" data-title="listReaders" data-dfn-for="SmartCardContext"><span class="idlType">
   <a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence">sequence</a>&lt;<a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a>&gt;&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardcontext-listreaders" id="ref-for-dom-smartcardcontext-listreaders-1"><code>listReaders</code></a>();</span><span data-idl="" class="idlMethod" id="idl-def-smartcardcontext-getstatuschange-readerstates-options" data-title="getStatusChange" data-dfn-for="SmartCardContext"><span class="idlType">
 
@@ -1091,7 +1091,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
 
     <section data-dfn-for="SmartCardConnection" id="smartcardconnection-interface"><div class="header-wrapper"><h2 id="x5-smartcardconnection-interface"><bdi class="secno">5. </bdi><dfn data-export="" data-dfn-type="interface" id="dom-smartcardconnection" data-idl="interface" data-title="SmartCardConnection" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardConnection</code></dfn> interface</h2><a class="self-link" href="#smartcardconnection-interface" aria-label="Permalink for Section 5."></a></div>
       
-      <pre class="idl def" id="webidl-1329487962"><span class="idlHeader"><a class="self-link" href="#webidl-1329487962">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcardconnection" data-title="SmartCardConnection">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>]
+      <pre class="idl def" id="webidl-833118046"><span class="idlHeader"><a class="self-link" href="#webidl-833118046">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcardconnection" data-title="SmartCardConnection">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://wicg.github.io/isolated-web-apps/isolated-contexts.html#IsolatedContext">IsolatedContext</a></span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcardconnection" id="ref-for-dom-smartcardconnection-4"><code>SmartCardConnection</code></a> {<span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-disconnect-disposition" data-title="disconnect" data-dfn-for="SmartCardConnection"><span class="idlType">
   <a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise">Promise</a>&lt;<a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined">undefined</a>&gt;</span> <a class="internalDFN idlName" data-link-type="method" href="#dom-smartcardconnection-disconnect" id="ref-for-dom-smartcardconnection-disconnect-1"><code>disconnect</code></a>(optional<span class="idlType"> <a data-link-type="idl" href="#dom-smartcarddisposition" class="internalDFN" id="ref-for-dom-smartcarddisposition-1"><code>SmartCardDisposition</code></a></span> <span class="idlParamName">disposition</span> = "leave");</span><span data-idl="" class="idlMethod" id="idl-def-smartcardconnection-transmit-sendbuffer-options" data-title="transmit" data-dfn-for="SmartCardConnection"><span class="idlType">
 
@@ -1833,8 +1833,12 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
 
     <section data-dfn-for="SmartCardError" id="smartcarderror-interface"><div class="header-wrapper"><h2 id="x6-smartcarderror-interface"><bdi class="secno">6. </bdi><dfn data-export="" data-dfn-type="interface" id="dom-smartcarderror" data-idl="interface" data-title="SmartCardError" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>SmartCardError</code></dfn> interface</h2><a class="self-link" href="#smartcarderror-interface" aria-label="Permalink for Section 6."></a></div>
       
-      <pre class="idl def" id="webidl-1271376181"><span class="idlHeader"><a class="self-link" href="#webidl-1271376181">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcarderror" data-title="SmartCardError">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>, <span class="extAttr"><a data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable">Serializable</a></span>]
-interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcarderror" id="ref-for-dom-smartcarderror-1"><code>SmartCardError</code></a> : <span class="idlSuperclass"><a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException">DOMException</a></span> {<span data-idl="" class="idlConstructor" id="idl-def-smartcarderror-constructor-message-options" data-title="constructor" data-dfn-for="SmartCardError">
+      <pre class="idl def" id="webidl-899100751"><span class="idlHeader"><a class="self-link" href="#webidl-899100751">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-smartcarderror" data-title="SmartCardError">[
+  <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed">Exposed</a>=(DedicatedWorker, SharedWorker, Window)</span>,
+  <span class="extAttr"><a data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable">Serializable</a></span>,
+  <span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></span>,
+  <span class="extAttr"><a data-link-type="extended-attribute" href="https://wicg.github.io/isolated-web-apps/isolated-contexts.html#IsolatedContext">IsolatedContext</a></span>
+] interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-smartcarderror" id="ref-for-dom-smartcarderror-1"><code>SmartCardError</code></a> : <span class="idlSuperclass"><a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMException">DOMException</a></span> {<span data-idl="" class="idlConstructor" id="idl-def-smartcarderror-constructor-message-options" data-title="constructor" data-dfn-for="SmartCardError">
   <dfn data-export="" data-dfn-type="constructor" id="dom-smartcarderror-constructor" data-idl="constructor" data-title="constructor" data-dfn-for="SmartCardError" data-lt="constructor()|constructor(options)|constructor(options, message)" data-local-lt="SmartCardError.constructor|SmartCardError.constructor()|constructor" tabindex="0" aria-haspopup="dialog"><code>constructor</code></dfn>(optional<span class="idlType"> <a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString">DOMString</a></span> <span class="idlParamName">message</span> = "",<span class="idlType"> <a data-link-type="idl" href="#dom-smartcarderroroptions" class="internalDFN" id="ref-for-dom-smartcarderroroptions-1"><code>SmartCardErrorOptions</code></a></span> <span class="idlParamName">options</span>);</span><span data-idl="" class="idlAttribute" id="idl-def-smartcarderror-responsecode" data-title="responseCode" data-dfn-for="SmartCardError">
   readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-smartcardresponsecode" class="internalDFN" id="ref-for-dom-smartcardresponsecode-1"><code>SmartCardResponseCode</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-smartcarderror-responsecode" id="ref-for-dom-smartcarderror-responsecode-1"><code>responseCode</code></a>;</span>
 };</span></code></pre>
@@ -2154,9 +2158,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
     </dd><dt id="bib-pcsc5">[PCSC5]</dt><dd>
       <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf"><cite>Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition</cite></a>.  PC/SC Workgroup. 30 September 2005. Published. URL: <a href="https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf">https://pcscworkgroup.com/Download/Specifications/pcsc5_v2.01.01.pdf</a>
     </dd><dt id="bib-permissions">[permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 24 June 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 August 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
@@ -2188,7 +2192,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-workernavigator-smartcard" aria-label="Permalink for definition: smartCard. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1770504677">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1250775273">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -2268,7 +2272,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardcontext" aria-label="Permalink for definition: SmartCardContext. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1022524311">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-457612397">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -2382,7 +2386,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardcontext-listreaders" aria-label="Permalink for definition: listReaders(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1022524311">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-457612397">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -2398,7 +2402,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardcontext-getstatuschange" aria-label="Permalink for definition: getStatusChange(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1022524311">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-457612397">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -2876,7 +2880,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardcontext-connect" aria-label="Permalink for definition: connect(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1022524311">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-457612397">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3200,7 +3204,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection" aria-label="Permalink for definition: SmartCardConnection. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3326,7 +3330,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-disconnect" aria-label="Permalink for definition: disconnect(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3408,7 +3412,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-transmit" aria-label="Permalink for definition: transmit(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3450,7 +3454,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-starttransaction" aria-label="Permalink for definition: startTransaction(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3598,7 +3602,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-status" aria-label="Permalink for definition: status(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3794,7 +3798,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-control" aria-label="Permalink for definition: control(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3810,7 +3814,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-getattribute" aria-label="Permalink for definition: getAttribute(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3824,7 +3828,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcardconnection-setattribute" aria-label="Permalink for definition: setAttribute(). Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1329487962">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-833118046">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3840,7 +3844,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcarderror" aria-label="Permalink for definition: SmartCardError. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1271376181">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-899100751">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3864,7 +3868,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-smartcarderror-responsecode" aria-label="Permalink for definition: responseCode. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1271376181">IDL</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-899100751">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
