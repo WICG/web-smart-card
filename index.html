@@ -516,7 +516,7 @@
               reader.</dd>
 
             <dt><dfn>answerToReset</dfn> member</dt>
-            <dd>The inserted card's [[ISO7186-3]] Answer To Reset (ATR), if
+            <dd>The inserted card's [[ISO7816-3]] Answer To Reset (ATR), if
               applicable.</dd>
           </dl>
 
@@ -557,7 +557,7 @@
                   </aside>
                 </li>
                 <li>If the platform's `SCARD_READERSTATE` structure has a member
-                  containing the card's [[ISO7186-3]] Answer To Reset, set
+                  containing the card's [[ISO7816-3]] Answer To Reset, set
                   |stateOut|["{{SmartCardReaderStateOut/answerToReset}}"] to
                   that value.</li>
                 <li>[=list/Append=] |stateOut| to |readerStatesOut|.</li>
@@ -777,12 +777,12 @@
             [[PCSC5]] `SCARD_PROTOCOL_RAW` `DWORD`.</dd>
 
             <dt><dfn>t0</dfn></dt>
-            <dd>[[ISO7186-3]] T=0. Asynchronous half duplex character
+            <dd>[[ISO7816-3]] T=0. Asynchronous half duplex character
             transmission protocol. Corresponds to a [[PCSC5]]
             `SCARD_PROTOCOL_T0` `DWORD`.</dd>
 
             <dt><dfn>t1</dfn></dt>
-            <dd>[[ISO7186-3]] T=1. Asynchronous half duplex block transmission
+            <dd>[[ISO7816-3]] T=1. Asynchronous half duplex block transmission
             protocol. Corresponds to a [[PCSC5]] `SCARD_PROTOCOL_T1`
             `DWORD`.</dd>
           </dl>
@@ -1090,7 +1090,7 @@
           <li>Let |recvPci:SCARD_IO_HEADER| be the platform's `SCARD_IO_HEADER`
             equivalent of empty or null.</li>
           <li>Let |recvBuffer:array of BYTE| be a `BYTE[]` big enough to hold
-            the largest [[ISO7186-3]] extended response APDU (65538 bytes).</li>
+            the largest [[ISO7816-3]] extended response APDU (65538 bytes).</li>
           <li>Let |recvLength:DWORD| be a `DWORD` set to `0`.</li>
           <li>Run the following steps [=in parallel=]:
             <ol>
@@ -1403,7 +1403,7 @@
               <li>Let |pcscState:DWORD| be a [[PCSC5]] `DWORD` set to `0`.</li>
               <li>Let |activeProtocol:DWORD| be a [[PCSC5]] `DWORD` set to `0`.</li>
               <li>Let |pcscAtr:array of BYTE| be a `BYTE[]` big enough to hold
-                any [[ISO7186-3]] Answer To Reset (ATR).</li>
+                any [[ISO7816-3]] Answer To Reset (ATR).</li>
               <li>Call [=this=].{{SmartCardConnection/[[comm]]}}.`Status()`
                 with |pcscReader|, |pcscState|, |activeProtocol| and |pcscAtr| as
                 output parameters.</li>
@@ -1489,10 +1489,10 @@
               <dd>The card has been reset and is awaiting PTS (protocol type
                 selection) negotiation.</dd>
               <dt><dfn>t0</dfn></dt>
-              <dd>The card is in [[ISO7186-3]] T=0 protocol mode and a new protocol
+              <dd>The card is in [[ISO7816-3]] T=0 protocol mode and a new protocol
                 may not be negotiated.</dd>
               <dt><dfn>t1</dfn></dt>
-              <dd>The card is in [[ISO7186-3]] T=1 protocol mode and a new protocol
+              <dd>The card is in [[ISO7816-3]] T=1 protocol mode and a new protocol
                 may not be negotiated.</dd>
               <dt><dfn>raw</dfn></dt>
               <dd>The card is in raw protocol mode and a new protocol may not be
