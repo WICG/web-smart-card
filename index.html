@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.6.0">
+<meta name="generator" content="ReSpec 35.6.1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 .issue-label{text-transform:initial}
@@ -177,14 +177,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "permissions-policy",
     "webidl"
   ],
-  "publishISODate": "2025-11-05T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 05 November 2025"
+  "publishISODate": "2026-01-15T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 15 January 2026"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD"></head>
   <body class="h-entry" data-cite="WEBIDL dom hr-time-3 html infra isolated-contexts permissions permissions-policy webidl"><div class="head">
     
     <h1 id="title" class="title">Web Smart Card API</h1> 
-    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2025-11-05">05 November 2025</time></p>
+    <p id="w3c-state">Unofficial Draft <time class="dt-published" datetime="2026-01-15">15 January 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -222,7 +222,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     <p class="copyright">
       Copyright ©
-      2025
+      2026
       the document editors/authors.
       Text is available under the
             <a rel="license" href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International Public License</a>; additional terms may apply.
@@ -701,7 +701,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
               reader.</dd>
 
             <dt><dfn data-export="" data-dfn-type="dict-member" id="dom-smartcardreaderstateout-answertoreset" data-idl="field" data-title="answerToReset" data-dfn-for="SmartCardReaderStateOut" data-type="ArrayBuffer" tabindex="0" aria-haspopup="dialog"><code>answerToReset</code></dfn> member</dt>
-            <dd>The inserted card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] Answer To Reset (ATR), if
+            <dd>The inserted card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] Answer To Reset (ATR), if
               applicable.</dd>
           </dl>
 
@@ -741,7 +741,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
                   </aside></div>
                 </li>
                 <li>If the platform's <code>SCARD_READERSTATE</code> structure has a member
-                  containing the card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] Answer To Reset, set
+                  containing the card's [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] Answer To Reset, set
                   <var data-type="SmartCardReaderStateOut">stateOut</var>["<a data-link-type="idl" href="#dom-smartcardreaderstateout-answertoreset" class="internalDFN" id="ref-for-dom-smartcardreaderstateout-answertoreset-2"><code>answerToReset</code></a>"] to
                   that value.</li>
                 <li><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append">Append</a> <var data-type="SmartCardReaderStateOut">stateOut</var> to <var data-type="sequence&lt;SmartCardReaderStateOut&gt;">readerStatesOut</var>.</li>
@@ -952,12 +952,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-sma
             [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_PROTOCOL_RAW</code> <code>DWORD</code>.</dd>
 
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardprotocol-t0" data-idl="enum-value" data-title="t0" data-dfn-for="SmartCardProtocol" tabindex="0" aria-haspopup="dialog"><code>t0</code></dfn></dt>
-            <dd>[<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] T=0. Asynchronous half duplex character
+            <dd>[<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] T=0. Asynchronous half duplex character
             transmission protocol. Corresponds to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>]
             <code>SCARD_PROTOCOL_T0</code> <code>DWORD</code>.</dd>
 
             <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardprotocol-t1" data-idl="enum-value" data-title="t1" data-dfn-for="SmartCardProtocol" tabindex="0" aria-haspopup="dialog"><code>t1</code></dfn></dt>
-            <dd>[<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] T=1. Asynchronous half duplex block transmission
+            <dd>[<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] T=1. Asynchronous half duplex block transmission
             protocol. Corresponds to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>SCARD_PROTOCOL_T1</code>
             <code>DWORD</code>.</dd>
           </dl>
@@ -1254,7 +1254,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
           <li>Let <var data-type="SCARD_IO_HEADER">recvPci</var> be the platform's <code>SCARD_IO_HEADER</code>
             equivalent of empty or null.</li>
           <li>Let <var data-type="array of BYTE">recvBuffer</var> be a <code>BYTE[]</code> big enough to hold
-            the largest [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] extended response APDU (65538 bytes).</li>
+            the largest [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] extended response APDU (65538 bytes).</li>
           <li>Let <var data-type="DWORD">recvLength</var> be a <code>DWORD</code> set to <code>0</code>.</li>
           <li>Run the following steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
             <ol>
@@ -1559,7 +1559,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
               <li>Let <var data-type="DWORD">pcscState</var> be a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> set to <code>0</code>.</li>
               <li>Let <var data-type="DWORD">activeProtocol</var> be a [<cite><a class="bibref" data-link-type="biblio" href="#bib-pcsc5" title="Interoperability Specification for ICCs and Personal Computer Systems; Part 5. ICC Resource Manager Definition">PCSC5</a></cite>] <code>DWORD</code> set to <code>0</code>.</li>
               <li>Let <var data-type="array of BYTE">pcscAtr</var> be a <code>BYTE[]</code> big enough to hold
-                any [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] Answer To Reset (ATR).</li>
+                any [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] Answer To Reset (ATR).</li>
               <li>Call <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this">this</a>.<a data-link-type="attribute" data-lt="[[comm]]" href="#dfn-comm" class="internalDFN" id="ref-for-dfn-comm-14"><code>[[comm]]</code></a>.<code>Status()</code>
                 with <var data-type="array of STR">pcscReader</var>, <var data-type="DWORD">pcscState</var>, <var data-type="DWORD">activeProtocol</var> and <var data-type="array of BYTE">pcscAtr</var> as
                 output parameters.</li>
@@ -1641,10 +1641,10 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
               <dd>The card has been reset and is awaiting PTS (protocol type
                 selection) negotiation.</dd>
               <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardconnectionstate-t0" data-idl="enum-value" data-title="t0" data-dfn-for="SmartCardConnectionState" tabindex="0" aria-haspopup="dialog"><code>t0</code></dfn></dt>
-              <dd>The card is in [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] T=0 protocol mode and a new protocol
+              <dd>The card is in [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] T=0 protocol mode and a new protocol
                 may not be negotiated.</dd>
               <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardconnectionstate-t1" data-idl="enum-value" data-title="t1" data-dfn-for="SmartCardConnectionState" tabindex="0" aria-haspopup="dialog"><code>t1</code></dfn></dt>
-              <dd>The card is in [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7186-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7186-3</a></cite>] T=1 protocol mode and a new protocol
+              <dd>The card is in [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7816-3" title="Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols">ISO7816-3</a></cite>] T=1 protocol mode and a new protocol
                 may not be negotiated.</dd>
               <dt><dfn data-export="" data-dfn-type="enum-value" id="dom-smartcardconnectionstate-raw" data-idl="enum-value" data-title="raw" data-dfn-for="SmartCardConnectionState" tabindex="0" aria-haspopup="dialog"><code>raw</code></dfn></dt>
               <dd>The card is in raw protocol mode and a new protocol may not be
@@ -2150,7 +2150,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-smartcardtransacti
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Dominic Farolino; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
-    </dd><dt id="bib-iso7186-3">[ISO7186-3]</dt><dd>
+    </dd><dt id="bib-iso7816-3">[ISO7816-3]</dt><dd>
       <a href="https://www.iso.org/standard/38770.html"><cite>Identification cards - Integrated circuit cards; Part 3: Cards with contacts - Electrical interface and transmission protocols</cite></a>.  ISO/IEC. 1 November 2006. Published. URL: <a href="https://www.iso.org/standard/38770.html">https://www.iso.org/standard/38770.html</a>
     </dd><dt id="bib-isolated-contexts">[isolated-contexts]</dt><dd>
       <a href="https://wicg.github.io/isolated-web-apps/isolated-contexts.html"><cite>Isolated Contexts</cite></a>.  W3C. Draft Community Group Report. URL: <a href="https://wicg.github.io/isolated-web-apps/isolated-contexts.html">https://wicg.github.io/isolated-web-apps/isolated-contexts.html</a>
