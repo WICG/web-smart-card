@@ -168,6 +168,13 @@
           <td>Whether there is an ongoing PC/SC operation in this context.</td>
         </tr>
         <tr>
+          <td><dfn>[[\activeReaderTransactions]]</dfn></td>
+          <td>An empty <a data-cite="infra#map">map</a></td>
+          <td>A <a data-cite="infra#map">map</a> of reader names to the {{SmartCardConnection}} that
+            currently holds an active transaction on that reader in this
+            context, if any.</td>
+        </tr>
+        <tr>
           <td><dfn>[[\connections]]</dfn></td>
           <td>An empty [=ordered set=]</td>
           <td>The existing {{SmartCardConnection}}s created by this context.</td>
@@ -704,6 +711,9 @@
           <li>If [=this=].{{SmartCardContext/[[operationInProgress]]}} is
             `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
             {{DOMException}} and return |promise|.</li>
+          <li>If [=this=].{{SmartCardContext/[[activeReaderTransactions]]}}[|readerName|]
+            [=map/exists=], [=reject=] |promise| with a "{{InvalidStateError}}"
+            {{DOMException}} and return |promise|.</li>
           <li>Set [=this=].{{SmartCardContext/[[operationInProgress]]}} to
             `true`.</li>
           <li>Run the following steps [=in parallel=]:
@@ -744,6 +754,8 @@
                   <li>[=set/Append=] |connection| to
                     [=this=].{{SmartCardContext/[[connections]]}}.</li>
                   <li>Set |connection|.{{SmartCardConnection/[[comm]]}} to |comm|.
+                  <li>Set |connection|.{{SmartCardConnection/[[readerName]]}} to
+                    |readerName|.
                   <li>Set |connection|.{{SmartCardConnection/[[context]]}} to
                     [=this=].
                   <li>Set |connection|.{{SmartCardConnection/[[activeProtocol]]}} to
@@ -959,6 +971,11 @@
           <td>The platform's [[PCSC5]] `SCARDCOMM` to be used.</td>
         </tr>
         <tr>
+          <td><dfn>[[\readerName]]</dfn></td>
+          <td>`null`</td>
+          <td>The name of the reader this connection is associated with.</td>
+        </tr>
+        <tr>
           <td><dfn>[[\context]]</dfn></td>
           <td>`null`</td>
           <td>The {{SmartCardContext}} that created this instance.</td>
@@ -998,6 +1015,11 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+            with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
@@ -1067,6 +1089,11 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+            with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
@@ -1140,6 +1167,10 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=], [=reject=] |promise| with a "{{InvalidStateError}}"
+            {{DOMException}} and return |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
@@ -1255,6 +1286,9 @@
               |promise|.</li>
             <li>Set |connection|.{{SmartCardConnection/[[transactionState]]}}
               to |transactionState|.</li>
+            <li>Set
+              |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[|connection|.{{SmartCardConnection/[[readerName]]}}]
+              to |connection|.</li>
             <li>Let |callbackPromise:Promise| be the result of [=invoking=]
               |transaction|.</li>
             <li>[=promise/React=] to |callbackPromise|:
@@ -1340,6 +1374,8 @@
                   <ol>
                     <li>[=Clear the operationInProgress=] of
                       |connection|.{{SmartCardConnection/[[context]]}}.</li>
+                    <li>[=map/Remove=] |connection|.{{SmartCardConnection/[[readerName]]}}
+                      from |connection|.{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}.</li>
                     <li>Let |exception| be
                       |connection|.{{SmartCardConnection/[[transactionState]]}}'s
                       [=transaction state/pendingException=].</li>
@@ -1391,6 +1427,11 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+            with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
@@ -1539,6 +1580,11 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+            with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
@@ -1590,6 +1636,11 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+            with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
@@ -1642,6 +1693,11 @@
             [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[operationInProgress]]}}
             is `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
           {{DOMException}} and return |promise|.</li>
+          <li>If
+            [=this=].{{SmartCardConnection/[[context]]}}.{{SmartCardContext/[[activeReaderTransactions]]}}[[[=this=].{{SmartCardConnection/[[readerName]]}}]]
+            [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+            with a "{{InvalidStateError}}" {{DOMException}} and return
+            |promise|.</li>
           <li>If [=this=].{{SmartCardConnection/[[comm]]}} is `null`, [=reject=]
             |promise| with a "{{InvalidStateError}}" {{DOMException}} and return
             |promise|.</li>
