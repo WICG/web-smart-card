@@ -1,0 +1,1306 @@
+<pre class='metadata'>
+Title: Web Smart Card API
+Shortname: web-smart-card
+Level: 1
+Status: UD
+Group: wicg
+Repository: WICG/web-smart-card
+URL: https://wicg.github.io/web-smart-card/
+Editor: Daniel d'Andrada, Google, dandrader@google.com, w3cid 139380
+Editor: Luke Klimek, Google, zgroza@chromium.org, w3cid 158577
+Abstract: The objective of this API is to enable smart card (PC/SC) applications
+Abstract: to move to the Web Platform. It gives them access to the PC/SC
+Abstract: implementation (and card reader drivers) available in the host OS.
+Abstract:
+Abstract: There is also a companion <a href="https://github.com/WICG/web-smart-card/blob/main/README.md">explainer</a> document.
+Markup Shorthands: markdown yes, css no
+Complain About: accidental-2119 yes, missing-example-ids yes
+Assume Explicit For: yes
+Include MDN Panels: if possible
+Include Can I Use Panels: yes
+</pre>
+
+<pre class="link-defaults">
+spec:infra; type:dfn; text:map
+spec:infra; type:dfn; text:ordered set
+spec:html; type:dfn; text:allowed to use
+spec:webidl; type:dfn; text:a new promise
+spec:webidl; type:dfn; text:resolve
+spec:webidl; type:dfn; text:reject
+spec:html; type:dfn; text:in parallel
+</pre>
+
+Extensions to the {{Navigator}} interface {#navigator-extensions}
+=============================================================
+
+<xmp class="idl">
+[Exposed=Window, SecureContext, IsolatedContext]
+partial interface Navigator {
+  [SameObject] readonly attribute SmartCardResourceManager smartCard;
+};
+</xmp>
+
+## {{Navigator/smartCard}} attribute ## {#navigator-smartcard}
+
+When getting, the {{Navigator/smartCard}} attribute always returns the same
+instance of the {{SmartCardResourceManager}} object.
+
+Extensions to the {{WorkerNavigator}} interface {#workernavigator-extensions}
+=========================================================================
+
+<xmp class="idl">
+[Exposed=(DedicatedWorker, SharedWorker), SecureContext, IsolatedContext]
+partial interface WorkerNavigator {
+  [SameObject] readonly attribute SmartCardResourceManager smartCard;
+};
+</xmp>
+
+## {{WorkerNavigator/smartCard}} attribute ## {#workernavigator-smartcard}
+
+When getting, the {{WorkerNavigator/smartCard}} attribute always returns the same
+instance of the {{SmartCardResourceManager}} object.
+
+{{SmartCardResourceManager}} interface {#smartcardresourcemanager-interface}
+==================================================================================
+
+<xmp class="idl">
+[Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext, IsolatedContext]
+interface SmartCardResourceManager {
+  Promise<SmartCardContext> establishContext();
+};
+</xmp>
+
+Methods on this interface complete asynchronously, queuing
+work on the <dfn export>smart card task source</dfn>.
+
+## {{SmartCardResourceManager/establishContext()}} method ## {#smartcardresourcemanager-establishcontext}
+
+Requests a PC/SC context from the platform's PC/SC stack.
+
+The {{SmartCardResourceManager/establishContext()}} method steps are:
+
+1.  If [=this=]'s [=relevant global object=]'s [=associated Document=] is
+    not [=allowed to use=] the [=policy-controlled feature=] named
+    "[=policy-controlled feature/smart-card=]", [=exception/throw=] a
+    "{{SecurityError}}" {{DOMException}}.
+2.  Let |promise| be [=a new promise=].
+3.  Run the following steps [=in parallel=]:
+    1.  Let |resourceManager| be a new instance of the
+        platform's [[!PCSC5]] `RESOURCEMANAGER` class.
+    2.  Invoke the `EstablishContext` method of |resourceManager| with
+        a "system" `Scope` parameter.
+    3.  If the returned `RESPONSECODE` is not `SCARD_S_SUCCESS`, perform
+        the following steps:
+        1.  Destroy |resourceManager|.
+        2.  [=Queue a global task=] on the [=relevant global object=] of
+            [=this=] using the [=smart card task source=] to [=reject=]
+            |promise| with a [=SmartCardError/corresponding=]
+            [=exception=].
+    4.  Otherwise, perform the following steps:
+        1.  Let |context| be a [=new=]
+            {{SmartCardContext}} whose
+            [=SmartCardContext/[[resourceManager]]=] internal slot is set
+            to |resourceManager|.
+        2.  [=Queue a global task=] on the [=relevant global object=]
+            of [=this=] using the [=smart card task source=] to
+            [=resolve=] |promise| with |context|.
+4.  Return |promise|.
+
+{{SmartCardContext}} interface {#smartcardcontext-interface}
+===================================================================
+
+A context for communicating with the PC/SC resource manager.
+
+<xmp class="idl">
+[Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext, IsolatedContext]
+interface SmartCardContext {
+  Promise<sequence<DOMString>> listReaders();
+
+  Promise<sequence<SmartCardReaderStateOut>> getStatusChange(
+      sequence<SmartCardReaderStateIn> readerStates,
+      optional SmartCardGetStatusChangeOptions options = {});
+
+  Promise<SmartCardConnectResult> connect(
+      DOMString readerName,
+      SmartCardAccessMode accessMode,
+      optional SmartCardConnectOptions options = {});
+};
+</xmp>
+
+Instances of {{SmartCardContext}} are created with the internal slots
+described in the following table:
+
+<table class="simple" data-dfn-for="SmartCardContext">
+  <thead>
+    <tr>
+      <th>Internal slot
+      <th>Initial value
+      <th>Description (non-normative)
+  </thead>
+  <tbody>
+    <tr>
+      <td><dfn for="SmartCardContext" export lt="[[resourceManager]]">[[resourceManager]]</dfn>
+      <td>`null`
+      <td>The platform's [[!PCSC5]] `RESOURCEMANAGER` to be used.
+    <tr>
+      <td><dfn for="SmartCardContext" export lt="[[operationInProgress]]">[[operationInProgress]]</dfn>
+      <td>`false`
+      <td>Whether there is an ongoing PC/SC operation in this context.
+    <tr>
+      <td><dfn for="SmartCardContext" export lt="[[activeReaderTransactions]]">[[activeReaderTransactions]]</dfn>
+      <td>An empty [=map=]
+      <td>A [=map=] of reader names to the {{SmartCardConnection}} that
+        currently holds an active transaction on that reader in this
+        context, if any.
+    <tr>
+      <td><dfn for="SmartCardContext" export lt="[[connections]]">[[connections]]</dfn>
+      <td>An empty [=ordered set=]
+      <td>The existing {{SmartCardConnection}}s created by this context.
+    <tr>
+      <td><dfn for="SmartCardContext" export lt="[[tracker]]">[[tracker]]</dfn>
+      <td>`null`
+      <td>A [[!PCSC5]] `SCARDTRACK` instance.
+    <tr>
+      <td><dfn for="SmartCardContext" export lt="[[signal]]">[[signal]]</dfn>
+      <td>`null`
+      <td>The {{AbortSignal}} of the outstanding
+        {{SmartCardContext/getStatusChange()}} call, if any.
+  </tbody>
+</table>
+
+<aside class="note">
+  <p>**Lack of reader groups support:** This API does not include an equivalent for the "reader groups"
+    concept found in [[!PCSC5]]. The primary reason for this omission is
+    that PC/SC Lite does not support it—and thus, it's unavailable
+    on most platforms.</p>
+</aside>
+
+## {{SmartCardContext/listReaders()}} method ## {#smartcardcontext-listreaders}
+
+The {{SmartCardContext/listReaders()}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
+    `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+    {{DOMException}} and return |promise|.
+3.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+    `true`.
+4.  Run the following steps [=in parallel=]:
+    1.  Let |resourceQuery| be a new instance of the
+        platform's [[!PCSC5]] `RESOURCEQUERY` class, with
+        [=this=].[=SmartCardContext/[[resourceManager]]=] as its
+        constructor input parameter.
+    2.  Let |groups| be the platform's [[!PCSC5]] `STR[]`
+        containing the list of group names that is equivalent to "all
+        readers in the system" in that platform.
+        <aside class="note">This could be an empty `STR[]` in some
+          [[!PCSC5]] implementations.</aside>
+    3.  Let |pcscReaders| be an empty `STR[]`.
+    4.  Invoke the `ListReaders` method of |resourceQuery| with
+        |groups| as input and |pcscReaders| as output parameters.
+    5.  Let |responseCode| be the returned
+        `RESPONSECODE`.
+    6.  Destroy |resourceQuery|.
+    7.  [=Queue a global task=] on the [=relevant global object=] of
+        [=this=] using the [=smart card task source=] which performs the
+        following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`:
+            1.  If |responseCode| is `SCARD_E_NO_READERS_AVAILABLE`,
+                [=resolve=] |promise| with an empty `sequence` of
+                {{DOMString}}.
+                <aside class="note">
+                  <p>`SCARD_E_NO_READERS_AVAILABLE` is not part of
+                  [[!PCSC5]] but it is still considered in this
+                  specification as existing PC/SC implementations use
+                  it.</p>
+                </aside>
+            2.  Otherwise, [=reject=] |promise| with an
+                [=exception=] [=SmartCardError/corresponding=] to
+                |responseCode|.
+        3.  Otherwise, [=resolve=] |promise| with a `sequence` of
+            {{DOMString}} equivalent to |pcscReaders|.
+5.  Return |promise|.
+
+## {{SmartCardContext/getStatusChange()}} method ## {#smartcardcontext-getstatuschange}
+
+The {{SmartCardContext/getStatusChange(readerStates, options)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
+    `true`, [=reject=] |promise| with a "{{InvalidStateError}}"
+    {{DOMException}} and return |promise|.
+3.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"] [=map/exists=], run the following steps:
+    1.  Let |signal| be {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"].
+    2.  If |signal| is [=AbortSignal/aborted=], [=reject=] |promise|
+        with |signal|'s [=AbortSignal/abort reason=] and return |promise|.
+    3.  Set [=this=].[=SmartCardContext/[[signal]]=] to |signal|.
+    4.  [=AbortSignal/Add=] the [=cancel the outstanding GetStatusChange=] algorithm to |signal|.
+4.  Let |pcscTimeout| be a [[!PCSC5]] `DWORD` set to [[!PCSC5]]
+    `INFINITE`.
+5.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"] [=map/exists=], set |pcscTimeout| to
+    {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"].
+6.  Let |pcscReaderStates| be a [[!PCSC5]]
+    `SCARD_READERSTATE[]` [=SmartCardReaderStateIn/corresponding=] to
+    {{SmartCardContext/getStatusChange(readerStates, options)/readerStates}}.
+7.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+    `true`.
+8.  Set [=this=].[=SmartCardContext/[[tracker]]=] to a new instance of the
+    platform's [[!PCSC5]] `SCARDTRACK` class, with
+    [=this=].[=SmartCardContext/[[resourceManager]]=] as its
+    constructor input parameter.
+9.  Run the following steps [=in parallel=]:
+    1.  Call [=this=].[=SmartCardContext/[[tracker]]=].`GetStatusChange()`
+        with |pcscReaderStates| and |pcscTimeout| as input parameters.
+    2.  Let |responseCode| be the returned
+        [[!PCSC5]] `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of
+        [=this=] using the [=smart card task source=] which performs the
+        following steps:
+        1.  Set [=this=].[=SmartCardContext/[[tracker]]=] to `null`.
+        2.  [=Clear the operationInProgress=] of [=this=].
+        3.  Let |abortReason| be {{undefined}}.
+        4.  If [=this=].[=SmartCardContext/[[signal]]=] is not `null`,
+            run the following steps:
+            1.  If [=this=].[=SmartCardContext/[[signal]]=] is
+                [=AbortSignal/aborted=] then set |abortReason| to
+                [=this=].[=SmartCardContext/[[signal]]=]'s
+                [=AbortSignal/abort reason=].
+            2.  [=AbortSignal/Remove=] the [=cancel the outstanding GetStatusChange=] algorithm from
+                [=this=].[=SmartCardContext/[[signal]]=].
+            3.  Set [=this=].[=SmartCardContext/[[signal]]=] to `null`.
+        5.  If |responseCode| is not `SCARD_S_SUCCESS`, run the
+            following steps:
+            1.  If |responseCode| is `SCARD_E_CANCELLED` and
+                |abortReason| is not {{undefined}} then [=reject=]
+                |promise| with |abortReason|.
+            2.  Otherwise, [=reject=] |promise| with an [=exception=]
+                [=SmartCardError/corresponding=] to |responseCode|.
+            3.  Return.
+        6.  Let |readerStatesOut| be a sequence of {{SmartCardReaderStateOut}}
+            [=SmartCardReaderStateOut/corresponding=] to
+            |pcscReaderStates|.
+        7.  [=Resolve=] |promise| with |readerStatesOut|.
+10. Return |promise|.
+
+### {{SmartCardReaderStateIn}} dictionary ### {#smartcardreaderstatein-dict}
+<xmp class="idl">
+dictionary SmartCardReaderStateIn {
+  required DOMString readerName;
+  required SmartCardReaderStateFlagsIn currentState;
+  unsigned long currentCount;
+};
+</xmp>
+
+: {{SmartCardReaderStateIn/readerName}}
+:: Name of the smart card reader.
+: {{SmartCardReaderStateIn/currentState}}
+:: The current state of that smart card reader as known by the application.
+: {{SmartCardReaderStateIn/currentCount}}
+:: The current number of card insertion and removal events in this reader, as known by the application.
+
+Given a sequence of {{SmartCardReaderStateIn}} named |readerStates|, a <dfn for="SmartCardReaderStateIn" export>corresponding</dfn> [[!PCSC5]] `SCARD_READERSTATE[]` is created with the following steps:
+
+1.  Let |pcscReaderStates| be an empty `SCARD_READERSTATE[]`.
+2.  [=list/For each=] |stateIn| of type {{SmartCardReaderStateIn}} in |readerStates|:
+    1.  Let |pcscState| be a `SCARD_READERSTATE`.
+    2.  Set |pcscState|.`Reader` to |stateIn|["{{SmartCardReaderStateIn/readerName}}"].
+    3.  Set |pcscState|.`CurrentState` to the `DWORD` [=SmartCardReaderStateFlagsIn/corresponding=] to |stateIn|["{{SmartCardReaderStateIn/currentState}}"].
+    4.  If |stateIn|["{{SmartCardReaderStateIn/currentCount}}"] [=map/exists=], [=set the high word=] of |pcscState|.`CurrentState` to |stateIn|["{{SmartCardReaderStateIn/currentCount}}"].
+    5.  Set |pcscState|.`EventState` to zero.
+    6.  [=list/Append=] |pcscState| to |pcscReaderStates|.
+3.  Return |pcscReaderStates|.
+
+#### {{SmartCardReaderStateFlagsIn}} dictionary #### {#smartcardreaderstateflagsin-dict}
+<xmp class="idl">
+dictionary SmartCardReaderStateFlagsIn {
+  boolean unaware = false;
+  boolean ignore = false;
+  boolean unavailable = false;
+  boolean empty = false;
+  boolean present = false;
+  boolean exclusive = false;
+  boolean inuse = false;
+  boolean mute = false;
+  boolean unpowered = false;
+};
+</xmp>
+
+: {{SmartCardReaderStateFlagsIn/unaware}}
+:: The application is unaware of the current state, and would like to know.
+: {{SmartCardReaderStateFlagsIn/ignore}}
+:: The application is not interested in this reader, and it should not be considered during monitoring operations.
+: {{SmartCardReaderStateFlagsIn/unavailable}}
+:: The application believes that this reader is not available for use.
+: {{SmartCardReaderStateFlagsIn/empty}}
+:: The application believes that there is not a card in the reader.
+: {{SmartCardReaderStateFlagsIn/present}}
+:: The application believes that there is a card in the reader.
+: {{SmartCardReaderStateFlagsIn/exclusive}}
+:: The application believes that the card in the reader is allocated for exclusive use by another application.
+: {{SmartCardReaderStateFlagsIn/inuse}}
+:: The application believes that the card in the reader is in use by one or more other applications, but may be connected to in shared mode.
+: {{SmartCardReaderStateFlagsIn/mute}}
+:: The application believes that there is an unresponsive card in the reader.
+: {{SmartCardReaderStateFlagsIn/unpowered}}
+:: The application believes that the card in the reader has not been powered up.
+
+The [[!PCSC5]] `DWORD` <dfn for="SmartCardReaderStateFlagsIn" export>corresponding</dfn> to a given {{SmartCardReaderStateFlagsIn}} is created with the following steps:
+
+1.  Let |flagsIn| be the given {{SmartCardReaderStateFlagsIn}}.
+2.  Let |pcscFlags| be a `DWORD` set to zero.
+3.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/unaware}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_UNAWARE` to |pcscFlags|.
+4.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/ignore}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_IGNORE` to |pcscFlags|.
+5.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/unavailable}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_UNAVAILABLE` to |pcscFlags|.
+6.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/empty}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_EMPTY` to |pcscFlags|.
+7.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/present}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_PRESENT` to |pcscFlags|.
+8.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/exclusive}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_EXCLUSIVE` to |pcscFlags|.
+9.  If |flagsIn|["{{SmartCardReaderStateFlagsIn/inuse}}"] is `true`, [=add a flag|add=] [[!PCSC5]] `SCARD_STATE_INUSE` to |pcscFlags|.
+10. If |flagsIn|["{{SmartCardReaderStateFlagsIn/mute}}"] is `true`, [=add a flag|add=] `SCARD_STATE_MUTE` to |pcscFlags|.
+11. If |flagsIn|["{{SmartCardReaderStateFlagsIn/unpowered}}"] is `true`, [=add a flag|add=] `SCARD_STATE_UNPOWERED` to |pcscFlags|.
+12. Return |pcscFlags|.
+
+<aside class="note">
+  <p>`SCARD_STATE_MUTE` and `SCARD_STATE_UNPOWERED` are not part of
+  [[!PCSC5]] but are still considered in this specification as
+  existing PC/SC implementations use it.</p>
+</aside>
+
+### {{SmartCardReaderStateOut}} dictionary ### {#smartcardreaderstateout-dict}
+The actual state of a smart card reader.
+
+<xmp class="idl">
+dictionary SmartCardReaderStateOut {
+  required DOMString readerName;
+  required SmartCardReaderStateFlagsOut eventState;
+  required unsigned long eventCount;
+  ArrayBuffer answerToReset;
+};
+</xmp>
+
+: {{SmartCardReaderStateOut/readerName}}
+:: Name of the smart card reader.
+: {{SmartCardReaderStateOut/eventState}}
+:: The actual state of that smart card reader.
+: {{SmartCardReaderStateOut/eventCount}}
+:: The actual number of card insertion and removal events in this reader.
+: {{SmartCardReaderStateOut/answerToReset}}
+:: The inserted card's [[!ISO7816-3]] Answer To Reset (ATR), if applicable.
+
+Given a [[!PCSC5]] `SCARD_READERSTATE[]` named |pcscReaderStates|, a <dfn for="SmartCardReaderStateOut" export>corresponding</dfn> sequence of {{SmartCardReaderStateOut}} is created with the following steps:
+
+1.  Let |readerStatesOut| be an empty sequence of {{SmartCardReaderStateOut}}.
+2.  [=list/For each=] |pcscState| of type `SCARD_READERSTATE` in |pcscReaderStates|:
+    1.  Let |stateOut| be a {{SmartCardReaderStateOut}}.
+    2.  Set |stateOut|["{{SmartCardReaderStateOut/readerName}}"] to |pcscState|.`Reader`.
+    3.  Set |stateOut|["{{SmartCardReaderStateOut/eventState}}"] to the {{SmartCardReaderStateFlagsOut}} dictionary [=SmartCardReaderStateFlagsOut/corresponding=] to |pcscState|.`EventState`.
+    4.  Set |stateOut|["{{SmartCardReaderStateOut/eventCount}}"] to the [=high word=] of |pcscState|.`EventState`.
+        <aside class="note">
+          <p>**Number of card insertion and removal events:** Having the number of card insertion and removal events
+          stored in the upper 2 bytes of the `EventState` and
+          `CurrentState` `DWORD`s is not part of [[!PCSC5]] but it is
+          still considered in this specification as several existing
+          PC/SC implementations use it.</p>
+          <p>In PC/SC implementations where this information is not
+          available, the upper two bytes of `EventState` will always
+          be zero and so the resulting
+          "{{SmartCardReaderStateOut/eventCount}}" will be zero.</p>
+          <p>The algorithms in this specification assume that PC/SC
+          implementations will define all [[!PCSC5]] `SCARD_STATE_*`
+          flags to be `DWORD` values no higher than `0xFFFF`.</p>
+        </aside>
+    5.  If the platform's `SCARD_READERSTATE` structure has a member containing the card's [[!ISO7816-3]] Answer To Reset, set |stateOut|["{{SmartCardReaderStateOut/answerToReset}}"] to that value.
+    6.  [=list/Append=] |stateOut| to |readerStatesOut|.
+3.  Return |readerStatesOut|.
+
+#### {{SmartCardReaderStateFlagsOut}} dictionary #### {#smartcardreaderstateflagsout-dict}
+<xmp class="idl">
+dictionary SmartCardReaderStateFlagsOut {
+  boolean ignore = false;
+  boolean changed = false;
+  boolean unavailable = false;
+  boolean unknown = false;
+  boolean empty = false;
+  boolean present = false;
+  boolean exclusive = false;
+  boolean inuse = false;
+  boolean mute = false;
+  boolean unpowered = false;
+};
+</xmp>
+
+: {{SmartCardReaderStateFlagsOut/ignore}}
+:: The application requested that this reader be ignored.
+: {{SmartCardReaderStateFlagsOut/changed}}
+:: There is a difference between the state input by the calling application, and the actual state.
+: {{SmartCardReaderStateFlagsOut/unavailable}}
+:: This reader is not available for use.
+: {{SmartCardReaderStateFlagsOut/unknown}}
+:: The reader name given by the application is not known.
+: {{SmartCardReaderStateFlagsOut/empty}}
+:: There is no card in the reader.
+: {{SmartCardReaderStateFlagsOut/present}}
+:: There is a card in the reader.
+: {{SmartCardReaderStateFlagsOut/exclusive}}
+:: The card in the reader is allocated for exclusive use by another application.
+: {{SmartCardReaderStateFlagsOut/inuse}}
+:: The card in the reader is in use by one or more other applications, but may be connected to in shared mode.
+: {{SmartCardReaderStateFlagsOut/mute}}
+:: There is an unresponsive card in the reader.
+: {{SmartCardReaderStateFlagsOut/unpowered}}
+:: The card in the reader has not been powered up.
+
+Given a [[!PCSC5]] `DWORD` named |pcscFlags|, a <dfn for="SmartCardReaderStateFlagsOut" export>corresponding</dfn> {{SmartCardReaderStateFlagsOut}} dictionary is created with the following steps:
+
+1.  Let |flagsOut| be a {{SmartCardReaderStateFlagsOut}} dictionary with [=dictionary member/default value|default members=].
+2.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_IGNORE`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/ignore}}"] to `true`.
+3.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_CHANGED`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/changed}}"] to `true`.
+4.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_UNAVAILABLE`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/unavailable}}"] to `true`.
+5.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_UNKNOWN`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/unknown}}"] to `true`.
+6.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_EMPTY`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/empty}}"] to `true`.
+7.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_PRESENT`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/present}}"] to `true`.
+8.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_EXCLUSIVE`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/exclusive}}"] to `true`.
+9.  If |pcscFlags| [=has a flag|has=] [[!PCSC5]] `SCARD_STATE_INUSE`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/inuse}}"] to `true`.
+10. If |pcscFlags| [=has a flag|has=] `SCARD_STATE_MUTE`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/mute}}"] to `true`.
+11. If |pcscFlags| [=has a flag|has=] `SCARD_STATE_UNPOWERED`, set |flagsOut|["{{SmartCardReaderStateFlagsOut/unpowered}}"] to `true`.
+12. Return |flagsOut|.
+
+<aside class="note">
+  <p>`SCARD_STATE_MUTE` and `SCARD_STATE_UNPOWERED` are not part of
+  [[!PCSC5]] but are still considered in this specification as
+  existing PC/SC implementations use it.</p>
+</aside>
+
+### {{SmartCardGetStatusChangeOptions}} dictionary ### {#smartcardgetstatuschangeoptions-dict}
+<xmp class="idl">
+dictionary SmartCardGetStatusChangeOptions {
+  DOMHighResTimeStamp timeout;
+  AbortSignal signal;
+};
+</xmp>
+
+: {{SmartCardGetStatusChangeOptions/timeout}}
+:: Timeout parameter for the GetStatusChange() [[!PCSC5]] method. If not specified, a timeout value of INFINITE (which is defined system dependent) will be used.
+: {{SmartCardGetStatusChangeOptions/signal}}
+:: When triggered, the platform's [[!PCSC5]] Cancel() method is called.
+
+## {{SmartCardContext/connect()}} method ## {#smartcardcontext-connect}
+
+The {{SmartCardContext/connect(readerName, accessMode, options)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardContext/[[activeReaderTransactions]]=][{{SmartCardContext/connect(readerName, accessMode, options)/readerName}}] [=map/exists=], [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Run the following steps [=in parallel=]:
+    1.  Let |accessFlags| be a [[!PCSC5]] `DWORD` [=SmartCardAccessMode/corresponding=] to {{SmartCardContext/connect(readerName, accessMode, options)/accessMode}}.
+    2.  Let |protocolFlags| be a `DWORD` set to `0`.
+    3.  If {{SmartCardContext/connect(readerName, accessMode, options)/options}}["{{SmartCardConnectOptions/preferredProtocols}}"] [=map/exists=], set |protocolFlags| to its [=SmartCardProtocol/corresponding flags=].
+    4.  Let |activeProtocol| be a `DWORD` set to `0`.
+    5.  Let |comm| be a new instance of the platform's [[!PCSC5]] `SCARDCOMM` class, with [=this=].[=SmartCardContext/[[resourceManager]]=] as its constructor parameter.
+    6.  Call |comm|.`Connect()` with {{SmartCardContext/connect(readerName, accessMode, options)/readerName}}, |accessFlags| and |protocolFlags| as input and |activeProtocol| as output parameters.
+    7.  Let |responseCode| be the returned `RESPONSECODE`.
+    8.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`:
+            1.  Destroy |comm|.
+            2.  [=Reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  Let |result| be an empty {{SmartCardConnectResult}} dictionary.
+        4.  Let |connection| be a new {{SmartCardConnection}}.
+        5.  [=set/Append=] |connection| to [=this=].[=SmartCardContext/[[connections]]=].
+        6.  Set |connection|.[=SmartCardConnection/[[comm]]=] to |comm|.
+        7.  Set |connection|.[=SmartCardConnection/[[readerName]]=] to {{SmartCardContext/connect(readerName, accessMode, options)/readerName}}.
+        8.  Set |connection|.[=SmartCardConnection/[[context]]=] to [=this=].
+        9.  Set |connection|.[=SmartCardConnection/[[activeProtocol]]=] to |activeProtocol|.
+        10. Set |result|["{{SmartCardConnectResult/connection}}"] to |connection|.
+        11. If |activeProtocol| is a [=SmartCardProtocol/valid protocol value=], set |result|["{{SmartCardConnectResult/activeProtocol}}"] to the corresponding {{SmartCardProtocol}}.
+        12. [=Resolve=] |promise| with |result|.
+6.  Return |promise|.
+
+### {{SmartCardProtocol}} enum ### {#smartcardprotocol-enum}
+<xmp class="idl">
+enum SmartCardProtocol {
+  "raw",
+  "t0",
+  "t1"
+};
+</xmp>
+
+: {{SmartCardProtocol/"raw"}}
+:: "Raw" mode. May be used to support arbitrary data exchange protocols for special-purpose requirements. Corresponds to a [[!PCSC5]] `SCARD_PROTOCOL_RAW` `DWORD`.
+: {{SmartCardProtocol/"t0"}}
+:: [[!ISO7816-3]] T=0. Asynchronous half duplex character transmission protocol. Corresponds to a [[!PCSC5]] `SCARD_PROTOCOL_T0` `DWORD`.
+: {{SmartCardProtocol/"t1"}}
+:: [[!ISO7816-3]] T=1. Asynchronous half duplex block transmission protocol. Corresponds to a [[!PCSC5]] `SCARD_PROTOCOL_T1` `DWORD`.
+
+A [[!PCSC5]] `DWORD` is a <dfn for="SmartCardProtocol" export>valid protocol value</dfn> if it is either [[!PCSC5]] `SCARD_PROTOCOL_T0`, [[!PCSC5]] `SCARD_PROTOCOL_T1` or [[!PCSC5]] `SCARD_PROTOCOL_RAW`.
+
+Given a sequence of {{SmartCardProtocol}} named |protocols|, a [[!PCSC5]] `DWORD` with the <dfn for="SmartCardProtocol" export>corresponding flags</dfn> is created with the following steps:
+
+1.  Let |flags| be a `DWORD` set to `0`.
+2.  [=list/For each=] |protocol| of type {{SmartCardProtocol}} in |protocols|, [=add a flag|add=] the corresponding `DWORD` of |protocol| to |flags|.
+3.  Return |flags|.
+
+### {{SmartCardConnectResult}} dictionary ### {#smartcardconnectresult-dict}
+<xmp class="idl">
+dictionary SmartCardConnectResult {
+  required SmartCardConnection connection;
+  SmartCardProtocol activeProtocol;
+};
+</xmp>
+
+: {{SmartCardConnectResult/connection}}
+:: An interface to the connection created.
+: {{SmartCardConnectResult/activeProtocol}}
+:: The protocol actually in use.
+
+### {{SmartCardAccessMode}} enum ### {#smartcardaccessmode-enum}
+<xmp class="idl">
+enum SmartCardAccessMode {
+  "shared",
+  "exclusive",
+  "direct"
+};
+</xmp>
+
+: {{SmartCardAccessMode/"shared"}}
+:: Application is willing to share access to card with other applications.
+: {{SmartCardAccessMode/"exclusive"}}
+:: Application requires exclusive access to the card.
+: {{SmartCardAccessMode/"direct"}}
+:: Application requires connection to reader whether or not card is present. Implies exclusive access.
+
+Given a {{SmartCardAccessMode}} enum named |accessMode|, a <dfn for="SmartCardAccessMode" export>corresponding</dfn> [[!PCSC5]] `DWORD` is created with the following steps:
+
+1.  Let |dword| be a `DWORD` set to `0`.
+2.  If |accessMode| is "{{SmartCardAccessMode/shared}}", set |dword| to [[!PCSC5]] `SCARD_SHARE_SHARED`.
+3.  If |accessMode| is "{{SmartCardAccessMode/exclusive}}", set |dword| to [[!PCSC5]] `SCARD_SHARE_EXCLUSIVE`.
+4.  If |accessMode| is "{{SmartCardAccessMode/direct}}", set |dword| to [[!PCSC5]] `SCARD_SHARE_DIRECT`.
+5.  Return |dword|.
+
+### {{SmartCardConnectOptions}} dictionary ### {#smartcardconnectoptions-dict}
+<xmp class="idl">
+dictionary SmartCardConnectOptions {
+  sequence<SmartCardProtocol> preferredProtocols;
+};
+</xmp>
+
+: {{SmartCardConnectOptions/preferredProtocols}}
+:: Card communication protocols that may be used.
+
+## Auxiliary algorithms and definitions ## {#smartcardcontext-auxiliary}
+
+To <dfn export>clear the operationInProgress</dfn> of a {{SmartCardContext}} |context|, perform the following steps:
+
+1.  [=Assert=]: |context|.[=SmartCardContext/[[operationInProgress]]=] is `true`.
+2.  Set |context|.[=SmartCardContext/[[operationInProgress]]=] to `false`.
+3.  [=set/For each=] |connection| of type {{SmartCardConnection}} of |context|.[=SmartCardContext/[[connections]]=]:
+    1.  [=SmartCardConnection/end any settled transaction=] of |connection|.
+    2.  If |context|.[=SmartCardContext/[[operationInProgress]]=] is `true`, abort there steps.
+
+<aside class="note">
+  <p>A transaction ends when the {{Promise}} returned by the
+  {{SmartCardTransactionCallback}} passed to
+  {{SmartCardConnection/startTransaction()}} settles. At this
+  point the user agent is expected to call [[!PCSC5]] `EndTransaction()` to
+  effect that on the platform's PC/SC stack. But that won't be
+  possible if at that moment there's already another PC/SC
+  operation taking place in the connection's PC/SC context. The
+  user agent then has to wait until this ongoing PC/SC operation
+  finishes before ending that settled transaction.</p>
+</aside>
+
+The <dfn export>cancel the outstanding GetStatusChange</dfn> algorithm steps are:
+
+1.  Call [=this=].[=SmartCardContext/[[tracker]]=].`Cancel()`.
+
+The <dfn export>high word</dfn> of a [[!PCSC5]] `DWORD` is the result of an unsigned right shift of 16 bits on that `DWORD`.
+
+To <dfn export>set the high word</dfn> of a [[!PCSC5]] `DWORD` named |dword| to a given number |n|, perform the following steps:
+
+1.  Set |dword| to |dword| bitwise AND `0xFFFF`.
+2.  Let |shiftedN| be the result of a left shift of 16 bits on |n|.
+3.  Set |dword| to |dword| bitwise OR |shiftedN|.
+
+To <dfn export>add a flag</dfn> |f| to a [[!PCSC5]] `DWORD` |flags|, set |flags| to |flags| bitwise OR |f|.
+
+A [[!PCSC5]] `DWORD` |flags| <dfn export>has a flag</dfn> |f| if |flags| bitwise AND |f| is |f|.
+
+{{SmartCardConnection}} interface {#smartcardconnection-interface}
+=======================================================================
+
+<xmp class="idl">
+[Exposed=(DedicatedWorker, SharedWorker, Window), SecureContext, IsolatedContext]
+interface SmartCardConnection {
+  Promise<undefined> disconnect(optional SmartCardDisposition disposition = "leave");
+
+  Promise<ArrayBuffer> transmit(BufferSource sendBuffer,
+      optional SmartCardTransmitOptions options = {});
+
+  Promise<undefined> startTransaction(SmartCardTransactionCallback transaction,
+      optional SmartCardTransactionOptions options = {});
+
+  Promise<SmartCardConnectionStatus> status();
+
+  Promise<ArrayBuffer> control([EnforceRange] unsigned long controlCode,
+      BufferSource data);
+
+  Promise<ArrayBuffer> getAttribute([EnforceRange] unsigned long tag);
+  Promise<undefined> setAttribute([EnforceRange] unsigned long tag, BufferSource value);
+};
+
+callback SmartCardTransactionCallback = Promise<SmartCardDisposition?> ();
+</xmp>
+
+Instances of {{SmartCardConnection}} are created with the internal slots
+described in the following table:
+
+<table class="simple" data-dfn-for="SmartCardConnection">
+  <thead>
+    <tr>
+      <th>Internal slot
+      <th>Initial value
+      <th>Description (non-normative)
+  </thead>
+  <tbody>
+    <tr>
+      <td><dfn for="SmartCardConnection" export lt="[[comm]]">[[comm]]</dfn>
+      <td>`null`
+      <td>The platform's [[!PCSC5]] `SCARDCOMM` to be used.
+    <tr>
+      <td><dfn for="SmartCardConnection" export lt="[[readerName]]">[[readerName]]</dfn>
+      <td>`null`
+      <td>The name of the reader this connection is associated with.
+    <tr>
+      <td><dfn for="SmartCardConnection" export lt="[[context]]">[[context]]</dfn>
+      <td>`null`
+      <td>The {{SmartCardContext}} that created this instance.
+    <tr>
+      <td><dfn for="SmartCardConnection" export lt="[[activeProtocol]]">[[activeProtocol]]</dfn>
+      <td>0
+      <td>The active protocol `DWORD`, as returned by the platform's
+        [[!PCSC5]] implementation.
+    <tr>
+      <td><dfn for="SmartCardConnection" export lt="[[transactionState]]">[[transactionState]]</dfn>
+      <td>`null`
+      <td>Holds the [=transaction state|state=] of an ongoing transaction
+        started with {{SmartCardConnection/startTransaction()}}, if any.
+  </tbody>
+</table>
+
+<aside class="note">
+  <p>**Lack of the reconnect method:** [[!PCSC5]] mentions also the `Reconnect` method, which has no equivalent here.
+    This is because its behavior differs between implementations—PC/SC Lite does
+    not release the transactions held by the process, while Microsoft's WinSCard
+    does. While PCSC lite's behavior cannot be replicated cross-platform, Microsoft
+    Windows WinSCard can be achieved via calling `Disconnect` + `Connect`. Moreover,
+    in case of the Javascript API the benefit of maintaining the same connection handle
+    ID is lost, as the ID is not exposed, only the `SmartCardConnection` which is an
+    abstraction over it. Hence, there are no material benefits to including this method in
+    the web API.</p>
+</aside>
+
+## {{SmartCardConnection/disconnect()}} method ## {#smartcardconnection-disconnect}
+
+The {{SmartCardConnection/disconnect(disposition)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+    with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+6.  Run the following steps [=in parallel=]:
+    1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Disconnect()` with a `DWORD` corresponding to {{SmartCardConnection/disconnect(disposition)/disposition}} as input parameter.
+    2.  Let |responseCode| be the returned `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].[=SmartCardConnection/[[context]]=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  Destroy [=this=].[=SmartCardConnection/[[comm]]=].
+        4.  Set [=this=].[=SmartCardConnection/[[comm]]=] to `null`.
+        5.  [=Resolve=] |promise|.
+7.  Return |promise|.
+
+### {{SmartCardDisposition}} enum ### {#smartcarddisposition-enum}
+<xmp class="idl">
+enum SmartCardDisposition {
+  "leave",
+  "reset",
+  "unpower",
+  "eject"
+};
+</xmp>
+
+: {{SmartCardDisposition/"leave"}}
+:: Don't alter card state. Corresponds to a [[!PCSC5]] `SCARD_LEAVE_CARD` `DWORD`.
+: {{SmartCardDisposition/"reset"}}
+:: Reset the card. Corresponds to a [[!PCSC5]] `SCARD_RESET_CARD` `DWORD`.
+: {{SmartCardDisposition/"unpower"}}
+:: Unpower and terminate access to the card. Corresponds to a [[!PCSC5]] `SCARD_UNPOWER_CARD` `DWORD`.
+: {{SmartCardDisposition/"eject"}}
+:: Eject the card from the reader. Corresponds to a [[!PCSC5]] `SCARD_EJECT_CARD` `DWORD`.
+
+## {{SmartCardConnection/transmit()}} method ## {#smartcardconnection-transmit}
+
+The {{SmartCardConnection/transmit(sendBuffer, options)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+    with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  Let |protocol| be a [[!PCSC5]] `DWORD` set to [=this=].[=SmartCardConnection/[[activeProtocol]]=].
+6.  If {{SmartCardConnection/transmit(sendBuffer, options)/options}}["{{SmartCardTransmitOptions/protocol}}"] [=map/exists=], set |protocol| to the `DWORD` corresponding to {{SmartCardConnection/transmit(sendBuffer, options)/options}}["{{SmartCardTransmitOptions/protocol}}"].
+7.  If |protocol| is not a [=SmartCardProtocol/valid protocol value=], [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+8.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+9.  Let |sendPci| be the platform's [[!PCSC5]] `SCARD_IO_HEADER` corresponding to [=this=].[=SmartCardConnection/[[activeProtocol]]=].
+10. Let |pcscSendBuffer| be a [[!PCSC5]] `BYTE[]` containing {{SmartCardConnection/transmit(sendBuffer, options)/sendBuffer}}.
+11. Let |recvPci| be the platform's `SCARD_IO_HEADER` equivalent of empty or null.
+12. Let |recvBuffer| be a `BYTE[]` big enough to hold the largest [[!ISO7816-3]] extended response APDU (65538 bytes).
+13. Let |recvLength| be a `DWORD` set to `0`.
+14. Run the following steps [=in parallel=]:
+    1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Transmit()` with |sendPci|, |pcscSendBuffer|, |recvPci|, |recvBuffer| and |recvLength| as arguments.
+    2.  Let |responseCode| be the returned `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].[=SmartCardConnection/[[context]]=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  [=Resolve=] |promise| with an {{ArrayBuffer}} containing the first |recvLength| bytes of |recvBuffer|.
+15. Return |promise|.
+
+### {{SmartCardTransmitOptions}} dictionary ### {#smartcardtransmitoptions-dict}
+<xmp class="idl">
+dictionary SmartCardTransmitOptions {
+  SmartCardProtocol protocol;
+};
+</xmp>
+
+: {{SmartCardTransmitOptions/protocol}}
+:: The protocol to be used in the transmission.
+
+## {{SmartCardConnection/startTransaction()}} method ## {#smartcardconnection-starttransaction}
+
+The {{SmartCardConnection/startTransaction(transaction, options)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=], [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  If [=this=].[=SmartCardConnection/[[transactionState]]=] is not `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+6.  Let |signal| be an {{AbortSignal}} set to `null`.
+7.  If {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"] [=map/exists=], run the following steps:
+    1.  If {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"] is [=AbortSignal/aborted=], [=reject=] |promise| with {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"]'s [=AbortSignal/abort reason=] and return |promise|.
+    2.  Set |signal| to {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"].
+    3.  [=AbortSignal/Add=] the [=SmartCardConnection/cancel=] algorithm to |signal|.
+8.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+9.  Run the following steps [=in parallel=]:
+    1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`BeginTransaction()`.
+    2.  Let |responseCode| be the returned [[!PCSC5]] `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] to [=process the result of a BeginTransaction=] with [=this=], |responseCode|, |signal|, {{SmartCardConnection/startTransaction(transaction, options)/transaction}} and |promise|.
+10. Return |promise|.
+
+### {{SmartCardTransactionOptions}} dictionary ### {#smartcardtransactionoptions-dict}
+<xmp class="idl">
+dictionary SmartCardTransactionOptions {
+  AbortSignal signal;
+};
+</xmp>
+
+: {{SmartCardTransactionOptions/signal}}
+:: When triggered, the platform's [[!PCSC5]] Cancel() method is called.
+
+### Auxiliary algorithms and definitions ### {#smartcardconnection-auxiliary}
+
+A <dfn export>transaction state</dfn> is a [=struct=] with the following [=struct/items=]:
+
+: <dfn for="transaction state" export>pendingDisposition</dfn>
+:: If set, it means once the ongoing PC/SC operation finishes [[!PCSC5]] `EndTransaction()` should be called with this value as the {{SmartCardDisposition}} parameter.
+: <dfn for="transaction state" export>pendingException</dfn>
+:: The exception to be used when rejecting [=transaction state/promise=].
+: <dfn for="transaction state" export>promise</dfn>
+:: The pending {{Promise}} returned by a {{SmartCardConnection/startTransaction()}} call.
+
+To <dfn export>process the result of a BeginTransaction</dfn> given a {{SmartCardConnection}} |connection|, a [[!PCSC5]] `RESPONSECODE` |responseCode|, an {{AbortSignal}} |signal|, a {{SmartCardTransactionCallback}} |transaction| and a {{Promise}} |promise|, perform the following steps:
+
+1.  [=Clear the operationInProgress=] of |connection|.[=SmartCardConnection/[[context]]=].
+2.  Let |abortReason| be {{undefined}}.
+3.  If |signal| is not `null`:
+    1.  [=AbortSignal/Remove=] the [=SmartCardConnection/cancel=] algorithm from |signal|.
+    2.  If |signal| is [=AbortSignal/aborted=] then set |abortReason| to |signal|'s [=AbortSignal/abort reason=].
+4.  If |responseCode| is not `SCARD_S_SUCCESS`:
+    1.  If |responseCode| is `SCARD_E_CANCELLED` and |abortReason| is not {{undefined}} then [=reject=] |promise| with |abortReason|.
+    2.  Otherwise, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode|.
+    3.  Return.
+5.  Let |transactionState| be a new [=transaction state=] with its [=transaction state/promise=] item set to |promise|.
+6.  Set |connection|.[=SmartCardConnection/[[transactionState]]=] to |transactionState|.
+7.  Set |connection|.[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][|connection|.[=SmartCardConnection/[[readerName]]=]] to |connection|.
+8.  Let |callbackPromise| be the result of [=invoking=] |transaction|.
+9.  [=promise/React=] to |callbackPromise|:
+    *   If |callbackPromise| was fulfilled with value |v| then:
+        1.  Let |disposition| be "{{SmartCardDisposition/reset}}".
+        2.  If |v| is not {{undefined}}, set |disposition| to |v|.
+        3.  If |connection|.[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] is `true`:
+            1.  Set |transactionState|'s [=transaction state/pendingException=] to a "{{InvalidStateError}}" {{DOMException}}.
+            2.  Set |transactionState|'s [=transaction state/pendingDisposition=] to |disposition|.
+        4.  Otherwise, [=SmartCardConnection/end the transaction=] of |connection| with |disposition|.
+    *   If |callbackPromise| was rejected with reason |r|, then:
+        1.  Set |transactionState|'s [=transaction state/pendingException=] to |r|.
+        2.  If |connection|.[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] is `true`, set |transactionState|'s [=transaction state/pendingDisposition=] to "{{SmartCardDisposition/reset}}".
+        3.  Otherwise, [=SmartCardConnection/end the transaction=] of |connection| with "{{SmartCardDisposition/reset}}".
+
+To <dfn for="SmartCardConnection" export>end the transaction</dfn> of a {{SmartCardConnection}} |connection| with a {{SmartCardDisposition}} |disposition|, perform the following steps:
+
+1.  [=Assert=]: |connection|.[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] is `false`.
+2.  [=Assert=]: |connection|.[=SmartCardConnection/[[transactionState]]=] is not `null`.
+3.  [=Assert=]: |connection|.[=SmartCardConnection/[[transactionState]]=]'s [=transaction state/pendingDisposition=] is `null`.
+4.  Let |transactionPromise| be |connection|.[=SmartCardConnection/[[transactionState]]=]'s [=transaction state/promise=].
+5.  If |connection|.[=SmartCardConnection/[[comm]]=] is `null`:
+    1.  [=Reject=] |transactionPromise| with a "{{InvalidStateError}}" {{DOMException}}.
+    2.  Set |connection|.[=SmartCardConnection/[[transactionState]]=] to `null`.
+    3.  Return.
+6.  Set |connection|.[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+7.  Run the following steps [=in parallel=]:
+    1.  Call |connection|.[=SmartCardConnection/[[comm]]=].`EndTransaction()` with a `DWORD` corresponding to |disposition| as input parameter.
+    2.  Let |responseCode| be the returned [[!PCSC5]] `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of |connection|.[=SmartCardConnection/[[context]]=].
+        2.  [=map/Remove=] |connection|.[=SmartCardConnection/[[readerName]]=] from |connection|.[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=].
+        3.  Let |exception| be |connection|.[=SmartCardConnection/[[transactionState]]=]'s [=transaction state/pendingException=].
+        4.  If |exception| is `null`, perform the following steps:
+            1.  If |responseCode| is `SCARD_S_SUCCESS`, [=resolve=] |transactionPromise|.
+            2.  Otherwise, [=reject=] |transactionPromise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode|.
+        5.  Otherwise, [=reject=] |transactionPromise| with |exception|.
+        6.  Set |connection|.[=SmartCardConnection/[[transactionState]]=] to `null`.
+
+To <dfn for="SmartCardConnection" export>end any settled transaction</dfn> of a {{SmartCardConnection}} |connection|, perform the following steps:
+
+1.  If |connection|.[=SmartCardConnection/[[transactionState]]=] is `null`, abort these steps.
+2.  Let |disposition| be |connection|.[=SmartCardConnection/[[transactionState]]=]'s [=transaction state/pendingDisposition=].
+3.  If |disposition| is `null`, abort these steps.
+4.  Set |connection|.[=SmartCardConnection/[[transactionState]]=]'s [=transaction state/pendingDisposition=] to `null`.
+5.  [=SmartCardConnection/End the transaction=] of |connection| with |disposition|.
+
+To <dfn for="SmartCardConnection" export>cancel</dfn> outstanding [[!PCSC5]] `SCARDCOMM` operations, call [=this=].[=SmartCardConnection/[[comm]]=].`Cancel()`.
+
+## {{SmartCardConnection/status()}} method ## {#smartcardconnection-status}
+
+The {{SmartCardConnection/status()}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+    with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+6.  Run the following steps [=in parallel=]:
+    1.  Let |pcscReader| be an empty `STR[]`.
+    2.  Let |pcscState| be a [[!PCSC5]] `DWORD` set to `0`.
+    3.  Let |activeProtocol| be a [[!PCSC5]] `DWORD` set to `0`.
+    4.  Let |pcscAtr| be a `BYTE[]` big enough to hold any [[!ISO7816-3]] Answer To Reset (ATR).
+    5.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Status()` with |pcscReader|, |pcscState|, |activeProtocol| and |pcscAtr| as output parameters.
+    6.  Let |responseCode| be the returned `RESPONSECODE`.
+    7.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].[=SmartCardConnection/[[context]]=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  Let |state| be a {{SmartCardConnectionState}} [=SmartCardConnectionState/corresponding=] to |pcscState| and |activeProtocol|.
+        4.  If |state| is {{undefined}}, [=reject=] |promise| with an "{{UnknownError}}" {{DOMException}} and abort these steps.
+        5.  Let |status| be a new {{SmartCardConnectionStatus}}.
+        6.  Set |status|["{{SmartCardConnectionStatus/readerName}}"] to |pcscReader|.
+        7.  Set |status|["{{SmartCardConnectionStatus/state}}"] to |state|.
+        8.  Set |status|["{{SmartCardConnectionStatus/answerToReset}}"] to an {{ArrayBuffer}} with the bytes that were written to |pcscAtr|.
+        9.  [=Resolve=] |promise| with |status|.
+7.  Return |promise|.
+
+### {{SmartCardConnectionStatus}} dictionary ### {#smartcardconnectionstatus-dict}
+<xmp class="idl">
+dictionary SmartCardConnectionStatus {
+  required DOMString readerName;
+  required SmartCardConnectionState state;
+  ArrayBuffer answerToReset;
+};
+</xmp>
+
+: {{SmartCardConnectionStatus/readerName}}
+:: Name of the connected reader.
+: {{SmartCardConnectionStatus/state}}
+:: Current state of the connection.
+: {{SmartCardConnectionStatus/answerToReset}}
+:: The answer to reset (ATR) string from the card, if applicable.
+
+#### {{SmartCardConnectionState}} enum #### {#smartcardconnectionstate-enum}
+<xmp class="idl">
+enum SmartCardConnectionState {
+  "absent",
+  "present",
+  "swallowed",
+  "powered",
+  "negotiable",
+  "t0",
+  "t1",
+  "raw"
+};
+</xmp>
+
+: {{SmartCardConnectionState/"absent"}}
+:: There is no card in the reader.
+: {{SmartCardConnectionState/"present"}}
+:: There is a card in the reader, but it has not been moved into position for use.
+: {{SmartCardConnectionState/"swallowed"}}
+:: There is a card in the reader in position for use. The card is not powered.
+: {{SmartCardConnectionState/"powered"}}
+:: Power is being provided to the card, but the reader driver is unaware of the mode of the card.
+: {{SmartCardConnectionState/"negotiable"}}
+:: The card has been reset and is awaiting PTS (protocol type selection) negotiation.
+: {{SmartCardConnectionState/"t0"}}
+:: The card is in [[!ISO7816-3]] T=0 protocol mode and a new protocol may not be negotiated.
+: {{SmartCardConnectionState/"t1"}}
+:: The card is in [[!ISO7816-3]] T=1 protocol mode and a new protocol may not be negotiated.
+: {{SmartCardConnectionState/"raw"}}
+:: The card is in raw protocol mode and a new protocol may not be negotiated.
+
+Given a [[!PCSC5]] `DWORD` |pcscState| and a `DWORD` |activeProtocol|, a <dfn for="SmartCardConnectionState" export>corresponding</dfn> {{SmartCardConnectionState}} is created with the following steps:
+
+1.  If |pcscState| is [[!PCSC5]] `SCARD_ABSENT`, return "{{SmartCardConnectionState/absent}}".
+2.  If |pcscState| is [[!PCSC5]] `SCARD_PRESENT`, return "{{SmartCardConnectionState/present}}".
+3.  If |pcscState| is [[!PCSC5]] `SCARD_SWALLOWED`, return "{{SmartCardConnectionState/swallowed}}".
+4.  If |pcscState| is [[!PCSC5]] `SCARD_POWERED`, return "{{SmartCardConnectionState/powered}}".
+5.  If |pcscState| is [[!PCSC5]] `SCARD_NEGOTIABLE`, return "{{SmartCardConnectionState/negotiable}}".
+6.  If |pcscState| is [[!PCSC5]] `SCARD_SPECIFIC`, perform the following steps:
+    1.  If |activeProtocol| is [[!PCSC5]] `SCARD_PROTOCOL_T0`, return "{{SmartCardConnectionState/t0}}".
+    2.  If |activeProtocol| is [[!PCSC5]] `SCARD_PROTOCOL_T1`, return "{{SmartCardConnectionState/t1}}".
+    3.  If |activeProtocol| is [[!PCSC5]] `SCARD_PROTOCOL_RAW`, return "{{SmartCardConnectionState/raw}}".
+7.  Return {{undefined}}.
+
+## {{SmartCardConnection/control()}} method ## {#smartcardconnection-control}
+
+The {{SmartCardConnection/control(controlCode, data)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+    with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+6.  Let |pcscControlCode| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/control(controlCode, data)/controlCode}}.
+7.  [=Get a copy of the buffer source=] {{SmartCardConnection/control(controlCode, data)/data}} and save the result in a [[!PCSC5]] `BYTE[]` |inBuffer|.
+8.  Let |outBuffer| be a [[!PCSC5]] `BYTE[]` large enough to hold any control command response.
+9.  Let |outBufferLength| be a `DWORD` set to `0`.
+10. Run the following steps [=in parallel=]:
+    1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Control()` with |pcscControlCode|, |inBuffer|, |outBuffer| and |outBufferLength| as arguments.
+    2.  Let |responseCode| be the returned `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].[=SmartCardConnection/[[context]]=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  Let |resultBytes| be the first |outBufferLength| bytes of |outBuffer|.
+        4.  [=Resolve=] |promise| with the result of [=ArrayBuffer/Create|creating=] an {{ArrayBuffer}} from |resultBytes| in [=this=]'s [=relevant Realm=].
+11. Return |promise|.
+
+## {{SmartCardConnection/getAttribute()}} method ## {#smartcardconnection-getattribute}
+
+The {{SmartCardConnection/getAttribute(tag)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+    with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+6.  Run the following steps [=in parallel=]:
+    1.  Let |pcscTag| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/getAttribute(tag)/tag}}.
+    2.  Let |buffer| be a [[!PCSC5]] `BYTE[]` large enough to hold this reader attribute, as determined by the platform's [[!PCSC5]] implementation.
+    3.  Call [=this=].[=SmartCardConnection/[[comm]]=].`GetReaderCapabilities()` with |pcscTag| and |buffer| as arguments.
+    4.  Let |responseCode| be the returned `RESPONSECODE`.
+    5.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].[=SmartCardConnection/[[context]]=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  Let |resultBytes| be the bytes of |buffer| containing the attribute read.
+        4.  [=Resolve=] |promise| with the result of [=ArrayBuffer/Create|creating=] an {{ArrayBuffer}} from |resultBytes| in [=this=]'s [=relevant Realm=].
+7.  Return |promise|.
+
+<aside class="note" title="Output buffer size">
+  <p>Known [[!PCSC5]] platform implementations allow either the output
+  buffer to be automatically allocated or to query the size needed for
+  it. This covers the gap left by [[!PCSC5]] in that regard.</p>
+</aside>
+
+## {{SmartCardConnection/setAttribute()}} method ## {#smartcardconnection-setattribute}
+
+The {{SmartCardConnection/setAttribute(tag, value)}} method steps are:
+
+1.  Let |promise| be [=a new promise=].
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
+    with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with a "{{InvalidStateError}}" {{DOMException}} and return |promise|.
+5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+6.  Let |pcscTag| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/setAttribute(tag, value)/tag}}.
+7.  [=Get a copy of the buffer source=] {{SmartCardConnection/setAttribute(tag, value)/value}} and save the result in a [[!PCSC5]] `BYTE[]` |buffer|.
+8.  Run the following steps [=in parallel=]:
+    1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`SetReaderCapabilities()` with |pcscTag| and |buffer| as arguments.
+    2.  Let |responseCode| be the returned `RESPONSECODE`.
+    3.  [=Queue a global task=] on the [=relevant global object=] of [=this=] using the [=smart card task source=] which performs the following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].[=SmartCardConnection/[[context]]=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=] |promise| with an [=exception=] [=SmartCardError/corresponding=] to |responseCode| and abort these steps.
+        3.  [=Resolve=] |promise|.
+9.  Return |promise|.
+
+{{SmartCardError}} interface {#smartcarderror-interface}
+=================================================================
+
+<xmp class="idl">
+[
+  Exposed=(DedicatedWorker, SharedWorker, Window),
+  SecureContext,
+  IsolatedContext
+] interface SmartCardError : DOMException {
+  constructor(optional DOMString message = "", SmartCardErrorOptions options);
+  readonly attribute SmartCardResponseCode responseCode;
+};
+</xmp>
+
+The {{SmartCardError/responseCode}} attribute is the error or warning response
+code returned by the related [[!PCSC5]] method.
+
+Given a [[!PCSC5]] `RESPONSECODE` different from `SCARD_S_SUCCESS`, a
+<dfn for="SmartCardError" export>corresponding</dfn> [=exception=] is
+created with the following steps:
+
+<aside class="note">
+  <p>**Unspecified response codes:** The following `RESPONSECODE`s are not part of [[!PCSC5]] but are still
+  considered in this specification as existing PC/SC
+  implementations use them:</p>
+  <ul>
+    <li>`SCARD_E_SERVER_TOO_BUSY`</li>
+    <li>`SCARD_E_SERVICE_STOPPED`</li>
+    <li>`SCARD_P_SHUTDOWN`</li>
+  </ul>
+</aside>
+
+1.  Let |pcscCode| be that `RESPONSECODE`.
+2.  If |pcscCode| is `SCARD_E_NO_SERVICE`, return a [=new=] {{SmartCardResponseCode/"no-service"}} {{SmartCardError}}.
+    <aside class="note">
+      <p>**Creating SmartCardError instances:** In statements such as:</p>
+      <blockquote>[=new=] {{SmartCardResponseCode/"no-service"}}
+        {{SmartCardError}}</blockquote>
+      <p>What is meant, more exactly, is:</p>
+      <blockquote>[=new=] {{SmartCardError}} where
+        {{SmartCardError/responseCode}} is set to
+        {{SmartCardResponseCode/"no-service"}}</blockquote>
+    </aside>
+3.  If |pcscCode| is `SCARD_E_NO_SMARTCARD`, return a [=new=] {{SmartCardResponseCode/"no-smartcard"}} {{SmartCardError}}.
+4.  If |pcscCode| is `SCARD_E_NOT_READY`, return a [=new=] {{SmartCardResponseCode/"not-ready"}} {{SmartCardError}}.
+5.  If |pcscCode| is `SCARD_E_NOT_TRANSACTED`, return a [=new=] {{SmartCardResponseCode/"not-transacted"}} {{SmartCardError}}.
+6.  If |pcscCode| is `SCARD_E_PROTO_MISMATCH`, return a [=new=] {{SmartCardResponseCode/"proto-mismatch"}} {{SmartCardError}}.
+7.  If |pcscCode| is `SCARD_E_READER_UNAVAILABLE`, return a [=new=] {{SmartCardResponseCode/"reader-unavailable"}} {{SmartCardError}}.
+8.  If |pcscCode| is `SCARD_W_REMOVED_CARD`, return a [=new=] {{SmartCardResponseCode/"removed-card"}} {{SmartCardError}}.
+9.  If |pcscCode| is `SCARD_W_RESET_CARD`, return a [=new=] {{SmartCardResponseCode/"reset-card"}} {{SmartCardError}}.
+10. If |pcscCode| is `SCARD_E_SERVER_TOO_BUSY`, return a [=new=] {{SmartCardResponseCode/"server-too-busy"}} {{SmartCardError}}.
+11. If |pcscCode| is `SCARD_E_SHARING_VIOLATION`, return a [=new=] {{SmartCardResponseCode/"sharing-violation"}} {{SmartCardError}}.
+12. If |pcscCode| is `SCARD_E_SYSTEM_CANCELLED`, return a [=new=] {{SmartCardResponseCode/"system-cancelled"}} {{SmartCardError}}.
+13. If |pcscCode| is `SCARD_E_UNKNOWN_READER`, return a [=new=] {{SmartCardResponseCode/"unknown-reader"}} {{SmartCardError}}.
+14. If |pcscCode| is `SCARD_W_UNPOWERED_CARD`, return a [=new=] {{SmartCardResponseCode/"unpowered-card"}} {{SmartCardError}}.
+15. If |pcscCode| is `SCARD_W_UNRESPONSIVE_CARD`, return a [=new=] {{SmartCardResponseCode/"unresponsive-card"}} {{SmartCardError}}.
+16. If |pcscCode| is `SCARD_W_UNSUPPORTED_CARD`, return a [=new=] {{SmartCardResponseCode/"unsupported-card"}} {{SmartCardError}}.
+17. If |pcscCode| is `SCARD_E_UNSUPPORTED_FEATURE`, return a [=new=] {{SmartCardResponseCode/"unsupported-feature"}} {{SmartCardError}}.
+18. If |pcscCode| is `SCARD_E_INVALID_PARAMETER`, return a [=new=] {{TypeError}}.
+19. If |pcscCode| is `SCARD_E_INVALID_HANDLE`, return a [=new=] "{{InvalidStateError}}" {{DOMException}}.
+20. If |pcscCode| is `SCARD_E_SERVICE_STOPPED`, return a [=new=] "{{InvalidStateError}}" {{DOMException}}.
+21. If |pcscCode| is `SCARD_P_SHUTDOWN`, return a [=new=] "{{AbortError}}" {{DOMException}}.
+22. Otherwise return a [=new=] "{{UnknownError}}" {{DOMException}}.
+
+## {{SmartCardErrorOptions}} dictionary ## {#smartcarderroroptions-dict}
+<xmp class="idl">
+dictionary SmartCardErrorOptions {
+  required SmartCardResponseCode responseCode;
+};
+</xmp>
+
+The {{SmartCardErrorOptions/responseCode}} member is the value for {{SmartCardError}}'s {{SmartCardError/responseCode}} attribute.
+
+## {{SmartCardResponseCode}} enum ## {#smartcardresponsecode-enum}
+<xmp class="idl">
+enum SmartCardResponseCode {
+  "no-service",
+  "no-smartcard",
+  "not-ready",
+  "not-transacted",
+  "proto-mismatch",
+  "reader-unavailable",
+  "removed-card",
+  "reset-card",
+  "server-too-busy",
+  "sharing-violation",
+  "system-cancelled",
+  "unknown-reader",
+  "unpowered-card",
+  "unresponsive-card",
+  "unsupported-card",
+  "unsupported-feature"
+};
+</xmp>
+
+: {{SmartCardResponseCode/"no-service"}}
+:: SCARD_E_NO_SERVICE in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"no-smartcard"}}
+:: SCARD_E_NO_SMARTCARD in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"not-ready"}}
+:: SCARD_E_NOT_READY in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"not-transacted"}}
+:: SCARD_E_NOT_TRANSACTED in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"proto-mismatch"}}
+:: SCARD_E_PROTO_MISMATCH in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"reader-unavailable"}}
+:: SCARD_E_READER_UNAVAILABLE in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"removed-card"}}
+:: SCARD_W_REMOVED_CARD in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"reset-card"}}
+:: SCARD_W_RESET_CARD in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"server-too-busy"}}
+:: The smart card resource manager is too busy to complete this operation.
+: {{SmartCardResponseCode/"sharing-violation"}}
+:: SCARD_E_SHARING_VIOLATION in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"system-cancelled"}}
+:: SCARD_E_SYSTEM_CANCELLED in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"unknown-reader"}}
+:: SCARD_E_UNKNOWN_READER in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"unpowered-card"}}
+:: SCARD_W_UNPOWERED_CARD in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"unresponsive-card"}}
+:: SCARD_W_UNRESPONSIVE_CARD in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"unsupported-card"}}
+:: SCARD_W_UNSUPPORTED_CARD in the [[!PCSC5]] spec.
+: {{SmartCardResponseCode/"unsupported-feature"}}
+:: SCARD_E_UNSUPPORTED_FEATURE in the [[!PCSC5]] spec.
+
+Security and Privacy Considerations {#security-privacy}
+=====================================================
+
+This API provides web applications with access to the host's PC/SC smart
+card subsystem. This is a [=powerful feature=] that, if misused,
+could have significant negative impacts on a user's security and
+privacy. This section outlines the threats considered and the normative
+requirements for user agents to mitigate them.
+
+## User Consent ## {#user-consent}
+
+Access to a smart card reader and any card present within it is a
+[=powerful feature=]. A user agent MUST NOT
+allow a web application to gain access to a {{SmartCardConnection}}
+object without [=express permission=].
+
+User consent MUST be obtained for a specific
+[=origin=]. The request for consent MUST be
+triggered by a call to the {{SmartCardContext/connect()}} method. The
+user agent MUST display a permission prompt
+that clearly indicates which origin is requesting access and provides
+the user with enough information to make an informed decision (for
+example, by displaying the name of the smart card reader).
+
+User agents SHOULD provide options for both
+transient (e.g., "for this session only") and persistent permission.
+To mitigate the risk of users forgetting they have granted persistent
+access, transient permission SHOULD be the
+default and more prominent option.
+
+Users MUST be provided with a mechanism to
+view and revoke any previously granted permissions for this API.
+
+## Fingerprinting ## {#fingerprinting}
+
+The {{SmartCardContext/listReaders()}} method and the
+{{SmartCardReaderStateOut/answerToReset}} member of the
+{{SmartCardReaderStateOut}} dictionary expose information that can be
+used for passive fingerprinting. The presence and model of smart card
+readers can reveal information about the user, such as whether they
+are in a corporate environment. The Answer to Reset (ATR) can further
+identify the type and issuer of a smart card.
+
+While this specification does not require a permission prompt before
+calling {{SmartCardContext/listReaders()}}, access to the entire API
+is controlled by the "[=policy-controlled feature/smart-card=]"
+[=policy-controlled feature=]. This allows administrators or users to
+disable the API for specific origins, mitigating the fingerprinting
+risk.
+
+## Device and Data Integrity ## {#device-integrity}
+
+The {{SmartCardConnection/control()}} and
+{{SmartCardConnection/setAttribute()}} methods provide direct,
+low-level access to the smart card reader hardware. A malicious site
+could potentially use these methods to upload malicious firmware,
+render the device inoperable, or otherwise interfere with its normal
+operation.
+
+Similarly, a malicious site with a connection to a smart card could
+repeatedly attempt PIN verification to permanently block the card, or
+access or overwrite sensitive, unprotected data.
+
+The primary mitigation for these threats is the requirement for
+[=express permission=] before a {{SmartCardConnection}} object is created,
+as this gates access to all subsequent powerful methods.
+
+## Authentication and Spoofing ## {#authentication-spoofing}
+
+<aside class="note">
+  This API operates at a low level and does not have inherent
+  protections against phishing or other forms of spoofing attacks that
+  are present in higher-level APIs like WebAuthn. A malicious site could
+  trick a user into performing an authentication ceremony that is then
+  used to impersonate the user on a different site.
+</aside>
+
+For authentication use cases, developers
+SHOULD prefer using the Web Authentication
+API wherever possible.
+
+## Cross-Origin Communication ## {#cross-origin-communication}
+
+A smart card with writable memory could be used as a side-channel for
+different origins to exchange data, bypassing other same-origin
+policies. The mitigation for this is that [=express permission=] is granted
+to a specific [=origin=]. An attack would require the user to grant
+smart card access to multiple, potentially malicious, origins.
+
+## Isolated Context ## {#isolated-context}
+
+This API MUST only be exposed in an [=isolated context=].
+
+## Document Lifecycle ## {#document-lifecycle}
+
+To prevent documents from holding connections to sensitive hardware
+while not in the user's direct control, a user agent
+MUST dispose of all active
+{{SmartCardContext}} objects and their associated
+{{SmartCardConnection}}s when a [=document=] is no longer
+[=Document/fully active=]. This includes automatically disconnecting
+any active connections as if {{SmartCardConnection/disconnect()}} were
+called.
+
+Integrations {#integrations}
+============================
+
+## Permissions Policy ## {#permissions-policy}
+
+This specification defines a feature that controls whether the
+methods exposed by the {{Navigator/smartCard}} attribute on the
+{{Navigator}} object may be used.
+
+The feature name for this feature is
+"<dfn for="policy-controlled feature" export>smart-card</dfn>".
+
+The [=policy-controlled feature/default allowlist=] for this feature
+is `'none'`. User agents MAY override this
+to `'self'` for particular origins (for example based on user decision).
