@@ -1,11 +1,11 @@
-name: CI
+name: deploy-spec
 on:
   pull_request: {}
   push:
     branches: [main]
 jobs:
   main:
-    name: Build, Validate and Deploy
+    name: Build, Validate and Deploy Spec
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -13,5 +13,8 @@ jobs:
       - uses: actions/checkout@v6
       - uses: w3c/spec-prod@v2
         with:
+          SOURCE: index.bs
+          DESTINATION: index.html
+          TOOLCHAIN: bikeshed
           GH_PAGES_BRANCH: gh-pages
           BUILD_FAIL_ON: warning
