@@ -179,12 +179,12 @@ described in the following table:
 
 The {{SmartCardContext/listReaders()}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
-    `true`, [=reject=] |promise| with an "{{InvalidStateError}}"
-    {{DOMException}} and return |promise|.
-3.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
+    `true`, return [=a promise rejected with=] an "{{InvalidStateError}}"
+    {{DOMException}}.
+2.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
     `true`.
+3.  Let |promise| be [=a new promise=].
 4.  Run the following steps [=in parallel=]:
     1.  Let |resourceQuery| be a new instance of the
         platform's [[!PCSC5]] `RESOURCEQUERY` class, with
@@ -226,29 +226,29 @@ The {{SmartCardContext/listReaders()}} method steps are:
 
 The {{SmartCardContext/getStatusChange(readerStates, options)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
-    `true`, [=reject=] |promise| with an "{{InvalidStateError}}"
-    {{DOMException}} and return |promise|.
-3.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"] [=map/exists=], run the following steps:
+1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
+    `true`, return [=a promise rejected with=] an "{{InvalidStateError}}"
+    {{DOMException}}.
+2.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"] [=map/exists=], run the following steps:
     1.  Let |signal| be {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"].
-    2.  If |signal| is [=AbortSignal/aborted=], [=reject=] |promise|
-        with |signal|'s [=AbortSignal/abort reason=] and return |promise|.
+    2.  If |signal| is [=AbortSignal/aborted=], return [=a promise rejected with=]
+        |signal|'s [=AbortSignal/abort reason=].
     3.  Set [=this=].[=SmartCardContext/[[signal]]=] to |signal|.
     4.  [=AbortSignal/Add=] the algorithm to [=cancel the outstanding GetStatusChange=] of [=this=] to |signal|.
-4.  Let |pcscTimeout| be a [[!PCSC5]] `DWORD` set to [[!PCSC5]]
+3.  Let |pcscTimeout| be a [[!PCSC5]] `DWORD` set to [[!PCSC5]]
     `INFINITE`.
-5.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"] [=map/exists=], set |pcscTimeout| to
+4.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"] [=map/exists=], set |pcscTimeout| to
     {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"].
-6.  Let |pcscReaderStates| be a [[!PCSC5]]
+5.  Let |pcscReaderStates| be a [[!PCSC5]]
     `SCARD_READERSTATE[]` [=SmartCardReaderStateIn/corresponding=] to
     {{SmartCardContext/getStatusChange(readerStates, options)/readerStates}}.
-7.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+6.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
     `true`.
-8.  Set [=this=].[=SmartCardContext/[[tracker]]=] to a new instance of the
+7.  Set [=this=].[=SmartCardContext/[[tracker]]=] to a new instance of the
     platform's [[!PCSC5]] `SCARDTRACK` class, with
     [=this=].[=SmartCardContext/[[resourceManager]]=] as its
     constructor input parameter.
+8.  Let |promise| be [=a new promise=].
 9.  Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardContext/[[tracker]]=].`GetStatusChange()`
         with |pcscReaderStates| and |pcscTimeout| as input parameters.
@@ -488,10 +488,10 @@ dictionary SmartCardGetStatusChangeOptions {
 
 The {{SmartCardContext/connect(readerName, accessMode, options)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardContext/[[activeReaderTransactions]]=][{{SmartCardContext/connect(readerName, accessMode, options)/readerName}}] [=map/exists=], [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardContext/[[activeReaderTransactions]]=][{{SmartCardContext/connect(readerName, accessMode, options)/readerName}}] [=map/exists=], return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+3.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+4.  Let |promise| be [=a new promise=].
 5.  Run the following steps [=in parallel=]:
     1.  Let |accessFlags| be a [[!PCSC5]] `DWORD` [=SmartCardAccessMode/corresponding=] to {{SmartCardContext/connect(readerName, accessMode, options)/accessMode}}.
     2.  Let |protocolFlags| be a `DWORD` set to `0`.
@@ -702,14 +702,14 @@ described in the following table:
 
 The {{SmartCardConnection/disconnect(disposition)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
-    with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], return [=a promise rejected with=]
+    an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Let |promise| be [=a new promise=].
 6.  Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Disconnect()` with a `DWORD` corresponding to {{SmartCardConnection/disconnect(disposition)/disposition}} as input parameter.
     2.  Let |responseCode| be the returned `RESPONSECODE`.
@@ -744,22 +744,22 @@ enum SmartCardDisposition {
 
 The {{SmartCardConnection/transmit(sendBuffer, options)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
-    with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  Let |protocol| be a [[!PCSC5]] `DWORD` set to [=this=].[=SmartCardConnection/[[activeProtocol]]=].
-6.  If {{SmartCardConnection/transmit(sendBuffer, options)/options}}["{{SmartCardTransmitOptions/protocol}}"] [=map/exists=], set |protocol| to the `DWORD` corresponding to {{SmartCardConnection/transmit(sendBuffer, options)/options}}["{{SmartCardTransmitOptions/protocol}}"].
-7.  If |protocol| is not a [=SmartCardProtocol/valid protocol value=], [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-8.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
-9.  Let |sendPci| be the platform's [[!PCSC5]] `SCARD_IO_HEADER` corresponding to [=this=].[=SmartCardConnection/[[activeProtocol]]=].
-10. Let |pcscSendBuffer| be a [[!PCSC5]] `BYTE[]` containing {{SmartCardConnection/transmit(sendBuffer, options)/sendBuffer}}.
-11. Let |recvPci| be the platform's `SCARD_IO_HEADER` equivalent of empty or null.
-12. Let |recvBuffer| be a `BYTE[]` big enough to hold the largest [[!ISO7816-3]] extended response APDU (65538 bytes).
-13. Let |recvLength| be a `DWORD` set to `0`.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], return [=a promise rejected with=]
+    an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Let |protocol| be a [[!PCSC5]] `DWORD` set to [=this=].[=SmartCardConnection/[[activeProtocol]]=].
+5.  If {{SmartCardConnection/transmit(sendBuffer, options)/options}}["{{SmartCardTransmitOptions/protocol}}"] [=map/exists=], set |protocol| to the `DWORD` corresponding to {{SmartCardConnection/transmit(sendBuffer, options)/options}}["{{SmartCardTransmitOptions/protocol}}"].
+6.  If |protocol| is not a [=SmartCardProtocol/valid protocol value=], return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+7.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+8.  Let |sendPci| be the platform's [[!PCSC5]] `SCARD_IO_HEADER` corresponding to [=this=].[=SmartCardConnection/[[activeProtocol]]=].
+9.  Let |pcscSendBuffer| be a [[!PCSC5]] `BYTE[]` containing {{SmartCardConnection/transmit(sendBuffer, options)/sendBuffer}}.
+10. Let |recvPci| be the platform's `SCARD_IO_HEADER` equivalent of empty or null.
+11. Let |recvBuffer| be a `BYTE[]` big enough to hold the largest [[!ISO7816-3]] extended response APDU (65538 bytes).
+12. Let |recvLength| be a `DWORD` set to `0`.
+13. Let |promise| be [=a new promise=].
 14. Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Transmit()` with |sendPci|, |pcscSendBuffer|, |recvPci|, |recvBuffer| and |recvLength| as arguments.
     2.  Let |responseCode| be the returned `RESPONSECODE`.
@@ -783,19 +783,19 @@ dictionary SmartCardTransmitOptions {
 
 The {{SmartCardConnection/startTransaction(transaction, options)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=], [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  If [=this=].[=SmartCardConnection/[[transactionState]]=] is not `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-6.  Let |signal| be an {{AbortSignal}} set to `null`.
-7.  If {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"] [=map/exists=], run the following steps:
-    1.  If {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"] is [=AbortSignal/aborted=], [=reject=] |promise| with {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"]'s [=AbortSignal/abort reason=] and return |promise|.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=], return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  If [=this=].[=SmartCardConnection/[[transactionState]]=] is not `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+5.  Let |signal| be an {{AbortSignal}} set to `null`.
+6.  If {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"] [=map/exists=], run the following steps:
+    1.  If {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"] is [=AbortSignal/aborted=], return [=a promise rejected with=] {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"]'s [=AbortSignal/abort reason=].
     2.  Set |signal| to {{SmartCardConnection/startTransaction(transaction, options)/options}}["{{SmartCardTransactionOptions/signal}}"].
     3.  [=AbortSignal/Add=] the algorithm to [=SmartCardConnection/cancel=] the outstanding operations of [=this=] to |signal|.
-8.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+7.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+8.  Let |promise| be [=a new promise=].
 9.  Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`BeginTransaction()`.
     2.  Let |responseCode| be the returned [[!PCSC5]] `RESPONSECODE`.
@@ -889,14 +889,14 @@ To <dfn for="SmartCardConnection" export>cancel</dfn> the outstanding [[!PCSC5]]
 
 The {{SmartCardConnection/status()}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
-    with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], return [=a promise rejected with=]
+    an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Let |promise| be [=a new promise=].
 6.  Run the following steps [=in parallel=]:
     1.  Let |pcscReader| be an empty `STR[]`.
     2.  Let |pcscState| be a [[!PCSC5]] `DWORD` set to `0`.
@@ -980,18 +980,18 @@ Given a [[!PCSC5]] `DWORD` |pcscState| and a `DWORD` |activeProtocol|, a <dfn fo
 
 The {{SmartCardConnection/control(controlCode, data)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
-    with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
-6.  Let |pcscControlCode| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/control(controlCode, data)/controlCode}}.
-7.  [=Get a copy of the buffer source=] {{SmartCardConnection/control(controlCode, data)/data}} and save the result in a [[!PCSC5]] `BYTE[]` |inBuffer|.
-8.  Let |outBuffer| be a [[!PCSC5]] `BYTE[]` large enough to hold any control command response.
-9.  Let |outBufferLength| be a `DWORD` set to `0`.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], return [=a promise rejected with=]
+    an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Let |pcscControlCode| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/control(controlCode, data)/controlCode}}.
+6.  [=Get a copy of the buffer source=] {{SmartCardConnection/control(controlCode, data)/data}} and save the result in a [[!PCSC5]] `BYTE[]` |inBuffer|.
+7.  Let |outBuffer| be a [[!PCSC5]] `BYTE[]` large enough to hold any control command response.
+8.  Let |outBufferLength| be a `DWORD` set to `0`.
+9.  Let |promise| be [=a new promise=].
 10. Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`Control()` with |pcscControlCode|, |inBuffer|, |outBuffer| and |outBufferLength| as arguments.
     2.  Let |responseCode| be the returned `RESPONSECODE`.
@@ -1006,14 +1006,14 @@ The {{SmartCardConnection/control(controlCode, data)}} method steps are:
 
 The {{SmartCardConnection/getAttribute(tag)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
-    with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], return [=a promise rejected with=]
+    an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Let |promise| be [=a new promise=].
 6.  Run the following steps [=in parallel=]:
     1.  Let |pcscTag| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/getAttribute(tag)/tag}}.
     2.  Let |buffer| be a [[!PCSC5]] `BYTE[]` large enough to hold this reader attribute, as determined by the platform's [[!PCSC5]] implementation.
@@ -1036,16 +1036,16 @@ The {{SmartCardConnection/getAttribute(tag)}} method steps are:
 
 The {{SmartCardConnection/setAttribute(tag, value)}} method steps are:
 
-1.  Let |promise| be [=a new promise=].
-2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
-    is `true`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-3.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
-    [=map/exists=] and is not equal to [=this=], [=reject=] |promise|
-    with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-4.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, [=reject=] |promise| with an "{{InvalidStateError}}" {{DOMException}} and return |promise|.
-5.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
-6.  Let |pcscTag| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/setAttribute(tag, value)/tag}}.
-7.  [=Get a copy of the buffer source=] {{SmartCardConnection/setAttribute(tag, value)/value}} and save the result in a [[!PCSC5]] `BYTE[]` |buffer|.
+1.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=]
+    is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+2.  If [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[activeReaderTransactions]]=][[=this=].[=SmartCardConnection/[[readerName]]=]]
+    [=map/exists=] and is not equal to [=this=], return [=a promise rejected with=]
+    an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardConnection/[[comm]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Set [=this=].[=SmartCardConnection/[[context]]=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Let |pcscTag| be a [[!PCSC5]] `DWORD` containing {{SmartCardConnection/setAttribute(tag, value)/tag}}.
+6.  [=Get a copy of the buffer source=] {{SmartCardConnection/setAttribute(tag, value)/value}} and save the result in a [[!PCSC5]] `BYTE[]` |buffer|.
+7.  Let |promise| be [=a new promise=].
 8.  Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardConnection/[[comm]]=].`SetReaderCapabilities()` with |pcscTag| and |buffer| as arguments.
     2.  Let |responseCode| be the returned `RESPONSECODE`.
