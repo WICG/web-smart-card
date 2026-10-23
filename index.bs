@@ -124,6 +124,8 @@ interface SmartCardContext {
       DOMString readerName,
       SmartCardAccessMode accessMode,
       optional SmartCardConnectOptions options = {});
+
+  Promise<undefined> release();
 };
 </xmp>
 
@@ -141,7 +143,8 @@ described in the following table:
     <tr>
       <td><dfn for="SmartCardContext" export lt="[[resourceManager]]">[[resourceManager]]</dfn>
       <td>`null`
-      <td>The platform's [[!PCSC5]] `RESOURCEMANAGER` to be used.
+      <td>The platform's [[!PCSC5]] `RESOURCEMANAGER` to be used, or `null`
+        if this context has been released.
     <tr>
       <td><dfn for="SmartCardContext" export lt="[[operationInProgress]]">[[operationInProgress]]</dfn>
       <td>`false`
@@ -182,10 +185,13 @@ The {{SmartCardContext/listReaders()}} method steps are:
 1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
     `true`, return [=a promise rejected with=] an "{{InvalidStateError}}"
     {{DOMException}}.
-2.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+2.  If [=this=].[=SmartCardContext/[[resourceManager]]=] is `null`,
+    return [=a promise rejected with=] an "{{InvalidStateError}}"
+    {{DOMException}}.
+3.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
     `true`.
-3.  Let |promise| be [=a new promise=].
-4.  Run the following steps [=in parallel=]:
+4.  Let |promise| be [=a new promise=].
+5.  Run the following steps [=in parallel=]:
     1.  Let |resourceQuery| be a new instance of the
         platform's [[!PCSC5]] `RESOURCEQUERY` class, with
         [=this=].[=SmartCardContext/[[resourceManager]]=] as its
@@ -220,7 +226,7 @@ The {{SmartCardContext/listReaders()}} method steps are:
                 |responseCode|.
         3.  Otherwise, [=resolve=] |promise| with a `sequence` of
             {{DOMString}} equivalent to |pcscReaders|.
-5.  Return |promise|.
+6.  Return |promise|.
 
 ## {{SmartCardContext/getStatusChange()}} method ## {#smartcardcontext-getstatuschange}
 
@@ -229,27 +235,30 @@ The {{SmartCardContext/getStatusChange(readerStates, options)}} method steps are
 1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
     `true`, return [=a promise rejected with=] an "{{InvalidStateError}}"
     {{DOMException}}.
-2.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"] [=map/exists=], run the following steps:
+2.  If [=this=].[=SmartCardContext/[[resourceManager]]=] is `null`,
+    return [=a promise rejected with=] an "{{InvalidStateError}}"
+    {{DOMException}}.
+3.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"] [=map/exists=], run the following steps:
     1.  Let |signal| be {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/signal}}"].
     2.  If |signal| is [=AbortSignal/aborted=], return [=a promise rejected with=]
         |signal|'s [=AbortSignal/abort reason=].
     3.  Set [=this=].[=SmartCardContext/[[signal]]=] to |signal|.
     4.  [=AbortSignal/Add=] the algorithm to [=cancel the outstanding GetStatusChange=] of [=this=] to |signal|.
-3.  Let |pcscTimeout| be a [[!PCSC5]] `DWORD` set to [[!PCSC5]]
+4.  Let |pcscTimeout| be a [[!PCSC5]] `DWORD` set to [[!PCSC5]]
     `INFINITE`.
-4.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"] [=map/exists=], set |pcscTimeout| to
+5.  If {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"] [=map/exists=], set |pcscTimeout| to
     {{SmartCardContext/getStatusChange(readerStates, options)/options}}["{{SmartCardGetStatusChangeOptions/timeout}}"].
-5.  Let |pcscReaderStates| be a [[!PCSC5]]
+6.  Let |pcscReaderStates| be a [[!PCSC5]]
     `SCARD_READERSTATE[]` [=SmartCardReaderStateIn/corresponding=] to
     {{SmartCardContext/getStatusChange(readerStates, options)/readerStates}}.
-6.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+7.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
     `true`.
-7.  Set [=this=].[=SmartCardContext/[[tracker]]=] to a new instance of the
+8.  Set [=this=].[=SmartCardContext/[[tracker]]=] to a new instance of the
     platform's [[!PCSC5]] `SCARDTRACK` class, with
     [=this=].[=SmartCardContext/[[resourceManager]]=] as its
     constructor input parameter.
-8.  Let |promise| be [=a new promise=].
-9.  Run the following steps [=in parallel=]:
+9.  Let |promise| be [=a new promise=].
+10. Run the following steps [=in parallel=]:
     1.  Call [=this=].[=SmartCardContext/[[tracker]]=].`GetStatusChange()`
         with |pcscReaderStates| and |pcscTimeout| as input parameters.
     2.  Let |responseCode| be the returned
@@ -281,7 +290,7 @@ The {{SmartCardContext/getStatusChange(readerStates, options)}} method steps are
             [=SmartCardReaderStateOut/corresponding=] to
             |pcscReaderStates|.
         7.  [=Resolve=] |promise| with |readerStatesOut|.
-10. Return |promise|.
+11. Return |promise|.
 
 ### {{SmartCardReaderStateIn}} dictionary ### {#smartcardreaderstatein-dict}
 <xmp class="idl">
@@ -489,10 +498,11 @@ dictionary SmartCardGetStatusChangeOptions {
 The {{SmartCardContext/connect(readerName, accessMode, options)}} method steps are:
 
 1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is `true`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
-2.  If [=this=].[=SmartCardContext/[[activeReaderTransactions]]=][{{SmartCardContext/connect(readerName, accessMode, options)/readerName}}] [=map/exists=], return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
-3.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
-4.  Let |promise| be [=a new promise=].
-5.  Run the following steps [=in parallel=]:
+2.  If [=this=].[=SmartCardContext/[[resourceManager]]=] is `null`, return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+3.  If [=this=].[=SmartCardContext/[[activeReaderTransactions]]=][{{SmartCardContext/connect(readerName, accessMode, options)/readerName}}] [=map/exists=], return [=a promise rejected with=] an "{{InvalidStateError}}" {{DOMException}}.
+4.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to `true`.
+5.  Let |promise| be [=a new promise=].
+6.  Run the following steps [=in parallel=]:
     1.  Let |accessFlags| be a [[!PCSC5]] `DWORD` [=SmartCardAccessMode/corresponding=] to {{SmartCardContext/connect(readerName, accessMode, options)/accessMode}}.
     2.  Let |protocolFlags| be a `DWORD` set to `0`.
     3.  If {{SmartCardContext/connect(readerName, accessMode, options)/options}}["{{SmartCardConnectOptions/preferredProtocols}}"] [=map/exists=], set |protocolFlags| to its [=SmartCardProtocol/corresponding flags=].
@@ -515,7 +525,7 @@ The {{SmartCardContext/connect(readerName, accessMode, options)}} method steps a
         10. Set |result|["{{SmartCardConnectResult/connection}}"] to |connection|.
         11. If |activeProtocol| is a [=SmartCardProtocol/valid protocol value=], set |result|["{{SmartCardConnectResult/activeProtocol}}"] to the corresponding {{SmartCardProtocol}}.
         12. [=Resolve=] |promise| with |result|.
-6.  Return |promise|.
+7.  Return |promise|.
 
 ### {{SmartCardProtocol}} enum ### {#smartcardprotocol-enum}
 <xmp class="idl">
@@ -587,6 +597,86 @@ dictionary SmartCardConnectOptions {
 
 : {{SmartCardConnectOptions/preferredProtocols}}
 :: Card communication protocols that may be used.
+
+## {{SmartCardContext/release()}} method ## {#smartcardcontext-release}
+
+Releases the PC/SC context, disconnecting the connections established
+through it. Neither the context nor those connections can be used
+afterwards.
+
+The {{SmartCardContext/release()}} method steps are:
+
+1.  If [=this=].[=SmartCardContext/[[operationInProgress]]=] is
+    `true`, return [=a promise rejected with=] an "{{InvalidStateError}}"
+    {{DOMException}}.
+2.  If [=this=].[=SmartCardContext/[[resourceManager]]=] is `null`,
+    return [=a promise rejected with=] an "{{InvalidStateError}}"
+    {{DOMException}}.
+3.  Let |resourceManager| be
+    [=this=].[=SmartCardContext/[[resourceManager]]=].
+4.  Set [=this=].[=SmartCardContext/[[resourceManager]]=] to `null`.
+5.  Let |comms| be an empty [=map=].
+6.  [=set/For each=] |connection| of type {{SmartCardConnection}} of
+    [=this=].[=SmartCardContext/[[connections]]=]:
+    1.  If |connection|.[=SmartCardConnection/[[comm]]=] is `null`,
+        [=iteration/continue=].
+    2.  Let |disposition| be "{{SmartCardDisposition/leave}}".
+    3.  If |connection|.[=SmartCardConnection/[[transactionState]]=] is
+        not `null`, set |disposition| to
+        "{{SmartCardDisposition/reset}}".
+    4.  Set |comms|[|connection|.[=SmartCardConnection/[[comm]]=]] to
+        |disposition|.
+    5.  Set |connection|.[=SmartCardConnection/[[comm]]=] to `null`.
+7.  [=map/Clear=] [=this=].[=SmartCardContext/[[activeReaderTransactions]]=].
+8.  Set [=this=].[=SmartCardContext/[[operationInProgress]]=] to
+    `true`.
+9.  Let |promise| be [=a new promise=].
+10. Run the following steps [=in parallel=]:
+    1.  [=map/For each=] |comm| → |disposition| of |comms|:
+        1.  Call |comm|.`Disconnect()` with a `DWORD` corresponding to
+            |disposition| as input parameter.
+        2.  Destroy |comm|.
+    2.  Invoke the `ReleaseContext` method of |resourceManager|.
+    3.  Let |responseCode| be the returned `RESPONSECODE`.
+    4.  Destroy |resourceManager|.
+    5.  [=Queue a global task=] on the [=relevant global object=] of
+        [=this=] using the [=smart card task source=] which performs the
+        following steps:
+        1.  [=Clear the operationInProgress=] of [=this=].
+        2.  If |responseCode| is not `SCARD_S_SUCCESS`, [=reject=]
+            |promise| with an [=exception=]
+            [=SmartCardError/corresponding=] to |responseCode| and abort
+            these steps.
+        3.  [=Resolve=] |promise|.
+11. Return |promise|.
+
+A {{SmartCardContext}} MUST NOT be garbage collected while its
+[=SmartCardContext/[[operationInProgress]]=] is `true`.
+
+If a {{SmartCardContext}} whose
+[=SmartCardContext/[[resourceManager]]=] is not `null` is garbage
+collected, the user agent MUST release it as if
+{{SmartCardContext/release()}} were called.
+
+<aside class="note">
+  <p>**Card disposition:** Releasing a context leaves the cards of its
+  connections as they are, like {{SmartCardConnection/disconnect()}} does
+  by default, except for connections that hold an active transaction:
+  their cards are reset, which is also how a transaction ends when its
+  callback does not specify a disposition. The {{Promise}} returned by
+  {{SmartCardConnection/startTransaction()}} for such a transaction is
+  rejected with an "{{InvalidStateError}}" {{DOMException}} after its
+  callback settles.</p>
+</aside>
+
+<aside class="note">
+  <p>**Releasing unneeded contexts:** A context occupies resources of the
+  platform's PC/SC stack until it is released, and PC/SC stacks can limit
+  how many contexts all the applications on the system hold at the same
+  time. Applications are therefore encouraged to release contexts they no
+  longer need instead of leaving them to garbage collection, which can
+  happen arbitrarily late.</p>
+</aside>
 
 ## Auxiliary algorithms and definitions ## {#smartcardcontext-auxiliary}
 
@@ -1283,9 +1373,11 @@ while not in the user's direct control, a user agent
 MUST dispose of all active
 {{SmartCardContext}} objects and their associated
 {{SmartCardConnection}}s when a [=document=] is no longer
-[=Document/fully active=]. This includes automatically disconnecting
-any active connections as if {{SmartCardConnection/disconnect()}} were
-called.
+[=Document/fully active=]. This includes cancelling any outstanding
+{{SmartCardContext/getStatusChange()}} call and, once no PC/SC
+operation is ongoing in a context, releasing it as if
+{{SmartCardContext/release()}} were called, which also disconnects its
+connections.
 
 Integrations {#integrations}
 ============================
