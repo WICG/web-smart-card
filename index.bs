@@ -650,6 +650,9 @@ The {{SmartCardContext/release()}} method steps are:
         3.  [=Resolve=] |promise|.
 11. Return |promise|.
 
+A {{SmartCardContext}} MUST NOT be garbage collected while its
+[=SmartCardContext/[[operationInProgress]]=] is `true`.
+
 If a {{SmartCardContext}} whose
 [=SmartCardContext/[[resourceManager]]=] is not `null` is garbage
 collected, the user agent MUST release it as if
