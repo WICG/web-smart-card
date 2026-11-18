@@ -62,6 +62,7 @@ try {
   console.log("Card responded with: " + responseData);
 
   await connection.disconnect();
+  await context.release();
 } catch(ex) {
   console.warn("A Smart Card operation failed: " + ex);
 }
